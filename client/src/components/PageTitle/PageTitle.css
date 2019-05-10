@@ -1,0 +1,19 @@
+.main {
+    height: 105px;
+}
+
+.main__header {
+    padding-top: 18px;
+    margin: 0;
+    font: 36px/normal "Roboto Light";
+    line-height: 42px;
+    color: #333333;
+    text-align: center;
+}
+
+.main__description {
+    margin: 0;
+    text-align: center;
+    font: 18px/normal "Roboto Regular";
+    color: #323232;
+}
