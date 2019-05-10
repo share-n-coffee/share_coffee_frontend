@@ -5,6 +5,7 @@ import PageTitle from "./PageTitle/PageTitle";
 import PageInfo from "./PageInfo/PageInfo";
 import Button from "./Button/Button";
 import Footer from "./Footer/Footer";
+import EventDesc from "./EventDesc";
 
 function App() {
   return (
@@ -17,6 +18,12 @@ function App() {
     subscriptions:"
       />
       <Button text="Log in via Telegram" />
+      <EventDesc 
+        eventName="Platform Front-end"
+        adress="@ Latte Python 12 Zybitskaya St., Minsk"
+        eventFrequency="every Monday, 16:00"
+        text="Subscribe"
+      />
       <Footer />
     </div>
   );
