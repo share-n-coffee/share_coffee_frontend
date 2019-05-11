@@ -1,3 +1,3 @@
-import EventName from './EventName';
+import EventName from "./EventName";
 
 export default EventName;

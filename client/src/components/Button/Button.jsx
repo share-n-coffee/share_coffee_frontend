@@ -3,9 +3,13 @@ import "./Button.css";
 
 class Button extends Component {
   render() {
+    const { link, text } = this.props;
+
     return (
       <div className="wrapper section">
-        <button className="section__btn">{this.props.text}</button>
+        <button href={link} className="section__btn">
+          {text}
+        </button>
       </div>
     );
   }

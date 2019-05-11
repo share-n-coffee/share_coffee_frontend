@@ -1,3 +1,3 @@
-import EventDesc from './EventDesc';
+import EventDesc from "./EventDesc";
 
 export default EventDesc;
