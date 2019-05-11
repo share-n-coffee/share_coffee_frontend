@@ -12,11 +12,7 @@ function App() {
     <div className="App">
       <Header />
       <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-      <PageInfo
-        infoText=" Use Telegram to be aware of upcoming meets and 
-    manage
-    subscriptions:"
-      />
+      <PageInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
       <Button text="Log in via Telegram" />
       <EventDesc 
         eventName="Platform Front-end"

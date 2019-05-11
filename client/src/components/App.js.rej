@@ -1,0 +1,23 @@
+diff a/client/src/components/App.js b/client/src/components/App.js	(rejected hunks)
+@@ -3 +3 @@ import "./App.css";
+-import Header from "./Header/Header"
++import Header from "./Header/Header";
+@@ -12,5 +12,2 @@ function App() {
+-      <Header/>
+-      <PageTitle
+-        title="Get your own kick off"
+-        desc="with Wargaming S&C"
+-      />
++      <Header />
++      <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
+@@ -22,4 +19,2 @@ function App() {
+-      <Button
+-        text="Log in via Telegram"
+-      />
+-      <Footer/>
++      <Button text="Log in via Telegram" />
++      <Footer />
+@@ -27,2 +22 @@ function App() {
+-  )
+-    ;
++  );

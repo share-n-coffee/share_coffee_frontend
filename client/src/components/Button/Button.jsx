@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './Button.css';
+import React, { Component } from "react";
+import "./Button.css";
 
 class Button extends Component {
   render() {
@@ -7,7 +7,7 @@ class Button extends Component {
       <div className="wrapper section">
         <button className="section__btn">{this.props.text}</button>
       </div>
-    )
+    );
   }
 }
 export default Button;
