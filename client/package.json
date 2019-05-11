@@ -14,8 +14,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc.json src/",
-    "fix-lint": "eslint -c .eslintrc.json src/**/*.js src/**/*.jsx --fix",
-    "format": "prettier --write src/**/*.js src/**/*.jsx"
+    "fix-lint": "eslint -c .eslintrc.json src/**/*.js --fix",
+    "format": "prettier --write src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
