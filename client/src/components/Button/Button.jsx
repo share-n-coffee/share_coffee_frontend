@@ -7,9 +7,9 @@ class Button extends Component {
 
     return (
       <div className="wrapper section">
-        <button href={link} className="section__btn">
-          {text}
-        </button>
+        <a href={link}>
+          <button className="section__btn">{text}</button>
+        </a>
       </div>
     );
   }
