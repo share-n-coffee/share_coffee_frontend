@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './PageInfo.css';
+import React, { Component } from "react";
+import "./PageInfo.css";
 
 class PageInfo extends Component {
   render() {
