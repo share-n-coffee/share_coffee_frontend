@@ -12,10 +12,11 @@ const EventsDropdown = ({events}) => {
             onMouseLeave={() => {
                 setIsOpened(false);
             }}
+            className={styles.list_container}
         >
 
-            <button onClick={() => setIsOpened(!isOpened)}>My upcoming events({events.length})
-                <ArrowIcon className={isOpened ? styles['rotated'] : undefined}/>
+            <button className={styles.header} onClick={() => setIsOpened(!isOpened)}>My upcoming events ({events.length})
+                <ArrowIcon className={`${styles.arrow} ${isOpened ? styles['rotated'] : undefined}`}/>
             </button>
             {isOpened && <List events={events}/>}
         </div>

@@ -1,0 +1,20 @@
+.item p:first-child{
+  font-weight: bold;
+}
+
+.item{
+  border-color: #C8C8C8;
+  border-width: 2px;
+}
+
+.item p:first-child::before{
+  content: url("../../../icons/icon-status-active.svg");
+  margin-right: 10px;
+}
+
+.List{
+  background-color: #FFFFFF;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  width: fit-content;
+}

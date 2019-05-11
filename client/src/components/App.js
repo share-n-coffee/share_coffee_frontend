@@ -20,8 +20,9 @@ function App() {
     const [selectedValue, setSelectedValue] = useState(null);
   return (
     <div className="App">
-      <Dropdown options={options} selectedValue={selectedValue} onSelect={setSelectedValue}/>
-      <EventsDropdown events={events}/>
+        <Dropdown options={options} selectedValue={selectedValue} onSelect={setSelectedValue}/>
+        <EventsDropdown events={events}/>
+
     </div>
   );
 }
