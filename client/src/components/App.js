@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import Header from "./Header/Header";
 import PageTitle from "./PageTitle/PageTitle";
@@ -7,24 +7,21 @@ import Button from "./Button/Button";
 import Footer from "./Footer/Footer";
 import EventDesc from "./EventDesc";
 
+import Dropdown from "./Dropdown";
+import EventsDropdown from "./EventsDropdown";
+const options = [{label: 'Option1', value: 'opt1'}, {label: 'Option2', value: 'opt2'}, {
+    label: 'Option3',
+    value: 'opt3'
+}];
+
+const events = [{name: 'Name1', place: 'Place1', time: 'Time1'}, {name: 'Name2', place: 'Place2', time: 'Time2'}, {name: 'Name3', place: 'Place3', time: 'Time3'}]
+
 function App() {
+    const [selectedValue, setSelectedValue] = useState(null);
   return (
     <div className="App">
-      <Header />
-      <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-      <PageInfo
-        infoText=" Use Telegram to be aware of upcoming meets and 
-    manage
-    subscriptions:"
-      />
-      <Button text="Log in via Telegram" />
-      <EventDesc 
-        eventName="Platform Front-end"
-        adress="@ Latte Python 12 Zybitskaya St., Minsk"
-        eventFrequency="every Monday, 16:00"
-        text="Subscribe"
-      />
-      <Footer />
+      <Dropdown options={options} selectedValue={selectedValue} onSelect={setSelectedValue}/>
+      <EventsDropdown events={events}/>
     </div>
   );
 }

@@ -1,0 +1,27 @@
+.selection{
+  color: #C8C8C8;
+  border: none;
+  font-size: 18px;
+}
+
+.selection:hover{
+  color: #000;
+}
+
+input:focus, textarea {
+  outline: none !important;
+}
+
+.selection:focus{
+  color: #0064FF;
+}
+
+.dropdown_container{
+  position: relative;
+  color: #000;
+  width: fit-content;
+}
+
+.arrow{
+  position: absolute;
+}

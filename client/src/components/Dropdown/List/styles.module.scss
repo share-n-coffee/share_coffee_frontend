@@ -1,0 +1,14 @@
+.List{
+  display: flex;
+  flex-direction: column;
+}
+
+.List button{
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+}
+
+.List button:hover{
+  color: #0064FF;
+}
