@@ -8,7 +8,7 @@ class SectionMain extends Component {
     return <div className="wrapper section__center">
       <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
       <Button
-        link="https://forgeserver.herokuapp.com//auth/telegram"
+        link="https://forgeserver.herokuapp.com/auth/telegram"
         text="Log in via Telegram"
       />
     </div>;

@@ -27,3 +27,7 @@
     background: #0064FF;
     cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+}
