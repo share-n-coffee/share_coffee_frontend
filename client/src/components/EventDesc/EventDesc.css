@@ -1,4 +1,8 @@
+.eventDesc {
+    display: none;
+}
 .eventName {
+    display: none;
     padding: 30px 0;
     color: #323232;
     font: 18px "Roboto Regular";

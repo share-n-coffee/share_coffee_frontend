@@ -1,3 +1,3 @@
-import InfoAboutEvent from './InfoAboutEvent';
+import InfoAboutEvent from "./InfoAboutEvent";
 
 export default InfoAboutEvent;
