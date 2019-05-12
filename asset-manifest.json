@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/share_coffee_frontend/client/static/css/main.c602bb5e.chunk.css",
-    "main.js": "/share_coffee_frontend/client/static/js/main.55d62184.chunk.js",
-    "main.js.map": "/share_coffee_frontend/client/static/js/main.55d62184.chunk.js.map",
-    "runtime~main.js": "/share_coffee_frontend/client/static/js/runtime~main.61c99dbf.js",
-    "runtime~main.js.map": "/share_coffee_frontend/client/static/js/runtime~main.61c99dbf.js.map",
-    "static/js/2.5ea08a40.chunk.js": "/share_coffee_frontend/client/static/js/2.5ea08a40.chunk.js",
-    "static/js/2.5ea08a40.chunk.js.map": "/share_coffee_frontend/client/static/js/2.5ea08a40.chunk.js.map",
-    "index.html": "/share_coffee_frontend/client/index.html",
-    "precache-manifest.768388e6d0a02b53472ac27deb1d9fa3.js": "/share_coffee_frontend/client/precache-manifest.768388e6d0a02b53472ac27deb1d9fa3.js",
-    "service-worker.js": "/share_coffee_frontend/client/service-worker.js",
-    "static/css/main.c602bb5e.chunk.css.map": "/share_coffee_frontend/client/static/css/main.c602bb5e.chunk.css.map",
-    "static/media/logo-coffee.png": "/share_coffee_frontend/client/static/media/logo-coffee.195010f7.png"
+    "main.css": "/share_coffee_frontend/static/css/main.c602bb5e.chunk.css",
+    "main.js": "/share_coffee_frontend/static/js/main.95b6cdd4.chunk.js",
+    "main.js.map": "/share_coffee_frontend/static/js/main.95b6cdd4.chunk.js.map",
+    "runtime~main.js": "/share_coffee_frontend/static/js/runtime~main.0738e8e6.js",
+    "runtime~main.js.map": "/share_coffee_frontend/static/js/runtime~main.0738e8e6.js.map",
+    "static/js/2.5ea08a40.chunk.js": "/share_coffee_frontend/static/js/2.5ea08a40.chunk.js",
+    "static/js/2.5ea08a40.chunk.js.map": "/share_coffee_frontend/static/js/2.5ea08a40.chunk.js.map",
+    "index.html": "/share_coffee_frontend/index.html",
+    "precache-manifest.7ee811468202570b4760c2f881a8fe55.js": "/share_coffee_frontend/precache-manifest.7ee811468202570b4760c2f881a8fe55.js",
+    "service-worker.js": "/share_coffee_frontend/service-worker.js",
+    "static/css/main.c602bb5e.chunk.css.map": "/share_coffee_frontend/static/css/main.c602bb5e.chunk.css.map",
+    "static/media/logo-coffee.png": "/share_coffee_frontend/static/media/logo-coffee.195010f7.png"
   }
 }
