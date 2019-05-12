@@ -28,13 +28,16 @@ class MapEvent extends Component {
     );
   };
 
-  checkLocation = (mapState, location) => {
+  checkProps = (mapState, location, zoom) => {
     if (!Array.isArray(location)) {
       mapState.center = false;
       throw TypeError("location is not array");
     } else if (!location.length === 2) {
       mapState.center = false;
       throw TypeError("location incorrect data");
+    }
+    if (!isNaN(+zoom)) {
+      mapState.zoom = zoom;
     }
   };
 
@@ -43,10 +46,10 @@ class MapEvent extends Component {
 
     const mapState = {
       center: location,
-      zoom: zoom || 10,
+      zoom: 10,
     };
 
-    this.checkLocation(mapState, location);
+    this.checkProps(mapState, location, zoom);
 
     return mapState.center ? this.MapPlace(mapState) : this.ErrMap();
   }
