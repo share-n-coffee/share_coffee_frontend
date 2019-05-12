@@ -4,14 +4,14 @@ import Header from "./Header";
 import PageTitle from "./PageTitle";
 import Footer from "./Footer";
 import EventDesc from "./EventDesc";
-import Index from "./SectionMain";
+import SectionMain from "./SectionMain";
 
 function App() {
   return (
     <div className={styles.App}>
       <Header />
       <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-      <Index />
+      <SectionMain />
       <EventDesc
         eventName="Platform Front-end"
         adress="@ Latte Python 12 Zybitskaya St., Minsk"
