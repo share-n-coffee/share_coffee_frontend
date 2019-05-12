@@ -8,6 +8,7 @@ import SectionMain from "./SectionMain";
 
 import Dropdown from "./Dropdown";
 import EventsDropdown from "./EventsDropdown";
+import PageTeamSelect from "./PageTeamSelect";
 const options = [
   { label: "Optiooooooooooooooooooon1", value: "opt1" },
   { label: "Option2", value: "opt2" },
