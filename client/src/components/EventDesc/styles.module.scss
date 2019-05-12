@@ -1,3 +1,11 @@
 .eventDesc {
+    max-width: 1024px;
+    margin: auto;
     display: none;
+}
+
+.eventDescItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
