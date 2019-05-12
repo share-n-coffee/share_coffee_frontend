@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "https://loori-r.github.io/share_coffee_frontend/client",
+  "homepage": "https://loori-r.github.io/share_coffee_frontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
