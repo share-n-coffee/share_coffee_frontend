@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/share_coffee_frontend/static/css/main.8947bee6.chunk.css",
-    "main.js": "/share_coffee_frontend/static/js/main.c7eb6704.chunk.js",
-    "main.js.map": "/share_coffee_frontend/static/js/main.c7eb6704.chunk.js.map",
+    "main.js": "/share_coffee_frontend/static/js/main.210a4624.chunk.js",
+    "main.js.map": "/share_coffee_frontend/static/js/main.210a4624.chunk.js.map",
     "runtime~main.js": "/share_coffee_frontend/static/js/runtime~main.0738e8e6.js",
     "runtime~main.js.map": "/share_coffee_frontend/static/js/runtime~main.0738e8e6.js.map",
     "static/js/2.9a08430f.chunk.js": "/share_coffee_frontend/static/js/2.9a08430f.chunk.js",
     "static/js/2.9a08430f.chunk.js.map": "/share_coffee_frontend/static/js/2.9a08430f.chunk.js.map",
     "index.html": "/share_coffee_frontend/index.html",
-    "precache-manifest.0ce96b3a530795005a193ad44ab3a904.js": "/share_coffee_frontend/precache-manifest.0ce96b3a530795005a193ad44ab3a904.js",
+    "precache-manifest.95c1246bcc569cfc55b2c94e2621667a.js": "/share_coffee_frontend/precache-manifest.95c1246bcc569cfc55b2c94e2621667a.js",
     "service-worker.js": "/share_coffee_frontend/service-worker.js",
     "static/css/main.8947bee6.chunk.css.map": "/share_coffee_frontend/static/css/main.8947bee6.chunk.css.map",
     "static/media/logo-coffee.png": "/share_coffee_frontend/static/media/logo-coffee.195010f7.png"
