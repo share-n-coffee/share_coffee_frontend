@@ -11,7 +11,7 @@
   ],
   "plugins": [
     "import",
-    "jsx-ally",
+    "jsx-a11y",
     "react",
     "prettier"
   ],
