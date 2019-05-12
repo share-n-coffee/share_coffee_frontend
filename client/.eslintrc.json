@@ -10,6 +10,8 @@
     "plugin:prettier/recommended"
   ],
   "plugins": [
+    "import",
+    "jsx-ally",
     "react",
     "prettier"
   ],
