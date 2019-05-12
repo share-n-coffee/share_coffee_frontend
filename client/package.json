@@ -1,8 +1,10 @@
 {
   "name": "client",
+  "homepage": "https://loori-r.github.io/share_coffee_frontend/client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -17,6 +19,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc.json src/",
     "fix-lint": "eslint -c .eslintrc.json src/**/*.js --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "format": "prettier --write src/**/*.js"
   },
   "eslintConfig": {
