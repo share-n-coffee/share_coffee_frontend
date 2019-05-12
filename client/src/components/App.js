@@ -1,28 +1,48 @@
-import React, {useState} from "react";
-import "./App.css";
-import Header from "./Header/Header";
-import PageTitle from "./PageTitle/PageTitle";
-import PageInfo from "./PageInfo/PageInfo";
-import Button from "./Button/Button";
-import Footer from "./Footer/Footer";
+import React, { useState } from "react";
+import styles from "./App.module.scss";
+import Header from "./Header";
+import PageTitle from "./PageTitle";
+import Footer from "./Footer";
 import EventDesc from "./EventDesc";
+import SectionMain from "./SectionMain";
 
 import Dropdown from "./Dropdown";
 import EventsDropdown from "./EventsDropdown";
-const options = [{label: 'Optiooooooooooooooooooon1', value: 'opt1'}, {label: 'Option2', value: 'opt2'}, {
-    label: 'Option3',
-    value: 'opt3'
-}];
+const options = [
+  { label: "Optiooooooooooooooooooon1", value: "opt1" },
+  { label: "Option2", value: "opt2" },
+  {
+    label: "Option3",
+    value: "opt3",
+  },
+];
 
-const events = [{name: 'Name1', place: 'Place1', time: 'Time1'}, {name: 'Name2', place: 'Place2', time: 'Time2'}, {name: 'Name3', place: 'Place3', time: 'Time3'}]
+const events = [
+  { name: "Name1", place: "Place1", time: "Time1" },
+  { name: "Name2", place: "Place2", time: "Time2" },
+  { name: "Name3", place: "Place3", time: "Time3" },
+];
 
 function App() {
-    const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
   return (
-    <div className="App">
-        <Dropdown options={options} selectedValue={selectedValue} onSelect={setSelectedValue}/>
-        <EventsDropdown events={events}/>
-
+    <div className={styles.App}>
+      <Header />
+      <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
+      <Dropdown
+        options={options}
+        selectedValue={selectedValue}
+        onSelect={setSelectedValue}
+      />
+      <EventsDropdown events={events} />
+      <SectionMain />
+      <EventDesc
+        eventName="Platform Front-end"
+        adress="@ Latte Python 12 Zybitskaya St., Minsk"
+        eventFrequency="every Monday, 16:00"
+        text="Subscribe"
+      />
+      <Footer />
     </div>
   );
 }
