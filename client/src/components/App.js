@@ -9,7 +9,7 @@ import EventDesc from "./EventDesc";
 
 import Dropdown from "./Dropdown";
 import EventsDropdown from "./EventsDropdown";
-const options = [{label: 'Option1', value: 'opt1'}, {label: 'Option2', value: 'opt2'}, {
+const options = [{label: 'Optiooooooooooooooooooon1', value: 'opt1'}, {label: 'Option2', value: 'opt2'}, {
     label: 'Option3',
     value: 'opt3'
 }];

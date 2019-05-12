@@ -1,6 +1,7 @@
 .selection{
   color: #C8C8C8;
   border: none;
+  display: flex;
 }
 
 .selection:hover{
@@ -20,16 +21,17 @@
 }
 
 .arrow{
- padding: 2px;
+  padding: 6px 10px;
+  margin-left: auto;
 }
 
 .focused{
   background-color: #FFFFFF;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 5%;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-.rotated{
+.rotated {
   transform: rotate(180deg);
 }
