@@ -1,17 +1,17 @@
 import React from "react";
-import "./App.css";
-import Header from "./Header/Header";
-import PageTitle from "./PageTitle/PageTitle";
-import Footer from "./Footer/Footer";
+import styles from "./App.module.scss";
+import Header from "./Header";
+import PageTitle from "./PageTitle";
+import Footer from "./Footer";
 import EventDesc from "./EventDesc";
-import SectionMain from "./SectionMain/SectionMain";
+import Index from "./SectionMain";
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <Header />
       <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-      <SectionMain />
+      <Index />
       <EventDesc
         eventName="Platform Front-end"
         adress="@ Latte Python 12 Zybitskaya St., Minsk"

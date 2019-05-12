@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./SectionInfo.css";
+import styles from "./styles.module.scss";
 
 class SectionInfo extends Component {
   render() {
     const { infoText } = this.props;
 
     return (
-      <div className="wrapper section__info">
+      <div className={styles.section__info}>
         <span>{infoText}</span>
       </div>
     );

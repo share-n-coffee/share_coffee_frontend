@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import InfoAboutEvent from "../InfoAboutEvent";
 import EventName from "../EventName";
-import Button from "../Button/Button";
+import Button from "../Button";
 
-import "./EventDesc.css";
+import styles from "./styles.module.scss";
 
-export default class EventDesc extends Component {
+class EventDesc extends Component {
   render() {
     const { eventName, adress, eventFrequency, text } = this.props;
 
     return (
-      <div className="eventDesc wrapper">
+      <div className={styles.eventDesc}>
         <EventName eventName={eventName} />
         <InfoAboutEvent adress={adress} eventFrequency={eventFrequency} />
         <Button text={text} />
@@ -18,3 +18,5 @@ export default class EventDesc extends Component {
     );
   }
 }
+
+export default EventDesc;

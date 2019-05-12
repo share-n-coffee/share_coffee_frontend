@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import './SectionMain.css';
-import SectionInfo from "../SectionInfo/SectionInfo";
-import Button from "../Button/Button";
+import styles from './styles.module.scss';
+import SectionInfo from "../SectionInfo";
+import Button from "../Button";
 
 class SectionMain extends Component {
   render() {
-    return <div className="wrapper section__center">
+    return <div className={styles.section__center}>
       <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
       <Button
         link="https://forgeserver.herokuapp.com/auth/telegram"
