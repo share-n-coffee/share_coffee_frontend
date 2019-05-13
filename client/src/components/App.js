@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import EventDesc from "./EventDesc";
 import SectionMain from "./SectionMain";
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 export default class App extends Component {
   constructor() {
     super();
@@ -20,18 +22,33 @@ export default class App extends Component {
   render() {
 
     const { events } = this.state;
+    const Main = () => {
+      return (
+        <EventDesc events = { events }/>
+      );
+    };
+
+    const PageTittle = () => {
+      return (
+        <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
+      );
+    };
 
     return (
       <div className={styles.App}>
         <Header />
-        <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-        <SectionMain />
-        <EventDesc
-          events = { events }
-        />
+        <Router>
+          <Route path="/share_coffee_frontend/" component={PageTittle} exact/>
+          <Route path="/share_coffee_frontend/" component={SectionMain} exact/>
+          <Route path="/id/:id" 
+            render={({ match }) => {
+              const { id } = match.params;
+              console.log(id);
+              return <Main />
+            }} />
+        </Router>
         <Footer />
       </div>
     );
   };
 };
-
