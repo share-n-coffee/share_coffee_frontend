@@ -9,7 +9,10 @@ class SectionMain extends Component {
       <div className={`${styles.wrapper} ${styles.section__center}`}>
         <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
         <Button
-          link={"https://forge-development.herokuapp.com/auth/telegram?callback="+ window.location.origin}
+          link={
+            "https://forge-development.herokuapp.com/auth/telegram?callback=" +
+            window.location.origin
+          }
           text="Log in via Telegram"
         />
       </div>
