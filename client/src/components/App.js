@@ -4,7 +4,7 @@ import Header from "./Header";
 import PageTitle from "../modules/PageTitle";
 import Footer from "../modules/Footer";
 import EventDesc from "../events/components/EventDesc";
-import SectionMain from "../modules/SectionMain";
+import SectionMain from "../pages/SectionMain";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

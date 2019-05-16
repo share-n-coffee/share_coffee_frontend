@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./styles.module.scss";
-import SectionInfo from "../SectionInfo";
-import Button from "../Button";
+import SectionInfo from "../../modules/SectionInfo";
+import Button from "../../modules/Button";
 
 class SectionMain extends Component {
   render() {
