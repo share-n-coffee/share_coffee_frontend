@@ -1,40 +1,33 @@
-//.section {
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//}
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .section__btn {
-  padding: 0;
-  width: 222px;
-  height: 36px;
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
-  outline: none;
-  border: 2px solid rgba(0, 100, 255, 0.3);
-  box-sizing: border-box;
-  border-radius: 20px;
-  background: none;
-  font: 18px/normal "Roboto";
-  line-height: 21px;
-  text-align: center;
-  color: #0064FF;
-  //text-decoration: none;
-
+    width: 222px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: 2px solid rgba(0, 100, 255, 0.3);
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: none;
+    font: 18px/normal "Roboto";
+    line-height: 21px;
+    text-align: center;
+    color: #0064FF;
 }
 
 .section__btn:hover {
-  color: #FFFFFF;
-  opacity: 0.8;
-  background: #0064FF;
-  cursor: pointer;
+    color: #FFFFFF;
+    opacity: 0.8;
+    background: #0064FF;
+    cursor: pointer;
 }
 
-//.login__positon {
-//  position: absolute;
-//
-//}
-
-//a {
-//}
+a {
+    text-decoration: none;
+}
