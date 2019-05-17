@@ -2,28 +2,28 @@ import React, { Component } from "react";
 import styles from "./styles.module.scss";
 import SectionInfo from "../../modules/SectionInfo";
 import Button from "../../modules/Button";
-import TelegramLoginButton from "../TelegramLoginButton";
+import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 
 class SectionMain extends Component {
   render() {
     const handleTelegramResponse = response => {
-      alert(
-        "You shall not pass:\n" +
-          "auth_date: " +
-          response.auth_date +
-          "\n" +
-          "first_name: " +
-          response.first_name +
-          "\n" +
-          "id: " +
-          response.id +
-          "\n" +
-          "last_name: " +
-          response.last_name +
-          "\n" +
-          "last_name: " +
-          response.username,
-      );
+      // alert(
+      //   "You shall not pass:\n" +
+      //     "auth_date: " +
+      //     response.auth_date +
+      //     "\n" +
+      //     "first_name: " +
+      //     response.first_name +
+      //     "\n" +
+      //     "id: " +
+      //     response.id +
+      //     "\n" +
+      //     "last_name: " +
+      //     response.last_name +
+      //     "\n" +
+      //     "last_name: " +
+      //     response.username,
+      // );
 
       const myInit = {
         method: "PUT",
@@ -73,10 +73,15 @@ class SectionMain extends Component {
 
     const text = "logout";
     const { isActive, logOutClick } = this.props;
-    debugger;
+    const infoText = isActive
+      ? "Select your team to start knowledge sharing and\n" +
+        "\n" +
+        "having some coffee:\n" +
+        "\n"
+      : "Use Telegram to be aware of upcoming meets and manage subscriptions:";
     return (
       <div className={`${styles.wrapper} ${styles.section__center}`}>
-        <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
+        <SectionInfo infoText={infoText} />
         <div id={styles.telegram__login__container} className={styles.section}>
           {isActive ? (
             <Button text={text} handlerClick={logOutClick} />
