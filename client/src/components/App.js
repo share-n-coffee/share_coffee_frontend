@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./App.module.scss";
-import Header from "./Header";
+import Header from "../modules/Header";
 import PageTitle from "../modules/PageTitle";
 import Footer from "../modules/Footer";
 import EventDesc from "../events/components/EventDesc";
