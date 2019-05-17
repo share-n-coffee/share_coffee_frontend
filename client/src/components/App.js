@@ -1,51 +1,71 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import styles from "./App.module.scss";
-import Header from "./Header";
-import PageTitle from "./PageTitle";
-import Footer from "./Footer";
-import EventDesc from "./EventDesc";
-import SectionMain from "./SectionMain";
+import Header from "../modules/Header";
+import PageTitle from "../modules/PageTitle";
+import Footer from "../modules/Footer";
+import EventDesc from "../events/components/EventDesc";
+import SectionMain from "../pages/SectionMain";
 
-import Dropdown from "./Dropdown";
-import EventsDropdown from "./EventsDropdown";
-import PageTeamSelect from "./PageTeamSelect";
-const options = [
-  { label: "Optiooooooooooooooooooon1", value: "opt1" },
-  { label: "Option2", value: "opt2" },
-  {
-    label: "Option3",
-    value: "opt3",
-  },
-];
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-const events = [
-  { name: "Name1", place: "Place1", time: "Time1" },
-  { name: "Name2", place: "Place2", time: "Time2" },
-  { name: "Name3", place: "Place3", time: "Time3" },
-];
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      events: [
+        {
+          eventName: "Platform Front-end",
+          adress: "@ Latte Pytho 12 Zybitskaya St., Minsk",
+          eventFrequency: "every Monday, 16:00",
+          subscribe: "Subscribe",
+          key: 1,
+        },
+        {
+          eventName: "Platform Back-end",
+          adress: "@ Latte Pytho 12 Zybitskaya St., Minsk",
+          eventFrequency: "every Monday, 16:00",
+          subscribe: "Subscribe",
+          key: 2,
+        },
+        {
+          eventName: "Something event",
+          adress: "Something adress",
+          eventFrequency: "hz vasche",
+          subscribe: "Unsubscribe",
+          key: 3,
+        },
+      ],
+    };
+  }
+  render() {
+    const { events } = this.state;
+    const Main = () => {
+      return <EventDesc events={events} />;
+    };
 
-function App() {
-  const [selectedValue, setSelectedValue] = useState(null);
-  return (
-    <div className={styles.App}>
-      <Header />
-      <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-      <Dropdown
-        options={options}
-        selectedValue={selectedValue}
-        onSelect={setSelectedValue}
-      />
-      <EventsDropdown events={events} />
-      <SectionMain />
-      <EventDesc
-        eventName="Platform Front-end"
-        adress="@ Latte Python 12 Zybitskaya St., Minsk"
-        eventFrequency="every Monday, 16:00"
-        text="Subscribe"
-      />
-      <Footer />
-    </div>
-  );
+    const PageTittle = () => {
+      return (
+        <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
+      );
+    };
+
+    return (
+      <div className={styles.App}>
+        <Header />
+        <Router>
+          <Route path="/share_coffee_frontend/" component={PageTittle} exact />
+          <Route path="/share_coffee_frontend/" component={SectionMain} exact />
+          <Route
+            path="/id/:id"
+            render={({ match }) => {
+              const { id } = match.params;
+              console.log(id);
+              return <Main />;
+            }}
+          />
+        </Router>
+        <Footer />
+      </div>
+    );
+  }
 }
-
-export default App;

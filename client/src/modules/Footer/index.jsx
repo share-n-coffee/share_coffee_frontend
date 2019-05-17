@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 class Footer extends Component {
   render() {
     return (
-      <div className={styles.footer}>
+      <div className={`${styles.wrapper} ${styles.footer}`}>
         <span className={styles.footer__title}>© 2019 Wargaming.net</span>
       </div>
     );

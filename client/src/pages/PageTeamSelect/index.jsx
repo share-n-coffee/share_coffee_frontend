@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import Header from "../Header";
+import Header from "../../modules/Header";
 import PageTitle from "../PageTitle";
-import Dropdown from "../Dropdown";
+import Dropdown from "../../components/Dropdown";
 import Footer from "../Footer";
 import Button from "../Button";
 import SectionInfo from "../SectionInfo";
