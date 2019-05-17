@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import InfoAboutEvent from "../InfoAboutEvent";
-import EventName from "../EventName";
-import Button from "../Button";
+import InfoAboutEvent from "../../modules/InfoAboutEvent";
+import EventName from "../../modules/EventName";
+import Button from "../../../modules/Button";
 
 import styles from "./styles.module.scss";
 
