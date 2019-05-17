@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./styles.module.scss";
-import SectionInfo from "../SectionInfo";
-import Button from "../Button";
+import SectionInfo from "../../modules/SectionInfo";
+import Button from "../../modules/Button";
 
 class SectionMain extends Component {
   render() {
@@ -9,7 +9,10 @@ class SectionMain extends Component {
       <div className={`${styles.wrapper} ${styles.section__center}`}>
         <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
         <Button
-          link={"https://forge-development.herokuapp.com/auth/telegram?callback="+ window.location.origin}
+          link={
+            "https://forge-development.herokuapp.com/auth/telegram?callback=" +
+            window.location.origin
+          }
           text="Log in via Telegram"
         />
       </div>
