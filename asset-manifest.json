@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.fb1472f3.chunk.css",
-    "main.js": "/static/js/main.a0d15ed5.chunk.js",
-    "main.js.map": "/static/js/main.a0d15ed5.chunk.js.map",
+    "main.css": "/static/css/main.a20aa61c.chunk.css",
+    "main.js": "/static/js/main.b95502ba.chunk.js",
+    "main.js.map": "/static/js/main.b95502ba.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.6cded6f8.chunk.js": "/static/js/2.6cded6f8.chunk.js",
-    "static/js/2.6cded6f8.chunk.js.map": "/static/js/2.6cded6f8.chunk.js.map",
+    "static/js/2.28bd2cee.chunk.js": "/static/js/2.28bd2cee.chunk.js",
+    "static/js/2.28bd2cee.chunk.js.map": "/static/js/2.28bd2cee.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.adf713120fa39d821ee48dc0525127b6.js": "/precache-manifest.adf713120fa39d821ee48dc0525127b6.js",
+    "precache-manifest.e27cd9430a4ded9b66e3833a4efb1c0d.js": "/precache-manifest.e27cd9430a4ded9b66e3833a4efb1c0d.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.fb1472f3.chunk.css.map": "/static/css/main.fb1472f3.chunk.css.map",
+    "static/css/main.a20aa61c.chunk.css.map": "/static/css/main.a20aa61c.chunk.css.map",
     "static/media/logo-coffee.png": "/static/media/logo-coffee.195010f7.png"
   }
 }
