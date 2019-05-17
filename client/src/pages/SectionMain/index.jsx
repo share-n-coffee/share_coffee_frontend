@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import SectionInfo from "../../modules/SectionInfo";
 import Button from "../../modules/Button";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
+import axios from "axios";
 
 class SectionMain extends Component {
   render() {
@@ -32,19 +33,19 @@ class SectionMain extends Component {
         cache: "default",
       };
 
-      fetch(
+      axios(
         "https://forge-development.herokuapp.com/auth/telegram/callback",
         myInit,
       )
         .then(r => {
           // console.log("response: ");
-          // console.log(r);
+          console.log(r);
           return r;
           // return r.json()
         })
         .then(data => {
           return data;
-          // console.log(data);
+          console.log(data);
           // console.log(data.json());
         });
       // console.log(this.props
@@ -74,10 +75,7 @@ class SectionMain extends Component {
     const text = "logout";
     const { isActive, logOutClick } = this.props;
     const infoText = isActive
-      ? "Select your team to start knowledge sharing and\n" +
-        "\n" +
-        "having some coffee:\n" +
-        "\n"
+      ? "Select your team to start knowledge sharing and having some coffee:"
       : "Use Telegram to be aware of upcoming meets and manage subscriptions:";
     return (
       <div className={`${styles.wrapper} ${styles.section__center}`}>
