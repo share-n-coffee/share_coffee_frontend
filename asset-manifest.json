@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.6b566616.chunk.css",
-    "main.js": "/static/js/main.a3104145.chunk.js",
-    "main.js.map": "/static/js/main.a3104145.chunk.js.map",
+    "main.js": "/static/js/main.753a9def.chunk.js",
+    "main.js.map": "/static/js/main.753a9def.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/js/2.0af3c00b.chunk.js": "/static/js/2.0af3c00b.chunk.js",
     "static/js/2.0af3c00b.chunk.js.map": "/static/js/2.0af3c00b.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.0369710bfcb298c332a5ab929d15bed3.js": "/precache-manifest.0369710bfcb298c332a5ab929d15bed3.js",
+    "precache-manifest.f8efb335ad27eac5ec64c5839c0cbf8c.js": "/precache-manifest.f8efb335ad27eac5ec64c5839c0cbf8c.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.6b566616.chunk.css.map": "/static/css/main.6b566616.chunk.css.map",
     "static/media/logo-coffee.png": "/static/media/logo-coffee.195010f7.png"
