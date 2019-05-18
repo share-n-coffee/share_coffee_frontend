@@ -4,7 +4,12 @@ import Leaflet from "./maps/leaflet";
 import preloader from "../../../modules/preloader/preloader";
 import style from "./styles.module.scss";
 
-//example <MapEvent location={[55.751574, 37.573856]} zoom="5" type='leaflet/yandex'  />
+//example
+// <MapEvent location={[55.751574, 37.573856]} zoom="5" type='leaflet/yandex' />
+
+// location = array
+// zoom = num/str | optional(default 10)
+// type = str | optional(default yandex map)
 
 class EventMap extends Component {
   state = {
