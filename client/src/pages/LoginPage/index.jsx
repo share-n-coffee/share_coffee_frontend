@@ -3,11 +3,13 @@ import Header from "../../modules/Header";
 import PageTitle from "../../modules/PageTitle";
 import Footer from "../../modules/Footer";
 import SectionMain from "../SectionMain";
+import Dropdown from "../../components/Dropdown";
 
 export default class LoginPage extends Component {
   constructor() {
     super();
     this.state = {
+      //check  if user login
       isActive: false,
     };
   }
@@ -46,10 +48,7 @@ export default class LoginPage extends Component {
       <div>
         <Header />
         {isActive ? (
-          <PageTitle
-            title={`Hello, ${name} ${surName}`}
-            desc="feel free at this website"
-          />
+          <PageTitle title={`Hello, ${name} ${surName}`} />
         ) : (
           <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         )}
