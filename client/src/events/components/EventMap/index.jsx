@@ -72,7 +72,7 @@ class EventMap extends Component {
     };
 
     return (
-      <div className={style.map__container} id="waiting">
+      <div className={`${style.map__container} ${style.map__body}`}>
         {this.state.checkProps ? this.MapPlace(mapState) : this.ErrMap()}
       </div>
     );
