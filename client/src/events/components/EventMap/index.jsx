@@ -19,7 +19,7 @@ class EventMap extends Component {
   };
 
   ErrMap = () => {
-    // this.state.preloader.delNode();
+    this.state.preloader.delNode();
     return <span>{this.state.errorText}</span>;
   };
 
