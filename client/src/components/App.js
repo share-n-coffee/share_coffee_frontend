@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import styles from "./App.module.scss";
 import Header from "../modules/Header";
-import PageTitle from "../modules/PageTitle";
 import Footer from "../modules/Footer";
 import EventDesc from "../events/components/EventDesc";
 import SectionMain from "../pages/SectionMain";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import PageTeamSelect from "../pages/PageTeamSelect";
+import SubscriptionsPage from "../pages/SubscriptionsPage";
 
 export default class App extends Component {
   constructor() {
@@ -43,18 +44,11 @@ export default class App extends Component {
       return <EventDesc events={events} />;
     };
 
-    const PageTittle = () => {
-      return (
-        <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
-      );
-    };
-
     return (
       <div className={styles.App}>
         <Header />
         <Router>
-          <Route path="/share_coffee_frontend/" component={PageTittle} exact />
-          <Route path="/share_coffee_frontend/" component={SectionMain} exact />
+          <Route path="/" component={SectionMain} exact />
           <Route
             path="/id/:id"
             render={({ match }) => {
@@ -63,7 +57,10 @@ export default class App extends Component {
               return <Main />;
             }}
           />
+          <Route path="/team_select/" component={PageTeamSelect} exact />
+          <Route path="/subscriptions/" component={SubscriptionsPage} exact />
         </Router>
+
         <Footer />
       </div>
     );
