@@ -6,8 +6,30 @@ import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import axios from "axios";
 import URL_LOGIN from "../../constants";
 import jwtDecode from "jwt-decode";
+import { Link } from "react-router-dom";
 
 class SectionMain extends Component {
+  state = {
+    hasDepartament: false,
+  };
+  componentDidMount() {
+    const id = localStorage.getItem("id");
+    if (id) {
+      axios(`https://forge-development.herokuapp.com/api/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then(res => {
+          if (res.data.department) {
+            this.setState({ hasDepartament: true });
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }
   render() {
     const handleTelegramResponse = telegramResponse => {
       const requestObj = {
@@ -17,6 +39,7 @@ class SectionMain extends Component {
       };
       axios(requestObj)
         .then(response => {
+          localStorage.setItem("token", response.data.token);
           let userData = jwtDecode(`${response.data.token}`);
           setDataToStorage(userData);
           return response;
@@ -48,8 +71,15 @@ class SectionMain extends Component {
         <div className={`${styles.wrapper} ${styles.shadow_container}`} />
         <SectionInfo infoText={infoText} />
         <div id={styles.telegram__login__container} className={styles.section}>
-          {isActive ? (
-            <Button text={"logout"} handlerClick={logIO} />
+          {this.state.hasDepartament ? (
+            <Button
+              text={
+                <Link to="/subscriptions">{`Log in as,${localStorage.getItem(
+                  "firstName",
+                )}`}</Link>
+              }
+              handlerClick={logIO}
+            />
           ) : (
             <TelegramLoginButton
               dataOnauth={handleTelegramResponse}
