@@ -14,13 +14,13 @@ class EventDesc extends Component {
       return (
         <div key={itemProps.key} className={styles.eventDescItem}>
           <div>
-            <EventName eventName={itemProps.eventName} />
+            <EventName eventName={itemProps.title} />
             <InfoAboutEvent
-              adress={itemProps.adress}
-              eventFrequency={itemProps.eventFrequency}
+              adress={itemProps.address}
+              eventFrequency={new Date(itemProps.created).toDateString()}
             />
           </div>
-          <Button text={itemProps.subscribe} />
+          <Button text={itemProps.active ? "Unsubscribe" : "Subscribe"} />
         </div>
       );
     });

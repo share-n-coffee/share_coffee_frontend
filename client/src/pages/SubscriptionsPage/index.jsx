@@ -1,41 +1,39 @@
-import React, { Component } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+
 import styles from "./styles.module.scss";
 import PageTitle from "../../modules/PageTitle";
 import EventDesc from "../../events/components/EventDesc";
+import UserDataContext from "../../contexts/UserDataContext";
 
-const events = [
-  {
-    eventName: "Platform Front-end",
-    adress: "@ Latte Pytho 12 Zybitskaya St., Minsk",
-    eventFrequency: "every Monday, 16:00",
-    subscribe: "Subscribe",
-    key: 1,
-  },
-  {
-    eventName: "Platform Back-end",
-    adress: "@ Latte Pytho 12 Zybitskaya St., Minsk",
-    eventFrequency: "every Monday, 16:00",
-    subscribe: "Subscribe",
-    key: 2,
-  },
-  {
-    eventName: "Something event",
-    adress: "Something adress",
-    eventFrequency: "hz vasche",
-    subscribe: "Unsubscribe",
-    key: 3,
-  },
-];
+const getEvents = token => {
+  return axios({
+    method: "get",
+    url: "https://forge-development.herokuapp.com/api/events/",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-class SubscriptionsPage extends Component {
-  render() {
-    return (
-      <main>
-        <PageTitle title="Current topics" />
-        <EventDesc className={styles.event} events={events} />
-      </main>
-    );
-  }
-}
+const SubscriptionsPage = () => {
+  const [events, setEvents] = useState([]);
+  const { token } = useContext(UserDataContext);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getEvents(token);
+      setEvents(result.data);
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <main>
+      <PageTitle title="Current topics" />
+      <EventDesc className={styles.event} events={events} />
+    </main>
+  );
+};
 
 export default SubscriptionsPage;
