@@ -18,7 +18,6 @@ class SectionMain extends Component {
       axios(requestObj)
         .then(response => {
           let userData = jwtDecode(`${response.data.token}`);
-          console.dir(userData);
           setDataToStorage(userData);
           return response;
         })
@@ -40,11 +39,6 @@ class SectionMain extends Component {
       localStorage.setItem("created", res.data.created);
     };
 
-    // const text = "logout";
-    //test clicker
-    const { testClickHandlerLogin } = this.props;
-    //
-
     const { isActive, logIO } = this.props;
     const infoText = isActive
       ? "Select your team to start knowledge sharing and having some coffee:"
@@ -57,13 +51,11 @@ class SectionMain extends Component {
           {isActive ? (
             <Button text={"logout"} handlerClick={logIO} />
           ) : (
-            /*<TelegramLoginButton
+            <TelegramLoginButton
               dataOnauth={handleTelegramResponse}
               botName="RandomCofeeBot"
               requestAccess="write"
-            />*/
-            /* test button for login*/
-            <Button text={"login"} handlerClick={testClickHandlerLogin} />
+            />
           )}
         </div>
       </div>
