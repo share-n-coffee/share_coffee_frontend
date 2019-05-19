@@ -16,11 +16,16 @@
   color: #0064FF;
 }
 
-.section__btn:hover {
+.section__btn:hover:enabled {
   color: #FFFFFF;
   opacity: 0.8;
   background: #0064FF;
   cursor: pointer;
+}
+
+.section__btn:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .btn_logout {
