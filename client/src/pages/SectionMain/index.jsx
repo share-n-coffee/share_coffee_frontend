@@ -4,7 +4,7 @@ import SectionInfo from "../../modules/SectionInfo";
 import Button from "../../modules/Button";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import axios from "axios";
-import URL from "../../constants";
+import URL_LOGIN from "../../constants";
 import jwtDecode from "jwt-decode";
 
 class SectionMain extends Component {
@@ -12,7 +12,7 @@ class SectionMain extends Component {
     const handleTelegramResponse = telegramResponse => {
       const requestObj = {
         method: "put",
-        url: URL,
+        url: URL_LOGIN,
         data: telegramResponse,
       };
       axios(requestObj)
@@ -28,19 +28,23 @@ class SectionMain extends Component {
     };
 
     const setDataToStorage = res => {
-      localStorage.setItem("telegramID", res.user.telegramUserId);
-      localStorage.setItem("userName", res.user.username);
-      localStorage.setItem("id", res.user._id);
-      localStorage.setItem("firstName", res.user.firstName);
-      localStorage.setItem("lastName", res.user.lastName);
-      localStorage.setItem("avatar", res.user.avatar);
-      localStorage.setItem("banned", res.user.banned);
-      localStorage.setItem("Department", res.user.Department);
-      localStorage.setItem("tokenTime", res.exp);
-      localStorage.setItem("created", res.user.created);
+      localStorage.setItem("id", res.data._id);
+      localStorage.setItem("firstName", res.data.firstName);
+      localStorage.setItem("lastName", res.data.lastName);
+      localStorage.setItem("avatar", res.data.avatar);
+      localStorage.setItem("isAdmin", res.data.isAdmin);
+      localStorage.setItem("banned", res.data.banned);
+      localStorage.setItem("Department", res.data.Department);
+      localStorage.setItem("tokenTimeOver", res.exp);
+      localStorage.setItem("tokenTimeStart", res.iat);
+      localStorage.setItem("created", res.data.created);
     };
 
-    const text = "logout";
+    // const text = "logout";
+    //test clicker
+    const { testClickHandlerLogin } = this.props;
+    //
+
     const { isActive, logIO } = this.props;
     const infoText = isActive
       ? "Select your team to start knowledge sharing and having some coffee:"
@@ -51,13 +55,15 @@ class SectionMain extends Component {
         <SectionInfo infoText={infoText} />
         <div id={styles.telegram__login__container} className={styles.section}>
           {isActive ? (
-            <Button text={text} handlerClick={logIO} />
+            <Button text={"logout"} handlerClick={logIO} />
           ) : (
-            <TelegramLoginButton
+            /*<TelegramLoginButton
               dataOnauth={handleTelegramResponse}
               botName="RandomCofeeBot"
               requestAccess="write"
-            />
+            />*/
+            /* test button for login*/
+            <Button text={"login"} handlerClick={testClickHandlerLogin} />
           )}
         </div>
       </div>
