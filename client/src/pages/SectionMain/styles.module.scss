@@ -1,25 +1,19 @@
 .section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .section__center {
-  box-shadow: inset 0px 36px 100px -125px #333333;
+    box-shadow: inset 0px 36px 100px -125px #333333;
 }
 
 .wrapper {
-  max-width: 1024px;
-  margin: auto;
+    max-width: 1024px;
+    margin: auto;
 }
 
 #telegram__login__containter {
-  position: relative;
-  height: 40px;
-}
-
-.shadow_container {
-  height: 35px;
-  border-top: 1px solid #EFEFEF;
-  background: linear-gradient(180deg, #FBFBFB, #FEFEFE);;
+    position: relative;
+    height: 40px;
 }
