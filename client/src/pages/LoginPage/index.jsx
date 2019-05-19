@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Header from "../../common/Header";
+import { Link } from "react-router-dom";
 import PageTitle from "../../modules/PageTitle";
+import PageTeamSelect from "../PageTeamSelect";
 import Footer from "../../common/Footer";
 import SectionMain from "../SectionMain";
 
@@ -22,13 +24,11 @@ export default class LoginPage extends Component {
     };
 
     const isActive = this.state.isActive;
-    const name = localStorage.getItem("firstName");
-    const surName = localStorage.getItem("lastName");
     return (
       <div>
         <Header />
         {isActive ? (
-          <PageTitle title={`Hello, ${name} ${surName}`} />
+          <PageTeamSelect />
         ) : (
           <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         )}
