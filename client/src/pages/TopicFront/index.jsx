@@ -4,12 +4,10 @@ import PageTitle from "../../modules/PageTitle";
 import styles from "./styles.module.scss";
 import Map from "../../events/components/Map";
 import Button from "../../modules/Button";
-import Footer from "../../modules/Footer";
 
 const TopicFront = () => {
   return (
     <div>
-      <Header />
       <PageTitle title={`Platform Front-end`} />
       <div className={`${styles.wrapper} ${styles.shadow_container}`} />
       <div className={styles.wrapper}>
@@ -39,7 +37,6 @@ const TopicFront = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
