@@ -32,7 +32,7 @@ class SubscriptionsPage extends Component {
     return (
       <main>
         <PageTitle title="Current topics" />
-        <EventDesc events={events} />
+        <EventDesc className={styles.event} events={events} />
       </main>
     );
   }
