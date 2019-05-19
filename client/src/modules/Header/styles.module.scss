@@ -1,16 +1,51 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 120px;
-    background: #FAFAFA;
+  height: 120px;
+  background: #FAFAFA;
 }
 
 .logo_header {
-    margin: 0 50px;
+  //margin: 0 50px;
+  margin: 10px 0 0 0;
 }
 
 .wrapper {
-    max-width: 1024px;
-    margin: auto;
+  max-width: 1024px;
+  margin: 0 auto;
 }
+
+.header__container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 50px;
+}
+
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user__info {
+  display: flex;
+  margin: 0 20px 0 10px;
+  align-items: center;
+  font: 16px/normal "Roboto";
+  color: #C8C8C8;
+}
+.header__dropdown {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
