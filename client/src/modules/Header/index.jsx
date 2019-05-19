@@ -6,7 +6,7 @@ import Dropdown from "../../components/Dropdown";
 class Header extends Component {
   render() {
     //check if user login
-    const isActive = true;
+    const isActive = false;
     //
     const avatar = "https://t.me/i/userpic/320/MxmMazovsky.jpg";
     const name = "FullStack921";
