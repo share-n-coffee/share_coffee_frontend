@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Header from "../../modules/Header";
+import Header from "../../common/Header";
 import PageTitle from "../../modules/PageTitle";
-import Footer from "../../modules/Footer";
+import Footer from "../../common/Footer";
 import SectionMain from "../SectionMain";
 
 export default class LoginPage extends Component {
@@ -13,32 +13,14 @@ export default class LoginPage extends Component {
   }
 
   render() {
-    const logOutHandler = () => {
-      // console.log("logout work:");
-      // console.log("state changed");
-      this.setState(() => {
+    const logIO = () => {
+      this.setState(state => {
         return {
-          isActive: false,
+          isActive: !state.isActive,
         };
       });
-      // console.log("storage cleared");
-      localStorage.clear();
-      // console.log(localStorage);
     };
 
-    const logInHandler = () => {
-      // console.log("login work");
-      // console.log("state changed");
-      // console.log(localStorage.getItem("telegramID"));
-      this.setState(() => {
-        return {
-          isActive: true,
-        };
-      });
-      // console.log(localStorage);
-    };
-
-    // let isActive = this.state.userTelegramID === null ? false : true;
     const isActive = this.state.isActive;
     const name = localStorage.getItem("firstName");
     const surName = localStorage.getItem("lastName");
@@ -46,18 +28,11 @@ export default class LoginPage extends Component {
       <div>
         <Header />
         {isActive ? (
-          <PageTitle
-            title={`Hello, ${name} ${surName}`}
-            desc="feel free at this website"
-          />
+          <PageTitle title={`Hello, ${name} ${surName}`} />
         ) : (
           <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         )}
-        <SectionMain
-          isActive={isActive}
-          logInClick={logInHandler}
-          logOutClick={logOutHandler}
-        />
+        <SectionMain isActive={isActive} logIO={logIO} />
         <Footer />
       </div>
     );

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import styles from "./styles.module.scss";
 import Dropdown from "../../components/Dropdown";
-import Button from "../../modules/Button";
+import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
 import UserDataContext from "../../contexts/UserDataContext";

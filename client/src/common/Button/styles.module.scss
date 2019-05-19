@@ -27,3 +27,30 @@
   opacity: 0.5;
   cursor: default;
 }
+
+.btn_logout {
+  border: none;
+  width: auto;
+  border-radius: 0;
+  color: #323232;
+
+  &:hover {
+    cursor: pointer;
+    background: none;
+    color: rgb(50, 50, 50);
+  }
+}
+
+.btn_subscribe {
+  opacity: 0.3;
+  border: 2px solid #00B464;
+  box-sizing: border-box;
+  border-radius: 20px;
+  text-align: center;
+  color: #00B464;
+
+  &:hover {
+    color: #fff;
+    background: #00B464;
+  }
+}

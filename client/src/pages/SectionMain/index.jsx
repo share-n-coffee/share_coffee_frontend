@@ -1,89 +1,55 @@
 import React, { Component } from "react";
 import styles from "./styles.module.scss";
 import SectionInfo from "../../modules/SectionInfo";
-import Button from "../../modules/Button";
+import Button from "../../common/Button";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import axios from "axios";
-import PageTitle from "../../modules/PageTitle";
+import URL_LOGIN from "../../constants";
+import jwtDecode from "jwt-decode";
 
 class SectionMain extends Component {
   render() {
-    const handleTelegramResponse = response => {
-      // alert(
-      //   "You shall not pass:\n" +
-      //     "auth_date: " +
-      //     response.auth_date +
-      //     "\n" +
-      //     "first_name: " +
-      //     response.first_name +
-      //     "\n" +
-      //     "id: " +
-      //     response.id +
-      //     "\n" +
-      //     "last_name: " +
-      //     response.last_name +
-      //     "\n" +
-      //     "last_name: " +
-      //     response.username,
-      // );
-
-      const myInit = {
-        method: "PUT",
-        mode: "cors",
-        body: { user: response },
-        cache: "default",
+    const handleTelegramResponse = telegramResponse => {
+      const requestObj = {
+        method: "put",
+        url: URL_LOGIN,
+        data: telegramResponse,
       };
-
-      axios(
-        "https://forge-development.herokuapp.com/auth/telegram/callback",
-        myInit,
-      )
-        .then(r => {
-          // console.log("response: ");
-          console.log(r);
-          return r;
-          // return r.json()
+      axios(requestObj)
+        .then(response => {
+          let userData = jwtDecode(`${response.data.token}`);
+          setDataToStorage(userData);
+          return response;
         })
-        .then(data => {
-          return data;
-          console.log(data);
-          // console.log(data.json());
-        });
-      // console.log(this.props
-      let { logInClick } = this.props;
-      setDataToStorage(response);
-      logInClick();
-      // console.log(localStorage);
+        .catch(err => console.log(err));
+      const { logIO } = this.props;
+      logIO();
     };
 
-    const setDataToStorage = response => {
-      const {
-        id,
-        auth_date,
-        first_name,
-        last_name,
-        username,
-        photo_url,
-      } = response;
-      localStorage.setItem("telegramID", id);
-      localStorage.setItem("firstName", first_name);
-      localStorage.setItem("lastName", last_name);
-      localStorage.setItem("authDate", auth_date);
-      localStorage.setItem("userName", username);
-      localStorage.setItem("photoUrl", photo_url);
+    const setDataToStorage = res => {
+      localStorage.setItem("id", res.data._id);
+      localStorage.setItem("firstName", res.data.firstName);
+      localStorage.setItem("lastName", res.data.lastName);
+      localStorage.setItem("avatar", res.data.avatar);
+      localStorage.setItem("isAdmin", res.data.isAdmin);
+      localStorage.setItem("banned", res.data.banned);
+      localStorage.setItem("Department", res.data.Department);
+      localStorage.setItem("tokenTimeOver", res.exp);
+      localStorage.setItem("tokenTimeStart", res.iat);
+      localStorage.setItem("created", res.data.created);
     };
 
-    const text = "logout";
-    const { isActive, logOutClick } = this.props;
+    const { isActive, logIO } = this.props;
     const infoText = isActive
       ? "Select your team to start knowledge sharing and having some coffee:"
       : "Use Telegram to be aware of upcoming meets and manage subscriptions:";
     return (
-      <div className={`${styles.wrapper} ${styles.section__center}`}>
+      <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} ${styles.shadow_container}`} />
         <SectionInfo infoText={infoText} />
         <div id={styles.telegram__login__container} className={styles.section}>
           {isActive ? (
-            <Button text={text} onClick={logOutClick} />
+            <Button text={"logout"} handlerClick={logIO} />
           ) : (
             <TelegramLoginButton
               dataOnauth={handleTelegramResponse}

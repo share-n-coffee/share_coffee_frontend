@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 
 export default class TelegramLoginButton extends Component {
@@ -55,7 +55,7 @@ export default class TelegramLoginButton extends Component {
 //   requestAccess: PropTypes.string,
 //   usePic: PropTypes.bool,
 // };
-
+//
 // TelegramLoginButton.defaultProps = {
 //   botName: "samplebot",
 //   dataOnauth: () => undefined,
