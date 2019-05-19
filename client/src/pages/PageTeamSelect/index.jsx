@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import Header from "../../modules/Header";
+import Header from "../../common/Header";
 import PageTitle from "../PageTitle";
 import Dropdown from "../../components/Dropdown";
 import Footer from "../Footer";
