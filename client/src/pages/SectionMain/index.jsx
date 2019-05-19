@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./styles.module.scss";
 import SectionInfo from "../../modules/SectionInfo";
-import Button from "../../modules/Button";
+import Button from "../../common/Button";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import axios from "axios";
 import URL_LOGIN from "../../constants";

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Header from "../../modules/Header";
+import Header from "../../common/Header";
 import PageTitle from "../../modules/PageTitle";
 import styles from "./styles.module.scss";
 import Map from "../../events/components/Map";
-import Button from "../../modules/Button";
+import Button from "../../common/Button";
 
 const TopicFront = () => {
   return (
