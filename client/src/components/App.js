@@ -1,68 +1,30 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import styles from "./App.module.scss";
-import Header from "../modules/Header";
-import Footer from "../modules/Footer";
-import EventDesc from "../events/components/EventDesc";
-import SectionMain from "../pages/SectionMain";
+import styles from "./styles.module.scss";
+import LoginPage from "../pages/LoginPage";
 import PageTeamSelect from "../pages/PageTeamSelect";
 import SubscriptionsPage from "../pages/SubscriptionsPage";
+import UserDataContext from "../contexts/UserDataContext";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      events: [
-        {
-          eventName: "Platform Front-end",
-          adress: "@ Latte Pytho 12 Zybitskaya St., Minsk",
-          eventFrequency: "every Monday, 16:00",
-          subscribe: "Subscribe",
-          key: 1,
-        },
-        {
-          eventName: "Platform Back-end",
-          adress: "@ Latte Pytho 12 Zybitskaya St., Minsk",
-          eventFrequency: "every Monday, 16:00",
-          subscribe: "Subscribe",
-          key: 2,
-        },
-        {
-          eventName: "Something event",
-          adress: "Something adress",
-          eventFrequency: "hz vasche",
-          subscribe: "Unsubscribe",
-          key: 3,
-        },
-      ],
-    };
-  }
   render() {
-    const { events } = this.state;
-    const Main = () => {
-      return <EventDesc events={events} />;
-    };
-
     return (
-      <div className={styles.App}>
-        <Header />
-        <Router>
-          <Route path="/" component={SectionMain} exact />
-          <Route
-            path="/id/:id"
-            render={({ match }) => {
-              const { id } = match.params;
-              console.log(id);
-              return <Main />;
-            }}
-          />
-          <Route path="/team_select/" component={PageTeamSelect} exact />
-          <Route path="/subscriptions/" component={SubscriptionsPage} exact />
-        </Router>
-
-        <Footer />
-      </div>
+      <UserDataContext.Provider
+        value={{
+          userId: "5ce1147ca0c89f001e1c2a4b",
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTExNDdjYTBjODlmMDAxZTFjMmE0YiIsImZpcnN0TmFtZSI6IkFuYXRvbHkiLCJsYXN0TmFtZSI6IlNlbWVueWFrYSIsImF2YXRhciI6Imh0dHBzOi8vdC5tZS9pL3VzZXJwaWMvMzIwL3RvbHlhX2thdG9seWEuanBnIiwiYmFubmVkIjp7InN0YXR1cyI6ZmFsc2UsImV4cGlyZWQiOjB9LCJpc0FkbWluIjpmYWxzZX0sImlhdCI6MTU1ODI1NDcxNiwiZXhwIjoxNTU4ODU5NTE2fQ.t2vTbuMgfp4Q-rz6AH_d_i6F6F0ZaeH9E6e-yz2MC_4",
+        }}
+      >
+        <div className={styles.App}>
+          <Router>
+            <Route path="/" component={LoginPage} exact />
+            <Route path="/team_select/" component={PageTeamSelect} exact />
+            <Route path="/subscriptions/" component={SubscriptionsPage} exact />
+          </Router>
+        </div>
+      </UserDataContext.Provider>
     );
   }
 }

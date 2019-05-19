@@ -1,17 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 
-class Button extends Component {
-  render() {
-    const { link, text } = this.props;
+const Button = props => {
+  const { text, onClick, disabled } = props;
+  return (
+    <button
+      className={styles.section__btn}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {text}
+    </button>
+  );
+};
 
-    return (
-      <div className={styles.section}>
-        <a href={link}>
-          <button className={styles.section__btn}>{text}</button>
-        </a>
-      </div>
-    );
-  }
-}
+Button.propTypes = {
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+};
+
 export default Button;
