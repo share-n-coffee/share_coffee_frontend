@@ -8,7 +8,7 @@ export default class LoginPage extends Component {
   constructor() {
     super();
     this.state = {
-      isActive: true,
+      isActive: false,
     };
   }
 
