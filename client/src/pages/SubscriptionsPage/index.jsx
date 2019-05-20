@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import PageTitle from "../../modules/PageTitle";
-import EventDesc from "../../events/components/EventDesc";
+import EventDesc from "../../Events/components/EventDesc";
 import UserDataContext from "../../contexts/UserDataContext";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
