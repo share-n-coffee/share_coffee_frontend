@@ -5,6 +5,8 @@ import Button from "../../../common/Button";
 
 import styles from "./styles.module.scss";
 
+const subscribeOnEvent = () => {};
+
 class EventDesc extends Component {
   render() {
     const { events } = this.props;
@@ -13,14 +15,20 @@ class EventDesc extends Component {
 
       return (
         <div key={itemProps.key} className={styles.eventDescItem}>
-          <div>
-            <EventName eventName={itemProps.title} />
+          <div className={styles.eventContainer}>
+            <EventName
+              eventName={itemProps.title}
+              isSubscribed={itemProps.isActive}
+            />
             <InfoAboutEvent
               adress={itemProps.address}
               eventFrequency={new Date(itemProps.created).toDateString()}
             />
           </div>
-          <Button text={itemProps.active ? "Unsubscribe" : "Subscribe"} />
+          <Button
+            text={itemProps.active ? "Unsubscribe" : "Subscribe"}
+            type={itemProps.active ? "Unsubscribe" : "Subscribe"}
+          />
         </div>
       );
     });

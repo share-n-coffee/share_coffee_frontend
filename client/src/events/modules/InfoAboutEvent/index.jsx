@@ -8,12 +8,12 @@ class InfoAboutEvent extends Component {
 
     return (
       <div className={styles.infoAboutEvent}>
-        <div>
-          <span>Place:</span>
+        <div className={styles.row}>
+          <p className={styles.title}>Place:</p>
           <span>{adress}</span>
         </div>
-        <div>
-          <span>Time:</span>
+        <div className={styles.row}>
+          <p className={styles.title}>Time:</p>
           <span>{eventFrequency}</span>
         </div>
       </div>
