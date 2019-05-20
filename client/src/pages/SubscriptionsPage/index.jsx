@@ -29,8 +29,10 @@ const SubscriptionsPage = () => {
 
   return (
     <main>
+      <Header />
       <PageTitle title="Current topics" />
       <EventDesc className={styles.event} events={events} />
+      <Footer />
     </main>
   );
 };
