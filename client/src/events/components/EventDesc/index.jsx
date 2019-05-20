@@ -5,6 +5,8 @@ import Button from "../../../common/Button";
 
 import styles from "./styles.module.scss";
 
+const subscribeOnEvent = () => {};
+
 class EventDesc extends Component {
   render() {
     const { events } = this.props;
