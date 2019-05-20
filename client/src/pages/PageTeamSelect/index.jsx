@@ -41,7 +41,7 @@ const PageTeamSelect = ({ history }) => {
       const result = await axios(
         "https://forge-development.herokuapp.com/api/departments/",
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: { Authorization: `Bearer ${userData.token}` },
         },
       );
 

@@ -10,7 +10,7 @@ const getEvents = token => {
     method: "get",
     url: "https://forge-development.herokuapp.com/api/events/",
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 };

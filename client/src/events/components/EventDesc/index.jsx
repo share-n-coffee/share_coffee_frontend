@@ -24,8 +24,8 @@ class EventDesc extends Component {
             />
           </div>
           <Button
-            text={itemProps.active ? "Unsubscribe" : "Subscribe"}
-            type={itemProps.active ? "Unsubscribe" : "Subscribe"}
+            text={itemProps.events ? "Unsubscribe" : "Subscribe"}
+            type={itemProps.events ? "Unsubscribe" : "Subscribe"}
           />
         </div>
       );
