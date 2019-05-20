@@ -9,7 +9,7 @@ const Button = props => {
     [styles.subscribe]: type === "Subscribe",
     [styles.unsubscribe]: type === "Unsubscribe",
     [styles.primary]: type === "primary",
-    [styles.btn_logout]: type === "logout",
+    [styles.logout]: type === "logout",
   });
 
   return (
