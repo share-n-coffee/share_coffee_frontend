@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import PageTitle from "../../modules/PageTitle";
 import styles from "./styles.module.scss";
-import EventMap from "../../events/components/EventMap";
+import EventMap from "../../Events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
 
@@ -24,16 +24,14 @@ const TopicFront = id => {
   const [eventData, setEvent] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getDataEvent("5cd6f6c381371d297acb2fe0");
+      const result = await getDataEvent(id.id);
       setEvent(result);
     };
     fetchData();
   }, {});
   console.log(eventData);
-
   return (
     <div>
-      <PageTitle title={`Platform Front-end`} />
       <div className={styles.wrapper}>
         <div className={styles.section_container}>
           <div className={styles.section_header}>
@@ -51,7 +49,7 @@ const TopicFront = id => {
           </div>
           <div className={styles.map__descr}>
             <h3 className={styles.section__topic__title}>map</h3>
-            {/*<EventMap location={eventData.location} />*/}
+            {<EventMap location={eventData.location} />}
           </div>
         </div>
       </div>

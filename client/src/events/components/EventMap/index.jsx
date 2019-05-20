@@ -20,11 +20,11 @@ class EventMap extends Component {
   };
 
   readyMap = () => {
-    this.state.preloader.delNode();
+    //this.state.preloader.delNode();
   };
 
   ErrMap = () => {
-    this.state.preloader.delNode();
+    //this.state.preloader.delNode();
     return <span>{this.state.errorText}</span>;
   };
 
@@ -40,7 +40,7 @@ class EventMap extends Component {
     //checkProps
     //location
     if (this.props.location) {
-      this.state.preloader.addNode();
+      //this.state.preloader.addNode();
     } else {
       return;
     }
