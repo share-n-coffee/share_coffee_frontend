@@ -7,15 +7,15 @@ import EventsDropDown from "../../components/EventsDropdown";
 class Header extends Component {
   render() {
     //check if user login
-    const isActive = false;
+    const isActive = localStorage.getItem("id");
     //
     // test data
     const events = [
       { name: "name1", place: "place1", time: "1st September" },
       { name: "name2", place: "place2", time: "1st September" },
     ];
-    const avatar = "https://t.me/i/userpic/320/MxmMazovsky.jpg";
-    const name = "FullStack921";
+    const avatar = `http://bestnycacupuncturist.com/wp-content/uploads/2016/11/anonymous-avatar-sm.jpg`;
+    const name = localStorage.getItem("firstName");
     //
     const getUserDataContainer = () => {
       return (
@@ -36,7 +36,9 @@ class Header extends Component {
       <div className={styles.header}>
         <div className={styles.header__container}>
           <img src={logo} className={styles.logo_header} alt="coffee" />
-          {isActive && getUserDataContainer()}
+          {isActive && window.location.pathname !== "/"
+            ? getUserDataContainer()
+            : ""}
         </div>
       </div>
     );
