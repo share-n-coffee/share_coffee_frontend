@@ -14,7 +14,7 @@ class Header extends Component {
       { name: "name1", place: "place1", time: "1st September" },
       { name: "name2", place: "place2", time: "1st September" },
     ];
-    const avatar = `http://bestnycacupuncturist.com/wp-content/uploads/2016/11/anonymous-avatar-sm.jpg`;
+    const avatar = localStorage.getItem("avatar");
     const name = localStorage.getItem("firstName");
     //
     const getUserDataContainer = () => {

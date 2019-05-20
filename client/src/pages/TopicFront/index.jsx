@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Header from "../../common/Header";
 import PageTitle from "../../modules/PageTitle";
 import styles from "./styles.module.scss";
-import Map from "../../events/components/Map";
+import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 
 const TopicFront = () => {
@@ -33,7 +32,7 @@ const TopicFront = () => {
           </div>
           <div className={styles.map__descr}>
             <h3 className={styles.section__topic__title}>map</h3>
-            <Map location={[-8.369326, 115.166023]} />
+            {/*<EventMap location={[-8.369326, 115.166023]} />*/}
           </div>
         </div>
       </div>

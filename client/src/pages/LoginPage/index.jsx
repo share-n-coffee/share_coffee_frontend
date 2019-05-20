@@ -26,7 +26,6 @@ export default class LoginPage extends Component {
     const isActive = this.state.isActive;
     return (
       <div>
-        {/*<Header />*/}
         {isActive ? (
           <PageTeamSelect />
         ) : (
