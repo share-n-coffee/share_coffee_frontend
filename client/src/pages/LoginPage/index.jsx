@@ -26,14 +26,13 @@ export default class LoginPage extends Component {
     const isActive = this.state.isActive;
     return (
       <div>
-        <Header />
+        {/*<Header />*/}
         {isActive ? (
           <PageTeamSelect />
         ) : (
           <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         )}
         <SectionMain isActive={isActive} logIO={logIO} />
-        <Footer />
       </div>
     );
   }

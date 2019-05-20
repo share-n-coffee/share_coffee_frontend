@@ -39,9 +39,8 @@ class SectionMain extends Component {
       };
       axios(requestObj)
         .then(response => {
-          localStorage.setItem("token", response.data.token);
           let userData = jwtDecode(`${response.data.token}`);
-          setDataToStorage(userData);
+          setDataToStorage(userData, response.data.token);
           return response;
         })
         .catch(err => console.log(err));
@@ -49,17 +48,17 @@ class SectionMain extends Component {
       logIO();
     };
 
-    const setDataToStorage = res => {
-      localStorage.setItem("id", res.data._id);
-      localStorage.setItem("firstName", res.data.firstName);
-      localStorage.setItem("lastName", res.data.lastName);
-      localStorage.setItem("avatar", res.data.avatar);
-      localStorage.setItem("isAdmin", res.data.isAdmin);
-      localStorage.setItem("banned", res.data.banned);
-      localStorage.setItem("Department", res.data.Department);
-      localStorage.setItem("tokenTimeOver", res.exp);
-      localStorage.setItem("tokenTimeStart", res.iat);
-      localStorage.setItem("created", res.data.created);
+    const setDataToStorage = (userData, token) => {
+      localStorage.setItem("token", token);
+      localStorage.setItem("id", userData.data._id);
+      localStorage.setItem("firstName", userData.data.firstName);
+      localStorage.setItem("lastName", userData.data.lastName);
+      localStorage.setItem("avatar", userData.data.avatar);
+      localStorage.setItem("isAdmin", userData.data.isAdmin);
+      localStorage.setItem("banned", userData.data.banned.status);
+      localStorage.setItem("Department", userData.data.Department);
+      localStorage.setItem("tokenTimeOver", userData.exp);
+      localStorage.setItem("tokenTimeStart", userData.iat);
     };
 
     const { isActive, logIO } = this.props;
@@ -67,8 +66,7 @@ class SectionMain extends Component {
       ? "Select your team to start knowledge sharing and having some coffee:"
       : "Use Telegram to be aware of upcoming meets and manage subscriptions:";
     return (
-      <div className={styles.wrapper}>
-        <div className={`${styles.wrapper} ${styles.shadow_container}`} />
+      <>
         <SectionInfo infoText={infoText} />
         <div id={styles.telegram__login__container} className={styles.section}>
           {this.state.hasDepartament ? (
@@ -81,14 +79,14 @@ class SectionMain extends Component {
               handlerClick={logIO}
             />
           ) : (
-            <TelegramLoginButton
-              dataOnauth={handleTelegramResponse}
-              botName="RandomCofeeBot"
-              requestAccess="write"
-            />
-          )}
+              <TelegramLoginButton
+                dataOnauth={handleTelegramResponse}
+                botName="RandomCofeeBot"
+                requestAccess="write"
+              />
+            )}
         </div>
-      </div>
+      </>
     );
   }
 }
