@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-
 import styles from "./styles.module.scss";
 import Dropdown from "../../components/Dropdown";
 import Button from "../../common/Button";
@@ -18,11 +17,13 @@ const getAccountOptions = departments => {
 const setUserDepartment = (departmentId, userData) => {
   return axios
     .put(
-      `https://forge-development.herokuapp.com/api/users/${userData.userId}`,
+      `https://forge-development.herokuapp.com/api/users/${localStorage.getItem(
+        "id",
+      )}`,
       { newDepartment: departmentId },
       {
         headers: {
-          Authorization: `Bearer ${userData.token}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
       },
@@ -34,14 +35,13 @@ const PageTeamSelect = ({ history }) => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
   const userData = useContext(UserDataContext);
-  const { token } = userData;
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
         "https://forge-development.herokuapp.com/api/departments/",
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         },
       );
 
@@ -51,9 +51,12 @@ const PageTeamSelect = ({ history }) => {
     fetchData();
   }, []);
 
+  const name = localStorage.getItem("firstName");
+  const surName = localStorage.getItem("lastName");
+
   return (
     <main className={styles.main_section}>
-      <PageTitle title="Hello, FullStackVasya921" />
+      <PageTitle title={`Hello, ${name} ${surName}`} />
       <SectionInfo
         infoText="Select your team to start knowledge sharing and
                 having some coffee:"
