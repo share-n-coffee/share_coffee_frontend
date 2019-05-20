@@ -19,11 +19,11 @@
 .section__btn:hover:enabled {
   opacity: 0.8;
   cursor: pointer;
-  color: #FFFFFF;
 }
 
 .primary:hover {
   background: #0064FF;
+  color: #FFFFFF;
 }
 
 .section__btn:disabled {
@@ -52,6 +52,7 @@
 
 .subscribe:hover {
   background: #00B464;
+  color: #FFFFFF;
 }
 
 .unsubscribe {
@@ -61,4 +62,5 @@
 
 .unsubscribe:hover {
   opacity: 0.5;
+  color: #FF0032;
 }
