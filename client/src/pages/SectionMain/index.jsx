@@ -48,7 +48,7 @@ class SectionMain extends Component {
         <SectionInfo infoText={infoText} />
         <div id={styles.telegram__login__container} className={styles.section}>
           {isActive ? (
-            <Button text={"logout"} onClick={logIO} />
+            <Button text={"logout"} onClick={logIO} type="primary" />
           ) : (
             <TelegramLoginButton
               dataOnauth={handleTelegramResponse}

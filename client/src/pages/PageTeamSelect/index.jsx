@@ -73,6 +73,7 @@ const PageTeamSelect = ({ history }) => {
         }}
         disabled={!selectedDepartmentId}
         text="Accept"
+        type="primary"
       />
     </main>
   );

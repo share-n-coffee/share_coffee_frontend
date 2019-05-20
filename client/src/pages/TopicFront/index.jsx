@@ -14,7 +14,7 @@ const TopicFront = () => {
         <div className={styles.section_container}>
           <div className={styles.section_header}>
             <h2>Topic Topic</h2>
-            <Button text={"Subscribe"} />
+            <Button text={"Subscribe"} type="Subscribe" />
           </div>
           <p className={styles.section__descr}>
             subscribe to this topic and try random coffee to improve your skills

@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "gh-pages": "^2.0.1",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.5.1",

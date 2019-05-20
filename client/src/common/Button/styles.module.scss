@@ -3,21 +3,27 @@
   width: 222px;
   height: 36px;
   outline: none;
-  border: 2px solid rgba(0, 100, 255, 0.3);
   box-sizing: border-box;
   border-radius: 20px;
   background: none;
   font: 18px/normal "Roboto";
   line-height: 21px;
   text-align: center;
+}
+
+.primary {
   color: #0064FF;
+  border: 2px solid rgba(0, 100, 255, 0.3);
 }
 
 .section__btn:hover:enabled {
-  color: #FFFFFF;
   opacity: 0.8;
-  background: #0064FF;
   cursor: pointer;
+  color: #FFFFFF;
+}
+
+.primary:hover {
+  background: #0064FF;
 }
 
 .section__btn:disabled {
@@ -38,16 +44,21 @@
   }
 }
 
-.btn_subscribe {
+.subscribe {
   opacity: 0.3;
   border: 2px solid #00B464;
-  box-sizing: border-box;
-  border-radius: 20px;
-  text-align: center;
   color: #00B464;
+}
 
-  &:hover {
-    color: #fff;
-    background: #00B464;
-  }
+.subscribe:hover {
+  background: #00B464;
+}
+
+.unsubscribe {
+  color: #FF0032;
+  border: none;
+}
+
+.unsubscribe:hover {
+  background: #FF0032;
 }

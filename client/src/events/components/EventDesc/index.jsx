@@ -25,7 +25,10 @@ class EventDesc extends Component {
               eventFrequency={new Date(itemProps.created).toDateString()}
             />
           </div>
-          <Button text={itemProps.active ? "Unsubscribe" : "Subscribe"} />
+          <Button
+            text={itemProps.active ? "Unsubscribe" : "Subscribe"}
+            type={itemProps.active ? "Unsubscribe" : "Subscribe"}
+          />
         </div>
       );
     });
