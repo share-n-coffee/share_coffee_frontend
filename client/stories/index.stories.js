@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import TopicDescription from "../src/TopicDescription";
+import TopicEditor from "../src/TopicEditor";
 
 // Topic description
 const onChangeCallback = renderedHtml => console.log(renderedHtml);
@@ -16,3 +17,6 @@ storiesOf("Topic description", module)
   .add("editable without text", () => (
     <TopicDescription editable={true} onChange={onChangeCallback} />
   ));
+
+// Topic editor
+storiesOf("Topic editor", module).add("topic editor", () => <TopicEditor />);
