@@ -33,7 +33,7 @@ class Header extends Component {
     };
 
     return (
-      <div className={`${styles.wrapper} ${styles.header}`}>
+      <div className={styles.header}>
         <div className={styles.header__container}>
           <img src={logo} className={styles.logo_header} alt="coffee" />
           {isActive && getUserDataContainer()}

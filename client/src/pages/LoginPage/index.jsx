@@ -26,14 +26,13 @@ export default class LoginPage extends Component {
     const surName = localStorage.getItem("lastName");
     return (
       <div>
-        <Header />
+        {/*<Header />*/}
         {isActive ? (
           <PageTitle title={`Hello, ${name} ${surName}`} />
         ) : (
           <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         )}
         <SectionMain isActive={isActive} logIO={logIO} />
-        <Footer />
       </div>
     );
   }
