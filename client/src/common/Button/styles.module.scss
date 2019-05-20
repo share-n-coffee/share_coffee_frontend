@@ -29,6 +29,7 @@
 .section__btn:disabled {
   opacity: 0.5;
   cursor: default;
+  background-color: transparent;
 }
 
 .btn_logout {
@@ -60,5 +61,5 @@
 }
 
 .unsubscribe:hover {
-  background: #FF0032;
+  opacity: 0.5;
 }
