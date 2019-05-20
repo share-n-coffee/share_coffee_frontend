@@ -79,12 +79,12 @@ class SectionMain extends Component {
               handlerClick={logIO}
             />
           ) : (
-              <TelegramLoginButton
-                dataOnauth={handleTelegramResponse}
-                botName="RandomCofeeBot"
-                requestAccess="write"
-              />
-            )}
+            <TelegramLoginButton
+              dataOnauth={handleTelegramResponse}
+              botName="RandomCofeeBot"
+              requestAccess="write"
+            />
+          )}
         </div>
       </>
     );

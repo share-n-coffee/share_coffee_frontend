@@ -23,7 +23,7 @@ class Header extends Component {
           <div className={styles.nav}>
             <img className={styles.user__img} src={avatar} alt="avatar" />
             <span className={styles.user__info}>{name}</span>
-            <Button text={"Log out "} className={styles.btn_logout_style} />
+            <Button text={"Log out "} type="logout" />
           </div>
           <div className={styles.header__dropdown}>
             <EventsDropDown events={events} />
