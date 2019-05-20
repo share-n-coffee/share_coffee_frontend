@@ -9,30 +9,45 @@
   font: 18px/normal "Roboto";
   line-height: 21px;
   text-align: center;
+
+  &:hover:enabled {
+
+    //opacity: 0.8;
+    color: #fff;
+    background:  #0064FF;
+    border: 2px solid rgba(0, 100, 255, 0.3);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+    background-color: transparent;
+  }
 }
 
 .primary {
   color: #0064FF;
   border: 2px solid rgba(0, 100, 255, 0.3);
+
+  :hover {
+    background: #0064FF;
+    color: #FFFFFF;
+  }
 }
 
-.section__btn:hover:enabled {
-  opacity: 0.8;
-  cursor: pointer;
-}
+//.section__btn:hover:enabled {
+//  opacity: 0.8;
+//  cursor: pointer;
+//}
 
-.primary:hover {
-  background: #0064FF;
-  color: #FFFFFF;
-}
+//.section__btn:disabled {
+//  opacity: 0.3;
+//  cursor: default;
+//  background-color: transparent;
+//}
 
-.section__btn:disabled {
-  opacity: 0.5;
-  cursor: default;
-  background-color: transparent;
-}
-
-.btn_logout {
+.logout {
   border: none;
   width: auto;
   border-radius: 0;
@@ -46,21 +61,22 @@
 }
 
 .subscribe {
-  border: 2px solid rgba(0,180,100, 0.3);
+  border: 2px solid rgba(0, 180, 100, 0.3);
   color: #00B464;
+
+  &:hover {
+    background: #00B464;
+    color: #FFFFFF;
+  }
 }
 
-.subscribe:hover {
-  background: #00B464;
-  color: #FFFFFF;
-}
 
 .unsubscribe {
   color: #FF0032;
   border: none;
-}
 
-.unsubscribe:hover {
-  opacity: 0.5;
-  color: #FF0032;
+  :hover {
+    opacity: 0.5;
+    color: #FF0032;
+  }
 }
