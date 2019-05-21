@@ -49,7 +49,11 @@ const TopicFront = id => {
           </div>
           <div className={styles.map__descr}>
             <h3 className={styles.section__topic__title}>map</h3>
-            {<EventMap location={eventData.location} />}
+            {eventData.location ? (
+              <EventMap location={eventData.location} />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
