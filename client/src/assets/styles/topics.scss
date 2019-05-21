@@ -1,0 +1,67 @@
+.one-topic {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  display: grid;
+  border-bottom: 1.3px solid #e1e1e1;
+  padding: 20px 0;
+  grid-template-columns: 2fr 4fr 1fr;
+  grid-template-rows: auto;
+  text-align: left;
+  & > button {
+    grid-column-start: 3;
+    grid-row-start: row1-start;
+    grid-row-end: 1;
+  }
+
+  & > .title {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    &:hover {
+      color: #646464;
+      transition: all ease 0.1s;
+    }
+    & > .event-status {
+      width: 6px;
+      height: 6px;
+      border-radius: 100%;
+      background: red;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    & > .active {
+      background: green;
+    }
+  }
+  & > .subscribers {
+    font-family: 'Roboto Regular', 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #C8C8C8;
+  }
+  & > span {
+    font-family: 'Roboto Regular', 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #C8C8C8;
+    margin-left: 20px;
+    margin-bottom: 5px;
+  }
+  & > div {
+    font-family: 'Roboto Regular', 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #323232;
+    max-width: 250px;
+    margin-bottom: 5px;
+  }
+}

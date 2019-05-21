@@ -1,0 +1,15 @@
+.team_block {
+  display: flex;
+  border-bottom: 1.3px solid #F0F0F0;
+  height: 49px;
+  align-items: center;
+  & > span {
+    flex: 1;
+    text-align: left;
+  }
+  & > img {
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+  }
+}

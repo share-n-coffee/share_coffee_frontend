@@ -1,0 +1,50 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  box-shadow: 0 0 2px rgba(0,0,0,.5);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;
+  z-index: 1;
+}
+
+.nav__logo-wrapper {
+  text-decoration: none;
+}
+
+.nav__wrapper {
+  & > div {
+    display: flex;
+    margin-left: 10px;
+    & > div {
+      margin-right: 40px;
+      display: flex;
+      font-family: 'Roboto Regular', 'Roboto', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      color: #C8C8C8;
+      & > span {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .nav__wrapper {
+  }
+
+  .nav__logo-wrapper {
+    margin: 0 auto;
+  }
+
+  .btn--nav {
+    display: none;
+  }
+}

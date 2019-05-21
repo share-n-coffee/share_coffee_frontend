@@ -1,0 +1,26 @@
+.wrapper {
+	max-width: calc(768px + 16px * 2);
+	margin: 0 auto;
+	display: flex;
+	height: 100%;
+	padding: 0 16px;
+}
+
+.nav__wrapper {
+	max-width: calc(768px + 16px * 2);
+	width: 100%;
+	padding: 0 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+}
+
+.login_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: auto;
+}
+

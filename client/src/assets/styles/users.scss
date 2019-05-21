@@ -1,0 +1,59 @@
+.user_block {
+  width: 100%;
+  & > thead {
+    & > tr {
+      & > th {
+        border-bottom: 1.3px solid #F0F0F0;
+        height: 44px;
+        padding: 5px;
+        text-align: left;
+        transition: all ease 0.1s;
+        cursor: pointer;
+        &:hover {
+          color: #646464;
+          transition: all ease 0.1s;
+        }
+      }
+      & > .active {
+        color: #0064FF;
+        &:hover {
+          color: #288eff;
+        }
+        &::after {
+          content: '↓';
+          position: absolute;
+          margin-left: 10px;
+        }
+      }
+      & >  .up {
+        &::after {
+          content: '↑';
+          position: absolute;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  & > tbody {
+    & > tr {
+      & > td {
+        border-bottom: 1.3px solid #F0F0F0;
+        height: 44px;
+        padding: 5px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+.bannedUser {
+  color: #A1A1A1;
+}
+.adminUser {
+  color: #0064FF;
+}
