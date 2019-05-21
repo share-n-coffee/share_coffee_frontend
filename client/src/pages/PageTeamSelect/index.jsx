@@ -6,7 +6,7 @@ import Dropdown from "../../components/Dropdown";
 import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
-import UserDataContext from "../../contexts/UserDataContext";
+// import UserDataContext from "../../contexts/UserDataContext";
 
 const getAccountOptions = departments => {
   return departments.map(department => {
@@ -35,7 +35,11 @@ const PageTeamSelect = ({ history }) => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
 
-  const userData = useContext(UserDataContext);
+  // const userData = useContext(UserDataContext);
+  const userData = {
+    id: sessionStorage.getItem("id"),
+    token: sessionStorage.getItem("token"),
+  };
 
   useEffect(() => {
     const fetchData = async () => {
