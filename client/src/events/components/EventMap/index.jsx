@@ -37,11 +37,11 @@ class EventMap extends Component {
   };
 
   componentDidMount() {
+    // this.state.preloader.addNode()
+
     //checkProps
     //location
-    if (this.props.location) {
-      //this.state.preloader.addNode();
-    } else {
+    if (!this.props.location) {
       return;
     }
 
