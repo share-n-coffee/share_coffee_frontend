@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Yandex from "./maps/yandex";
 import Leaflet from "./maps/leaflet";
-import preloader from "../../../modules/preloader/preloader";
+import Preloader from "../../../modules/Preloader/Preloader";
 import style from "./styles.module.scss";
 
 //example
@@ -16,15 +16,14 @@ class EventMap extends Component {
     zoom: 10,
     checkProps: false,
     errorText: "Sorry, no info",
-    preloader: preloader(),
+    preloader: false,
   };
 
   readyMap = () => {
-    //this.state.preloader.delNode();
+    this.setState({ preloader: false });
   };
 
   ErrMap = () => {
-    //this.state.preloader.delNode();
     return <span>{this.state.errorText}</span>;
   };
 
@@ -39,9 +38,7 @@ class EventMap extends Component {
   componentDidMount() {
     //checkProps
     //location
-    if (this.props.location) {
-      //this.state.preloader.addNode();
-    } else {
+    if (!this.props.location) {
       return;
     }
 
@@ -64,6 +61,7 @@ class EventMap extends Component {
     //all ok
     this.setState({
       checkProps: true,
+      preloader: true,
     });
   }
 
@@ -75,10 +73,14 @@ class EventMap extends Component {
       zoom: this.state.zoom || zoom,
       type: type,
     };
-
     return (
       <div className={`${style.map__container} ${style.map__body}`}>
-        {this.state.checkProps ? this.MapPlace(mapState) : this.ErrMap()}
+        {this.state.preloader ? <Preloader /> : null}
+        {this.state.checkProps ? (
+          <>{this.MapPlace(mapState)} </>
+        ) : (
+          this.ErrMap()
+        )}
       </div>
     );
   }
