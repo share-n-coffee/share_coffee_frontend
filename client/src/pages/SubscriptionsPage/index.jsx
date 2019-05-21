@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
-import EventDesc from "../../Events/components/EventDesc";
+import EventDesc from "../../events/components/EventDesc";
 import UserDataContext from "../../contexts/UserDataContext";
 
 const getEvents = token => {

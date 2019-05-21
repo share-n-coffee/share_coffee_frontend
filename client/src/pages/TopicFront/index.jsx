@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import PageTitle from "../../modules/PageTitle";
 import styles from "./styles.module.scss";
-import EventMap from "../../Events/components/EventMap";
+import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
 
