@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import Header from "../../common/Header";
-import { Link } from "react-router-dom";
 import PageTitle from "../../modules/PageTitle";
 import PageTeamSelect from "../PageTeamSelect";
-import Footer from "../../common/Footer";
 import SectionMain from "../SectionMain";
-
 export default class LoginPage extends Component {
   constructor() {
     super();

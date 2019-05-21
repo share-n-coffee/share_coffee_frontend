@@ -11,7 +11,7 @@ const getDataEvent = id => {
   return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
     headers: {
       // Authorization: `Bearer ${token}`,
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   })
     .then(res => {
@@ -52,7 +52,7 @@ const TopicFront = id => {
             {eventData.location ? (
               <EventMap location={eventData.location} />
             ) : (
-              <></>
+              <span>Map is not ready</span>
             )}
           </div>
         </div>

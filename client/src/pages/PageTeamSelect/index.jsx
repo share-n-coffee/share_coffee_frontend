@@ -6,7 +6,7 @@ import Dropdown from "../../components/Dropdown";
 import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
-import UserDataContext from "../../contexts/UserDataContext";
+// import UserDataContext from "../../contexts/UserDataContext";
 
 const getAccountOptions = departments => {
   return departments.map(department => {
@@ -17,13 +17,13 @@ const getAccountOptions = departments => {
 const setUserDepartment = (departmentId, userData) => {
   return axios
     .put(
-      `https://forge-development.herokuapp.com/api/users/${localStorage.getItem(
+      `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem(
         "id",
       )}`,
       { newDepartment: departmentId },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
       },
@@ -34,14 +34,21 @@ const setUserDepartment = (departmentId, userData) => {
 const PageTeamSelect = ({ history }) => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
-  const userData = useContext(UserDataContext);
+
+  // const userData = useContext(UserDataContext);
+  const userData = {
+    id: sessionStorage.getItem("id"),
+    token: sessionStorage.getItem("token"),
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
         "https://forge-development.herokuapp.com/api/departments/",
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
         },
       );
 
@@ -51,8 +58,8 @@ const PageTeamSelect = ({ history }) => {
     fetchData();
   }, []);
 
-  const name = localStorage.getItem("firstName");
-  const surName = localStorage.getItem("lastName");
+  const name = sessionStorage.getItem("firstName");
+  const surName = sessionStorage.getItem("lastName");
 
   return (
     <main className={styles.main_section}>

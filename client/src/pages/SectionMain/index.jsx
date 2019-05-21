@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import SectionInfo from "../../modules/SectionInfo";
 import Button from "../../common/Button";
@@ -7,20 +7,26 @@ import axios from "axios";
 import URL_LOGIN from "../../constants";
 import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
+
 class SectionMain extends Component {
   state = {
     hasDepartament: false,
   };
+
   componentDidMount() {
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("id");
     if (id) {
-      axios(`https://forge-development.herokuapp.com/api/users/${id}`, {
+      axios({
+        method: "get",
+        url: `https://forge-development.herokuapp.com/api/users/${id}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
       })
         .then(res => {
+          console.log(res);
           if (res.data.department) {
+            console.log(true);
             this.setState({ hasDepartament: true });
           }
         })
@@ -29,36 +35,32 @@ class SectionMain extends Component {
         });
     }
   }
+
   render() {
-    const handleTelegramResponse = telegramResponse => {
+    const handleTelegramResponse = async telegramResponse => {
       const requestObj = {
         method: "put",
         url: URL_LOGIN,
         data: telegramResponse,
       };
-      axios(requestObj)
+      const token = await axios(requestObj)
         .then(response => {
-          return setDataToStorage(
-            jwtDecode(`${response.data.token}`),
-            response.data.token,
-          );
+          return response.data.token;
         })
         .catch(err => console.log(err));
+      const userData = jwtDecode(`${token}`);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("id", userData.data._id);
+      sessionStorage.setItem("firstName", userData.data.firstName);
+      sessionStorage.setItem("lastName", userData.data.lastName);
+      sessionStorage.setItem("avatar", userData.data.avatar);
+      sessionStorage.setItem("isAdmin", userData.data.isAdmin);
+      sessionStorage.setItem("banned", userData.data.banned.status);
+      sessionStorage.setItem("Department", userData.data.Department);
+      sessionStorage.setItem("tokenTimeOver", userData.exp);
+      sessionStorage.setItem("tokenTimeStart", userData.iat);
       const { logIO } = this.props;
       logIO();
-    };
-
-    const setDataToStorage = (userData, token) => {
-      localStorage.setItem("token", token);
-      localStorage.setItem("id", userData.data._id);
-      localStorage.setItem("firstName", userData.data.firstName);
-      localStorage.setItem("lastName", userData.data.lastName);
-      localStorage.setItem("avatar", userData.data.avatar);
-      localStorage.setItem("isAdmin", userData.data.isAdmin);
-      localStorage.setItem("banned", userData.data.banned.status);
-      localStorage.setItem("Department", userData.data.Department);
-      localStorage.setItem("tokenTimeOver", userData.exp);
-      localStorage.setItem("tokenTimeStart", userData.iat);
     };
 
     const { isActive, logIO } = this.props;
@@ -72,7 +74,7 @@ class SectionMain extends Component {
           {this.state.hasDepartament ? (
             <Button
               text={
-                <Link to="/subscriptions">{`Log in as ${localStorage.getItem(
+                <Link to="/subscriptions">{`Log in as ${sessionStorage.getItem(
                   "firstName",
                 )}`}</Link>
               }
@@ -81,8 +83,11 @@ class SectionMain extends Component {
           ) : (
             <TelegramLoginButton
               dataOnauth={handleTelegramResponse}
-              botName="RandomCofeeBot"
+              botName="rdmcoffee_bot"
               requestAccess="write"
+              buttonSize="large"
+              cornerRadius={20}
+              usePic={false}
             />
           )}
         </div>
