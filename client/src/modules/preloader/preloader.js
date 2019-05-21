@@ -2,9 +2,9 @@ import logo from "./logo.png";
 import "./styles.css";
 
 const preloader = () => {
-  let lastContainer;
+  const container = document.createElement("div");
+  let lastContainer = container;
   const addNode = () => {
-    const container = document.createElement("div");
     container.className = "preloader";
     container.innerHTML = `
         <div class="image__container">
