@@ -20,7 +20,6 @@ export default class App extends Component {
         }
       >                    */
       <div className={`${styles.App} ${styles.wrapper}`}>
-        <Header />
         <Router>
           <Route path="/" component={LoginPage} exact />
           <Route path="/team_select/" component={PageTeamSelect} exact />
