@@ -7,7 +7,7 @@ import { setCookie } from "tiny-cookie";
 import axios from "axios";
 import URL_LOGIN from "../../constants";
 import jwtDecode from "jwt-decode";
-import { setStorage, router } from "../../helpers/helpers";
+import { setStorage, router } from "./helpers";
 
 export default class LoginPage extends Component {
   render() {
