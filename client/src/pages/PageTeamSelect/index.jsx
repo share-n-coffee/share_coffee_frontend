@@ -31,7 +31,7 @@ const setUserDepartment = (departmentId, userData) => {
     .catch(error => console.log(error));
 };
 
-const PageTeamSelect = ({ history }) => {
+const PageTeamSelect = props => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
 
@@ -60,7 +60,7 @@ const PageTeamSelect = ({ history }) => {
 
   return (
     <>
-      <Header isActive={true} isAdmin={false} hasDepartment={false} />
+      <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
       <main className={styles.main_section}>
         <PageTitle title={`Hello, ${name} ${surName}`} />
         <SectionInfo
@@ -78,7 +78,7 @@ const PageTeamSelect = ({ history }) => {
         <Button
           onClick={async () => {
             await setUserDepartment(selectedDepartmentId, userData);
-            history.push("/subscriptions");
+            props.history.push("/subscriptions");
           }}
           disabled={!selectedDepartmentId}
           text="Accept"

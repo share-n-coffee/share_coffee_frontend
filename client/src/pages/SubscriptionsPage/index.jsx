@@ -16,7 +16,7 @@ const getEvents = token => {
   });
 };
 
-const SubscriptionsPage = () => {
+const SubscriptionsPage = props => {
   const [events, setEvents] = useState([]);
   const token = getCookie("token");
   useEffect(() => {
@@ -36,6 +36,7 @@ const SubscriptionsPage = () => {
         hasDepartment={true}
         avatar={sessionStorage.getItem("avatar")}
         name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        location={props}
       />
       <main>
         <EventDesc className={styles.event} events={events} />
