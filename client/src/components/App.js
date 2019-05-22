@@ -5,6 +5,7 @@ import PageTeamSelect from "../pages/PageTeamSelect";
 import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
+import OneUser from "../pages/HomeAdmin/Users/oneUser";
 // import UserDataContext from "../contexts/UserDataContext";
 import Header from "../common/Header";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -33,6 +34,7 @@ export default class App extends Component {
             <Route path="/subscriptions/" component={SubscriptionsPage} exact />
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
+            <Route path="/admin/user/:id" component={OneUser} exact />
             <Route component={NotFound} exact />
           </Switch>
         </Router>

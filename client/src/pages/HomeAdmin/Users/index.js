@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Pagination from "../../../components/Pagination";
 import { Button, ButtonText } from "../../../ui/components/button";
+import { Link } from "react-router-dom";
 
 class Topics extends Component {
   state = {
@@ -157,7 +158,14 @@ class Topics extends Component {
                         : ""
                     }`}
                   >
-                    <td>{user.username}</td>
+                    <td>
+                      <Link
+                        to={{ pathname: `/admin/user/${user._id}` }}
+                        className={"title"}
+                      >
+                        <span className={"username"}>{user.username}</span>
+                      </Link>
+                    </td>
                     <td>team</td>
                     <td>{this.timestamp(user.created)}</td>
                     {!user.admin.isAdmin ? (
