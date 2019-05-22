@@ -12,4 +12,10 @@
     height: 13px;
     cursor: pointer;
   }
+  & .toggle_delete{
+    & > img {
+      cursor: pointer;
+    }
+
+  }
 }

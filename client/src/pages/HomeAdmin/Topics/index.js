@@ -8,7 +8,7 @@ import {
   DropdownItem,
   Dropdown,
 } from "../../../ui/components/dropdown";
-import { Button } from "../../../ui/components/button";
+import { Button, ButtonText } from "../../../ui/components/button";
 
 class TopicDropdown extends Component {
   state = {
@@ -23,7 +23,6 @@ class TopicDropdown extends Component {
 
   getSubscribers = id => {
     const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-
     requests.get(requestUrl).then(data => {
       this.setState({
         subscribers: data.object,
@@ -65,6 +64,67 @@ class TopicDropdown extends Component {
   }
 }
 
+class DeleteBtn extends Component {
+  state = {
+    subscribers: [],
+    error: false,
+    deleteContent: false,
+  };
+
+  componentDidMount() {
+    this.getSubscribers(this.props.id);
+  }
+
+  getSubscribers = id => {
+    const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
+    requests.get(requestUrl).then(data => {
+      console.log(data);
+      this.setState({
+        subscribers: data.object,
+        error: data.message,
+      });
+    });
+  };
+
+  toggle = () => {
+    this.setState({ deleteContent: true });
+  };
+
+  clear = () => {
+    this.setState({ deleteContent: false });
+  };
+
+  delete = () => {
+    console.log("delete");
+    this.clear();
+  };
+
+  render() {
+    const { subscribers, deleteContent } = this.state;
+    return subscribers && subscribers.length > 0 ? null : (
+      <div className="toggle_delete">
+        {!deleteContent ? (
+          <img
+            src={require("../../../assets/img/close.svg")}
+            alt=""
+            onClick={this.toggle}
+          />
+        ) : (
+          <div>
+            Are you sure you want to delete?
+            <ButtonText onClick={this.clear} style={{ marginLeft: "10px" }}>
+              Cancel
+            </ButtonText>
+            <Button onClick={this.delete} style={{ marginLeft: "10px" }}>
+              Delete
+            </Button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
 class Topics extends Component {
   constructor(props) {
     super(props);
@@ -98,10 +158,14 @@ class Topics extends Component {
     });
   }
 
+  addTopic() {
+    console.log("adding");
+  }
+
   render() {
     const { events, error } = this.state;
     return (
-      <div>
+      <div style={{ textAlign: "left" }}>
         {events &&
           events.length > 0 &&
           events.map(event => (
@@ -124,8 +188,12 @@ class Topics extends Component {
               <Button onClick={() => this.generatePairs(event._id)}>
                 pairs
               </Button>
+              <DeleteBtn id={event._id} />
             </div>
           ))}
+        <Button onClick={this.addTopic} style={{ marginTop: "10px" }}>
+          Add topic
+        </Button>
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );
