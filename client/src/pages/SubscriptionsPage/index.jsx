@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import Header from "../../common/Header";
 import EventDesc from "../../events/components/EventDesc";
+import { getCookie } from "tiny-cookie";
 // import UserDataContext from "../../contexts/UserDataContext";
 
 const getEvents = token => {
@@ -10,14 +11,14 @@ const getEvents = token => {
     method: "get",
     url: "https://forge-development.herokuapp.com/api/events/",
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
 
 const SubscriptionsPage = () => {
   const [events, setEvents] = useState([]);
-  const token = sessionStorage.getItem("token");
+  const token = getCookie("token");
   useEffect(() => {
     const fetchData = async () => {
       const result = await getEvents(token);
@@ -34,9 +35,7 @@ const SubscriptionsPage = () => {
         isAdmin={false}
         hasDepartment={true}
         avatar={sessionStorage.getItem("avatar")}
-        name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
-          "lastName",
-        )}`}
+        name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
       />
       <main>
         <EventDesc className={styles.event} events={events} />
