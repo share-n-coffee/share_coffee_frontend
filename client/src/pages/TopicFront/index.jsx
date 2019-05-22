@@ -29,9 +29,8 @@ const TopicFront = id => {
     };
     fetchData();
   }, {});
-  console.log(eventData);
   return (
-    <div>
+    <>
       <div className={styles.wrapper}>
         <div className={styles.section_container}>
           <div className={styles.section_header}>
@@ -57,7 +56,7 @@ const TopicFront = id => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

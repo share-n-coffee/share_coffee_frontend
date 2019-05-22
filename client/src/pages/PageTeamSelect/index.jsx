@@ -6,6 +6,7 @@ import Dropdown from "../../components/Dropdown";
 import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
+import Header from "../../common/Header";
 // import UserDataContext from "../../contexts/UserDataContext";
 
 const getAccountOptions = departments => {
@@ -62,30 +63,33 @@ const PageTeamSelect = ({ history }) => {
   const surName = sessionStorage.getItem("lastName");
 
   return (
-    <main className={styles.main_section}>
-      <PageTitle title={`Hello, ${name} ${surName}`} />
-      <SectionInfo
-        infoText="Select your team to start knowledge sharing and
+    <>
+      <Header isActive={true} isAdmin={false} hasDepartment={false} />
+      <main className={styles.main_section}>
+        <PageTitle title={`Hello, ${name} ${surName}`} />
+        <SectionInfo
+          infoText="Select your team to start knowledge sharing and
                 having some coffee:"
-      />
-      <div className={styles.dropdown_container}>
-        <Dropdown
-          options={options}
-          selectedValue={selectedDepartmentId}
-          onSelect={setSelectedDepartmentId}
         />
-      </div>
+        <div className={styles.dropdown_container}>
+          <Dropdown
+            options={options}
+            selectedValue={selectedDepartmentId}
+            onSelect={setSelectedDepartmentId}
+          />
+        </div>
 
-      <Button
-        onClick={async () => {
-          await setUserDepartment(selectedDepartmentId, userData);
-          history.push("/subscriptions");
-        }}
-        disabled={!selectedDepartmentId}
-        text="Accept"
-        type="primary"
-      />
-    </main>
+        <Button
+          onClick={async () => {
+            await setUserDepartment(selectedDepartmentId, userData);
+            history.push("/subscriptions");
+          }}
+          disabled={!selectedDepartmentId}
+          text="Accept"
+          type="primary"
+        />
+      </main>
+    </>
   );
 };
 

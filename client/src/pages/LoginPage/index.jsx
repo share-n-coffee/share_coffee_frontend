@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import SectionInfo from "../../modules/SectionInfo";
 import { setCookie } from "tiny-cookie";
+import Header from "../../common/Header";
 import axios from "axios";
 import URL_LOGIN from "../../constants";
 import jwtDecode from "jwt-decode";
@@ -34,6 +35,7 @@ export default class LoginPage extends Component {
     };
     return (
       <>
+        <Header isActive={false} isAdmin={false} hasDepartment={false} />
         <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
         <div
