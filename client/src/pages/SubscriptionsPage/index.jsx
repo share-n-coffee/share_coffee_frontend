@@ -34,9 +34,8 @@ const SubscriptionsPage = () => {
         isAdmin={false}
         hasDepartment={true}
         avatar={sessionStorage.getItem("avatar")}
-        name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
-          "lastName",
-        )}`}
+        name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        location={window.location}
       />
       <main>
         <EventDesc className={styles.event} events={events} />
