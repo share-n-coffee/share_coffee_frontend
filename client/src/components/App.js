@@ -27,7 +27,6 @@ export default class App extends Component {
         }}
       >   */
       <div className={`${styles.App} ${styles.wrapper}`}>
-        <Header />
         <Router>
           <Switch>
             <Route path="/" component={LoginPage} exact />

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
+import Header from "../../common/Header";
 import EventDesc from "../../events/components/EventDesc";
 // import UserDataContext from "../../contexts/UserDataContext";
 
@@ -16,7 +17,6 @@ const getEvents = token => {
 
 const SubscriptionsPage = () => {
   const [events, setEvents] = useState([]);
-  // const { token } = useContext(UserDataContext);
   const token = sessionStorage.getItem("token");
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +28,20 @@ const SubscriptionsPage = () => {
   }, []);
 
   return (
-    <main>
-      <EventDesc className={styles.event} events={events} />
-    </main>
+    <>
+      <Header
+        isActive={true}
+        isAdmin={false}
+        hasDepartment={true}
+        avatar={sessionStorage.getItem("avatar")}
+        name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
+          "lastName",
+        )}`}
+      />
+      <main>
+        <EventDesc className={styles.event} events={events} />
+      </main>
+    </>
   );
 };
 
