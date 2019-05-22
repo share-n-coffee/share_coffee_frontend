@@ -18,9 +18,7 @@ const getAccountOptions = departments => {
 const setUserDepartment = (departmentId, userData) => {
   return axios
     .put(
-      `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem(
-        "id",
-      )}`,
+      `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem("id")}`,
       { newDepartment: departmentId },
       {
         headers: {
@@ -32,7 +30,7 @@ const setUserDepartment = (departmentId, userData) => {
     .catch(error => console.log(error));
 };
 
-const PageTeamSelect = ({ history }) => {
+const PageTeamSelect = props => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
 
@@ -44,14 +42,11 @@ const PageTeamSelect = ({ history }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
-        "https://forge-development.herokuapp.com/api/departments/",
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
+      const result = await axios("https://forge-development.herokuapp.com/api/departments/", {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-      );
+      });
 
       setOptions(getAccountOptions(result.data));
     };
@@ -64,7 +59,7 @@ const PageTeamSelect = ({ history }) => {
 
   return (
     <>
-      <Header isActive={true} isAdmin={false} hasDepartment={false} />
+      <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
       <main className={styles.main_section}>
         <PageTitle title={`Hello, ${name} ${surName}`} />
         <SectionInfo
@@ -82,7 +77,7 @@ const PageTeamSelect = ({ history }) => {
         <Button
           onClick={async () => {
             await setUserDepartment(selectedDepartmentId, userData);
-            history.push("/subscriptions");
+            props.history.push("/subscriptions");
           }}
           disabled={!selectedDepartmentId}
           text="Accept"
