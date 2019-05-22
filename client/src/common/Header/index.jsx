@@ -7,15 +7,15 @@ import EventsDropDown from "../../components/EventsDropdown";
 class Header extends Component {
   render() {
     //check if user login
-    const isActive = localStorage.getItem("id");
+    const isActive = sessionStorage.getItem("id");
     //
     // test data
     const events = [
       { name: "name1", place: "place1", time: "1st September" },
       { name: "name2", place: "place2", time: "1st September" },
     ];
-    const avatar = localStorage.getItem("avatar");
-    const name = localStorage.getItem("firstName");
+    const avatar = sessionStorage.getItem("avatar");
+    const name = sessionStorage.getItem("firstName");
     //
     const getUserDataContainer = () => {
       return (

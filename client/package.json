@@ -19,7 +19,8 @@
     "react-scripts": "3.0.0",
     "react-yandex-maps": "^3.0.2",
     "styled-components": "^4.2.0",
-    "react-router": "latest"
+    "react-router": "latest",
+    "tiny-cookie": "^2.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

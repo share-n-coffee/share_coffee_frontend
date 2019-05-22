@@ -2,21 +2,22 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import EventDesc from "../../events/components/EventDesc";
-import UserDataContext from "../../contexts/UserDataContext";
+// import UserDataContext from "../../contexts/UserDataContext";
 
 const getEvents = token => {
   return axios({
     method: "get",
     url: "https://forge-development.herokuapp.com/api/events/",
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   });
 };
 
 const SubscriptionsPage = () => {
   const [events, setEvents] = useState([]);
-  const { token } = useContext(UserDataContext);
+  // const { token } = useContext(UserDataContext);
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
     const fetchData = async () => {
       const result = await getEvents(token);

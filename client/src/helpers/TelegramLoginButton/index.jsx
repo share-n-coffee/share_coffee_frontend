@@ -19,7 +19,7 @@ export default class TelegramLoginButton extends Component {
     };
 
     const script = document.createElement("script");
-    script.src = "https://telegram.org/js/telegram-widget.js?4";
+    script.src = "https://telegram.org/js/telegram-widget.js?5";
     script.setAttribute("data-telegram-login", botName);
     script.setAttribute("data-size", buttonSize);
     if (cornerRadius !== undefined) {
@@ -37,9 +37,6 @@ export default class TelegramLoginButton extends Component {
       <div
         className={styles.telegram__iframe__block}
         ref={component => {
-          // console.log("this.props.className: " + this.props.className);
-          // console.dir(component);
-          // console.dir(this.instance);
           this.instance = component;
         }}
       />
@@ -47,19 +44,11 @@ export default class TelegramLoginButton extends Component {
   }
 }
 
-// TelegramLoginButton.propTypes = {
-//   botName: PropTypes.string.isRequired,
-//   dataOnauth: PropTypes.func,
-//   buttonSize: PropTypes.oneOf(["large", "medium", "small"]),
-//   cornerRadius: PropTypes.number,
-//   requestAccess: PropTypes.string,
-//   usePic: PropTypes.bool,
-// };
-//
-// TelegramLoginButton.defaultProps = {
-//   botName: "samplebot",
-//   dataOnauth: () => undefined,
-//   buttonSize: "large",
-//   requestAccess: "write",
-//   usePic: true,
-// };
+TelegramLoginButton.propTypes = {
+  botName: PropTypes.string.isRequired,
+  dataOnauth: PropTypes.func,
+  buttonSize: PropTypes.oneOf(["large", "medium", "small"]),
+  cornerRadius: PropTypes.number,
+  requestAccess: PropTypes.string,
+  usePic: PropTypes.bool,
+};
