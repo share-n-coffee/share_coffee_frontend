@@ -30,7 +30,7 @@ class HomeAdmin extends React.Component {
             setLogin={this.setLogin}
           />
         ) : (
-          <HomeDashboard />
+          <HomeDashboard history={this.props.history} />
         )}
       </div>
     );

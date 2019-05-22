@@ -12,6 +12,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
+import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
   render() {
@@ -34,6 +35,7 @@ export default class App extends Component {
             <Route path="/subscriptions/" component={SubscriptionsPage} exact />
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
+            <Route path="/admin/topic-create" component={TopicCreate} exact />
             <Route path="/admin/user/:id" component={OneUser} exact />
             <Route component={NotFound} exact />
           </Switch>

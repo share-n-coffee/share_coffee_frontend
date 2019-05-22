@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
+import Button from "../../common/Button";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -43,7 +44,6 @@ class AdminLoginPage extends Component {
           this.setState({ error: data.errors[0].msg });
         }
         if (data.token) {
-          console.log(this.props.history);
           localStorage.setItem("adminToken", data.token);
           this.props.setLogin(token != null);
         }
@@ -80,9 +80,7 @@ class AdminLoginPage extends Component {
             placeholder="password"
           />
 
-          <button className="form__submit-btn" onClick={e => this.login(e)}>
-            Log in
-          </button>
+          <Button onClick={e => this.login(e)} text="Log in" />
         </form>
       </div>
     );

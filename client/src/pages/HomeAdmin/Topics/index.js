@@ -154,9 +154,10 @@ class Topics extends Component {
     });
   }
 
-  addTopic() {
-    console.log("adding");
-  }
+  addTopic = e => {
+    e.preventDefault();
+    this.props.history.push("/admin/topic-create");
+  };
 
   render() {
     const { events, error } = this.state;
@@ -188,7 +189,7 @@ class Topics extends Component {
               <DeleteBtn id={event._id} />
             </div>
           ))}
-        <Button onClick={this.addTopic} text="Add topic" />
+        <Button onClick={e => this.addTopic(e)} text="Add topic" />
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );
@@ -196,7 +197,6 @@ class Topics extends Component {
 }
 
 Topics.propTypes = {
-  history: PropTypes.object,
   location: PropTypes.object,
   children: PropTypes.object,
   dispatch: PropTypes.func,
