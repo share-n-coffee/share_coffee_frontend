@@ -1,5 +1,4 @@
-const setStorage = (token, userData) => {
-  sessionStorage.setItem("token", token);
+const setStorage = userData => {
   sessionStorage.setItem("id", userData.data._id);
   sessionStorage.setItem("firstName", userData.data.firstName);
   sessionStorage.setItem("lastName", userData.data.lastName);
