@@ -5,14 +5,27 @@ import defaultUser from "./defaultUser.png";
 import styles from "./styles.module.scss";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
-import { getCookie } from "tiny-cookie";
-
+import { removeCookie } from "tiny-cookie";
+//testData
 // const avatar = "https://t.me/i/userpic/320/MxmMazovsky.jpg";
 // const name = "Max Razhnov";
+
 const events = [
   { name: "name1", place: "place1", time: "1st September" },
   { name: "name2", place: "place2", time: "1st September" },
 ];
+//
+
+const logOut = props => {
+  const { location } = props;
+  sessionStorage.clear();
+
+  removeCookie("token", {
+    domain: "random-coffee.fun",
+  });
+  location.history.replace("/");
+};
+
 const adminNavigation = props => {
   let { avatar } = props;
   if (avatar === "undefined") {
@@ -22,7 +35,7 @@ const adminNavigation = props => {
     <div className={styles.nav}>
       <img className={styles.user__img} src={avatar} alt="avatar" />
       <span className={styles.user__info}>{props.name}</span>
-      <Button text={"Log out"} type="logout" />
+      <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
     </div>
   );
 };
@@ -39,7 +52,7 @@ const userNavigation = props => {
           <div className={styles.nav}>
             <img className={styles.user__img} src={avatar} alt="avatar" />
             <span className={styles.user__info}> {props.name}</span>
-            <Button text={"Log out "} type="logout" />
+            <Button text={"Log out "} type="logout" onClick={() => logOut(props)} />
           </div>
           <div className={styles.header__dropdown}>
             <EventsDropDown events={events} />
@@ -47,7 +60,7 @@ const userNavigation = props => {
         </div>
       ) : (
         <div className={styles.nav}>
-          <Button text={"Log out "} type="logout" />
+          <Button text={"Log out "} type="logout" onClick={() => logOut(props)} />
         </div>
       )}
     </>
