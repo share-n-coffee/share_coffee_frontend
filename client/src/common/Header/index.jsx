@@ -17,13 +17,14 @@ const events = [
 //
 
 const logOut = props => {
+  const { location } = props;
   sessionStorage.clear();
   // not work remove
   remove("token", {
     domain: "http://random-coffee.fun",
   });
   //
-  props.location.replace("/");
+  location.history.replace("/");
 };
 
 const adminNavigation = props => {
