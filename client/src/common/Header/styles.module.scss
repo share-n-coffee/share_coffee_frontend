@@ -4,8 +4,13 @@
 }
 
 .logo_header {
-  //margin: 0 50px;
-  margin: 10px 0 0 0;
+  display: flex;
+  align-items: center;
+  & > span {
+    margin-left: 10px;
+    color: #939598;
+    font: 22px/normal 'Roboto Black';
+  }
 }
 
 .wrapper {
@@ -41,6 +46,7 @@
   font: 16px/normal "Roboto";
   color: #C8C8C8;
 }
+
 .header__dropdown {
   margin: 10px 0px;
   display: flex;
