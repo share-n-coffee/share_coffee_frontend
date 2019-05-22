@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import requests from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
-import { Button, ButtonText } from "../../../ui/components/button";
+import Button from "../../../common/Button";
 
 class DeleteBtn extends Component {
   state = {
@@ -51,12 +51,8 @@ class DeleteBtn extends Component {
         ) : (
           <div>
             Are you sure you want to delete?
-            <ButtonText onClick={this.clear} style={{ marginLeft: "10px" }}>
-              Cancel
-            </ButtonText>
-            <Button onClick={this.delete} style={{ marginLeft: "10px" }}>
-              Delete
-            </Button>
+            <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
+            <Button onClick={this.delete} text="Delete" />
           </div>
         )}
       </div>
@@ -158,9 +154,7 @@ class Teams extends Component {
             </div>
           ))}
         {!isShowAdding ? (
-          <Button onClick={this.toggleAdding} style={{ marginTop: "10px" }}>
-            Add team
-          </Button>
+          <Button onClick={this.toggleAdding} text=" Add team" />
         ) : (
           <div>
             <input
@@ -170,10 +164,12 @@ class Teams extends Component {
               onChange={e => this.changeInput(e.target.value)}
               placeholder="Department name"
             />
-            <Button onClick={this.adding} style={{ marginRight: "10px" }}>
-              Save
-            </Button>
-            <ButtonText onClick={this.toggleAdding}>Cancel</ButtonText>
+            <Button onClick={this.adding} text="Save" />
+            <Button
+              onClick={this.toggleAdding}
+              type="Unsubscribe"
+              text="Cancel"
+            />
           </div>
         )}
         {error ? <ErrorMessage error={error} /> : ""}

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Pagination from "../../../components/Pagination";
-import { Button, ButtonText } from "../../../ui/components/button";
 import { Link } from "react-router-dom";
+import Button from "../../../common/Button";
 
 class Topics extends Component {
   state = {
@@ -171,13 +171,17 @@ class Topics extends Component {
                     {!user.admin.isAdmin ? (
                       <td>
                         {!user.banned.status ? (
-                          <ButtonText onClick={() => this.toggle(user)}>
-                            Ban User
-                          </ButtonText>
+                          <Button
+                            onClick={() => this.toggle(user)}
+                            text="Ban User"
+                            type="Unsubscribe"
+                          />
                         ) : (
-                          <Button onClick={() => this.toggle(user)}>
-                            Unban
-                          </Button>
+                          <Button
+                            onClick={() => this.toggle(user)}
+                            text="Unban"
+                            type="Subscribe"
+                          />
                         )}
                       </td>
                     ) : (

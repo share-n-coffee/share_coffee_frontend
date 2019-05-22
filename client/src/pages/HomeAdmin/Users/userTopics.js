@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../../../components/ErrorMessage";
 import requests from "../../../helpers/requests";
-import { Button } from "../../../ui/components/button";
+import Button from "../../../common/Button";
 
 class OneTopics extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class OneTopics extends Component {
           <div>{event.address}</div>
           <span>Time:</span>
           <div>{event.options && event.options.times[0]}</div>
-          <Button>unsubscribe</Button>
+          <Button text="unsubscribe" />
         </div>
         {error ? <ErrorMessage error={error} /> : null}
       </div>

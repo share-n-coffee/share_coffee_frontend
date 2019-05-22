@@ -4,7 +4,7 @@ import TopicEditer from "./topicEditer";
 import { Tab, TabContainer } from "../../../ui/core/home";
 import PageTitle from "../../../modules/PageTitle";
 import requests from "../../../helpers/requests";
-import { Button } from "../../../ui/components/button";
+import Button from "../../../common/Button";
 
 class oneTopic extends Component {
   constructor(props) {
@@ -87,7 +87,11 @@ class oneTopic extends Component {
             {!isEdit ? (
               <div>
                 <p>{event.description}</p>
-                <Button onClick={() => this.showEditForm()}>Edit</Button>
+                <Button
+                  onClick={this.showEditForm}
+                  text="Edit"
+                  type="Subscribe"
+                />
               </div>
             ) : (
               <TopicEditer id={event._id} />

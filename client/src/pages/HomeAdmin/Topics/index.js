@@ -8,7 +8,7 @@ import {
   DropdownItem,
   Dropdown,
 } from "../../../ui/components/dropdown";
-import { Button, ButtonText } from "../../../ui/components/button";
+import Button from "../../../common/Button";
 
 class TopicDropdown extends Component {
   state = {
@@ -112,12 +112,8 @@ class DeleteBtn extends Component {
         ) : (
           <div>
             Are you sure you want to delete?
-            <ButtonText onClick={this.clear} style={{ marginLeft: "10px" }}>
-              Cancel
-            </ButtonText>
-            <Button onClick={this.delete} style={{ marginLeft: "10px" }}>
-              Delete
-            </Button>
+            <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
+            <Button onClick={this.delete} text="Delete" />
           </div>
         )}
       </div>
@@ -185,15 +181,14 @@ class Topics extends Component {
               <div>{event.address}</div>
               <span>Time:</span>
               <div>{event.options.times}</div>
-              <Button onClick={() => this.generatePairs(event._id)}>
-                pairs
-              </Button>
+              <Button
+                onClick={() => this.generatePairs(event._id)}
+                text="pairs"
+              />
               <DeleteBtn id={event._id} />
             </div>
           ))}
-        <Button onClick={this.addTopic} style={{ marginTop: "10px" }}>
-          Add topic
-        </Button>
+        <Button onClick={this.addTopic} text="Add topic" />
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );

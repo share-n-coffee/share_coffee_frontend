@@ -10,7 +10,7 @@
   line-height: 21px;
   text-align: center;
 
-  &:hover:enabled {
+  &:hover {
 
     //opacity: 0.8;
     color: #fff;
@@ -66,6 +66,7 @@
 
   &:hover {
     background: #00B464;
+    border: 2px solid rgba(0, 180, 100, 0.3);
     color: #FFFFFF;
   }
 }
@@ -75,7 +76,9 @@
   color: #FF0032;
   border: none;
 
-  :hover {
+  &:hover {
+    background:  none;
+    border: none;
     opacity: 0.5;
     color: #FF0032;
   }
