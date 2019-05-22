@@ -5,7 +5,7 @@ import defaultUser from "./defaultUser.png";
 import styles from "./styles.module.scss";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
-import { remove } from "tiny-cookie";
+import { removeCookie } from "tiny-cookie";
 //testData
 // const avatar = "https://t.me/i/userpic/320/MxmMazovsky.jpg";
 // const name = "Max Razhnov";
@@ -19,11 +19,10 @@ const events = [
 const logOut = props => {
   const { location } = props;
   sessionStorage.clear();
-  // not work remove
-  remove("token", {
-    domain: "http://random-coffee.fun",
+
+  removeCookie("token", {
+    domain: "random-coffee.fun",
   });
-  //
   location.history.replace("/");
 };
 
@@ -91,7 +90,7 @@ Header.propTypes = {
   isAdmin: PropTypes.bool,
   hasDepartment: PropTypes.bool,
   avatar: PropTypes.string,
-  name: PropTypes.object,
+  name: PropTypes.string,
 };
 
 export default Header;
