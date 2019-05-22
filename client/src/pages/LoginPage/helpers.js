@@ -14,7 +14,11 @@ const setStorage = (token, userData) => {
 const router = props => {
   const id = sessionStorage.getItem("id");
   const departament = sessionStorage.getItem("department");
-  if (id && !departament) {
+  const isAdmin = sessionStorage.getItem("isAdmin");
+
+  if (isAdmin === "true") {
+    props.history.push("/admin");
+  } else if (id && !departament) {
     props.history.push("/team_select/");
   } else if (id && departament) {
     props.history.push("/subscriptions/");
