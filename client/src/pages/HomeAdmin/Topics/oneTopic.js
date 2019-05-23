@@ -5,6 +5,7 @@ import { Tab, TabContainer } from "../../../ui/core/home";
 import PageTitle from "../../../modules/PageTitle";
 import requests from "../../../helpers/requests";
 import Button from "../../../common/Button";
+import Header from "../../../common/Header";
 
 class oneTopic extends Component {
   constructor(props) {
@@ -61,7 +62,14 @@ class oneTopic extends Component {
   render() {
     const { event, activeTab, isEdit } = this.state;
     return (
-      <div>
+      <>
+        <Header
+          isActive={true}
+          isAdmin={true}
+          hasDepartment={false}
+          avatar={sessionStorage.getItem("avatar")}
+          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        />
         <PageTitle
           title={this.state.linkNoHover ? event.title : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}
@@ -69,16 +77,10 @@ class oneTopic extends Component {
           click={this.mouseEvents.click}
         />
         <TabContainer>
-          <Tab
-            onClick={() => this.openTab("Description")}
-            active={activeTab === "Description"}
-          >
+          <Tab onClick={() => this.openTab("Description")} active={activeTab === "Description"}>
             Description
           </Tab>
-          <Tab
-            onClick={() => this.openTab("Upcoming")}
-            active={activeTab === "Upcoming"}
-          >
+          <Tab onClick={() => this.openTab("Upcoming")} active={activeTab === "Upcoming"}>
             Upcoming
           </Tab>
         </TabContainer>
@@ -87,11 +89,7 @@ class oneTopic extends Component {
             {!isEdit ? (
               <div>
                 <p>{event.description}</p>
-                <Button
-                  onClick={this.showEditForm}
-                  text="Edit"
-                  type="Subscribe"
-                />
+                <Button onClick={this.showEditForm} text="Edit" type="Subscribe" />
               </div>
             ) : (
               <TopicEditer id={event._id} />
@@ -100,7 +98,7 @@ class oneTopic extends Component {
         ) : (
           <div>All events</div>
         )}
-      </div>
+      </>
     );
   }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import AdminLoginPage from "../AdminLoginPage";
 import HomeDashboard from "./home";
 // import Navbar from "../../components/Navbar";
+import Header from "../../common/Header";
 
 class HomeAdmin extends React.Component {
   state = {
@@ -21,18 +22,18 @@ class HomeAdmin extends React.Component {
 
   render() {
     return (
-      <div className="login_container" style={{ width: "100%" }}>
-        {/*<Navbar setLogin={this.setLogin} isLogin={this.state.isLogin}/>*/}
-        <h1>Admin panel</h1>
-        {!this.state.isLogin ? (
-          <AdminLoginPage
-            history={this.props.history}
-            setLogin={this.setLogin}
-          />
-        ) : (
-          <HomeDashboard history={this.props.history} />
-        )}
-      </div>
+      <>
+        <Header isActive={false} isAdmin={false} hasDepartment={false} />
+        <div className="login_container" style={{ width: "100%" }}>
+          {/*<Navbar setLogin={this.setLogin} isLogin={this.state.isLogin}/>*/}
+          <h1>Admin panel</h1>
+          {!this.state.isLogin ? (
+            <AdminLoginPage history={this.props.history} setLogin={this.setLogin} />
+          ) : (
+            <HomeDashboard history={this.props.history} />
+          )}
+        </div>
+      </>
     );
   }
 }
