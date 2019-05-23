@@ -3,7 +3,7 @@ import PageTitle from "../../../modules/PageTitle";
 import requests from "../../../helpers/requests";
 import Button from "../../../common/Button";
 import ErrorMessage from "../../../components/ErrorMessage";
-
+import Header from "../../../common/Header";
 class TopicCreate extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +64,14 @@ class TopicCreate extends Component {
     const { error } = this.state;
 
     return (
-      <div>
+      <>
+        <Header
+          isActive={true}
+          isAdmin={true}
+          hasDepartment={false}
+          avatar={sessionStorage.getItem("avatar")}
+          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        />
         <PageTitle
           title={this.state.linkNoHover ? "Create new topic" : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}
@@ -95,7 +102,7 @@ class TopicCreate extends Component {
           <Button onClick={e => this.create(e)} text="Create" />
         </form>
         {error ? <ErrorMessage error={error} /> : ""}
-      </div>
+      </>
     );
   }
 }

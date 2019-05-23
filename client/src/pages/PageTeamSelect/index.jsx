@@ -55,14 +55,15 @@ const PageTeamSelect = props => {
     fetchData();
   }, []);
 
-  const name = sessionStorage.getItem("firstName");
-  const surName = sessionStorage.getItem("lastName");
-
   return (
     <>
       <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
       <main className={styles.main_section}>
-        <PageTitle title={`Hello, ${name} ${surName}`} />
+        <PageTitle
+          title={`Hello, ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
+            "lastName",
+          )}`}
+        />
         <SectionInfo
           infoText="Select your team to start knowledge sharing and
                 having some coffee:"
