@@ -39,7 +39,6 @@ const adminNavigation = props => {
         <span className={styles.user__info}>{props.name}</span>
         <Button text="Log out" type="logout" onClick={() => logOut(props)} />
       </div>
-      <Button text="Admin" type="logout" onClick={() => props.location.history.replace("/admin")} />
     </>
   );
 };
@@ -54,9 +53,18 @@ const userNavigation = props => {
       {props.hasDepartment ? (
         <div>
           <div className={styles.nav}>
+            {sessionStorage.getItem("isAdmin") === "true" ? (
+              <Button
+                text="Admin"
+                type="logout"
+                onClick={() => props.location.history.replace(`/admin`)}
+              />
+            ) : (
+              <></>
+            )}
             <img className={styles.user__img} src={avatar} alt="avatar" />
             <span className={styles.user__info}> {props.name}</span>
-            <Button text={"Log out "} type="logout" onClick={() => logOut(props)} />
+            <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
           <div className={styles.header__dropdown}>
             <EventsDropDown events={events} />
