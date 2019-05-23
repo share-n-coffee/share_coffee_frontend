@@ -22,7 +22,7 @@ export default class App extends Component {
           <Switch>
             <Route path="/" component={LoginPage} exact />
             <Route path="/team_select/" component={PageTeamSelect} exact />
-            <Route path="/subscriptions/" component={SubscriptionsPage} exact />
+            <Route path="/subscriptions/" component={SubscriptionsPage} />
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
             <Route path="/admin/topic-create" component={TopicCreate} exact />
