@@ -30,7 +30,7 @@ export default class LoginPage extends Component {
       setCookie("token", token, { expires: date });
 
       //from helpers.js
-      await setStorage(token, userData);
+      await setStorage(userData);
       router(this.props);
     };
     return (

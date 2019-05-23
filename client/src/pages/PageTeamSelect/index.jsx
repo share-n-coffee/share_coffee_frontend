@@ -7,6 +7,7 @@ import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
 import Header from "../../common/Header";
+import { getCookie } from "tiny-cookie";
 // import UserDataContext from "../../contexts/UserDataContext";
 
 const getAccountOptions = departments => {
@@ -22,7 +23,7 @@ const setUserDepartment = (departmentId, userData) => {
       { newDepartment: departmentId },
       {
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          Authorization: `Bearer ${getCookie("token")}`,
           "Content-Type": "application/json",
         },
       },
@@ -37,14 +38,14 @@ const PageTeamSelect = props => {
   // const userData = useContext(UserDataContext);
   const userData = {
     id: sessionStorage.getItem("id"),
-    token: sessionStorage.getItem("token"),
+    token: getCookie("token"),
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios("https://forge-development.herokuapp.com/api/departments/", {
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          Authorization: `Bearer ${getCookie("token")}`,
         },
       });
 
