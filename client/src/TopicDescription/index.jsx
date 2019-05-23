@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import { Editor, createEditorState } from "medium-draft";
 import { exportToHtml, importFromHtml } from "./helpers.js";
 
-import "medium-draft/lib/index.css"; // TODO: change styles from default to project styles
+import "medium-draft/lib/index.css"; // default medium-draft's styles
+import "./medium-draft.scss"; // override some default medium-draft's styles
+
 import styles from "./styles.module.scss";
 
 const EDITOR_PLACEHOLDER = "Write a topic description...";

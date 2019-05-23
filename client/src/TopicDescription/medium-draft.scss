@@ -1,0 +1,34 @@
+.md-RichEditor-root {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: normal;
+    padding: 0;
+}
+
+.md-RichEditor-editor h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+}
+
+.md-RichEditor-editor .public-DraftEditor-content {
+    min-height: 100px;
+}
+
+.md-RichEditor-editor .public-DraftEditor-content,
+.md-RichEditor-editor .public-DraftEditorPlaceholder-root {
+    padding: 0;
+    margin: 0;
+
+ }
+.md-RichEditor-editor .md-RichEditor-blockquote {
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+a.md-link {
+    color: rgb(0, 100, 255);
+    opacity: 0.8;
+    text-decoration: none;
+}
