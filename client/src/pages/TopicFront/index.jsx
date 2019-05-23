@@ -1,9 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
-import PageTitle from "../../modules/PageTitle";
 import styles from "./styles.module.scss";
 import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
+import { getCookie } from "tiny-cookie";
 
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTAxNTgyN2RjODI0MDAxZTBhYzczZSIsImZpcnN0TmFtZSI6Ik1heCIsImxhc3ROYW1lIjoiUmF6aG5vdiIsImRlcGFydG1lbnQiOiI1Y2Q2ZjZjMzgxMzcxZDI5N2FjYjJmZDAiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9NeG1NYXpvdnNreS5qcGciLCJiYW5uZWQiOnsic3RhdHVzIjp0cnVlLCJleHBpcmVkIjo0MTAyMzg5ODI4NTA1fSwiaXNBZG1pbiI6ZmFsc2V9LCJpYXQiOjE1NTgzNTI4OTksImV4cCI6MTU1ODk1NzY5OX0.mvcXUriYtWCvaxnejCTatksS97sakq5hekN5w_3Zvxw";
@@ -11,7 +11,7 @@ const getDataEvent = id => {
   return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
     headers: {
       // Authorization: `Bearer ${token}`,
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   })
     .then(res => {
