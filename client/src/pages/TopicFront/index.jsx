@@ -20,22 +20,27 @@ const getDataEvent = id => {
     .catch(err => console.log(err));
 };
 
-const TopicFront = id => {
+const TopicFront = props => {
   const [eventData, setEvent] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getDataEvent(id.id);
+      const result = await getDataEvent(props.id);
       setEvent(result);
     };
     fetchData();
   }, {});
+  console.log(eventData);
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.section_container}>
           <div className={styles.section_header}>
             <h2>Topic {eventData.title}</h2>
-            <Button text={"Subscribe"} type="Subscribe" />
+            {eventData.active ? (
+              <Button text={"Subscribe"} type="Subscribe" />
+            ) : (
+              <Button text={"Subscribe"} type="Subscribe" disabled />
+            )}
           </div>
           <p className={styles.section__descr}>{eventData.description}</p>
           <div className={styles.section__place}>
@@ -44,7 +49,9 @@ const TopicFront = id => {
           </div>
           <div className={styles.time__descr}>
             <h3 className={styles.section__topic__title}>time</h3>
-            <p className={styles.time__descr}>{eventData.created}</p>
+            <p className={styles.time__descr}>
+              {eventData.options ? eventData.options.times[0] : "no time"}
+            </p>
           </div>
           <div className={styles.map__descr}>
             <h3 className={styles.section__topic__title}>map</h3>
