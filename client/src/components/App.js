@@ -6,7 +6,7 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
-//import {setCookie} from "tiny-cookie"; //for localhost
+import { setCookie } from "tiny-cookie"; //for localhost
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import Footer from "../common/Footer";
@@ -15,7 +15,10 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
   render() {
-    //setCookie("token",'youToken'); //for localhost
+    setCookie(
+      "token",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZGU4YjEwNDhlZjI3YTI1MWY2NWRkYyIsImZpcnN0TmFtZSI6Ildvb2RzIiwibGFzdE5hbWUiOiJNY3BoZXJzb24iLCJkZXBhcnRtZW50IjoiNWNkNmY2YzM4MTM3MWQyOTdhY2IyZmQyIiwiYXZhdGFyIjoiaHR0cHM6Ly9hcGkuYWRvcmFibGUuaW8vYXZhdGFycy8yODUvMjM1LnBuZyIsImJhbm5lZCI6eyJzdGF0dXMiOmZhbHNlLCJleHBpcmVkIjowfSwiaXNBZG1pbiI6dHJ1ZX0sImlhdCI6MTU1ODYxMjU3MiwiZXhwIjoxNTU5MjE3MzcyfQ.p8hAQYvtBMId6bP4nDZRPV49PS-ZTTYoOPD6I-1CYRc",
+    ); //for localhost
     return (
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>

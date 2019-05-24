@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import styles from "./styles.module.scss";
+// import styles from "./styles.module.scss";
 class Footer extends Component {
   render() {
     return (
-      <div className={`${styles.wrapper} ${styles.footer}`}>
-        <span className={styles.footer__title}>© 2019 Wargaming.net</span>
+      <div className="f-wrapper f-footer">
+        <span className="footer__title">© 2019 Wargaming.net</span>
       </div>
     );
   }

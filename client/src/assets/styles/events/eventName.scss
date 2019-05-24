@@ -1,5 +1,5 @@
 .eventName {
-    padding: 30px 0;
+    margin: 30px 0;
     color: #323232;
     font: 18px "Roboto";
     font-weight: bold;
@@ -7,4 +7,5 @@
 
 .eventContainer {
     position: relative;
+    cursor: pointer;
 }

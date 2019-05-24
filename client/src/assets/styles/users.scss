@@ -22,14 +22,14 @@
         &::after {
           content: '↓';
           position: absolute;
-          margin-left: 10px;
+          margin-left: 5px;
         }
       }
       & >  .up {
         &::after {
           content: '↑';
           position: absolute;
-          margin-left: 10px;
+          margin-left: 5px;
         }
       }
     }
@@ -57,4 +57,17 @@
 }
 .adminUser {
   color: #0064FF;
+}
+
+@media all and (max-width: 450px) {
+  .user_block td:last-child {
+    display: none;
+  }
+
+  .user_block tr:nth-child(n){
+    text-align: center;
+  }
+  .user_block td:nth-child(n) {
+    text-align: center;
+  }
 }

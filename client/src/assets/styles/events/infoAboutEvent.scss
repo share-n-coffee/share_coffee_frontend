@@ -1,0 +1,31 @@
+.info-About-Event{
+    margin-bottom: 30px;
+  }
+
+  .info-About-Event div+div {
+    margin-top: 15px;
+  }
+  
+  .info-title {
+    // width: 100px;
+    margin: 0;
+    font-family: 'Roboto Regular', 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #C8C8C8;
+    margin-left: 20px;
+    margin-right: 70px;
+  }
+  
+  .info-row {
+    display: flex;
+
+    & > span {
+      font-family: 'Roboto Regular', 'Roboto', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      color: #323232;
+    }
+  }

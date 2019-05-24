@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./styles.module.scss";
 import Header from "../../common/Header";
 import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
@@ -39,7 +38,7 @@ const SubscriptionsPage = props => {
         location={props}
       />
       <main>
-        <EventDesc className={styles.event} events={events} />
+        <EventDesc className="event" events={events} />
       </main>
     </>
   );

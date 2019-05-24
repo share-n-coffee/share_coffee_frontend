@@ -4,7 +4,6 @@ import PageTitle from "../../../modules/PageTitle";
 import TopicFront from "../../../pages/TopicFront";
 import EventName from "../../modules/EventName";
 import Button from "../../../common/Button";
-import styles from "./styles.module.scss";
 
 class EventDesc extends Component {
   state = {
@@ -40,15 +39,9 @@ class EventDesc extends Component {
     const elements = events.map(item => {
       const { ...itemProps } = item;
       return (
-        <div key={itemProps._id} className={styles.eventDescItem}>
-          <div
-            className={styles.eventContainer}
-            onClick={this.openEvent(itemProps._id, itemProps.title)}
-          >
-            <EventName
-              eventName={itemProps.title}
-              isSubscribed={itemProps.isActive}
-            />
+        <div key={itemProps._id} className="eventDescItem">
+          <div className="eventContainer" onClick={this.openEvent(itemProps._id, itemProps.title)}>
+            <EventName eventName={itemProps.title} isSubscribed={itemProps.isActive} />
             <InfoAboutEvent
               adress={itemProps.address}
               eventFrequency={new Date(itemProps.created).toDateString()}
@@ -75,7 +68,7 @@ class EventDesc extends Component {
     ) : (
       <>
         <PageTitle title="Current topics" />
-        <div className={styles.eventDesc}>{elements}</div>
+        <div className="eventDesc">{elements}</div>
       </>
     );
   }

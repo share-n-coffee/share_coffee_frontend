@@ -1,0 +1,13 @@
+.select-main_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .select-dropdown_container{
+    padding-bottom: 50px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    z-index: 10;
+  }

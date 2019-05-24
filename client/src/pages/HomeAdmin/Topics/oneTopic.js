@@ -69,16 +69,10 @@ class oneTopic extends Component {
           click={this.mouseEvents.click}
         />
         <TabContainer>
-          <Tab
-            onClick={() => this.openTab("Description")}
-            active={activeTab === "Description"}
-          >
+          <Tab onClick={() => this.openTab("Description")} active={activeTab === "Description"}>
             Description
           </Tab>
-          <Tab
-            onClick={() => this.openTab("Upcoming")}
-            active={activeTab === "Upcoming"}
-          >
+          <Tab onClick={() => this.openTab("Upcoming")} active={activeTab === "Upcoming"}>
             Upcoming
           </Tab>
         </TabContainer>
@@ -86,12 +80,8 @@ class oneTopic extends Component {
           <div>
             {!isEdit ? (
               <div>
-                <p>{event.description}</p>
-                <Button
-                  onClick={this.showEditForm}
-                  text="Edit"
-                  type="Subscribe"
-                />
+                <p className="topic-description">{event.description}</p>
+                <Button onClick={this.showEditForm} text="Edit" type="Subscribe" />
               </div>
             ) : (
               <TopicEditer id={event._id} />

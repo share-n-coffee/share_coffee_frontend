@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import styles from "./styles.module.scss";
 import Dropdown from "../../components/Dropdown";
 import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
@@ -61,13 +60,13 @@ const PageTeamSelect = props => {
   return (
     <>
       <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
-      <main className={styles.main_section}>
+      <main className="select-main_section">
         <PageTitle title={`Hello, ${name} ${surName}`} />
         <SectionInfo
           infoText="Select your team to start knowledge sharing and
                 having some coffee:"
         />
-        <div className={styles.dropdown_container}>
+        <div className="select-dropdown_container">
           <Dropdown
             options={options}
             selectedValue={selectedDepartmentId}

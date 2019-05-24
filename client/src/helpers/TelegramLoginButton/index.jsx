@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
 
 export default class TelegramLoginButton extends Component {
   componentDidMount() {
-    const {
-      botName,
-      buttonSize,
-      cornerRadius,
-      requestAccess,
-      usePic,
-      dataOnauth,
-    } = this.props;
+    const { botName, buttonSize, cornerRadius, requestAccess, usePic, dataOnauth } = this.props;
     window.TelegramLoginWidget = {
       dataOnauth: user => {
         dataOnauth(user);
@@ -35,7 +27,6 @@ export default class TelegramLoginButton extends Component {
   render() {
     return (
       <div
-        className={styles.telegram__iframe__block}
         ref={component => {
           this.instance = component;
         }}

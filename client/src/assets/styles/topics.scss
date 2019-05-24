@@ -2,13 +2,14 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-
+  margin: 0 20px;
   display: grid;
   border-bottom: 1.3px solid #e1e1e1;
   padding: 20px 0;
   grid-template-columns: 2fr 4fr 1fr;
   grid-template-rows: auto;
   text-align: left;
+
   & > button {
     grid-column-start: 3;
     grid-row-start: row1-start;
@@ -46,6 +47,7 @@
     font-size: 16px;
     color: #C8C8C8;
   }
+
   & > span {
     font-family: 'Roboto Regular', 'Roboto', sans-serif;
     font-weight: 400;
@@ -63,5 +65,32 @@
     color: #323232;
     max-width: 250px;
     margin-bottom: 5px;
+  }
+}
+
+.topic-description {
+  margin: 0 10px;
+}
+
+.topic-description + button {
+  margin: 10px 10px 150px;
+}
+
+@media all and (max-width: 550px) {
+  .one-topic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    & > span,
+    & > span + div {
+      display: flex;
+      width: 100%;
+    }
+
+    & > div + span {
+      margin-top: 20px;
+    }
   }
 }
