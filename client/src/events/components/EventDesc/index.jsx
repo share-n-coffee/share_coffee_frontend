@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import InfoAboutEvent from "../../modules/InfoAboutEvent";
 import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
-import Button from "../../../common/Button";
+import SpinButton from "../../../common/SpinButton";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
 class EventDesc extends Component {
   render() {
-    const { events, onSubscriptionClick, onUnsubscriptionClick, userEvents = [] } = this.props;
+    const {
+      events,
+      onSubscriptionClick,
+      onUnsubscriptionClick,
+      userEvents = [],
+      isLoading,
+    } = this.props;
     const userEventIds = userEvents.map(event => event.eventId);
 
     const elements = events.map(event => {
@@ -25,9 +31,10 @@ class EventDesc extends Component {
               eventFrequency={new Date(event.created).toDateString()}
             />
           </div>
-          <Button
+          <SpinButton
             text={isSubscribed ? "Unsubscribe" : "Subscribe"}
             type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+            isLoading={isLoading}
             onClick={() => {
               if (isSubscribed) {
                 onUnsubscriptionClick(event._id);

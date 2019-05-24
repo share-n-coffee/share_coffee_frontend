@@ -53,6 +53,7 @@ const unsubscibeUserFromEvent = (eventId, userId, token) => {
 const SubscriptionsPage = props => {
   const [events, setEvents] = useState([]);
   const [userData, setUserData] = useState({});
+  const [isUserDataLoaded, setIsUserDataLoaded] = useState(false);
   const token = getCookie("token");
   const userId = "5ce1147ca0c89f001e1c2a4b";
   // const userId = sessionStorage.getItem("id");
@@ -79,6 +80,7 @@ const SubscriptionsPage = props => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
       setUserData(result.data);
+      setIsUserDataLoaded(true);
     };
 
     fetchData();
@@ -91,6 +93,7 @@ const SubscriptionsPage = props => {
       userEvents={userData.events}
       onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
       onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+      isLoading={!isUserDataLoaded}
     />
   );
   return (

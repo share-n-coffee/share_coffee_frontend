@@ -25,7 +25,7 @@ const Button = props => {
 };
 
 Button.propTypes = {
-  text: PropTypes.string,
+  text: PropTypes.node,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   type: PropTypes.string,
