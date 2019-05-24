@@ -2,7 +2,13 @@ import React, { Component } from "react";
 
 import styles from "./styles.module.scss";
 
-import PREDEFINED_TOPIC from "./constants";
+import {
+  PREDEFINED_TOPIC,
+  PLACEHOLDERS,
+  COORDINATES_SEP,
+  DEFAULT_COORDINATES,
+  REGULARITY,
+} from "./constants";
 
 class TopicEditor extends Component {
   constructor(props) {
@@ -31,15 +37,34 @@ class TopicEditor extends Component {
 
   onChange(event) {
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.value;
     const name = target.name;
+
+    if (name === "location") {
+      this.onLocationChange(name, value);
+      return;
+    }
 
     this.setState(
       {
         [name]: value,
       },
-      () => console.log("state changed:", this.state),
+      () => console.log("state changed:", this.state.isRegular),
     );
+  }
+
+  onLocationChange(name, value) {
+    const newValue = DEFAULT_COORDINATES;
+    value
+      .split(COORDINATES_SEP)
+      .slice(0, 2)
+      .forEach((str, index) => {
+        const num = Number(str);
+        const coordinate = Number.isNaN(num) || str === "" ? String(0) : str;
+        // TODO: validate coordinate (-180, 180; -90, 90)
+        newValue[index] = coordinate;
+      });
+    this.setState({ [name]: newValue });
   }
 
   render() {
@@ -51,87 +76,97 @@ class TopicEditor extends Component {
             <button type="submit">Save</button>
           </div>
 
+          <input
+            type="text"
+            name="title"
+            placeholder={PLACEHOLDERS.title}
+            value={this.state.title}
+            onChange={this.onChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="place"
+            placeholder={PLACEHOLDERS.place}
+            value={this.state.place}
+            onChange={this.onChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="location"
+            placeholder={PLACEHOLDERS.location}
+            value={
+              this.state.location
+                ? `${this.state.location[0]}${COORDINATES_SEP}${
+                    this.state.location[1]
+                  }`
+                : ""
+            }
+            onChange={this.onChange}
+            required
+          />
+
           <div>
-            <label htmlFor="topic_title">Title</label>
+            <label htmlFor="periodic">Periodic</label>
             <input
-              type="text"
-              id="topic_title"
-              name="title"
-              value={this.state.title}
+              type="radio"
+              name="isRegular"
+              id="periodic"
+              value={REGULARITY.periodic}
+              checked={this.state.isRegular === REGULARITY.periodic}
               onChange={this.onChange}
               required
             />
+            <label htmlFor="single">Single</label>
+            <input
+              type="radio"
+              name="isRegular"
+              id="single"
+              value={REGULARITY.single}
+              checked={this.state.isRegular === REGULARITY.single}
+              onChange={this.onChange}
+            />
           </div>
+
+          {/* {if (this.state.isRegular===)} */}
+
+          {/* <select
+            name="weekDay"
+            id="topic_week_day"
+            value={this.state.weekDay}
+            onChange={this.onChange}
+          >
+            <option value="0">Monday</option>
+            <option value="1">Tuesday</option>
+            <option value="2">Wednesday</option>
+            <option value="3">Thursday</option>
+            <option value="4">Friday</option>
+            <option value="5">Saturday</option>
+            <option value="6">Sunday</option>
+          </select> */}
+
+          {/* <input
+            type="date"
+            name="date"
+            id="topic_date"
+            value={this.state.date}
+            onChange={this.onChange}
+            required
+          /> */}
+
+          {/* <input
+            type="time"
+            name="time"
+            id="topic_time"
+            value={this.state.time}
+            onChange={this.onChange}
+            required
+          /> */}
 
           <div>[ TopicDescription component ]</div>
-
-          <div>
-            <label htmlFor="regular">Regular</label>
-            <input
-              type="checkbox"
-              name="isRegular"
-              checked={this.state.isRegular}
-              onChange={this.onChange}
-              id="regular"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="">Week day</label>
-            <select
-              name="weekDay"
-              id="topic_week_day"
-              value={this.state.weekDay}
-              onChange={this.onChange}
-            >
-              <option value="0">Monday</option>
-              <option value="1">Tuesday</option>
-              <option value="2">Wednesday</option>
-              <option value="3">Thursday</option>
-              <option value="4">Friday</option>
-              <option value="5">Saturday</option>
-              <option value="6">Sunday</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="topic_date">Date</label>
-            <input
-              type="date"
-              name="date"
-              id="topic_date"
-              value={this.state.date}
-              onChange={this.onChange}
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="topic_time">Time</label>
-            <input
-              type="time"
-              name="time"
-              id="topic_time"
-              value={this.state.time}
-              onChange={this.onChange}
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="topic_place">Place</label>
-            <textarea
-              type="text"
-              name="place"
-              id="topic_place"
-              rows="3"
-              wrap="soft"
-              value={this.state.place}
-              onChange={this.onChange}
-              required
-            />
-          </div>
-
           <div>[ Map component ]</div>
         </form>
       </div>

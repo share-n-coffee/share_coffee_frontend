@@ -1,15 +1,33 @@
 const PREDEFINED_TOPIC = {
-  title: "a topic title",
+  title: "some title",
   description: "",
   weekDay: "2",
   date: new Date().toJSON().substring(0, 10),
   time: "18:00",
   place: "some place",
-  isRegular: true,
-  location: {
-    x: 0,
-    y: 0,
-  },
+  isRegular: null,
+  // location: [-53.905535, 27.558799],
+  location: null,
 };
 
-export default PREDEFINED_TOPIC;
+const PLACEHOLDERS = {
+  title: "Topic Title",
+  place: "Place",
+  location: "Coordinates",
+};
+
+const DEFAULT_COORDINATES = [0, 0];
+const COORDINATES_SEP = ", ";
+
+const REGULARITY = {
+  periodic: "true",
+  single: "false",
+};
+
+export {
+  PREDEFINED_TOPIC,
+  PLACEHOLDERS,
+  COORDINATES_SEP,
+  DEFAULT_COORDINATES,
+  REGULARITY,
+};
