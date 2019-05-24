@@ -6,21 +6,56 @@ import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
-// import UserDataContext from "../../contexts/UserDataContext";
+import jwtDecode from "jwt-decode";
 
 const getEvents = token => {
   return axios({
     method: "get",
     url: "https://forge-development.herokuapp.com/api/events/",
     headers: {
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${token}`,
     },
+  });
+};
+
+const getUser = (token, id) => {
+  return axios({
+    method: "get",
+    url: `https://forge-development.herokuapp.com/api/users/${id}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+const handleSubscriptionClick = (eventId, userId, token) => {
+  return axios({
+    method: "put",
+    url: `https://forge-development.herokuapp.com/api/users/${userId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: { eventId: eventId },
+  });
+};
+
+const handleUnsubscriptionClick = (eventId, userId, token) => {
+  return axios({
+    method: "delete",
+    url: `https://forge-development.herokuapp.com/api/users/${userId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: { eventId: eventId },
   });
 };
 
 const SubscriptionsPage = props => {
   const [events, setEvents] = useState([]);
+  const [userData, setUserData] = useState({});
   const token = getCookie("token");
+  const userId = "5ce1147ca0c89f001e1c2a4b";
+  // const userId = sessionStorage.getItem("id");
   useEffect(() => {
     const fetchData = async () => {
       const result = await getEvents(token);
@@ -29,7 +64,25 @@ const SubscriptionsPage = props => {
 
     fetchData();
   }, []);
-  const EventFull = () => <EventDesc className={styles.event} events={events} />;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getUser(token, userId);
+      setUserData(result.data);
+    };
+
+    fetchData();
+  }, []);
+
+  const EventFull = () => (
+    <EventDesc
+      className={styles.event}
+      events={events}
+      userEvents={userData.events}
+      onSubscriptionClick={eventId => handleSubscriptionClick(eventId, userId, token)}
+      onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId, userId, token)}
+    />
+  );
   return (
     <>
       <Header

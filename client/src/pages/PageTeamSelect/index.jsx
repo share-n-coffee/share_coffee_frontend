@@ -16,7 +16,7 @@ const getAccountOptions = departments => {
   });
 };
 
-const setUserDepartment = (departmentId, userData) => {
+const setUserDepartment = departmentId => {
   return axios
     .put(
       `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem("id")}`,
@@ -34,12 +34,6 @@ const setUserDepartment = (departmentId, userData) => {
 const PageTeamSelect = props => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
-
-  // const userData = useContext(UserDataContext);
-  const userData = {
-    id: sessionStorage.getItem("id"),
-    token: getCookie("token"),
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +72,7 @@ const PageTeamSelect = props => {
 
         <Button
           onClick={async () => {
-            await setUserDepartment(selectedDepartmentId, userData);
+            await setUserDepartment(selectedDepartmentId);
             props.history.push("/subscriptions");
           }}
           disabled={!selectedDepartmentId}
