@@ -6,7 +6,8 @@ import styles from "./styles.module.scss";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
 import { removeCookie } from "tiny-cookie";
-import { Link } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
+
 //testData
 // const avatar = "https://t.me/i/userpic/320/MxmMazovsky.jpg";
 // const name = "Max Razhnov";
@@ -57,7 +58,9 @@ const userNavigation = props => {
               <Button
                 text="Admin"
                 type="logout"
-                onClick={() => props.location.history.replace(`/admin`)}
+                onClick={() => {
+                  props.location.history.replace(`/admin`);
+                }}
               />
             ) : (
               <></>
