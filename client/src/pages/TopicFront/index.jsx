@@ -3,7 +3,7 @@ import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
-
+import PageTitle from "../../modules/PageTitle";
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTAxNTgyN2RjODI0MDAxZTBhYzczZSIsImZpcnN0TmFtZSI6Ik1heCIsImxhc3ROYW1lIjoiUmF6aG5vdiIsImRlcGFydG1lbnQiOiI1Y2Q2ZjZjMzgxMzcxZDI5N2FjYjJmZDAiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9NeG1NYXpvdnNreS5qcGciLCJiYW5uZWQiOnsic3RhdHVzIjp0cnVlLCJleHBpcmVkIjo0MTAyMzg5ODI4NTA1fSwiaXNBZG1pbiI6ZmFsc2V9LCJpYXQiOjE1NTgzNTI4OTksImV4cCI6MTU1ODk1NzY5OX0.mvcXUriYtWCvaxnejCTatksS97sakq5hekN5w_3Zvxw";
 const getDataEvent = id => {
@@ -19,17 +19,39 @@ const getDataEvent = id => {
     .catch(err => console.log(err));
 };
 
-const TopicFront = id => {
+const TopicFront = obj => {
+  const [linkHover, setHover] = useState(false);
+
+  const id = obj.match.params.id;
+
+  const mouseEvents = {
+    mouseOver: () => {
+      setHover(true);
+    },
+    mouseOut: () => {
+      setHover(false);
+    },
+    click: () => {
+      obj.history.goBack();
+    },
+  };
+
   const [eventData, setEvent] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getDataEvent(id.id);
+      const result = await getDataEvent(id);
       setEvent(result);
     };
     fetchData();
   }, {});
   return (
     <>
+      <PageTitle
+        title={!linkHover ? eventData.title : "← Back"}
+        mouseOver={mouseEvents.mouseOver}
+        mouseOut={mouseEvents.mouseOut}
+        click={mouseEvents.click}
+      />
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">

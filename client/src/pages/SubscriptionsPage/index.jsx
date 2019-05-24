@@ -3,6 +3,8 @@ import axios from "axios";
 import Header from "../../common/Header";
 import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
+import { Switch, Route } from "react-router-dom";
+import TopicFront from "../TopicFront";
 // import UserDataContext from "../../contexts/UserDataContext";
 
 const getEvents = token => {
@@ -26,7 +28,7 @@ const SubscriptionsPage = props => {
 
     fetchData();
   }, []);
-
+  const EventFull = () => <EventDesc className="event" events={events} />;
   return (
     <>
       <Header
@@ -38,7 +40,12 @@ const SubscriptionsPage = props => {
         location={props}
       />
       <main>
-        <EventDesc className="event" events={events} />
+        {/* <EventDesc className="event" events={events} /> */}
+
+        <Switch>
+          <Route exact path="/subscriptions/" component={EventFull} />
+          <Route path="/subscriptions/:id" component={TopicFront} />
+        </Switch>
       </main>
     </>
   );

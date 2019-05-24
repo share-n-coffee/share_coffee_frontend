@@ -5,6 +5,7 @@ import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
 import { removeCookie } from "tiny-cookie";
+import { Link } from "react-router-dom";
 //testData
 // const avatar = "https://t.me/i/userpic/320/MxmMazovsky.jpg";
 // const name = "Max Razhnov";
@@ -49,9 +50,18 @@ const userNavigation = props => {
       {props.hasDepartment ? (
         <div>
           <div className="h-nav">
+            {sessionStorage.getItem("isAdmin") === "true" ? (
+              <Button
+                text="Admin"
+                type="logout"
+                onClick={() => props.location.history.replace(`/admin`)}
+              />
+            ) : (
+              <></>
+            )}
             <img className="h-user__img" src={avatar} alt="avatar" />
             <span className="h-user__info"> {props.name}</span>
-            <Button text={"Log out "} type="logout" onClick={() => logOut(props)} />
+            <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
           <div className="h-header__dropdown">
             <EventsDropDown events={events} />
@@ -71,7 +81,9 @@ const Header = props => {
     <div className="h-header">
       <div className="h-header__container">
         <div className="h-logo_header">
-          <img src={logo} alt="coffee" />
+          <Link to="/" title="Home">
+            <img src={logo} alt="coffee" />
+          </Link>
           <span>SHARE & COFFEE</span>
         </div>
         {props.isActive ? (
