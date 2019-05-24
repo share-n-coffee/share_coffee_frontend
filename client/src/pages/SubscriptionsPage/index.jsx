@@ -6,7 +6,6 @@ import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
-import jwtDecode from "jwt-decode";
 
 const getEvents = token => {
   return axios({
