@@ -28,7 +28,7 @@ const getUser = (token, id) => {
   });
 };
 
-const handleSubscriptionClick = (eventId, userId, token) => {
+const subscribeUserToEvent = (eventId, userId, token) => {
   return axios({
     method: "put",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
@@ -39,7 +39,7 @@ const handleSubscriptionClick = (eventId, userId, token) => {
   });
 };
 
-const handleUnsubscriptionClick = (eventId, userId, token) => {
+const unsubscibeUserFromEvent = (eventId, userId, token) => {
   return axios({
     method: "delete",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
@@ -56,6 +56,16 @@ const SubscriptionsPage = props => {
   const token = getCookie("token");
   const userId = "5ce1147ca0c89f001e1c2a4b";
   // const userId = sessionStorage.getItem("id");
+  const handleSubscriptionClick = async eventId => {
+    const result = await subscribeUserToEvent(eventId, userId, token);
+    setUserData(result.data);
+  };
+
+  const handleUnsubscriptionClick = async eventId => {
+    const result = await unsubscibeUserFromEvent(eventId, userId, token);
+    setUserData(result.data);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await getEvents(token);
@@ -79,8 +89,8 @@ const SubscriptionsPage = props => {
       className={styles.event}
       events={events}
       userEvents={userData.events}
-      onSubscriptionClick={eventId => handleSubscriptionClick(eventId, userId, token)}
-      onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId, userId, token)}
+      onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
+      onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
     />
   );
   return (
