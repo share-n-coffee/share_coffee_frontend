@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 
 import TopicDescription from "../src/TopicDescription";
 import TopicEditor from "../src/TopicEditor";
+import WeekPicker from "../src/TopicEditor/WeekPicker";
 
 // Topic description
 const onChangeCallback = renderedHtml => console.log(renderedHtml);
@@ -19,4 +20,9 @@ storiesOf("Topic description", module)
   ));
 
 // Topic editor
-storiesOf("Topic editor", module).add("topic editor", () => <TopicEditor />);
+storiesOf("Topic editor", module)
+  .add("topic editor", () => <TopicEditor />)
+  .add("week picker", () => {
+    const onChange = e => console.log(e.target.value);
+    return <WeekPicker onChange={onChange} />;
+  });
