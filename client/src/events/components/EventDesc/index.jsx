@@ -14,6 +14,7 @@ class EventDesc extends Component {
       onUnsubscriptionClick,
       userEvents = [],
       isLoading,
+      currentLoadingEvents = [],
     } = this.props;
     const userEventIds = userEvents.map(event => event.eventId);
 
@@ -34,7 +35,7 @@ class EventDesc extends Component {
           <SpinButton
             text={isSubscribed ? "Unsubscribe" : "Subscribe"}
             type={isSubscribed ? "Unsubscribe" : "Subscribe"}
-            isLoading={isLoading}
+            isLoading={isLoading || currentLoadingEvents.includes(event._id)}
             onClick={() => {
               if (isSubscribed) {
                 onUnsubscriptionClick(event._id);

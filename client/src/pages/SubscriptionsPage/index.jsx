@@ -53,17 +53,19 @@ const SubscriptionsPage = props => {
   const [events, setEvents] = useState([]);
   const [userData, setUserData] = useState({});
   const [isUserDataLoaded, setIsUserDataLoaded] = useState(false);
+  const [currentLoadingEvents, setCurrentLoadingEvents] = useState([]);
   const token = getCookie("token");
-  const userId = "5ce1147ca0c89f001e1c2a4b";
-  // const userId = sessionStorage.getItem("id");
-  const handleSubscriptionClick = async eventId => {
-    const result = await subscribeUserToEvent(eventId, userId, token);
+  //const userId = "5ce1147ca0c89f001e1c2a4b";
+  const userId = sessionStorage.getItem("id");
+  const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
+  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubscibeUserFromEvent);
+  const handleSubscribing = async (eventId, subscribingFunction) => {
+    setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
+    const result = await subscribingFunction(eventId, userId, token);
     setUserData(result.data);
-  };
-
-  const handleUnsubscriptionClick = async eventId => {
-    const result = await unsubscibeUserFromEvent(eventId, userId, token);
-    setUserData(result.data);
+    setCurrentLoadingEvents(
+      currentLoadingEvents.filter(loadingEventId => loadingEventId !== eventId),
+    );
   };
 
   useEffect(() => {
@@ -93,6 +95,7 @@ const SubscriptionsPage = props => {
       onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
       onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
       isLoading={!isUserDataLoaded}
+      currentLoadingEvents={currentLoadingEvents}
     />
   );
   return (
