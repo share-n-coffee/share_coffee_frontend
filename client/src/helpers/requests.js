@@ -89,4 +89,42 @@ class requests {
   }
 }
 
-export default new requests();
+// const loginSuperAdmin = (user, token, requestUrl) => {
+//   return fetch(requestUrl, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token} `,
+//     },
+//     body: JSON.stringify(user),
+//   })
+//     .then(data => {
+//       return data.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       if (data.errors && data.errors.length > 0) {
+//         this.setState({ error: data.errors[0].msg });
+//       }
+//       if (data.token) {
+//         sessionStorage.setItem("adminToken", data.token);
+//         this.props.setLogin(token != null);
+//       }
+//     })
+//     .catch(err => {
+//       this.setState({ error: err.message });
+//       console.error(err);
+//     });
+// };
+
+const checkTokenTime = tokenTimeOver => {
+  let dateNow = (Date.now() / 1000).toFixed();
+  if (+tokenTimeOver < +dateNow) {
+    window.location.history.replace("/");
+  } else {
+    return;
+  }
+};
+
+let request = new requests();
+export { request, checkTokenTime };
