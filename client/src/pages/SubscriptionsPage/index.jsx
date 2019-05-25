@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./styles.module.scss";
 import Header from "../../common/Header";
 import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
@@ -76,7 +75,6 @@ const SubscriptionsPage = props => {
 
     fetchData();
   }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
@@ -89,7 +87,7 @@ const SubscriptionsPage = props => {
 
   const EventFull = () => (
     <EventDesc
-      className={styles.event}
+      className="event"
       events={events}
       userEvents={userData.events}
       onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
@@ -98,6 +96,7 @@ const SubscriptionsPage = props => {
       currentLoadingEvents={currentLoadingEvents}
     />
   );
+  
   return (
     <>
       <Header
@@ -109,6 +108,8 @@ const SubscriptionsPage = props => {
         location={props}
       />
       <main>
+        {/* <EventDesc className="event" events={events} /> */}
+
         <Switch>
           <Route exact path="/subscriptions/" component={EventFull} />
           <Route path="/subscriptions/:id" component={TopicFront} />

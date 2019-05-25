@@ -88,7 +88,7 @@ class oneTopic extends Component {
           <div>
             {!isEdit ? (
               <div>
-                <p>{event.description}</p>
+                <p className="topic-description">{event.description}</p>
                 <Button onClick={this.showEditForm} text="Edit" type="Subscribe" />
               </div>
             ) : (

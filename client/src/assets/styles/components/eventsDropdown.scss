@@ -1,0 +1,29 @@
+.rotated {
+    transform: rotate(180deg);
+  }
+  
+  .header{
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: #0064FF;
+    cursor: pointer;
+  }
+  
+  .header:focus{
+    outline: none !important;
+  }
+  
+  .header:hover{
+    opacity: 0.8;
+  }
+  
+  .arrow {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .list_container{
+    width: fit-content;
+    position: absolute;
+  }

@@ -1,0 +1,66 @@
+.section__btn {
+  padding: 9px 20px;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: none;
+  font: 18px/normal "Roboto";
+  line-height: 21px;
+  text-align: center;
+  
+  &:hover {
+    cursor: pointer;
+  }
+  
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+    background-color: transparent;
+  }
+}
+  
+  .primary {
+    color: #0064FF;
+    border: 2px solid rgba(0, 100, 255, 0.3);
+  
+    :hover {
+      background: #0064FF;
+      color: #FFFFFF;
+    }
+  }
+  
+  .logout {
+    border: none;
+    width: auto;
+    border-radius: 0;
+    color: #323232;
+  
+    &:hover {
+      cursor: pointer;
+      background: none;
+      color: rgb(50, 50, 50);
+    }
+  }
+  
+  .subscribe {
+    border: 2px solid rgba(0, 180, 100, 0.3);
+    color: #00B464;
+  
+    &:hover {
+      background: #00B464;
+      border: 2px solid rgba(0, 180, 100, 0.3);
+      color: #FFFFFF;
+    }
+  }
+
+  .unsubscribe {
+    color: #FF0032;
+    border: none;
+  
+    &:hover {
+      background:  none;
+      border: none;
+      opacity: 0.5;
+      color: #FF0032;
+    }
+  }
