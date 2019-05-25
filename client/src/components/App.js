@@ -6,7 +6,7 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
-import { setCookie } from "tiny-cookie"; //for localhost
+// import { setCookie } from "tiny-cookie"; //for localhost
 import { HashRouter as Router } from "react-router-dom";
 
 import { Route, Switch } from "react-router";
@@ -16,10 +16,10 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
   render() {
-    setCookie(
-      "token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTFjYTE2OGMwZjQzMDAxZTZlODg5NyIsImZpcnN0TmFtZSI6IkJhaHVzIiwibGFzdE5hbWUiOiJFTiIsImRlcGFydG1lbnQiOiI1Y2Q2ZjZjMzgxMzcxZDI5N2FjYjJmZDQiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9DWEJhaHVzLmpwZyIsImJhbm5lZCI6eyJzdGF0dXMiOmZhbHNlLCJleHBpcmVkIjowfSwiaXNBZG1pbiI6dHJ1ZX0sImlhdCI6MTU1ODc3NTU2MSwiZXhwIjoxNTU5MzgwMzYxfQ.s4QOGKmZvmkVsYTEjZ_fot0DA0Rkh84DEc8BxOZ8G7c",
-    ); //for localhost
+    // setCookie(
+    //   "token",
+    //   "",
+    // ); //for localhost
     return (
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>
