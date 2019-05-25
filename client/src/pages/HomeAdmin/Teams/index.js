@@ -43,11 +43,7 @@ class DeleteBtn extends Component {
     return (
       <div className="toggle_delete">
         {!deleteContent ? (
-          <img
-            src={require("../../../assets/img/close.svg")}
-            alt=""
-            onClick={this.toggle}
-          />
+          <img src={require("../../../assets/img/close.svg")} alt="" onClick={this.toggle} />
         ) : (
           <div>
             Are you sure you want to delete?
@@ -77,8 +73,7 @@ class Teams extends Component {
   }
 
   getData() {
-    const requestUrl =
-      "https://forge-development.herokuapp.com/api/departments/";
+    const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
 
     requests.get(requestUrl).then(data => {
       console.log(data);
@@ -106,9 +101,8 @@ class Teams extends Component {
     } else {
       this.setState({ error: "" });
 
-      const requestUrl =
-        "https://forge-development.herokuapp.com/api/departments/";
-      const token = localStorage.getItem("adminToken");
+      const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
+      const token = sessionStorage.getItem("adminToken");
       const department = {
         title: this.state.team,
         description: "",
@@ -165,11 +159,7 @@ class Teams extends Component {
               placeholder="Department name"
             />
             <Button onClick={this.adding} text="Save" />
-            <Button
-              onClick={this.toggleAdding}
-              type="Unsubscribe"
-              text="Cancel"
-            />
+            <Button onClick={this.toggleAdding} type="Unsubscribe" text="Cancel" />
           </div>
         )}
         {error ? <ErrorMessage error={error} /> : ""}

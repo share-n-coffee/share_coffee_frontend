@@ -7,13 +7,13 @@ class requests {
   };
 
   redirect2Login() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload(true);
   }
 
   getAuthHeader() {
     let header = {};
-    const token = localStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("adminToken");
 
     if (token) {
       header = {
@@ -47,8 +47,7 @@ class requests {
       result.message = this.getStatusMessage(response.status);
 
       if (response.status === 403 && withRedirect) this.redirect2Login();
-      else if (response.status >= 400)
-        console.log("Bad response from server, url: " + url);
+      else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       if (response.status < 400) {
         result.object = await response.json();
       }
@@ -78,14 +77,12 @@ class requests {
       result.ok = response.ok;
       result.message = this.getStatusMessage(response.status);
       if (response.status === 403 && withRedirect) this.redirect2Login();
-      else if (response.status >= 400)
-        console.log("Bad response from server, url: " + url);
+      else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       result.object = await response.json();
     } catch (err) {
       console.log(err);
 
-      if (err.message === "Network request failed")
-        result.message = "Internet connection error";
+      if (err.message === "Network request failed") result.message = "Internet connection error";
       if (result.message === null) result.message = "Something went wrong";
     }
     return result;

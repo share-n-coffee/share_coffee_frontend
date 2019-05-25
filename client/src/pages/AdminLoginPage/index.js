@@ -44,7 +44,7 @@ class AdminLoginPage extends Component {
           this.setState({ error: data.errors[0].msg });
         }
         if (data.token) {
-          localStorage.setItem("adminToken", data.token);
+          sessionStorage.setItem("adminToken", data.token);
           this.props.setLogin(token != null);
         }
       })
