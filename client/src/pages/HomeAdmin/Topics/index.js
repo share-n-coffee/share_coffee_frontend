@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import requests from "../../../helpers/requests";
+import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
-import {
-  DropdownContent,
-  DropdownItem,
-  Dropdown,
-} from "../../../ui/components/dropdown";
+import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 import Button from "../../../common/Button";
 
 class TopicDropdown extends Component {
@@ -23,7 +19,7 @@ class TopicDropdown extends Component {
 
   getSubscribers = id => {
     const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       this.setState({
         subscribers: data.object,
         error: data.message,
@@ -49,9 +45,7 @@ class TopicDropdown extends Component {
         onClick={() => subscribers.length > 0 && this.openSubscribers(id)}
         open={openSubscribers === id}
       >
-        {subscribers.length > 0
-          ? `Subscribers (${subscribers.length})`
-          : `(0 Subscribers)`}
+        {subscribers.length > 0 ? `Subscribers (${subscribers.length})` : `(0 Subscribers)`}
         <DropdownContent open={openSubscribers === id}>
           {subscribers.map(subscriber => (
             <DropdownItem key={subscriber._id}>
@@ -77,7 +71,7 @@ class DeleteBtn extends Component {
 
   getSubscribers = id => {
     const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       console.log(data);
       this.setState({
         subscribers: data.object,
@@ -104,11 +98,7 @@ class DeleteBtn extends Component {
     return subscribers && subscribers.length > 0 ? null : (
       <div className="toggle_delete">
         {!deleteContent ? (
-          <img
-            src={require("../../../assets/img/close.svg")}
-            alt=""
-            onClick={this.toggle}
-          />
+          <img src={require("../../../assets/img/close.svg")} alt="" onClick={this.toggle} />
         ) : (
           <div>
             Are you sure you want to delete?
@@ -138,7 +128,7 @@ class Topics extends Component {
   getData() {
     const requestUrl = "https://forge-development.herokuapp.com/api/events/";
 
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       this.setState({
         events: data.object,
         error: data.message,
@@ -149,7 +139,7 @@ class Topics extends Component {
   generatePairs(id) {
     const requestUrl = `https://forge-development.herokuapp.com/api/randomizer/${id}`;
 
-    requests.post(requestUrl).then(data => {
+    request.post(requestUrl).then(data => {
       console.log(data);
     });
   }
@@ -167,13 +157,8 @@ class Topics extends Component {
           events.length > 0 &&
           events.map(event => (
             <div key={event._id} className={"one-topic"}>
-              <Link
-                to={{ pathname: `/admin/topic/${event._id}` }}
-                className={"title"}
-              >
-                <span
-                  className={`event-status ${event.active ? "active" : ""}`}
-                />
+              <Link to={{ pathname: `/admin/topic/${event._id}` }} className={"title"}>
+                <span className={`event-status ${event.active ? "active" : ""}`} />
                 {event.title}
               </Link>
 
@@ -182,10 +167,7 @@ class Topics extends Component {
               <div>{event.address}</div>
               <span>Time:</span>
               <div>{event.options.times}</div>
-              <Button
-                onClick={() => this.generatePairs(event._id)}
-                text="pairs"
-              />
+              <Button onClick={() => this.generatePairs(event._id)} text="pairs" />
               <DeleteBtn id={event._id} />
             </div>
           ))}

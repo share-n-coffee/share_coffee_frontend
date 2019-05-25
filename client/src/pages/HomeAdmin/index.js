@@ -10,7 +10,7 @@ class HomeAdmin extends React.Component {
   };
 
   componentDidMount() {
-    const token = localStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("adminToken");
     if (token !== null) {
       this.setState({ isLogin: true });
     }

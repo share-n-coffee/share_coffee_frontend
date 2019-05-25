@@ -3,7 +3,7 @@ import { Tab, TabContainer } from "../../../ui/core/home";
 import UserTopics from "./userTopics";
 import UserInfo from "./userInfo";
 import UserLogs from "./userLogs";
-import requests from "../../../helpers/requests";
+import { request } from "../../../helpers/requests";
 import PageTitle from "../../../modules/PageTitle";
 
 class OneUser extends React.Component {
@@ -23,7 +23,7 @@ class OneUser extends React.Component {
       this.props.match.params.id
     }`;
 
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       this.setState({
         user: data.object,
         error: data.message,
@@ -54,39 +54,24 @@ class OneUser extends React.Component {
     return (
       <div>
         <PageTitle
-          title={
-            this.state.linkNoHover
-              ? user.firstName + " " + user.lastName
-              : "← Back"
-          }
+          title={this.state.linkNoHover ? user.firstName + " " + user.lastName : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}
           mouseOut={this.mouseEvents.mouseOut}
           click={this.mouseEvents.click}
         />
         <TabContainer>
-          <Tab
-            onClick={() => this.openTab("UserInfo")}
-            active={activeTab === "UserInfo"}
-          >
+          <Tab onClick={() => this.openTab("UserInfo")} active={activeTab === "UserInfo"}>
             User
           </Tab>
-          <Tab
-            onClick={() => this.openTab("UserTopics")}
-            active={activeTab === "UserTopics"}
-          >
+          <Tab onClick={() => this.openTab("UserTopics")} active={activeTab === "UserTopics"}>
             Topics
           </Tab>
-          <Tab
-            onClick={() => this.openTab("UserLogs")}
-            active={activeTab === "UserLogs"}
-          >
+          <Tab onClick={() => this.openTab("UserLogs")} active={activeTab === "UserLogs"}>
             Logs
           </Tab>
         </TabContainer>
         {activeTab === "UserInfo" && <UserInfo user={user} error={error} />}
-        {activeTab === "UserTopics" && (
-          <UserTopics events={user.events} error={error} />
-        )}
+        {activeTab === "UserTopics" && <UserTopics events={user.events} error={error} />}
         {activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}
       </div>
     );

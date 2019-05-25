@@ -17,7 +17,6 @@ const events = [
 const logOut = props => {
   const { location } = props;
   sessionStorage.clear();
-
   removeCookie("token", {
     domain: "random-coffee.fun",
   });
