@@ -1,18 +1,26 @@
 import React, { Component } from "react";
+import styles from "./styles.module.scss";
 
 class PageTitle extends Component {
   render() {
     const { title, desc, mouseOver, mouseOut, click } = this.props;
-    let styleCheck = mouseOver ? "main__header__link" : "main__header";
+    let styleCheck = mouseOver
+      ? styles.main__header__link
+      : styles.main__header;
     return (
       <>
-        <div className="main">
-          <h1 className={styleCheck} onMouseOver={mouseOver} onMouseOut={mouseOut} onClick={click}>
+        <div className={styles.main}>
+          <h1
+            className={styleCheck}
+            onMouseOver={mouseOver}
+            onMouseOut={mouseOut}
+            onClick={click}
+          >
             {title}
           </h1>
-          <p className="main__description">{desc}</p>
+          <p className={styles.main__description}>{desc}</p>
         </div>
-        <div className="shadow_container" />
+        <div className={styles.shadow_container} />
       </>
     );
   }

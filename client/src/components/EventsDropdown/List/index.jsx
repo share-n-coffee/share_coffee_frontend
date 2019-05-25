@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./styles.module.scss";
 
 const List = ({ events }) => {
   return (
-    <ul className="List">
+    <ul className={styles.List}>
       {events.map(({ name, place, time }) => (
-        <div className="item" key={name}>
+        <div className={styles.item} key={name}>
           <p>{name}</p>
           <p>{place}</p>
           <p>{time}</p>

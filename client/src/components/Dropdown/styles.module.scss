@@ -1,0 +1,37 @@
+.selection {
+  color: #C8C8C8;
+  border: none;
+  display: flex;
+}
+
+.selection:hover {
+  color: #000;
+}
+
+.selection:focus {
+  color: #0064FF;
+  outline: none !important;
+}
+
+.dropdown_container {
+  //margin: 30px auto;
+  color: #000;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.arrow {
+  padding: 9px 10px;
+  margin-left: auto;
+}
+
+.focused {
+  background-color: #FFFFFF;
+  padding: 10px 15px;
+  border-radius: 5%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
