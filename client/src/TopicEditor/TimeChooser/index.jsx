@@ -74,7 +74,7 @@ class TimeChooser extends Component {
     }
 
     return (
-      <div className={styles.time_chooser}>
+      <div className={styles.time_chooser} onMouseLeave={this.hidePicker}>
         <input
           className={styles.time_input}
           type="text"
