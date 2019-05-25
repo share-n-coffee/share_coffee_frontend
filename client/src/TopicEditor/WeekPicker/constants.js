@@ -10,31 +10,31 @@ const WEEK_DAYS = {
 
 const WEEK_DAYS_NAMES = {
   [WEEK_DAYS.monday]: {
-    name: "monday",
+    name: "Monday",
     abbr: "Mon",
   },
   [WEEK_DAYS.tuesday]: {
-    name: "tuesday",
+    name: "Tuesday",
     abbr: "Tue",
   },
   [WEEK_DAYS.wednesday]: {
-    name: "wednesday",
+    name: "Wednesday",
     abbr: "Wed",
   },
   [WEEK_DAYS.thursday]: {
-    name: "thursday",
+    name: "Thursday",
     abbr: "Thu",
   },
   [WEEK_DAYS.friday]: {
-    name: "friday",
+    name: "Friday",
     abbr: "Fri",
   },
   [WEEK_DAYS.saturday]: {
-    name: "saturday",
+    name: "Saturday",
     abbr: "Sat",
   },
   [WEEK_DAYS.sunday]: {
-    name: "sunday",
+    name: "Sunday",
     abbr: "Sun",
   },
 };
