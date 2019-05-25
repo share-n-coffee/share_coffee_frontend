@@ -2,31 +2,47 @@ import React, { Component } from "react";
 import InfoAboutEvent from "../../modules/InfoAboutEvent";
 import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
-import Button from "../../../common/Button";
+import SpinButton from "../../../common/SpinButton";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
 class EventDesc extends Component {
   render() {
-    const { events } = this.props;
+    const {
+      events,
+      onSubscriptionClick,
+      onUnsubscriptionClick,
+      userEvents = [],
+      isLoading,
+      currentLoadingEvents = [],
+    } = this.props;
+    const userEventIds = userEvents.map(event => event.eventId);
 
-    const elements = events.map(item => {
-      const { ...itemProps } = item;
+    const elements = events.map(event => {
+      const isSubscribed = userEventIds.includes(event._id);
       return (
-        <div key={itemProps._id} className={styles.eventDescItem}>
+        <div key={event._id} className={styles.eventDescItem}>
           <div className={styles.eventContainer}>
-            <Link to={{ pathname: `/subscriptions/${itemProps._id}` }}>
-              <EventName eventName={itemProps.title} isSubscribed={itemProps.isActive} />
+            <Link to={{ pathname: `/subscriptions/${event._id}` }}>
+              <EventName eventName={event.title} isSubscribed={event.isActive} />
             </Link>
 
             <InfoAboutEvent
-              adress={itemProps.address}
-              eventFrequency={new Date(itemProps.created).toDateString()}
+              adress={event.address}
+              eventFrequency={new Date(event.created).toDateString()}
             />
           </div>
-          <Button
-            text={itemProps.events ? "Unsubscribe" : "Subscribe"}
-            type={itemProps.events ? "Unsubscribe" : "Subscribe"}
+          <SpinButton
+            text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+            type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+            isLoading={isLoading || currentLoadingEvents.includes(event._id)}
+            onClick={() => {
+              if (isSubscribed) {
+                onUnsubscriptionClick(event._id);
+              } else {
+                onSubscriptionClick(event._id);
+              }
+            }}
           />
         </div>
       );
