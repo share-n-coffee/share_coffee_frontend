@@ -1,0 +1,32 @@
+$blue: #4285F4;
+$red: #FF0032;
+$green: #00B464;
+$colors-list: $blue $red $green;
+
+.dots {
+  span {
+    display: inline-block;
+    margin-top: 10px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    &:not(:first-child) { margin-left: 5px; }
+  }
+  @each $current-color in $colors-list {
+    $i: index($colors-list, $current-color);
+    $t: $i * 0.15;
+    span:nth-child(#{$i}) {
+      background: $green;
+      animation: move 0.4s ease-in-out (#{$t}s) infinite alternate;
+    }
+  }
+}
+
+@keyframes move {
+  from { transform: translateY(-5px); }
+  to { transform: translateY(5px); }
+}
+
+
+
+

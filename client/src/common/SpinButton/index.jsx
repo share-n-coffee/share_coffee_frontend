@@ -1,9 +1,23 @@
 import React from "react";
 import Button from "../Button";
 import PropTypes from "prop-types";
+import styles from "./styles.module.scss";
 
 const SpinButton = props => (
-  <Button {...props} text={props.isLoading ? <span>...</span> : props.text} />
+  <Button
+    {...props}
+    text={
+      props.isLoading ? (
+        <div className={styles.dots}>
+          <span />
+          <span />
+          <span />
+        </div>
+      ) : (
+        props.text
+      )
+    }
+  />
 );
 
 SpinButton.propTypes = {

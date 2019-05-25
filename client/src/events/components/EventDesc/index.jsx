@@ -17,9 +17,19 @@ class EventDesc extends Component {
       currentLoadingEvents = [],
     } = this.props;
     const userEventIds = userEvents.map(event => event.eventId);
+    const regularity = {
+      0: "Sunday",
+      1: "Monday",
+      2: "Tuesday",
+      3: "Wednesday",
+      4: "Thursday",
+      5: "Friday",
+      6: "Saturday",
+    };
 
     const elements = events.map(event => {
       const isSubscribed = userEventIds.includes(event._id);
+      console.log("event", event);
       return (
         <div key={event._id} className={styles.eventDescItem}>
           <div className={styles.eventContainer}>
@@ -29,7 +39,9 @@ class EventDesc extends Component {
 
             <InfoAboutEvent
               adress={event.address}
-              eventFrequency={new Date(event.created).toDateString()}
+              eventFrequency={`every ${regularity[event.options.regularity]}, ${
+                event.options.times[0]
+              }`}
             />
           </div>
           <SpinButton
