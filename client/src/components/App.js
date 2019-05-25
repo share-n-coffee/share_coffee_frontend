@@ -7,15 +7,32 @@ import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
 // import { setCookie } from "tiny-cookie"; //for localhost
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter as Router, Redirect } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
+import { getCookie } from "tiny-cookie";
 
 export default class App extends Component {
   render() {
-    //setCookie("token",'youToken');  //for localhost
+    // setCookie("token", 'youToken');  //for localhost
+
+    const id = sessionStorage.getItem("id");
+    const token = getCookie("token");
+
+    //if no info about user
+    if (!(id && token)) {
+      return (
+        <div className={`${styles.App} ${styles.wrapper}`}>
+          <Switch>
+            <Route path="/" component={LoginPage} exact />
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      );
+    }
+
     return (
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>
