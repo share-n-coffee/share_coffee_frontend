@@ -1,10 +1,71 @@
+@import './styles.scss';
+
 .topic_editor {
-    width: 600px;
-    border: 1px solid red;
+    width: 380px; // TODO: delete, for testing only
+    // border: 1px solid red; // TODO: delete, for testing only
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
 }
 
-.eventDescItem {
+.topic_editor_form {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+}
+
+.topic_editor_form input {
+    position: relative;
+    padding: 22px 0;
+    font-size: 16px;
+    color: $unactive-grey;
+    border: none;
+    border-bottom: 1px solid $deep-blue-inactive;
+    outline: 0;
+    background: transparent;
+    margin: 10px 0;
+    &:focus {
+        background-color: transparent;
+        color: $metal;
+    };
+    &::placeholder {
+        color: $unactive-grey;
+    };
+    &:focus::placeholder {
+        color: $metal;
+    };
+    &:hover {
+      border-bottom: 1px solid $deep-blue;
+    }
+  }
+
+.topic_editor_periodic {
+    margin: 20px 0 0;
+    width: 100%;
+    display: flex;
+    & [type="radio"] {
+        display: none;
+    };
+    & label {
+        position: relative;
+        padding: 0 20px;
+        flex: 1;
+        cursor: pointer;
+    };
+    & [type="radio"] + label:before {
+        content: '';
+        position: absolute;
+        box-sizing: border-box;
+        margin: 0px;
+        left: 0;
+        top: 0.4em;
+        width: 10px;
+        height: 10px;
+        border: 1px solid $unactive-grey;
+        border-radius: 100%;
+        background: $mr-white;
+    }
+    & [type="radio"]:checked + label:before {
+        border: 3px solid $deep-blue;
+    }
 }
