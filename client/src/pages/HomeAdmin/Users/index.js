@@ -4,6 +4,7 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import Pagination from "../../../components/Pagination";
 import { Link } from "react-router-dom";
 import Button from "../../../common/Button";
+import axios from "axios";
 
 class Topics extends Component {
   state = {
@@ -25,7 +26,7 @@ class Topics extends Component {
     const requestUrl = "https://forge-development.herokuapp.com/api/users/";
     const token = sessionStorage.getItem("adminToken");
 
-    fetch(requestUrl, {
+    axios(requestUrl, {
       headers: {
         Authorization: `Bearer ${token} `,
       },
@@ -54,7 +55,7 @@ class Topics extends Component {
         status: !user.banned.status,
       },
     };
-    fetch(requestUrl, {
+    axios(requestUrl, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

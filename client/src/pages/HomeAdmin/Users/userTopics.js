@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../../../components/ErrorMessage";
-import requests from "../../../helpers/requests";
+import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
 
 class OneTopics extends Component {
@@ -20,7 +20,7 @@ class OneTopics extends Component {
   getData(id) {
     const requestUrl = `https://forge-development.herokuapp.com/api/events/${id}`;
 
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       console.log(data);
       this.setState({
         event: data.object,
@@ -58,9 +58,7 @@ class UserTopics extends Component {
       <div>
         {events &&
           events.length > 0 &&
-          events.map(event => (
-            <OneTopics id={event.eventId} key={event.eventId} />
-          ))}
+          events.map(event => <OneTopics id={event.eventId} key={event.eventId} />)}
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );

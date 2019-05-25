@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import requests from "../../../helpers/requests";
+import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Button from "../../../common/Button";
+import axios from "axios";
 
 class DeleteBtn extends Component {
   state = {
@@ -16,7 +17,7 @@ class DeleteBtn extends Component {
   getOneTeam(id) {
     const requestUrl = `https://forge-development.herokuapp.com/api/departments/${id}`;
 
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       console.log(data);
       this.setState({
         team: data.object,
@@ -75,7 +76,7 @@ class Teams extends Component {
   getData() {
     const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
 
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       console.log(data);
       this.setState({
         teams: data.object,
@@ -107,7 +108,7 @@ class Teams extends Component {
         title: this.state.team,
         description: "",
       };
-      fetch(requestUrl, {
+      axios(requestUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
