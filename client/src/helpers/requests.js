@@ -1,3 +1,5 @@
+import { removeCookie } from "tiny-cookie";
+
 class requests {
   initialResult = {
     ok: false,
@@ -121,6 +123,8 @@ const checkTokenTime = tokenTimeOver => {
   let dateNow = (Date.now() / 1000).toFixed();
   if (+tokenTimeOver < +dateNow) {
     window.location.history.replace("/");
+    sessionStorage.clear();
+    removeCookie("token");
   } else {
     return;
   }
