@@ -118,6 +118,20 @@
           }
         }
       }
+
+      &--now {
+        overflow: visible !important;
+        & abbr {
+          display: none;
+          
+        }
+        &::after {
+          content: 'Today';
+          display: block;
+          color: $deep-blue;
+          transform: translateX(-50%);
+        }
+      }
     }
   
     &--selectRange {
