@@ -23,7 +23,14 @@ class HomeAdmin extends React.Component {
   render() {
     return (
       <>
-        <Header isActive={false} isAdmin={false} hasDepartment={false} />
+        <Header
+          isActive={true}
+          isAdmin={true}
+          hasDepartment={false}
+          location={this.props}
+          avatar={sessionStorage.getItem("avatar")}
+          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        />
         <div className="login_container" style={{ width: "100%" }}>
           {/*<Navbar setLogin={this.setLogin} isLogin={this.state.isLogin}/>*/}
           <h1>Admin panel</h1>

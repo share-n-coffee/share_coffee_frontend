@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../common/Button";
-import Header from "../../common/Header";
 
 class AdminLoginPage extends Component {
   constructor(props) {
