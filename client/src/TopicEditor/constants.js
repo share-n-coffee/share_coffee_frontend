@@ -1,19 +1,19 @@
 const PREDEFINED_TOPIC = {
-  title: "some title",
+  title: "",
   description: "",
-  weekDay: "2",
-  date: new Date().toJSON().substring(0, 10),
-  time: "18:00",
-  place: "some place",
+  weekDay: "",
+  date: "",
+  time: "",
+  place: "",
   isRegular: null,
-  // location: [-53.905535, 27.558799],
-  location: null,
+  location: [],
 };
 
 const PLACEHOLDERS = {
-  title: "Topic Title",
-  place: "Place",
   location: "Coordinates",
+  place: "Place",
+  time: "Time",
+  title: "Topic Title",
 };
 
 const DEFAULT_COORDINATES = [0, 0];
