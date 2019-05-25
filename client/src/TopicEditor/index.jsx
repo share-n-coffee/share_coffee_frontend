@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TimeChooser from "./TimeChooser";
 
 import styles from "./styles.module.scss";
 
@@ -49,7 +50,7 @@ class TopicEditor extends Component {
       {
         [name]: value,
       },
-      () => console.log("state changed:", this.state.isRegular),
+      () => console.log("state changed:", this.state),
     );
   }
 
@@ -70,7 +71,7 @@ class TopicEditor extends Component {
   render() {
     return (
       <div className={styles.topic_editor}>
-        <form onSubmit={this.onSave}>
+        <form className={styles.topic_editor_form} onSubmit={this.onSave}>
           <div>
             <button onClick={this.onCancel}>Cancel</button>
             <button type="submit">Save</button>
@@ -109,8 +110,7 @@ class TopicEditor extends Component {
             required
           />
 
-          <div>
-            <label htmlFor="periodic">Periodic</label>
+          <div className={styles.topic_editor_periodic}>
             <input
               type="radio"
               name="isRegular"
@@ -120,7 +120,7 @@ class TopicEditor extends Component {
               onChange={this.onChange}
               required
             />
-            <label htmlFor="single">Single</label>
+            <label htmlFor="periodic">Periodic</label>
             <input
               type="radio"
               name="isRegular"
@@ -129,42 +129,18 @@ class TopicEditor extends Component {
               checked={this.state.isRegular === REGULARITY.single}
               onChange={this.onChange}
             />
+            <label htmlFor="single">Single</label>
           </div>
 
-          {/* {if (this.state.isRegular===)} */}
-
-          {/* <select
-            name="weekDay"
-            id="topic_week_day"
-            value={this.state.weekDay}
-            onChange={this.onChange}
-          >
-            <option value="0">Monday</option>
-            <option value="1">Tuesday</option>
-            <option value="2">Wednesday</option>
-            <option value="3">Thursday</option>
-            <option value="4">Friday</option>
-            <option value="5">Saturday</option>
-            <option value="6">Sunday</option>
-          </select> */}
-
-          {/* <input
-            type="date"
-            name="date"
-            id="topic_date"
-            value={this.state.date}
-            onChange={this.onChange}
-            required
-          /> */}
-
-          {/* <input
-            type="time"
-            name="time"
-            id="topic_time"
-            value={this.state.time}
-            onChange={this.onChange}
-            required
-          /> */}
+          {this.state.isRegular !== null ? (
+            <TimeChooser
+              isRegular={this.state.isRegular}
+              weekDay={this.state.weekDay}
+              date={this.state.date}
+              time={this.state.time}
+              onChange={this.onChange}
+            />
+          ) : null}
 
           <div>[ TopicDescription component ]</div>
           <div>[ Map component ]</div>
