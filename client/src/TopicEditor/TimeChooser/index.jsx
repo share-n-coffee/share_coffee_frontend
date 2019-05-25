@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import WeekPicker from "../WeekPicker";
 import DatePicker from "../DatePicker";
 import PickerButton from "../PickerButton";
+import * as fmt from "./formatters";
 
 import { PLACEHOLDERS, REGULARITY } from "../constants";
 
-// import styles from "./styles.module.scss";
+import styles from "./styles.module.scss";
 
 class TimeChooser extends Component {
   constructor(props) {
@@ -15,61 +17,89 @@ class TimeChooser extends Component {
 
     this.showPicker = this.showPicker.bind(this);
     this.hidePicker = this.hidePicker.bind(this);
+    this.onPickerSelect = this.onPickerSelect.bind(this);
   }
 
   showPicker(event) {
     event.preventDefault();
-    this.setState({ isShowPicker: true });
+    if (!this.state.isShowPicker) {
+      this.setState({ isShowPicker: true });
+    }
   }
 
   hidePicker(event) {
     event.preventDefault();
-    this.setState({ isShowPicker: false });
+    if (this.state.isShowPicker) {
+      this.setState({ isShowPicker: false });
+    }
+  }
+
+  onPickerSelect(event) {
+    this.hidePicker(event);
+    this.props.onChange(event);
   }
 
   render() {
-    const { isRegular } = this.props;
+    const { isRegular, weekDay, time, date, onChange } = this.props;
     const { isShowPicker } = this.state;
 
-    let picker;
+    let inputValue = "";
+    let picker = null;
+
     switch (isRegular) {
       case REGULARITY.periodic:
+        inputValue = fmt.periodicTime(weekDay, time);
         picker = (
           <WeekPicker
-            weekDay={this.props.weekDay}
-            onChange={this.props.onChange}
+            weekDay={weekDay}
+            onChange={this.onPickerSelect}
             onMouseLeave={this.hidePicker}
           />
         );
         break;
       case REGULARITY.single:
+        inputValue = fmt.singleTime(date, time);
         picker = (
           <DatePicker
-            onChange={this.props.onChange}
+            date={date}
+            onChange={onChange}
             onMouseLeave={this.hidePicker}
           />
         );
         break;
       default:
         picker = null;
+        inputValue = "";
         break;
     }
 
     return (
-      <div>
+      <div className={styles.time_chooser}>
         <input
+          className={styles.time_input}
           type="text"
           name="time"
+          value={inputValue}
           placeholder={PLACEHOLDERS.time}
-          onFocus={this.showPicker}
-          onBlur={this.hidePicker}
-          onMouseLeave={this.hidePicker}
+          onChange={this.props.onChange}
+          onClick={this.showPicker}
           required
         />
-        {isShowPicker ? picker : <PickerButton onClick={this.showPicker} />}
+        <div className={styles.picker_container}>
+          <PickerButton onClick={this.showPicker} />
+          {isShowPicker ? picker : null}
+        </div>
       </div>
     );
   }
 }
+
+TimeChooser.propTypes = {
+  isRegular: PropTypes.string,
+  weekDay: PropTypes.string,
+  date: PropTypes.string,
+  time: PropTypes.string,
+  onChange: PropTypes.func,
+};
 
 export default TimeChooser;
