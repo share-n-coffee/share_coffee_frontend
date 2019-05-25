@@ -26,6 +26,7 @@ class HomeAdmin extends React.Component {
         <Header
           isActive={true}
           isAdmin={true}
+          hasDepartment={false}
           location={this.props}
           avatar={sessionStorage.getItem("avatar")}
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
