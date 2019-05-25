@@ -40,7 +40,7 @@ class TimeChooser extends Component {
   }
 
   render() {
-    const { isRegular, weekDay, time, date, onChange } = this.props;
+    const { isRegular, weekDay, time, date } = this.props;
     const { isShowPicker } = this.state;
 
     let inputValue = "";

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { WEEK_DAYS_NAMES, WEEK, WEEK_PICKER_TITLE } from "./constants";
