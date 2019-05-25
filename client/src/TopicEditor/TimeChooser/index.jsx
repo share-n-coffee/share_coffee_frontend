@@ -17,7 +17,7 @@ class TimeChooser extends Component {
 
     this.showPicker = this.showPicker.bind(this);
     this.hidePicker = this.hidePicker.bind(this);
-    this.onPickerSelect = this.onPickerSelect.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   showPicker(event) {
@@ -34,7 +34,7 @@ class TimeChooser extends Component {
     }
   }
 
-  onPickerSelect(event) {
+  onChange(event) {
     this.hidePicker(event);
     this.props.onChange(event);
   }
@@ -52,7 +52,7 @@ class TimeChooser extends Component {
         picker = (
           <WeekPicker
             weekDay={weekDay}
-            onChange={this.onPickerSelect}
+            onChange={this.onChange}
             onMouseLeave={this.hidePicker}
           />
         );
@@ -62,7 +62,7 @@ class TimeChooser extends Component {
         picker = (
           <DatePicker
             date={date}
-            onChange={onChange}
+            onChange={this.onChange}
             onMouseLeave={this.hidePicker}
           />
         );
