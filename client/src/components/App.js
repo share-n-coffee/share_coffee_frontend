@@ -16,10 +16,7 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
   render() {
-    // setCookie(
-    //   "token",
-    //   "",
-    // ); //for localhost
+    //setCookie("token",'youToken');  //for localhost
     return (
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>
