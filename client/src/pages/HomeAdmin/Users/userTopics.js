@@ -55,10 +55,12 @@ class UserTopics extends Component {
   render() {
     const { events, error } = this.props;
     return (
-      <div className="user-topic__container">
+      <div>
         {events &&
           events.length > 0 &&
-          events.map(event => <OneTopics id={event.eventId} key={event.eventId} />)}
+          events.map(event => (
+            <OneTopics id={event.eventId} key={event.eventId} />
+          ))}
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );

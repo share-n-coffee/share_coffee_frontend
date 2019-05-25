@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./styles.module.scss";
 import List from "./List";
 import { ReactComponent as DropdownArrowIcon } from "../../icons/DropdownArrow.svg";
 
@@ -17,7 +18,9 @@ const getLabelByValue = (options, value) => {
  */
 const Dropdown = ({ options, selectedValue, onSelect }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const selection = selectedValue ? getLabelByValue(options, selectedValue) : "Accounts";
+  const selection = selectedValue
+    ? getLabelByValue(options, selectedValue)
+    : "Accounts";
 
   return (
     <div
@@ -27,12 +30,20 @@ const Dropdown = ({ options, selectedValue, onSelect }) => {
           setIsOpened(false);
         });
       }}
-      className={`department-dropdown_container ${isOpened ? "department-focused" : undefined}`}
+      className={`${styles.dropdown_container} ${
+        isOpened ? styles["focused"] : undefined
+      }`}
     >
-      <div tabIndex="0" className="department-selection" onClick={() => setIsOpened(!isOpened)}>
+      <div
+        tabIndex="0"
+        className={styles.selection}
+        onClick={() => setIsOpened(!isOpened)}
+      >
         {selection}
         <DropdownArrowIcon
-          className={`department-arrow ${isOpened ? "department-rotated" : undefined}`}
+          className={`${styles.arrow} ${
+            isOpened ? styles["rotated"] : undefined
+          }`}
         />
       </div>
       {isOpened && (

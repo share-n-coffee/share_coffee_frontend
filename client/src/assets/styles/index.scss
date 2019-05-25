@@ -1,29 +1,7 @@
-@import "common/header.scss";
-@import "common/footer.scss";
-
 @import "components/form.scss";
 @import "components/containers.scss";
 @import "components/navbar.scss";
 @import "components/pagination.scss";
-@import "components/dropdownList.scss";
-@import "components/dropdown.scss";
-@import "components/eventsDropdown.scss";
-@import "components/eventsDropdownList.scss";
-
-@import "events/eventDesc.scss";
-@import "events/eventMap.scss";
-@import "events/eventName.scss";
-@import "events/infoAboutEvent.scss";
-
-@import "modules/pageTitle.scss";
-@import "modules/preloader.scss";
-@import "modules/sectionInfo.scss";
-
-@import "pages/loginPage.scss";
-@import "pages/teamSelect.scss";
-@import "pages/subscriptionsPage.scss";
-@import "pages/topicFront.scss";
-
 @import "team.scss";
 @import "topics.scss";
 @import "users.scss";

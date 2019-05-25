@@ -1,0 +1,40 @@
+
+.shadow_container {
+  height: 35px;
+  border-top: 1px solid #EFEFEF;
+  background: linear-gradient(180deg, #FBFBFB, #FEFEFE);;
+}
+
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.section_container {
+  margin: 10px 50px 0 50px;
+}
+
+.section_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section__place,
+.time__descr {
+  display: flex;
+  align-items: center;
+}
+
+.map__descr {
+  display: flex;
+  //text-align: top;
+}
+
+.section__topic__title {
+  width: 20%;
+}
+
+h2,h3 {
+  margin: 0;
+}

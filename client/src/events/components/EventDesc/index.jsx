@@ -3,6 +3,7 @@ import InfoAboutEvent from "../../modules/InfoAboutEvent";
 import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
 import SpinButton from "../../../common/SpinButton";
+import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
 class EventDesc extends Component {
@@ -20,11 +21,12 @@ class EventDesc extends Component {
     const elements = events.map(event => {
       const isSubscribed = userEventIds.includes(event._id);
       return (
-        <div key={event._id} className="eventDescItem">
-          <div className="eventContainer">
+        <div key={event._id} className={styles.eventDescItem}>
+          <div className={styles.eventContainer}>
             <Link to={{ pathname: `/subscriptions/${event._id}` }}>
               <EventName eventName={event.title} isSubscribed={event.isActive} />
             </Link>
+
             <InfoAboutEvent
               adress={event.address}
               eventFrequency={new Date(event.created).toDateString()}
@@ -48,7 +50,7 @@ class EventDesc extends Component {
     return (
       <>
         <PageTitle title="Current topics" />
-        <div className="eventDesc">{elements}</div>
+        <div className={styles.eventDesc}>{elements}</div>
       </>
     );
   }

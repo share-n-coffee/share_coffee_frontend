@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
 import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
@@ -52,23 +53,23 @@ const TopicFront = obj => {
         mouseOut={mouseEvents.mouseOut}
         click={mouseEvents.click}
       />
-      <div className="topic-wrapper">
-        <div className="map-section_container">
-          <div className="section_header">
+      <div className={styles.wrapper}>
+        <div className={styles.section_container}>
+          <div className={styles.section_header}>
             <h2>Topic {eventData.title}</h2>
             <Button text={"Subscribe"} type="Subscribe" />
           </div>
-          <p className="section__descr">{eventData.description}</p>
-          <div className="section__place">
-            <h3 className="section__topic__title">place</h3>
-            <p className="place__descr">{eventData.address}</p>
+          <p className={styles.section__descr}>{eventData.description}</p>
+          <div className={styles.section__place}>
+            <h3 className={styles.section__topic__title}>place</h3>
+            <p className={styles.place__descr}>{eventData.address}</p>
           </div>
-          <div className="time__descr">
-            <h3 className="section__topic__title">time</h3>
-            <p className="time__descr">{eventData.created}</p>
+          <div className={styles.time__descr}>
+            <h3 className={styles.section__topic__title}>time</h3>
+            <p className={styles.time__descr}>{eventData.created}</p>
           </div>
-          <div className="map__descr">
-            <h3 className="section__topic__title">map</h3>
+          <div className={styles.map__descr}>
+            <h3 className={styles.section__topic__title}>map</h3>
             {eventData.location ? (
               <EventMap location={eventData.location} />
             ) : (

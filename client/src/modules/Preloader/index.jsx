@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "../../assets/img/preloader-logo.png";
+import logo from "./logo.png";
+import styles from "./styles.module.scss";
 
 const Preloader = () => {
   return (
-    <div className="preloader">
-      <div className="preloader-image__container">
+    <div className={styles.preloader}>
+      <div className={styles.image__container}>
         <img src={logo} alt="wait" />
-        <div className="preloader-animation__container">
-          <div className="preloader-animation" />
+        <div className={styles.animation__container}>
+          <div className={styles.animation} />
         </div>
       </div>
     </div>

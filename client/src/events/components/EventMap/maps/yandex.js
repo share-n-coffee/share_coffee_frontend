@@ -1,6 +1,7 @@
 import React from "react";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
-import marker from "../../../../assets/img/marker-icon.png";
+import style from "../styles.module.scss";
+import marker from "../marker-icon.png";
 
 const Yandex = (mapState, callback) => {
   const myIcon = {
@@ -12,7 +13,11 @@ const Yandex = (mapState, callback) => {
   };
   return (
     <YMaps>
-      <Map defaultState={mapState} onLoad={callback} className="map__container">
+      <Map
+        defaultState={mapState}
+        onLoad={callback}
+        className={style.map__container}
+      >
         <Placemark geometry={mapState.center} options={myIcon} />
       </Map>
     </YMaps>
