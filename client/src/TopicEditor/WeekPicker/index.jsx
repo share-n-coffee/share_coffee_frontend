@@ -14,7 +14,6 @@ function WeekPicker({ weekDay, onChange }) {
         type="radio"
         name="weekDay"
         value={day}
-        checked={day === weekDay}
         onChange={onChange}
         required
       />
