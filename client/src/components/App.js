@@ -6,7 +6,7 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
-//import {setCookie} from "tiny-cookie"; //for localhost
+// import { setCookie } from "tiny-cookie"; //for localhost
 import { HashRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import Footer from "../common/Footer";
@@ -15,7 +15,7 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
   render() {
-    //setCookie("token",'youToken'); //for localhost
+    //setCookie("token",'youToken');  //for localhost
     return (
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>
