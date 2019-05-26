@@ -18,7 +18,7 @@ const getAccountOptions = departments => {
 };
 
 const setUserDepartment = departmentId => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios
     .put(
       `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem("id")}`,
@@ -38,7 +38,7 @@ const PageTeamSelect = props => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+    // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
     const fetchData = async () => {
       const result = await axios("https://forge-development.herokuapp.com/api/departments/", {
         headers: {

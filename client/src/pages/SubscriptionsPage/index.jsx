@@ -9,7 +9,7 @@ import TopicFront from "../TopicFront";
 import { checkTokenTime } from "../../helpers/requests";
 
 const getEvents = token => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: "https://forge-development.herokuapp.com/api/events/",
@@ -20,7 +20,7 @@ const getEvents = token => {
 };
 
 const getUser = (token, id) => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: `https://forge-development.herokuapp.com/api/users/${id}`,
@@ -31,7 +31,7 @@ const getUser = (token, id) => {
 };
 
 const subscribeUserToEvent = (eventId, userId, token) => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "put",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
@@ -43,7 +43,7 @@ const subscribeUserToEvent = (eventId, userId, token) => {
 };
 
 const unsubscibeUserFromEvent = (eventId, userId, token) => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
