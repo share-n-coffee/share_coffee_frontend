@@ -1,16 +1,16 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTAxNTgyN2RjODI0MDAxZTBhYzczZSIsImZpcnN0TmFtZSI6Ik1heCIsImxhc3ROYW1lIjoiUmF6aG5vdiIsImRlcGFydG1lbnQiOiI1Y2Q2ZjZjMzgxMzcxZDI5N2FjYjJmZDAiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9NeG1NYXpvdnNreS5qcGciLCJiYW5uZWQiOnsic3RhdHVzIjp0cnVlLCJleHBpcmVkIjo0MTAyMzg5ODI4NTA1fSwiaXNBZG1pbiI6ZmFsc2V9LCJpYXQiOjE1NTgzNTI4OTksImV4cCI6MTU1ODk1NzY5OX0.mvcXUriYtWCvaxnejCTatksS97sakq5hekN5w_3Zvxw";
+import { checkTokenTime } from "../../helpers/requests";
+
 const getDataEvent = id => {
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
     headers: {
-      // Authorization: `Bearer ${token}`,
       Authorization: `Bearer ${getCookie("token")}`,
     },
   })
@@ -20,10 +20,10 @@ const getDataEvent = id => {
     .catch(err => console.log(err));
 };
 
-const TopicFront = obj => {
+const TopicFront = props => {
   const [linkHover, setHover] = useState(false);
 
-  const id = obj.match.params.id;
+  const id = props.match.params.id;
 
   const mouseEvents = {
     mouseOver: () => {
@@ -33,7 +33,7 @@ const TopicFront = obj => {
       setHover(false);
     },
     click: () => {
-      obj.history.goBack();
+      props.history.goBack();
     },
   };
 
@@ -57,7 +57,11 @@ const TopicFront = obj => {
         <div className={styles.section_container}>
           <div className={styles.section_header}>
             <h2>Topic {eventData.title}</h2>
-            <Button text={"Subscribe"} type="Subscribe" />
+            {eventData.active ? (
+              <Button text={"Subscribe"} type="Subscribe" />
+            ) : (
+              <Button text={"Subscribe"} type="Subscribe" disabled />
+            )}
           </div>
           <p className={styles.section__descr}>{eventData.description}</p>
           <div className={styles.section__place}>
@@ -66,7 +70,9 @@ const TopicFront = obj => {
           </div>
           <div className={styles.time__descr}>
             <h3 className={styles.section__topic__title}>time</h3>
-            <p className={styles.time__descr}>{eventData.created}</p>
+            <p className={styles.time__descr}>
+              {eventData.options ? eventData.options.times[0] : <></>}
+            </p>
           </div>
           <div className={styles.map__descr}>
             <h3 className={styles.section__topic__title}>map</h3>

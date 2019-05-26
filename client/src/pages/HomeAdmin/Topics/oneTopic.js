@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TopicEditer from "./topicEditer";
 import { Tab, TabContainer } from "../../../ui/core/home";
 import PageTitle from "../../../modules/PageTitle";
-import requests from "../../../helpers/requests";
+import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
 import Header from "../../../common/Header";
 
@@ -29,7 +29,7 @@ class oneTopic extends Component {
       this.props.match.params.id
     }`;
 
-    requests.get(requestUrl).then(data => {
+    request.get(requestUrl).then(data => {
       console.log(data);
       this.setState({
         event: data.object,

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class TopicEditer extends Component {
   constructor(props) {
@@ -15,11 +16,9 @@ class TopicEditer extends Component {
   }
 
   getData() {
-    const requestUrl = `https://forge-development.herokuapp.com/api/events/${
-      this.props._id
-    }`;
+    const requestUrl = `https://forge-development.herokuapp.com/api/events/${this.props._id}`;
 
-    fetch(requestUrl).then(event => {
+    axios(requestUrl).then(event => {
       console.log(event);
 
       this.setState({ event: event });
