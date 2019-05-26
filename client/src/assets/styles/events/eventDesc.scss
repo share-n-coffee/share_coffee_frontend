@@ -16,6 +16,21 @@
     text-decoration: none;
 }
 
+.selectedEvent {
+    display: flex;
+}
+
+.selectedEvent span {
+    margin: 30px;
+    color: #C8C8C8;
+    font-family: sans-serif;
+}
+
+.selectedEvent span::before{
+    content: "✓";
+    padding-right: 5px;
+}
+
 .time-desc {
     padding-left: 3px;
 }
