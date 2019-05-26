@@ -6,6 +6,7 @@ import UserLogs from "./userLogs";
 import { request } from "../../../helpers/requests";
 import PageTitle from "../../../modules/PageTitle";
 import * as URL from "../../../constants";
+import Header from "../../../common/Header";
 
 class OneUser extends React.Component {
   state = {
@@ -50,6 +51,13 @@ class OneUser extends React.Component {
 
     return (
       <div>
+        <Header
+          isActive={true}
+          isAdmin={true}
+          hasDepartment={false}
+          avatar={sessionStorage.getItem("avatar")}
+          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        />
         <PageTitle
           title={this.state.linkNoHover ? user.firstName + " " + user.lastName : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}

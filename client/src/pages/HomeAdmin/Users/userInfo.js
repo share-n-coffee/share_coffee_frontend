@@ -51,7 +51,10 @@ class Topics extends Component {
     const { user } = this.props;
     return (
       <div key={user._id} className={""}>
-        <img src={`${user.avatar}`} alt="user photo" />
+        <img
+          src={`${user.avatar ? user.avatar : require("../../../assets/img/logo.png")}`}
+          alt="user photo"
+        />
         <h2>{user.username} </h2>
         <h3>{user.firstName + " " + user.lastName}</h3>
         <span>team: {user.department}</span>

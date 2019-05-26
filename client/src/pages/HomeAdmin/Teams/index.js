@@ -3,11 +3,14 @@ import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Button from "../../../common/Button";
 import * as URL from "../../../constants";
+import SpinButton from "../../../common/SpinButton";
+import { Loading } from "../../../ui/components/Loader";
 
 class DeleteBtn extends Component {
   state = {
     users: [],
     deleteContent: false,
+    isLoading: "",
   };
 
   componentDidMount() {
@@ -32,12 +35,14 @@ class DeleteBtn extends Component {
   };
 
   delete = () => {
+    this.setState({ isLoading: true });
     console.log("delete");
     this.clear();
+    this.setState({ isLoading: false });
   };
 
   render() {
-    const { users, deleteContent } = this.state;
+    const { users, deleteContent, isLoading } = this.state;
     return users.length > 0 ? (
       ""
     ) : (
@@ -48,7 +53,7 @@ class DeleteBtn extends Component {
           <div>
             Are you sure you want to delete?
             <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
-            <Button onClick={this.delete} text="Delete" />
+            <SpinButton onClick={this.delete} text="Delete" isLoading={isLoading} />
           </div>
         )}
       </div>
@@ -66,6 +71,8 @@ class Teams extends Component {
     isShowAdding: false,
     team: "",
     error: "",
+    isLoading: false,
+    isLoadData: false,
   };
 
   componentDidMount() {
@@ -73,10 +80,12 @@ class Teams extends Component {
   }
 
   getData() {
+    this.setState({ isLoadData: true });
     request.get(URL.TEAMS).then(data => {
       this.setState({
         teams: data.object,
         error: data.message,
+        isLoadData: false,
       });
     });
   }
@@ -93,6 +102,8 @@ class Teams extends Component {
   };
 
   adding = () => {
+    this.setState({ isLoading: true });
+
     if (this.state.team === "") {
       this.setState({ error: "Name must be filled out" });
     } else {
@@ -107,16 +118,22 @@ class Teams extends Component {
         if (!data.message) {
           this.toggleAdding();
           this.getData();
+          this.setState({ isLoading: false });
         } else {
-          this.setState({ error: data.message });
+          this.setState({
+            error: data.message,
+            isLoading: false,
+          });
         }
       });
     }
   };
 
   render() {
-    const { teams, isShowAdding, error } = this.state;
-    return (
+    const { teams, isShowAdding, error, isLoading, isLoadData } = this.state;
+    return isLoadData ? (
+      <Loading />
+    ) : (
       <div style={{ textAlign: "left" }}>
         {teams &&
           teams.length > 0 &&
@@ -137,7 +154,7 @@ class Teams extends Component {
               onChange={e => this.changeInput(e.target.value)}
               placeholder="Department name"
             />
-            <Button onClick={this.adding} text="Save" />
+            <SpinButton onClick={this.adding} text="Save" isLoading={isLoading} />
             <Button onClick={this.toggleAdding} type="Unsubscribe" text="Cancel" />
           </div>
         )}

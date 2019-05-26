@@ -23,6 +23,7 @@ const TopicFront = props => {
   const [linkHover, setHover] = useState(false);
 
   const id = props.match.params.id;
+  const isAdmin = props.isAdmin;
 
   const mouseEvents = {
     mouseOver: () => {
@@ -36,6 +37,10 @@ const TopicFront = props => {
     },
   };
 
+  const toEdit = () => {
+    props.history.push(`/admin/topic-create/${id}`);
+  };
+
   const [eventData, setEvent] = useState({});
   useEffect(() => {
     const fetchData = async () => {
@@ -46,17 +51,23 @@ const TopicFront = props => {
   }, {});
   return (
     <>
-      <PageTitle
-        title={!linkHover ? eventData.title : "← Back"}
-        mouseOver={mouseEvents.mouseOver}
-        mouseOut={mouseEvents.mouseOut}
-        click={mouseEvents.click}
-      />
+      {!isAdmin ? (
+        <PageTitle
+          title={!linkHover ? eventData.title : "← Back"}
+          mouseOver={mouseEvents.mouseOver}
+          mouseOut={mouseEvents.mouseOut}
+          click={mouseEvents.click}
+        />
+      ) : (
+        ""
+      )}
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
             <h2>Topic {eventData.title}</h2>
-            {eventData.active ? (
+            {isAdmin ? (
+              <Button text={"Edit"} onClick={toEdit} />
+            ) : eventData.active ? (
               <Button text={"Subscribe"} type="Subscribe" />
             ) : (
               <Button text={"Subscribe"} type="Subscribe" disabled />

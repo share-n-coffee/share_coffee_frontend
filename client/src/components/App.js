@@ -34,7 +34,7 @@ export default class App extends Component {
   }
 
   render() {
-    setCookie("token", "youToken"); //for localhost
+    // setCookie("token", "youToken"); //for localhost
     sessionStorage.setItem("id", "122248863");
     sessionStorage.setItem("firstName", "gadya");
     sessionStorage.setItem("lastName", "xrenova");
@@ -74,6 +74,7 @@ export default class App extends Component {
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
             <Route path="/admin/topic-create" component={TopicCreate} exact />
+            <Route path="/admin/topic-create/:id" component={TopicCreate} exact />
             <Route path="/admin/user/:id" component={OneUser} exact />
             <Route component={NotFound} exact />
           </Switch>

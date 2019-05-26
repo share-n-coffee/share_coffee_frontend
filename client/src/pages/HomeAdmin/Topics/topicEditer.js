@@ -18,7 +18,6 @@ class TopicEditer extends Component {
 
   getData() {
     request.get(URL.ONE_EVENT(this.props._id)).then(data => {
-      console.log(data);
       this.setState({
         event: data.object,
         error: data.message,
@@ -30,7 +29,6 @@ class TopicEditer extends Component {
   }
 
   changeInput(event) {
-    console.log(event);
     this.setState({ title: event.target.value });
   }
 

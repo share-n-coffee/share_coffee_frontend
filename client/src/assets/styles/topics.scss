@@ -80,6 +80,22 @@
   margin: 10px 10px 150px;
 }
 
+.one-topic-container {
+  &  .description {
+    display: flex;
+    & > span {
+      margin-right: 20px;
+
+    }
+    & > button {
+      margin-left: auto;
+      height: min-content;
+      min-width: 160px;
+    }
+
+  }
+}
+
 @media all and (max-width: 550px) {
   .one-topic {
     display: flex;

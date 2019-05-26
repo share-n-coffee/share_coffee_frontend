@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
-import Button from "../../common/Button";
 import { request } from "../../helpers/requests";
+import SpinButton from "../../common/SpinButton";
+import { setCookie } from "tiny-cookie";
+import jwtDecode from "jwt-decode";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -14,25 +16,37 @@ class AdminLoginPage extends Component {
     username: "",
     password: "",
     error: "",
+    isLoading: false,
   };
 
   login = e => {
     e.preventDefault();
     const requestUrl = `https://forge-development.herokuapp.com/login/admin`;
 
+    this.setState({
+      isLoading: true,
+    });
+
     const user = {
       username: this.state.username,
       password: md5(this.state.password),
     };
 
-    request.post(requestUrl, user).then(data => {
+    request.post(requestUrl, user, false).then(data => {
       if (!data.message) {
         if (data.object.token) {
-          sessionStorage.setItem("adminToken", data.object.token);
+          const date = new Date(jwtDecode(data.object.token).exp * 1000).toGMTString();
+          setCookie("token", data.object.token, { expires: date });
+
+          // sessionStorage.setItem("adminToken", data.object.token);
           this.props.setLogin(data.object.token != null);
+          this.setState({ isLoading: false });
         }
       } else {
-        this.setState({ error: data.message });
+        this.setState({
+          error: data.message,
+          isLoading: false,
+        });
       }
     });
   };
@@ -42,7 +56,7 @@ class AdminLoginPage extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    const { error, isLoading } = this.state;
 
     return (
       <div className="form-page__wrapper login_container">
@@ -63,7 +77,7 @@ class AdminLoginPage extends Component {
             placeholder="password"
           />
 
-          <Button onClick={e => this.login(e)} text="Log in" />
+          <SpinButton onClick={e => this.login(e)} text="Log in" isLoading={isLoading} />
         </form>
       </div>
     );

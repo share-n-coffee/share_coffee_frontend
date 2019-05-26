@@ -4,10 +4,11 @@ import TopicEditer from "./topicEditer";
 import { Tab, TabContainer } from "../../../ui/core/home";
 import PageTitle from "../../../modules/PageTitle";
 import { request } from "../../../helpers/requests";
-import Button from "../../../common/Button";
 import Header from "../../../common/Header";
 import * as URL from "../../../constants";
+import TopicFront from "../../TopicFront";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
+
 class TopicDropdown extends Component {
   state = {
     subscribers: [],
@@ -58,6 +59,7 @@ class TopicDropdown extends Component {
     );
   }
 }
+
 class oneTopic extends Component {
   constructor(props) {
     super(props);
@@ -135,15 +137,14 @@ class oneTopic extends Component {
           <div>
             {!isEdit ? (
               <div>
-                <p>{event.description}</p>
-                <Button onClick={this.showEditForm} text="Edit" type="Subscribe" />
+                <TopicFront match={this.props.match} isAdmin={true} history={this.props.history} />
               </div>
             ) : (
               <TopicEditer id={event._id} />
             )}
           </div>
         ) : (
-          <div>
+          <div className={"one-topic"}>
             <div className={"title"}>
               <span className={`event-status ${event.active ? "active" : ""}`} />
               {event.title}
@@ -154,7 +155,7 @@ class oneTopic extends Component {
             <div>{event.address}</div>
             <span>Time:</span>
             <div>{event.options.times}</div>
-            <Button onClick={() => this.generatePairs(event._id)} text="pairs" />
+            <button style={{ visibility: "hidden" }} />
           </div>
         )}
       </>

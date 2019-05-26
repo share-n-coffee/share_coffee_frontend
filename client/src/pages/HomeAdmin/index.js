@@ -3,6 +3,7 @@ import AdminLoginPage from "../AdminLoginPage";
 import HomeDashboard from "./home";
 // import Navbar from "../../components/Navbar";
 import Header from "../../common/Header";
+import { getCookie } from "tiny-cookie";
 
 class HomeAdmin extends React.Component {
   state = {
@@ -10,7 +11,7 @@ class HomeAdmin extends React.Component {
   };
 
   componentDidMount() {
-    const token = sessionStorage.getItem("adminToken");
+    const token = getCookie("token");
     if (token !== null) {
       this.setState({ isLogin: true });
     }

@@ -1,4 +1,4 @@
-import { removeCookie } from "tiny-cookie";
+import { removeCookie, getCookie } from "tiny-cookie";
 import axios from "axios";
 
 class requests {
@@ -11,21 +11,15 @@ class requests {
 
   redirect2Login() {
     sessionStorage.clear();
-    window.location.reload(true);
+    removeCookie("token");
+    window.location.href = "/";
   }
 
   getAuthHeader() {
-    let header = {};
-    const token = sessionStorage.getItem("adminToken");
-
-    if (token) {
-      header = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      };
-    }
-
-    return header;
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
+    };
   }
 
   getStatusMessage(status) {
@@ -48,7 +42,9 @@ class requests {
       result.ok = response.ok;
       result.object = response.data;
       result.message = this.getStatusMessage(response.status);
+      if (response.status === 403 && withRedirect) this.redirect2Login();
     } catch (err) {
+      console.log(err);
       const response = err.response;
       result.object = [];
 
