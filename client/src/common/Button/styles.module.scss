@@ -57,6 +57,8 @@
 
 .subscribe,
 .unsubscribe {
+  outline: none;
+  padding: 0;
   width: 165px;
   height: 36px;
   display: flex;
