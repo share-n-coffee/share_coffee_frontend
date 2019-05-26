@@ -5,7 +5,7 @@ import { WEEK_DAYS_NAMES, WEEK, WEEK_PICKER_TITLE } from "./constants";
 
 import styles from "./styles.module.scss";
 
-function WeekPicker({ weekDay, onChange }) {
+function WeekPicker({ onChange }) {
   const week_days = WEEK.map((day, index) => (
     <label className={styles.week_picker_label} key={index}>
       {WEEK_DAYS_NAMES[day].abbr}
@@ -29,7 +29,6 @@ function WeekPicker({ weekDay, onChange }) {
 }
 
 WeekPicker.propTypes = {
-  weekDay: PropTypes.string,
   onChange: PropTypes.func,
 };
 
