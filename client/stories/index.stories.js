@@ -7,28 +7,50 @@ import TopicEditor from "../src/TopicEditor";
 import WeekPicker from "../src/TopicEditor/WeekPicker";
 import DatePicker from "../src/TopicEditor/DatePicker";
 
+import * as data from "./data/";
+
+// Topic editor
+storiesOf("Topic editor", module)
+  .add("default", () => <TopicEditor />)
+  .add("regular with data", () => (
+    <TopicEditor topicData={data.topicEditor.regular} />
+  ))
+  .add("single with data", () => (
+    <TopicEditor topicData={data.topicEditor.single} />
+  ));
+
 // Topic description
 const onChangeCallback = renderedHtml => console.log(renderedHtml);
-const data = `<h3 class="md-block-header-three">Hello! This is header!</h3><p class="md-block-unstyled">This is a <strong class="md-inline-bold">bold</strong> text.</p><p class="md-block-unstyled">This is a <span class="md-inline-highlight">highlighted</span> text.</p><p class="md-block-unstyled">This is a <u class="md-inline-underline">underline</u> text and <a class="md-inline-link" href="http://wg.net" target="_blank" rel="noopener noreferrer">link</a>.</p>`;
 storiesOf("Topic description", module)
-  .add("read-only with text", () => <TopicDescription data={data} />)
+  .add("read-only with text", () => (
+    <TopicDescription data={data.topicDescription.data} />
+  ))
   .add("read-only without text", () => <TopicDescription />)
   .add("editable with text", () => (
-    <TopicDescription data={data} editable={true} onChange={onChangeCallback} />
+    <TopicDescription
+      data={data.topicDescription.data}
+      editable={true}
+      onChange={onChangeCallback}
+    />
   ))
   .add("editable without text", () => (
     <TopicDescription editable={true} onChange={onChangeCallback} />
   ));
 
-// Topic editor
-storiesOf("Topic editor", module)
-  .add("topic editor", () => <TopicEditor />)
-  .add("week picker", () => {
-    const onChange = e => console.log(e.target.value);
-    return <WeekPicker onChange={onChange} />;
-  })
-  .add("date picker", () => {
+// Date picker
+storiesOf("Date picker", module)
+  .add("default", () => {
     const onChange = e => console.log(e);
     const date = new Date();
-    return <DatePicker onChange={onChange} value={date} />;
+    return <DatePicker onChange={onChange} />;
+  })
+  .add("with start date", () => {
+    const date = new Date(0);
+    return <DatePicker activeStartDate={date} />;
   });
+
+// Date picker
+storiesOf("Week picker", module).add("week picker", () => {
+  const onChange = e => console.log(e.target.value);
+  return <WeekPicker onChange={onChange} />;
+});
