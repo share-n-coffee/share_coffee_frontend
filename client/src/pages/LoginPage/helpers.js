@@ -7,7 +7,6 @@ const setStorage = userData => {
   sessionStorage.setItem("banned", userData.data.banned.status);
   sessionStorage.setItem("department", userData.data.department);
   sessionStorage.setItem("tokenTimeOver", userData.exp);
-  sessionStorage.setItem("tokenTimeStart", userData.iat);
 };
 
 const router = props => {

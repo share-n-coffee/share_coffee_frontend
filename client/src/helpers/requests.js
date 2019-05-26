@@ -130,5 +130,15 @@ const checkTokenTime = tokenTimeOver => {
   }
 };
 
-let request = new requests();
-export { request, checkTokenTime };
+const checkIsBanned = () => {
+  if (sessionStorage.getItem("banned") === "true") {
+    window.location.history.replace("/");
+    sessionStorage.clear();
+    return true;
+  } else {
+    return;
+  }
+};
+
+const request = new requests();
+export { request, checkTokenTime, checkIsBanned };
