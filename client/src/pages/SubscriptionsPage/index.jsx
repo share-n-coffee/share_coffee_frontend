@@ -5,13 +5,19 @@ import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
+import {
+  GET_EVENTS,
+  GET_USER,
+  SUBCR_USER_TO_EVENT,
+  UNSUBCR_USER_FROM_EVENT,
+} from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
 
 const getEvents = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: "https://forge-development.herokuapp.com/api/events/",
+    url: GET_EVENTS,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -22,7 +28,7 @@ const getUser = (token, id) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: `https://forge-development.herokuapp.com/api/users/${id}`,
+    url: GET_USER(id),
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -33,7 +39,7 @@ const subscribeUserToEvent = (eventId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "put",
-    url: `https://forge-development.herokuapp.com/api/users/${userId}`,
+    url: SUBCR_USER_TO_EVENT(userId),
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -45,7 +51,7 @@ const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
-    url: `https://forge-development.herokuapp.com/api/users/${userId}`,
+    url: UNSUBCR_USER_FROM_EVENT(userId),
     headers: {
       Authorization: `Bearer ${token}`,
     },
