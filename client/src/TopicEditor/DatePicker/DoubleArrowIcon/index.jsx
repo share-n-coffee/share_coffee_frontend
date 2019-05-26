@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { ReactComponent as DoubleArrow } from "./icon-double-arrow.svg";
 import styles from "./styles.module.scss";

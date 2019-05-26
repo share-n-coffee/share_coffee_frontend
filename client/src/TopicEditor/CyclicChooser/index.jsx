@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./styles.module.scss";
 
 function CyclicChooser({ cyclic, onChange, options }) {
-  console.log("cyclic", cyclic);
   const radioGroup = options.map(item => (
     <Fragment key={item.value}>
       <input
