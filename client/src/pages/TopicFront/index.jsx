@@ -5,14 +5,19 @@ import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
 import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
+import { GET_EVENT } from "../../constants";
 
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
-    headers: {
-      Authorization: `Bearer ${getCookie("token")}`,
+  return axios(
+    GET_EVENT(id),
+    // `https://forge-development.herokuapp.com/api/events/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
     },
-  })
+  )
     .then(res => {
       return res.data;
     })

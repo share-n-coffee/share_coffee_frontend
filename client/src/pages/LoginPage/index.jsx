@@ -5,7 +5,7 @@ import SectionInfo from "../../modules/SectionInfo";
 import { setCookie } from "tiny-cookie";
 import Header from "../../common/Header";
 import axios from "axios";
-import URL_LOGIN from "../../constants";
+import { SET_USER_DATA } from "../../constants";
 import jwtDecode from "jwt-decode";
 import { setStorage, router } from "./helpers";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -22,7 +22,7 @@ export default class LoginPage extends Component {
     const handleTelegramResponse = async telegramResponse => {
       const requestObj = {
         method: "put",
-        url: URL_LOGIN,
+        url: SET_USER_DATA,
         data: telegramResponse,
       };
 
