@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Yandex from "./maps/yandex";
 import Leaflet from "./maps/leaflet";
 import Preloader from "../../../modules/Preloader";
-import style from "./styles.module.scss";
 
 //example
 // <MapEvent location={[55.751574, 37.573856]} zoom="5" type='leaflet/yandex' />
@@ -74,13 +73,9 @@ class EventMap extends Component {
       type: type,
     };
     return (
-      <div className={`${style.map__container} ${style.map__body}`}>
+      <div className="map__container map__body">
         {this.state.preloader ? <Preloader /> : null}
-        {this.state.checkProps ? (
-          <>{this.MapPlace(mapState)} </>
-        ) : (
-          this.ErrMap()
-        )}
+        {this.state.checkProps ? <>{this.MapPlace(mapState)} </> : this.ErrMap()}
       </div>
     );
   }

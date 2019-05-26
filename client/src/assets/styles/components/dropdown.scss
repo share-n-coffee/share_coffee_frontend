@@ -1,0 +1,37 @@
+.department-selection {
+    color: #C8C8C8;
+    border: none;
+    display: flex;
+  }
+  
+  .department-selection:hover {
+    color: #000;
+  }
+  
+  .department-selection:focus {
+    color: #0064FF;
+    outline: none !important;
+  }
+  
+  .department-dropdown_container {
+    //margin: 30px auto;
+    color: #000;
+    width: fit-content;
+    cursor: pointer;
+  }
+  
+  .department-arrow {
+    padding: 9px 10px;
+    margin-left: auto;
+  }
+  
+  .department-focused {
+    background-color: #FFFFFF;
+    padding: 10px 15px;
+    border-radius: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .department-rotated {
+    transform: rotate(180deg);
+  }

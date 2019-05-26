@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PageTitle from "../../modules/PageTitle";
-import styles from "./styles.module.scss";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import SectionInfo from "../../modules/SectionInfo";
 import { setCookie } from "tiny-cookie";
@@ -53,13 +52,7 @@ export default class LoginPage extends Component {
         <Header isActive={false} isAdmin={false} hasDepartment={false} />
         <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
-        {/*{sessionStorage.getItem("banned") === "true" ? <BanMsg /> : <></>}*/}
-        {/*{error ? <ErrorMessage error={error} /> : <></>}*/}
-        <div
-          id={styles.telegram__login__container}
-          className={styles.section}
-          onClick={this.update}
-        >
+        <div id="telegram__login__container" className="section" onClick={this.update}>
           <TelegramLoginButton
             dataOnauth={handleTelegramResponse}
             botName="rdmcoffee_bot"

@@ -1,0 +1,17 @@
+.department-list{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .department-list button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    padding: 0;
+  }
+  
+  .department-list button:hover{
+    color: #0064FF;
+  }

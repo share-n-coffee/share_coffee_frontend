@@ -1,0 +1,29 @@
+.event-rotated {
+    transform: rotate(180deg);
+  }
+  
+  .event-header{
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: #0064FF;
+    cursor: pointer;
+  }
+  
+  .event-header:focus{
+    outline: none !important;
+  }
+  
+  .event-header:hover{
+    opacity: 0.8;
+  }
+  
+  .event-arrow {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .event-list_container{
+    width: fit-content;
+    position: absolute;
+  }

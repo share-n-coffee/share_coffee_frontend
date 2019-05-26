@@ -22,14 +22,14 @@
         &::after {
           content: '↓';
           position: absolute;
-          margin-left: 10px;
+          margin-left: 5px;
         }
       }
       & >  .up {
         &::after {
           content: '↑';
           position: absolute;
-          margin-left: 10px;
+          margin-left: 5px;
         }
       }
     }
@@ -57,4 +57,30 @@
 }
 .adminUser {
   color: #0064FF;
+}
+
+.user-info__container {
+  margin: 0 10px 100px;
+}
+
+@media all and (max-width: 450px) {
+  .user_block thead tr th {
+    text-align: center;
+  }
+  
+  .user_block td:last-child {
+    display: none;
+  }
+
+  .user_block tr:nth-child(n){
+    text-align: center;
+  }
+
+  .user_block td:nth-child(n) {
+    text-align: center;
+  }
+
+  .user-info__container img {
+    width: 100%;
+  }
 }
