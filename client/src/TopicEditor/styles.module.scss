@@ -1,8 +1,8 @@
-@import './styles.scss';
+@import './styles';
 
 .topic_editor {
-    width: 380px; // TODO: delete, for testing only
-    // border: 1px solid red; // TODO: delete, for testing only
+    width: 380px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     font-family: Roboto, sans-serif;
