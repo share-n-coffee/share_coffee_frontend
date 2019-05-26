@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import WeekPicker from "../WeekPicker";
 import DatePicker from "../DatePicker";
 import PickerButton from "../PickerButton";
-import * as fmt from "./formatters";
 
-import { PLACEHOLDERS, REGULARITY } from "../constants";
+import { PLACEHOLDERS } from "../constants";
 
 import styles from "./styles.module.scss";
 
@@ -40,15 +39,15 @@ class TimeChooser extends Component {
   }
 
   render() {
-    const { isRegular, weekDay, time, date } = this.props;
+    const { cyclic, weekDay, time, singleDate } = this.props;
     const { isShowPicker } = this.state;
 
     let inputValue = "";
     let picker = null;
 
-    switch (isRegular) {
-      case REGULARITY.periodic:
-        inputValue = fmt.periodicTime(weekDay, time);
+    switch (cyclic) {
+      case true:
+        inputValue = `${weekDay}, ${time}`;
         picker = (
           <WeekPicker
             weekDay={weekDay}
@@ -57,8 +56,8 @@ class TimeChooser extends Component {
           />
         );
         break;
-      case REGULARITY.single:
-        inputValue = fmt.singleTime(date, time);
+      case false:
+        inputValue = `${singleDate}, ${time}`;
         picker = (
           <DatePicker
             date={date}
@@ -95,10 +94,10 @@ class TimeChooser extends Component {
 }
 
 TimeChooser.propTypes = {
-  isRegular: PropTypes.string,
-  weekDay: PropTypes.string,
-  date: PropTypes.string,
+  cyclic: PropTypes.bool.isRequired,
+  weekDay: PropTypes.number,
   time: PropTypes.string,
+  singleDate: PropTypes.number,
   onChange: PropTypes.func,
 };
 
