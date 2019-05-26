@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TimeChooser from "./TimeChooser";
+import TopicDescription from "../TopicDescription";
 
 import styles from "./styles.module.scss";
 
@@ -21,6 +22,7 @@ class TopicEditor extends Component {
     this.onSave = this.onSave.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
   }
 
   onSave(e) {
@@ -51,6 +53,12 @@ class TopicEditor extends Component {
         [name]: value,
       },
       () => console.log("state changed:", this.state),
+    );
+  }
+
+  onDescriptionChange(description) {
+    this.setState({ description }, () =>
+      console.log("state changed:", this.state),
     );
   }
 
@@ -142,7 +150,12 @@ class TopicEditor extends Component {
             />
           ) : null}
 
-          <div>[ TopicDescription component ]</div>
+          <TopicDescription
+            data={this.state.description}
+            editable={true}
+            onChange={this.onDescriptionChange}
+          />
+
           <div>[ Map component ]</div>
         </form>
       </div>
