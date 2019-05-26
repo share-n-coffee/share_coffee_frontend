@@ -9,15 +9,11 @@ import { GET_EVENT } from "../../constants";
 
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  return axios(
-    GET_EVENT(id),
-    // `https://forge-development.herokuapp.com/api/events/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${getCookie("token")}`,
-      },
+  return axios(GET_EVENT(id), {
+    headers: {
+      Authorization: `Bearer ${getCookie("token")}`,
     },
-  )
+  })
     .then(res => {
       return res.data;
     })

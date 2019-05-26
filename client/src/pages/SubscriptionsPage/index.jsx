@@ -18,7 +18,6 @@ const getEvents = token => {
   return axios({
     method: "get",
     url: GET_EVENTS,
-    // url: "https://forge-development.herokuapp.com/api/events/",
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -30,7 +29,6 @@ const getUser = (token, id) => {
   return axios({
     method: "get",
     url: GET_USER(id),
-    // url: `https://forge-development.herokuapp.com/api/users/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -42,7 +40,6 @@ const subscribeUserToEvent = (eventId, userId, token) => {
   return axios({
     method: "put",
     url: SUBCR_USER_TO_EVENT(userId),
-    // url: `https://forge-development.herokuapp.com/api/users/${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -55,7 +52,6 @@ const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
   return axios({
     method: "delete",
     url: UNSUBCR_USER_FROM_EVENT(userId),
-    // url: `https://forge-development.herokuapp.com/api/users/${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
