@@ -1,3 +1,5 @@
+@import '../TopicEditor/styles.scss';
+
 .md-RichEditor-root {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -12,8 +14,16 @@
     font-size: 18px;
 }
 
+.public-DraftEditorPlaceholder-root {
+    color: $unactive-grey;
+}
+
+.public-DraftEditorPlaceholder-hasFocus {
+    color: $metal;
+}
+
 .md-RichEditor-editor .public-DraftEditor-content {
-    min-height: 100px;
+    min-height: 1em;
 }
 
 .md-RichEditor-editor .public-DraftEditor-content,
@@ -28,7 +38,11 @@
 }
 
 a.md-link {
-    color: rgb(0, 100, 255);
+    color: $deep-blue;
     opacity: 0.8;
     text-decoration: none;
+}
+
+.md-editor-toolbar .md-url-input:focus {
+    color: $mr-white;
 }
