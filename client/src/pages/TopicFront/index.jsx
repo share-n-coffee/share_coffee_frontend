@@ -1,7 +1,6 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import EventMap from "../../events/components/EventMap";
-import Button from "../../common/Button";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
