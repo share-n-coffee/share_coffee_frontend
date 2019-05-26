@@ -14,13 +14,52 @@ import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.userAuth = this.userAuth.bind(this);
+  }
+
+  state = {
+    id: sessionStorage.getItem("id"),
+    token: getCookie("token"),
+  };
+
+  userAuth() {
+    this.setState({
+      id: sessionStorage.getItem("id"),
+      token: getCookie("token"),
+    });
+  }
+
   render() {
-    //setCookie("token",'youToken');  //for localhost
+    // setCookie("token", 'youToken');  //for localhost
+
+    //if no info about user
+    if (!this.state.id && !this.state.token) {
+      return (
+        <div className={`${styles.App} ${styles.wrapper}`}>
+          <Switch>
+            <Route
+              path="/"
+              render={props => <LoginPage userAuth={this.userAuth} {...props} />}
+              exact
+            />
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      );
+    }
+
     return (
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>
           <Switch>
-            <Route path="/" component={LoginPage} exact />
+            <Route
+              path="/"
+              render={props => <LoginPage userAuth={this.userAuth} {...props} />}
+              exact
+            />
             <Route path="/team_select/" component={PageTeamSelect} exact />
             <Route path="/subscriptions/" component={SubscriptionsPage} />
             <Route path="/admin" component={HomeAdmin} exact />
