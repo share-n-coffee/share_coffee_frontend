@@ -6,6 +6,14 @@
 }
 
 .map__container {
-    height: 400px;
     width: 400px;
+    height: 400px;
 }
+
+@media all and (max-width: 550px) {
+    .map__container {
+        width: 100%;
+        height: 200px;
+    }
+  
+ }

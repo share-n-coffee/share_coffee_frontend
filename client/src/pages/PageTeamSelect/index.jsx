@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import styles from "./styles.module.scss";
 import Dropdown from "../../components/Dropdown";
 import Button from "../../common/Button";
 import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
+import { checkTokenTime } from "../../helpers/requests";
 // import UserDataContext from "../../contexts/UserDataContext";
 
 const getAccountOptions = departments => {
@@ -17,6 +17,7 @@ const getAccountOptions = departments => {
 };
 
 const setUserDepartment = departmentId => {
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios
     .put(
       `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem("id")}`,
@@ -36,6 +37,7 @@ const PageTeamSelect = props => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
+    // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
     const fetchData = async () => {
       const result = await axios("https://forge-development.herokuapp.com/api/departments/", {
         headers: {
@@ -52,7 +54,7 @@ const PageTeamSelect = props => {
   return (
     <>
       <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
-      <main className={styles.main_section}>
+      <main className="select-main_section">
         <PageTitle
           title={`Hello, ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
             "lastName",
@@ -62,7 +64,7 @@ const PageTeamSelect = props => {
           infoText="Select your team to start knowledge sharing and
                 having some coffee:"
         />
-        <div className={styles.dropdown_container}>
+        <div className="select-dropdown_container">
           <Dropdown
             options={options}
             selectedValue={selectedDepartmentId}

@@ -1,0 +1,20 @@
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section__center {
+    box-shadow: inset 0px 36px 100px -125px #333333;
+  }
+  
+  
+  #telegram__login__containter {
+    position: relative;
+    height: 40px;
+  }
+
+  .section > div {
+    margin-bottom: 100px;
+  }
+  

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../common/Button";
-import Header from "../../common/Header";
+import axios from "axios";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class AdminLoginPage extends Component {
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVjZGU4YjEwNDhlZjI3YTI1MWY2NWRkYyIsInRlbGVncmFtVXNlcklkIjo1NDE0MTk0MzEsImFkbWluIjp7ImlzQWRtaW4iOnRydWUsInBhc3N3b3JkIjoidGVzdCJ9fSwiaWF0IjoxNTU4MTc5Nzc4LCJleHAiOjE1NTgyNjYxNzh9.YESFpIbsN_-Hyu9Q0bo8mwhU_Ur9BbdbmudiJpLVea8";
 
-    fetch(requestUrl, {
+    axios(requestUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ class AdminLoginPage extends Component {
           this.setState({ error: data.errors[0].msg });
         }
         if (data.token) {
-          localStorage.setItem("adminToken", data.token);
+          sessionStorage.setItem("adminToken", data.token);
           this.props.setLogin(token != null);
         }
       })

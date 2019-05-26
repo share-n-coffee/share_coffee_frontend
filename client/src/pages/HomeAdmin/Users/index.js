@@ -4,6 +4,7 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import Pagination from "../../../components/Pagination";
 import { Link } from "react-router-dom";
 import Button from "../../../common/Button";
+import axios from "axios";
 
 class Topics extends Component {
   state = {
@@ -23,9 +24,9 @@ class Topics extends Component {
 
   getData() {
     const requestUrl = "https://forge-development.herokuapp.com/api/users/";
-    const token = localStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("adminToken");
 
-    fetch(requestUrl, {
+    axios(requestUrl, {
       headers: {
         Authorization: `Bearer ${token} `,
       },
@@ -47,16 +48,14 @@ class Topics extends Component {
 
   toggle = user => {
     // this.state.userId === '' ? this.setState({userId: id}) : this.setState({userId: ''});
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/ban/${
-      user._id
-    }`;
-    const token = localStorage.getItem("adminToken");
+    const requestUrl = `https://forge-development.herokuapp.com/api/users/ban/${user._id}`;
+    const token = sessionStorage.getItem("adminToken");
     const status = {
       ban: {
         status: !user.banned.status,
       },
     };
-    fetch(requestUrl, {
+    axios(requestUrl, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -120,9 +119,9 @@ class Topics extends Component {
               <thead>
                 <tr>
                   <th
-                    className={`${
-                      activeFilter === "Username" ? "active" : ""
-                    } ${up === "Username" ? "up" : ""}`}
+                    className={`${activeFilter === "Username" ? "active" : ""} ${
+                      up === "Username" ? "up" : ""
+                    }`}
                     onClick={() => this.filter("Username")}
                   >
                     Username
@@ -136,9 +135,9 @@ class Topics extends Component {
                     Team
                   </th>
                   <th
-                    className={`${
-                      activeFilter === "Registration" ? "active" : ""
-                    } ${up === "Registration" ? "up" : ""}`}
+                    className={`${activeFilter === "Registration" ? "active" : ""} ${
+                      up === "Registration" ? "up" : ""
+                    }`}
                     onClick={() => this.filter("Registration")}
                     colSpan={2}
                   >
@@ -151,18 +150,11 @@ class Topics extends Component {
                   <tr
                     key={user._id}
                     className={`${
-                      user.banned.status
-                        ? "bannedUser"
-                        : user.admin.isAdmin
-                        ? "adminUser"
-                        : ""
+                      user.banned.status ? "bannedUser" : user.admin.isAdmin ? "adminUser" : ""
                     }`}
                   >
                     <td>
-                      <Link
-                        to={{ pathname: `/admin/user/${user._id}` }}
-                        className={"title"}
-                      >
+                      <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
                         <span className={"username"}>{user.username}</span>
                       </Link>
                     </td>
@@ -177,11 +169,7 @@ class Topics extends Component {
                             type="Unsubscribe"
                           />
                         ) : (
-                          <Button
-                            onClick={() => this.toggle(user)}
-                            text="Unban"
-                            type="Subscribe"
-                          />
+                          <Button onClick={() => this.toggle(user)} text="Unban" type="Subscribe" />
                         )}
                       </td>
                     ) : (
@@ -193,9 +181,7 @@ class Topics extends Component {
             </table>
             <Pagination
               length={userLength}
-              change={(pageSize, currentPage) =>
-                this.pagination(pageSize, currentPage)
-              }
+              change={(pageSize, currentPage) => this.pagination(pageSize, currentPage)}
             />
           </div>
         ) : (

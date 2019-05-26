@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
 
 const List = ({ onItemClick, options }) => {
   return (
-    <div className={styles.List}>
+    <div className="department-list">
       {options.map(({ label, value }) => (
         <button key={value} onClick={() => onItemClick(value)}>
           {label}

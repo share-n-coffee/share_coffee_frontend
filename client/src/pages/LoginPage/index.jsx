@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PageTitle from "../../modules/PageTitle";
-import styles from "./styles.module.scss";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import SectionInfo from "../../modules/SectionInfo";
 import { setCookie } from "tiny-cookie";
@@ -9,8 +8,14 @@ import axios from "axios";
 import URL_LOGIN from "../../constants";
 import jwtDecode from "jwt-decode";
 import { setStorage, router } from "./helpers";
+import ErrorMessage from "../../components/ErrorMessage";
+import BanMsg from "../../components/BanMsg";
 
 export default class LoginPage extends Component {
+  // state = {
+  //   error: "",
+  // };
+
   render() {
     const handleTelegramResponse = async telegramResponse => {
       const requestObj = {
@@ -23,7 +28,14 @@ export default class LoginPage extends Component {
         .then(response => {
           return response.data.token;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          // this.setState(() => {
+          //   return {
+          //     error: err,
+          //   };
+          // });
+          console.log(err);
+        });
 
       const userData = jwtDecode(`${token}`);
       const date = new Date(userData.exp * 1000).toGMTString();
@@ -33,16 +45,14 @@ export default class LoginPage extends Component {
       await setStorage(userData);
       router(this.props);
     };
+    // const { error } = this.state;
+    // console.log(sessionStorage.getItem("banned"));
     return (
       <>
         <Header isActive={false} isAdmin={false} hasDepartment={false} />
         <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
-        <div
-          id={styles.telegram__login__container}
-          className={styles.section}
-          onClick={this.update}
-        >
+        <div id="telegram__login__container" className="section" onClick={this.update}>
           <TelegramLoginButton
             dataOnauth={handleTelegramResponse}
             botName="rdmcoffee_bot"
