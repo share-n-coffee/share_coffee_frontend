@@ -11,16 +11,11 @@
   text-align: center;
 
   &:hover {
-
-    //opacity: 0.8;
-    //color: #fff;
-    //background:  #0064FF;
-    //border: 2px solid rgba(0, 100, 255, 0.3);
     cursor: pointer;
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: 0.7;
     cursor: default;
     background-color: transparent;
   }
@@ -30,22 +25,11 @@
   color: #0064FF;
   border: 2px solid rgba(0, 100, 255, 0.3);
 
-  :hover {
+  :hover:enabled {
     background: #0064FF;
     color: #FFFFFF;
   }
 }
-
-//.section__btn:hover:enabled {
-//  opacity: 0.8;
-//  cursor: pointer;
-//}
-
-//.section__btn:disabled {
-//  opacity: 0.3;
-//  cursor: default;
-//  background-color: transparent;
-//}
 
 .logout {
   border: none;
@@ -53,7 +37,7 @@
   border-radius: 0;
   color: #323232;
 
-  &:hover {
+  &:hover:enabled {
     cursor: pointer;
     background: none;
     color: rgb(50, 50, 50);
@@ -64,7 +48,7 @@
   border: 2px solid rgba(0, 180, 100, 0.3);
   color: #00B464;
 
-  &:hover {
+  &:hover:enabled {
     background: #00B464;
     border: 2px solid rgba(0, 180, 100, 0.3);
     color: #FFFFFF;
@@ -76,7 +60,7 @@
   color: #FF0032;
   border: none;
 
-  &:hover {
+  &:hover:enabled {
     background:  none;
     border: none;
     opacity: 0.5;

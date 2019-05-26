@@ -1,24 +1,29 @@
-$blue: #4285F4;
-$red: #FF0032;
-$green: #00B464;
-$colors-list: $blue $red $green;
-
 .dots {
   span {
     display: inline-block;
-    margin-top: 10px;
-    height: 10px;
-    width: 10px;
+    height: 8px;
+    width: 8px;
     border-radius: 50%;
     &:not(:first-child) { margin-left: 5px; }
   }
-  @each $current-color in $colors-list {
-    $i: index($colors-list, $current-color);
+
+  @for $i from 0 through 3 {
     $t: $i * 0.15;
     span:nth-child(#{$i}) {
-      background: $green;
-      animation: move 0.4s ease-in-out (#{$t}s) infinite alternate;
+      animation: move 0.2s ease-in-out (#{$t}s) infinite alternate;
     }
+  }
+}
+
+.greenDots {
+  span {
+    background-color: #00B464;
+  }
+}
+
+.redDots {
+  span {
+    background-color: #FF0032;
   }
 }
 

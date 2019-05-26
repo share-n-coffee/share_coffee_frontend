@@ -38,7 +38,7 @@ const subscribeUserToEvent = (eventId, userId, token) => {
   });
 };
 
-const unsubscibeUserFromEvent = (eventId, userId, token) => {
+const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
   return axios({
     method: "delete",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
@@ -58,7 +58,7 @@ const SubscriptionsPage = props => {
   const userId = "5ce1147ca0c89f001e1c2a4b";
   //const userId = sessionStorage.getItem("id");
   const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
-  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubscibeUserFromEvent);
+  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubsrcibeUserFromEvent);
   const handleSubscribing = async (eventId, subscribingFunction) => {
     setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
     const result = await subscribingFunction(eventId, userId, token);
@@ -94,7 +94,7 @@ const SubscriptionsPage = props => {
       userEvents={userData.events}
       onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
       onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
-      isLoading={isUserDataLoaded}
+      isLoading={!isUserDataLoaded}
       currentLoadingEvents={currentLoadingEvents}
     />
   );
@@ -110,8 +110,19 @@ const SubscriptionsPage = props => {
       />
       <main>
         <Switch>
-          <Route exact path="/subscriptions/" component={EventFull} />
-          <Route path="/subscriptions/:id" component={TopicFront} />
+          <Route
+            path="/subscriptions/:id"
+            component={params => (
+              <TopicFront
+                userEvents={userData.events}
+                onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
+                onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+                isLoading={!isUserDataLoaded}
+                currentLoadingEvents={currentLoadingEvents}
+                {...params}
+              />
+            )}
+          />
         </Switch>
       </main>
     </>

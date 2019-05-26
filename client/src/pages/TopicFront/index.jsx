@@ -5,6 +5,7 @@ import Button from "../../common/Button";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
+import SpinButton from "../../common/SpinButton";
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTAxNTgyN2RjODI0MDAxZTBhYzczZSIsImZpcnN0TmFtZSI6Ik1heCIsImxhc3ROYW1lIjoiUmF6aG5vdiIsImRlcGFydG1lbnQiOiI1Y2Q2ZjZjMzgxMzcxZDI5N2FjYjJmZDAiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9NeG1NYXpvdnNreS5qcGciLCJiYW5uZWQiOnsic3RhdHVzIjp0cnVlLCJleHBpcmVkIjo0MTAyMzg5ODI4NTA1fSwiaXNBZG1pbiI6ZmFsc2V9LCJpYXQiOjE1NTgzNTI4OTksImV4cCI6MTU1ODk1NzY5OX0.mvcXUriYtWCvaxnejCTatksS97sakq5hekN5w_3Zvxw";
 const getDataEvent = id => {
@@ -20,11 +21,20 @@ const getDataEvent = id => {
     .catch(err => console.log(err));
 };
 
-const TopicFront = obj => {
+const TopicFront = ({
+  userEvents = [],
+  onSubscriptionClick,
+  onUnsubscriptionClick,
+  isLoading,
+  currentLoadingEvents = [],
+  match,
+  history,
+}) => {
   const [linkHover, setHover] = useState(false);
 
-  const id = obj.match.params.id;
-
+  const id = match.params.id;
+  const userEventIds = userEvents.map(event => event.eventId);
+  const isSubscribed = userEventIds.includes(id);
   const mouseEvents = {
     mouseOver: () => {
       setHover(true);
@@ -33,7 +43,7 @@ const TopicFront = obj => {
       setHover(false);
     },
     click: () => {
-      obj.history.goBack();
+      history.goBack();
     },
   };
 
@@ -44,7 +54,7 @@ const TopicFront = obj => {
       setEvent(result);
     };
     fetchData();
-  }, {});
+  }, []);
   return (
     <>
       <PageTitle
@@ -57,7 +67,18 @@ const TopicFront = obj => {
         <div className={styles.section_container}>
           <div className={styles.section_header}>
             <h2>Topic {eventData.title}</h2>
-            <Button text={"Subscribe"} type="Subscribe" />
+            <SpinButton
+              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              isLoading={isLoading || currentLoadingEvents.includes(id)}
+              onClick={() => {
+                if (isSubscribed) {
+                  onUnsubscriptionClick(id);
+                } else {
+                  onSubscriptionClick(id);
+                }
+              }}
+            />
           </div>
           <p className={styles.section__descr}>{eventData.description}</p>
           <div className={styles.section__place}>
