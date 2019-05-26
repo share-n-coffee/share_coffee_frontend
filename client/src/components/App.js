@@ -37,7 +37,7 @@ export default class App extends Component {
   render() {
     // setCookie(
     //   "token",
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTFjYTE2OGMwZjQzMDAxZTZlODg5NyIsImZpcnN0TmFtZSI6IkJhaHVzIiwibGFzdE5hbWUiOiJFTiIsImRlcGFydG1lbnQiOiI1Y2UyYzViNzA0ZTg1ZDAwMWUwZWI5MjEiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9DWEJhaHVzLmpwZyIsImJhbm5lZCI6eyJzdGF0dXMiOmZhbHNlLCJleHBpcmVkIjowfSwiaXNBZG1pbiI6dHJ1ZX0sImlhdCI6MTU1ODc5NzE3MiwiZXhwIjoxNTU5NDAxOTcyfQ.qrcN3uduqyCtaLQd8EwE6EoLucBnMAYpNHYNb7iZIM4",
+    //   "",
     // ); //for localhost
 
     //if no info about user
