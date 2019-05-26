@@ -6,6 +6,7 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
+
 // import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
 import { HashRouter as Router } from "react-router-dom";
@@ -34,7 +35,10 @@ export default class App extends Component {
   }
 
   render() {
-    // setCookie("token", 'youToken');  //for localhost
+    // setCookie(
+    //   "token",
+    //   "",
+    // ); //for localhost
 
     //if no info about user
     if (!this.state.id && !this.state.token) {
