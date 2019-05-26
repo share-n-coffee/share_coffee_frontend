@@ -1,4 +1,8 @@
 .dots {
+  position: absolute;
+  right: 0;
+  left: 0;
+
   span {
     display: inline-block;
     height: 8px;
@@ -30,6 +34,10 @@
 @keyframes move {
   from { transform: translateY(-5px); }
   to { transform: translateY(5px); }
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 
