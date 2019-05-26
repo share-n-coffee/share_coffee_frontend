@@ -7,7 +7,57 @@ import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
 import Header from "../../../common/Header";
 import * as URL from "../../../constants";
+import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
+class TopicDropdown extends Component {
+  state = {
+    subscribers: [],
+    openSubscribers: "",
+    error: "",
+  };
 
+  componentDidMount() {
+    this.getSubscribers(this.props.id);
+  }
+
+  getSubscribers = id => {
+    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
+      this.setState({
+        subscribers: data.object,
+        error: data.message,
+      });
+    });
+  };
+
+  openSubscribers = id => {
+    if (this.state.openSubscribers === id) {
+      this.setState({ openSubscribers: "" });
+    } else {
+      this.setState({ openSubscribers: id });
+    }
+  };
+
+  render() {
+    const { subscribers, openSubscribers } = this.state;
+    const { id } = this.props;
+
+    return (
+      <Dropdown
+        length={subscribers.length}
+        onClick={() => subscribers.length > 0 && this.openSubscribers(id)}
+        open={openSubscribers === id}
+      >
+        {subscribers.length > 0 ? `Subscribers (${subscribers.length})` : `(0 Subscribers)`}
+        <DropdownContent open={openSubscribers === id}>
+          {subscribers.map(subscriber => (
+            <DropdownItem key={subscriber._id}>
+              {subscriber.firstName} {subscriber.lastName}
+            </DropdownItem>
+          ))}
+        </DropdownContent>
+      </Dropdown>
+    );
+  }
+}
 class oneTopic extends Component {
   constructor(props) {
     super(props);
@@ -93,7 +143,19 @@ class oneTopic extends Component {
             )}
           </div>
         ) : (
-          <div>All events</div>
+          <div>
+            <div className={"title"}>
+              <span className={`event-status ${event.active ? "active" : ""}`} />
+              {event.title}
+            </div>
+
+            <TopicDropdown id={event._id} />
+            <span>Place: </span>
+            <div>{event.address}</div>
+            <span>Time:</span>
+            <div>{event.options.times}</div>
+            <Button onClick={() => this.generatePairs(event._id)} text="pairs" />
+          </div>
         )}
       </>
     );

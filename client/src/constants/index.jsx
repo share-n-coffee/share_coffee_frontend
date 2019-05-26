@@ -11,5 +11,5 @@ export const BAN_USER = id => `https://forge-development.herokuapp.com/api/users
 export const ONE_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
 export const USER_IN_TEAM = id =>
   `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-
+export const ADMIN_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
 export default URL_LOGIN;
