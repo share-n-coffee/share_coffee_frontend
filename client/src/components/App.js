@@ -15,18 +15,37 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 import { getCookie } from "tiny-cookie";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.userAuth = this.userAuth.bind(this);
+  }
+
+  state = {
+    id: sessionStorage.getItem("id"),
+    token: getCookie("token"),
+  };
+
+  userAuth() {
+    this.setState({
+      id: sessionStorage.getItem("id"),
+      token: getCookie("token"),
+    });
+  }
+
   render() {
     // setCookie("token", 'youToken');  //for localhost
 
-    const id = sessionStorage.getItem("id");
-    const token = getCookie("token");
-
     //if no info about user
-    if (!(id && token)) {
+    if (!this.state.id && !this.state.token) {
       return (
         <div className={`${styles.App} ${styles.wrapper}`}>
           <Switch>
-            <Route path="/" component={LoginPage} exact />
+            <Route
+              path="/"
+              render={props => <LoginPage userAuth={this.userAuth} {...props} />}
+              exact
+            />
             <Redirect to="/" />
           </Switch>
         </div>
@@ -37,7 +56,11 @@ export default class App extends Component {
       <div className={`${styles.App} ${styles.wrapper}`}>
         <Router>
           <Switch>
-            <Route path="/" component={LoginPage} exact />
+            <Route
+              path="/"
+              render={props => <LoginPage userAuth={this.userAuth} {...props} />}
+              exact
+            />
             <Route path="/team_select/" component={PageTeamSelect} exact />
             <Route path="/subscriptions/" component={SubscriptionsPage} />
             <Route path="/admin" component={HomeAdmin} exact />
