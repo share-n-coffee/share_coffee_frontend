@@ -114,6 +114,7 @@ const SubscriptionsPage = props => {
       />
       <main>
         <Switch>
+          <Route exact path="/subscriptions/" component={EventFull} />
           <Route
             path="/subscriptions/:id"
             component={params => (
