@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../common/Button";
-import axios from "axios";
+import { request } from "../../helpers/requests";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -25,34 +25,16 @@ class AdminLoginPage extends Component {
       password: md5(this.state.password),
     };
 
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVjZGU4YjEwNDhlZjI3YTI1MWY2NWRkYyIsInRlbGVncmFtVXNlcklkIjo1NDE0MTk0MzEsImFkbWluIjp7ImlzQWRtaW4iOnRydWUsInBhc3N3b3JkIjoidGVzdCJ9fSwiaWF0IjoxNTU4MTc5Nzc4LCJleHAiOjE1NTgyNjYxNzh9.YESFpIbsN_-Hyu9Q0bo8mwhU_Ur9BbdbmudiJpLVea8";
-
-    axios(requestUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token} `,
-      },
-      body: JSON.stringify(user),
-    })
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        console.log(data);
-        if (data.errors && data.errors.length > 0) {
-          this.setState({ error: data.errors[0].msg });
+    request.post(requestUrl, user).then(data => {
+      if (!data.message) {
+        if (data.object.token) {
+          sessionStorage.setItem("adminToken", data.object.token);
+          this.props.setLogin(data.object.token != null);
         }
-        if (data.token) {
-          sessionStorage.setItem("adminToken", data.token);
-          this.props.setLogin(token != null);
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err.message });
-        console.error(err);
-      });
+      } else {
+        this.setState({ error: data.message });
+      }
+    });
   };
 
   changeInput = (title, value) => {

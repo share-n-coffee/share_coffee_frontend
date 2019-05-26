@@ -5,6 +5,7 @@ import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 import Button from "../../../common/Button";
+import * as URL from "../../../constants";
 
 class TopicDropdown extends Component {
   state = {
@@ -18,8 +19,7 @@ class TopicDropdown extends Component {
   }
 
   getSubscribers = id => {
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-    request.get(requestUrl).then(data => {
+    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
         subscribers: data.object,
         error: data.message,
@@ -70,9 +70,7 @@ class DeleteBtn extends Component {
   }
 
   getSubscribers = id => {
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-    request.get(requestUrl).then(data => {
-      console.log(data);
+    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
         subscribers: data.object,
         error: data.message,
@@ -126,9 +124,8 @@ class Topics extends Component {
   }
 
   getData() {
-    const requestUrl = "https://forge-development.herokuapp.com/api/events/";
-
-    request.get(requestUrl).then(data => {
+    console.log(URL.EVENTS);
+    request.get(URL.EVENTS).then(data => {
       this.setState({
         events: data.object,
         error: data.message,
@@ -137,9 +134,7 @@ class Topics extends Component {
   }
 
   generatePairs(id) {
-    const requestUrl = `https://forge-development.herokuapp.com/api/randomizer/${id}`;
-
-    request.post(requestUrl).then(data => {
+    request.post(URL.GENERATE_PAIRS(id)).then(data => {
       console.log(data);
     });
   }

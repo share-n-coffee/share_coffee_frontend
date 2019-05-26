@@ -4,7 +4,8 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import Pagination from "../../../components/Pagination";
 import { Link } from "react-router-dom";
 import Button from "../../../common/Button";
-import axios from "axios";
+import { request } from "../../../helpers/requests";
+import * as URL from "../../../constants";
 
 class Topics extends Component {
   state = {
@@ -23,61 +24,28 @@ class Topics extends Component {
   }
 
   getData() {
-    const requestUrl = "https://forge-development.herokuapp.com/api/users/";
-    const token = sessionStorage.getItem("adminToken");
-
-    axios(requestUrl, {
-      headers: {
-        Authorization: `Bearer ${token} `,
-      },
-    })
-      .then(blob => blob.json())
-      .then(users => {
-        console.log(users);
-        if (users.errors && users.errors.length > 0) {
-          this.setState({ error: users.errors[0].msg });
-        }
-        this.setState({
-          users: users,
-          unsortedUser: users,
-          userLength: users.length,
-        });
-        this.pagination(10, this.state.curPage);
+    request.get(URL.USERS).then(data => {
+      this.setState({
+        users: data.object,
+        unsortedUser: data.object,
+        userLength: data.object.length,
+        error: data.message,
       });
+      this.pagination(10, this.state.curPage);
+    });
   }
 
   toggle = user => {
-    // this.state.userId === '' ? this.setState({userId: id}) : this.setState({userId: ''});
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/ban/${user._id}`;
-    const token = sessionStorage.getItem("adminToken");
     const status = {
       ban: {
         status: !user.banned.status,
       },
     };
-    axios(requestUrl, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token} `,
-      },
-      body: JSON.stringify(status),
-    })
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        console.log(data);
-        if (data.errors && data.errors.length > 0) {
-          this.setState({ error: data.errors[0].msg });
-        } else {
-          this.getData();
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err.message });
-        console.error(err);
-      });
+
+    request.put(URL.BAN_USER(user._id), status).then(data => {
+      this.getData();
+      this.setState({ error: data.message });
+    });
   };
 
   pagination(pageSize, currentPage) {

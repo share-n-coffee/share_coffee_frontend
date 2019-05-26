@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Button from "../../../common/Button";
-import axios from "axios";
+import * as URL from "../../../constants";
 
 class DeleteBtn extends Component {
   state = {
@@ -15,10 +15,7 @@ class DeleteBtn extends Component {
   }
 
   getOneTeam(id) {
-    const requestUrl = `https://forge-development.herokuapp.com/api/departments/${id}`;
-
-    request.get(requestUrl).then(data => {
-      console.log(data);
+    request.get(URL.GET_ONE_TEAM(id)).then(data => {
       this.setState({
         team: data.object,
         error: data.message,
@@ -40,7 +37,7 @@ class DeleteBtn extends Component {
   };
 
   render() {
-    const { team, deleteContent } = this.state;
+    const { deleteContent } = this.state;
     return (
       <div className="toggle_delete">
         {!deleteContent ? (
@@ -74,10 +71,7 @@ class Teams extends Component {
   }
 
   getData() {
-    const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
-
-    request.get(requestUrl).then(data => {
-      console.log(data);
+    request.get(URL.TEAMS).then(data => {
       this.setState({
         teams: data.object,
         error: data.message,
@@ -102,37 +96,19 @@ class Teams extends Component {
     } else {
       this.setState({ error: "" });
 
-      const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
-      const token = sessionStorage.getItem("adminToken");
       const department = {
         title: this.state.team,
         description: "",
       };
-      axios(requestUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token} `,
-        },
-        body: JSON.stringify(department),
-      })
-        .then(data => {
-          return data.json();
-        })
-        .then(data => {
-          console.log(data);
-          if (data.errors && data.errors.length > 0) {
-            this.setState({ error: data.errors[0].msg });
-          } else {
-            this.toggleAdding();
-            this.setState({ success: true });
-            this.getData();
-          }
-        })
-        .catch(err => {
-          this.setState({ error: err.message });
-          console.error(err);
-        });
+
+      request.post(URL.TEAMS, department).then(data => {
+        if (!data.message) {
+          this.toggleAdding();
+          this.getData();
+        } else {
+          this.setState({ error: data.message });
+        }
+      });
     }
   };
 

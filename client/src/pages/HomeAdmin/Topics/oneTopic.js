@@ -6,6 +6,7 @@ import PageTitle from "../../../modules/PageTitle";
 import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
 import Header from "../../../common/Header";
+import * as URL from "../../../constants";
 
 class oneTopic extends Component {
   constructor(props) {
@@ -25,11 +26,7 @@ class oneTopic extends Component {
   }
 
   getData() {
-    const requestUrl = `https://forge-development.herokuapp.com/api/events/${
-      this.props.match.params.id
-    }`;
-
-    request.get(requestUrl).then(data => {
+    request.get(URL.ONE_EVENT(this.props.match.params.id)).then(data => {
       console.log(data);
       this.setState({
         event: data.object,

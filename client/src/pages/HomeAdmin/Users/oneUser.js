@@ -5,6 +5,7 @@ import UserInfo from "./userInfo";
 import UserLogs from "./userLogs";
 import { request } from "../../../helpers/requests";
 import PageTitle from "../../../modules/PageTitle";
+import * as URL from "../../../constants";
 
 class OneUser extends React.Component {
   state = {
@@ -19,11 +20,7 @@ class OneUser extends React.Component {
   }
 
   getData() {
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/${
-      this.props.match.params.id
-    }`;
-
-    request.get(requestUrl).then(data => {
+    request.get(URL.ONE_USER(this.props.match.params.id)).then(data => {
       this.setState({
         user: data.object,
         error: data.message,

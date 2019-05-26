@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
+import * as URL from "../../../constants";
 
 class OneTopics extends Component {
   constructor(props) {
@@ -18,9 +19,7 @@ class OneTopics extends Component {
   }
 
   getData(id) {
-    const requestUrl = `https://forge-development.herokuapp.com/api/events/${id}`;
-
-    request.get(requestUrl).then(data => {
+    request.get(URL.ONE_EVENT(id)).then(data => {
       console.log(data);
       this.setState({
         event: data.object,
