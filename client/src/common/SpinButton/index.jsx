@@ -1,9 +1,30 @@
 import React from "react";
 import Button from "../Button";
 import PropTypes from "prop-types";
+import styles from "./styles.module.scss";
+import classnames from "classnames";
 
 const SpinButton = props => (
-  <Button {...props} text={props.isLoading ? <span>...</span> : props.text} />
+  <Button
+    {...props}
+    disabled={props.disabled || props.isLoading}
+    text={
+      props.isLoading ? (
+        <div
+          className={classnames(styles.dots, {
+            [styles.greenDots]: props.type === "Subscribe",
+            [styles.redDots]: props.type === "Unsubscribe",
+          })}
+        >
+          <span />
+          <span />
+          <span />
+        </div>
+      ) : (
+        props.text
+      )
+    }
+  />
 );
 
 SpinButton.propTypes = {
