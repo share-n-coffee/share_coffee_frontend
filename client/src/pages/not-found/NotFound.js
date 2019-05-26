@@ -5,22 +5,27 @@ import Button from "../../common/Button";
 
 class NotFound extends Component {
   render() {
-    // const isActive = sessionStorage.length > 2 ? true : false;
-    // const isAdmin = isActive && sessionStorage.getItem("isAdmin") === "true" ? true : false;
-    // const hasDepartment =
-    //   isActive &&
-    //   sessionStorage.getItem("department") !== "undefined" &&
-    //   sessionStorage.getItem("department") !== null
-    //     ? true
-    //     : false;
+    //test data
+    const isActive = sessionStorage.length > 0 ? true : false;
+    const isAdmin =
+      isActive && sessionStorage.getItem("isAdmin") === "true" && sessionStorage.length < 3
+        ? true
+        : false;
+    const hasDepartment =
+      isActive &&
+      sessionStorage.getItem("department") !== "undefined" &&
+      sessionStorage.getItem("department") !== null
+        ? true
+        : false;
     return (
       <>
         <Header
-        // isActive={isActive}
-        // isAdmin={isAdmin}
-        // hasDepartment={hasDepartment}
-        // avatar={sessionStorage.getItem("avatar")}
-        // name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+          isActive={isActive}
+          isAdmin={isAdmin}
+          hasDepartment={hasDepartment}
+          avatar={sessionStorage.getItem("avatar")}
+          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+          location={this.props}
         />
         <div className="notfound_container">
           <div className="login_container">
