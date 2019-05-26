@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
 import EventMap from "../../events/components/EventMap";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
