@@ -99,7 +99,7 @@ class TopicEditor extends Component {
             type="text"
             name="address"
             placeholder={PLACEHOLDERS.address}
-            value={this.state.place}
+            value={this.state.address}
             onChange={this.onChange}
             required
           />
