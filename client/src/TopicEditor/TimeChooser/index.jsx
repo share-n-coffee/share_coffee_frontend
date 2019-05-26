@@ -17,17 +17,24 @@ class TimeChooser extends Component {
     this.showPicker = this.showPicker.bind(this);
     this.hidePicker = this.hidePicker.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSingleDateChange = this.onSingleDateChange.bind(this);
   }
 
   showPicker(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     if (!this.state.isShowPicker) {
       this.setState({ isShowPicker: true });
     }
   }
 
   hidePicker(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     if (this.state.isShowPicker) {
       this.setState({ isShowPicker: false });
     }
@@ -36,6 +43,11 @@ class TimeChooser extends Component {
   onChange(event) {
     this.hidePicker(event);
     this.props.onChange(event);
+  }
+
+  onSingleDateChange(data) {
+    this.hidePicker();
+    this.props.onSingleDateChange(data);
   }
 
   render() {
@@ -60,8 +72,8 @@ class TimeChooser extends Component {
         inputValue = `${singleDate}, ${time}`;
         picker = (
           <DatePicker
-            date={date}
-            onChange={this.onChange}
+            activeStartDate={singleDate}
+            onChange={this.onSingleDateChange}
             onMouseLeave={this.hidePicker}
           />
         );
