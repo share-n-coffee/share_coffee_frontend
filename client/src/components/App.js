@@ -34,15 +34,15 @@ export default class App extends Component {
   }
 
   render() {
-    // setCookie("token", "youToken"); //for localhost
-    // sessionStorage.setItem("id", "122248863");
-    // sessionStorage.setItem("firstName", "gadya");
-    // sessionStorage.setItem("lastName", "xrenova");
-    // sessionStorage.setItem("avatar", "undefined");
-    // sessionStorage.setItem("isAdmin", true);
-    // sessionStorage.setItem("banned", true);
-    // sessionStorage.setItem("department", "magistral");
-    // sessionStorage.setItem("tokenTimeOver", "15134868");
+    setCookie("token", "youToken"); //for localhost
+    sessionStorage.setItem("id", "122248863");
+    sessionStorage.setItem("firstName", "gadya");
+    sessionStorage.setItem("lastName", "xrenova");
+    sessionStorage.setItem("avatar", "undefined");
+    sessionStorage.setItem("isAdmin", true);
+    sessionStorage.setItem("banned", true);
+    sessionStorage.setItem("department", "magistral");
+    sessionStorage.setItem("tokenTimeOver", "15134868");
 
     //if no info about user
     if (!this.state.id && !this.state.token) {
