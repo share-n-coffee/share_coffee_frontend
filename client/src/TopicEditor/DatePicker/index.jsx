@@ -13,9 +13,15 @@ function DatePicker({ activeStartDate, onChange }) {
   const nextLabel = <ArrowIcon direction={"right"} />;
   const prev2Label = <DoubleArrowIcon direction={"left"} />;
   const prevLabel = <ArrowIcon direction={"left"} />;
+
+  let date = new Date(activeStartDate);
+  if (Number.isNaN(date.getDate())) {
+    date = new Date();
+  }
+
   return (
     <Calendar
-      activeStartDate={activeStartDate}
+      activeStartDate={date}
       onChange={onChange}
       locale={locale}
       nextLabel={nextLabel}
@@ -27,7 +33,7 @@ function DatePicker({ activeStartDate, onChange }) {
 }
 
 DatePicker.propTypes = {
-  activeStartDate: PropTypes.instanceOf(Date),
+  activeStartDate: PropTypes.number,
   onChange: PropTypes.func,
 };
 
