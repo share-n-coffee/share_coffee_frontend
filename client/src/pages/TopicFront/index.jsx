@@ -4,9 +4,10 @@ import Button from "../../common/Button";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
-import { checkTokenTime } from "../../helpers/requests";
+import { checkIsBanned, checkTokenTime } from "../../helpers/requests";
 
 const getDataEvent = id => {
+  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
     headers: {

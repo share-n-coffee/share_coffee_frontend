@@ -5,9 +5,10 @@ import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
-import { checkTokenTime } from "../../helpers/requests";
+import { checkIsBanned, checkTokenTime } from "../../helpers/requests";
 
-const getEvents = token => {
+const getEvents = (token, props) => {
+  checkIsBanned(sessionStorage.getItem("banned"), props);
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
@@ -19,6 +20,7 @@ const getEvents = token => {
 };
 
 const getUser = (token, id) => {
+  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
@@ -30,6 +32,7 @@ const getUser = (token, id) => {
 };
 
 const subscribeUserToEvent = (eventId, userId, token) => {
+  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "put",
@@ -42,6 +45,7 @@ const subscribeUserToEvent = (eventId, userId, token) => {
 };
 
 const unsubscibeUserFromEvent = (eventId, userId, token) => {
+  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
@@ -74,7 +78,7 @@ const SubscriptionsPage = props => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getEvents(token);
+      const result = await getEvents(token, props);
       setEvents(result.data);
     };
 

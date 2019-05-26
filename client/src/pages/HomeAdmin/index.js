@@ -24,7 +24,7 @@ class HomeAdmin extends React.Component {
     return (
       <>
         <Header
-          isActive={true}
+          isActive={false}
           isAdmin={true}
           hasDepartment={false}
           location={this.props}

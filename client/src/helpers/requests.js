@@ -122,7 +122,7 @@ class requests {
 const checkTokenTime = tokenTimeOver => {
   let dateNow = (Date.now() / 1000).toFixed();
   if (+tokenTimeOver < +dateNow) {
-    window.location.history.replace("/");
+    // window.location.history.replace("/");
     sessionStorage.clear();
     removeCookie("token");
   } else {
@@ -130,11 +130,13 @@ const checkTokenTime = tokenTimeOver => {
   }
 };
 
-const checkIsBanned = () => {
-  if (sessionStorage.getItem("banned") === "true") {
-    window.location.history.replace("/");
-    sessionStorage.clear();
-    return true;
+const checkIsBanned = (bannedFlag, props) => {
+  if (bannedFlag === "true") {
+    // if (sessionStorage.getItem("banned") === "true") {
+    console.log(props);
+    props.location = "random-coffee.fun";
+    // sessionStorage.clear();
+    // return true;
   } else {
     return;
   }
