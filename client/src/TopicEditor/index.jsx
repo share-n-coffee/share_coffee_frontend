@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import TimeChooser from "./TimeChooser";
 import TopicDescription from "../TopicDescription";
 import CyclicChooser from "./CyclicChooser";
@@ -6,7 +8,6 @@ import CyclicChooser from "./CyclicChooser";
 import styles from "./styles.module.scss";
 
 import {
-  PREDEFINED_TOPIC,
   PLACEHOLDERS,
   COORDINATES_SEP,
   DEFAULT_COORDINATES,
@@ -16,9 +17,7 @@ import {
 class TopicEditor extends Component {
   constructor(props) {
     super(props);
-
-    this.state = this.props.topicData || PREDEFINED_TOPIC;
-    console.log(this.state);
+    this.state = this.props.topicData;
 
     this.onSave = this.onSave.bind(this);
     this.onCancel = this.onCancel.bind(this);
@@ -78,6 +77,7 @@ class TopicEditor extends Component {
   }
 
   render() {
+    const { cyclic } = this.state;
     return (
       <div className={styles.topic_editor}>
         <form className={styles.topic_editor_form} onSubmit={this.onSave}>
@@ -97,8 +97,8 @@ class TopicEditor extends Component {
 
           <input
             type="text"
-            name="place"
-            placeholder={PLACEHOLDERS.place}
+            name="address"
+            placeholder={PLACEHOLDERS.address}
             value={this.state.place}
             onChange={this.onChange}
             required
@@ -125,11 +125,11 @@ class TopicEditor extends Component {
             options={CYCLIC}
           />
 
-          {this.state.isRegular !== null ? (
+          {cyclic !== undefined ? (
             <TimeChooser
-              isRegular={this.state.isRegular}
+              cyclic={cyclic}
               weekDay={this.state.weekDay}
-              date={this.state.date}
+              singleDate={this.state.singleDate}
               time={this.state.time}
               onChange={this.onChange}
             />
@@ -147,5 +147,28 @@ class TopicEditor extends Component {
     );
   }
 }
+
+TopicEditor.propTypes = {
+  topicData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.arrayOf(PropTypes.number),
+    address: PropTypes.string.isRequired,
+    // cyclic: PropTypes.bool.isRequired,
+    weekDay: PropTypes.number,
+    time: PropTypes.string.isRequired,
+    singleDate: PropTypes.number,
+  }),
+};
+
+TopicEditor.defaultProps = {
+  topicData: {
+    title: "",
+    description: "",
+    address: "",
+    // cyclic: false,
+    time: "",
+  },
+};
 
 export default TopicEditor;
