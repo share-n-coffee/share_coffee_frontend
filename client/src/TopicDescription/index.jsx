@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 
 import { Editor, createEditorState } from "medium-draft";
 import { exportToHtml, importFromHtml } from "./helpers.js";
+import { EDITOR_PLACEHOLDER } from "./constants";
 
 import "medium-draft/lib/index.css"; // default medium-draft's styles
 import "./medium-draft.scss"; // override some default medium-draft's styles
 
 import styles from "./styles.module.scss";
-
-const EDITOR_PLACEHOLDER = "Write a topic description...";
 
 class TopicDescription extends React.Component {
   constructor(props) {
