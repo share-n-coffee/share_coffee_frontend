@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
 import EventMap from "../../events/components/EventMap";
 import Button from "../../common/Button";
 import axios from "axios";
@@ -8,7 +7,7 @@ import PageTitle from "../../modules/PageTitle";
 import { checkTokenTime } from "../../helpers/requests";
 
 const getDataEvent = id => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -53,9 +52,9 @@ const TopicFront = props => {
         mouseOut={mouseEvents.mouseOut}
         click={mouseEvents.click}
       />
-      <div className={styles.wrapper}>
-        <div className={styles.section_container}>
-          <div className={styles.section_header}>
+      <div className="topic-wrapper">
+        <div className="map-section_container">
+          <div className="section_header">
             <h2>Topic {eventData.title}</h2>
             {eventData.active ? (
               <Button text={"Subscribe"} type="Subscribe" />
@@ -63,19 +62,17 @@ const TopicFront = props => {
               <Button text={"Subscribe"} type="Subscribe" disabled />
             )}
           </div>
-          <p className={styles.section__descr}>{eventData.description}</p>
-          <div className={styles.section__place}>
-            <h3 className={styles.section__topic__title}>place</h3>
-            <p className={styles.place__descr}>{eventData.address}</p>
+          <p className="section__descr">{eventData.description}</p>
+          <div className="section__place">
+            <h3 className="section__topic__title">place</h3>
+            <p className="place__descr">{eventData.address}</p>
           </div>
-          <div className={styles.time__descr}>
-            <h3 className={styles.section__topic__title}>time</h3>
-            <p className={styles.time__descr}>
-              {eventData.options ? eventData.options.times[0] : <></>}
-            </p>
+          <div className="time__descr">
+            <h3 className="section__topic__title">time</h3>
+            <p className="time__descr">{eventData.options ? eventData.options.times[0] : <></>}</p>
           </div>
-          <div className={styles.map__descr}>
-            <h3 className={styles.section__topic__title}>map</h3>
+          <div className="map__descr">
+            <h3 className="section__topic__title">map</h3>
             {eventData.location ? (
               <EventMap location={eventData.location} />
             ) : (

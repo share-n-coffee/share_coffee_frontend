@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./styles.module.scss";
 import Header from "../../common/Header";
 import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
@@ -9,7 +8,7 @@ import TopicFront from "../TopicFront";
 import { checkTokenTime } from "../../helpers/requests";
 
 const getEvents = token => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: "https://forge-development.herokuapp.com/api/events/",
@@ -20,7 +19,7 @@ const getEvents = token => {
 };
 
 const getUser = (token, id) => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: `https://forge-development.herokuapp.com/api/users/${id}`,
@@ -31,7 +30,7 @@ const getUser = (token, id) => {
 };
 
 const subscribeUserToEvent = (eventId, userId, token) => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "put",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
@@ -43,7 +42,7 @@ const subscribeUserToEvent = (eventId, userId, token) => {
 };
 
 const unsubscibeUserFromEvent = (eventId, userId, token) => {
-  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
     url: `https://forge-development.herokuapp.com/api/users/${userId}`,
@@ -94,7 +93,7 @@ const SubscriptionsPage = props => {
 
   const EventFull = () => (
     <EventDesc
-      className={styles.event}
+      className="event"
       events={events}
       userEvents={userData.events}
       onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
