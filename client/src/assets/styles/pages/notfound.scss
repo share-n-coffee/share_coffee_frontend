@@ -1,0 +1,49 @@
+.gif__container {
+  position: relative;
+  font-size: 36px;
+}
+
+.redux_txt, .tests_txt {
+  position: absolute;
+  top: 130px;
+}
+
+.redux_txt {
+  left: 100px;
+}
+
+.tests_txt {
+  right: 100px;
+}
+
+.notfound_container {
+  font-family: 'Roboto';
+}
+
+.btn_container {
+  margin: 20px auto;
+}
+
+@media all and (max-width: 320px) {
+  .gif {
+    width: 75%;
+    height: 75%;
+
+    &__container {
+      margin: 0 15px;
+    }
+  }
+
+  .redux_txt, .tests_txt {
+    font-size: 24px ;
+    top: 35px;
+  }
+  .redux_txt {
+    left: 0;
+  }
+
+  .tests_txt {
+    right: 0;
+  }
+
+}
