@@ -6,7 +6,7 @@ import * as URL from "../../../constants";
 
 class DeleteBtn extends Component {
   state = {
-    team: [],
+    users: [],
     deleteContent: false,
   };
 
@@ -15,9 +15,9 @@ class DeleteBtn extends Component {
   }
 
   getOneTeam(id) {
-    request.get(URL.GET_ONE_TEAM(id)).then(data => {
+    request.get(URL.USER_IN_TEAM(id)).then(data => {
       this.setState({
-        team: data.object,
+        users: data.object,
         error: data.message,
       });
     });
@@ -37,8 +37,10 @@ class DeleteBtn extends Component {
   };
 
   render() {
-    const { deleteContent } = this.state;
-    return (
+    const { users, deleteContent } = this.state;
+    return users.length > 0 ? (
+      ""
+    ) : (
       <div className="toggle_delete">
         {!deleteContent ? (
           <img src={require("../../../assets/img/close.svg")} alt="" onClick={this.toggle} />
