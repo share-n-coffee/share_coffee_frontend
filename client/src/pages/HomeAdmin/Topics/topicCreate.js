@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PageTitle from "../../../modules/PageTitle";
-import requests from "../../../helpers/requests";
+import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Header from "../../../common/Header";
@@ -49,7 +49,7 @@ class TopicCreate extends Component {
       location: [1.23456, 7.890123],
     };
     console.log(event);
-    requests.post(requestUrl, event).then(data => {
+    request.post(requestUrl, event).then(data => {
       console.log(data);
 
       if (data.message === "") {

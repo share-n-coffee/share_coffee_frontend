@@ -1,3 +1,5 @@
+import { removeCookie } from "tiny-cookie";
+
 class requests {
   initialResult = {
     ok: false,
@@ -7,13 +9,13 @@ class requests {
   };
 
   redirect2Login() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload(true);
   }
 
   getAuthHeader() {
     let header = {};
-    const token = localStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("adminToken");
 
     if (token) {
       header = {
@@ -47,8 +49,7 @@ class requests {
       result.message = this.getStatusMessage(response.status);
 
       if (response.status === 403 && withRedirect) this.redirect2Login();
-      else if (response.status >= 400)
-        console.log("Bad response from server, url: " + url);
+      else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       if (response.status < 400) {
         result.object = await response.json();
       }
@@ -78,18 +79,56 @@ class requests {
       result.ok = response.ok;
       result.message = this.getStatusMessage(response.status);
       if (response.status === 403 && withRedirect) this.redirect2Login();
-      else if (response.status >= 400)
-        console.log("Bad response from server, url: " + url);
+      else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       result.object = await response.json();
     } catch (err) {
       console.log(err);
 
-      if (err.message === "Network request failed")
-        result.message = "Internet connection error";
+      if (err.message === "Network request failed") result.message = "Internet connection error";
       if (result.message === null) result.message = "Something went wrong";
     }
     return result;
   }
 }
 
-export default new requests();
+// const loginSuperAdmin = (user, token, requestUrl) => {
+//   return fetch(requestUrl, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token} `,
+//     },
+//     body: JSON.stringify(user),
+//   })
+//     .then(data => {
+//       return data.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       if (data.errors && data.errors.length > 0) {
+//         this.setState({ error: data.errors[0].msg });
+//       }
+//       if (data.token) {
+//         sessionStorage.setItem("adminToken", data.token);
+//         this.props.setLogin(token != null);
+//       }
+//     })
+//     .catch(err => {
+//       this.setState({ error: err.message });
+//       console.error(err);
+//     });
+// };
+
+const checkTokenTime = tokenTimeOver => {
+  let dateNow = (Date.now() / 1000).toFixed();
+  if (+tokenTimeOver < +dateNow) {
+    window.location.history.replace("/");
+    sessionStorage.clear();
+    removeCookie("token");
+  } else {
+    return;
+  }
+};
+
+let request = new requests();
+export { request, checkTokenTime };

@@ -11,6 +11,7 @@ const setStorage = userData => {
 };
 
 const router = props => {
+  props.userAuth();
   const id = sessionStorage.getItem("id");
   const departament = sessionStorage.getItem("department");
   if (id && !departament) {
