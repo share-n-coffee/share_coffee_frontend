@@ -23,6 +23,16 @@ class TopicEditor extends Component {
     this.onCancel = this.onCancel.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
+    this.onSingleDateChange = this.onSingleDateChange.bind(this);
+  }
+
+  stateSetting(name, value) {
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => console.log("state changed:", this.state),
+    );
   }
 
   onSave(e) {
@@ -39,27 +49,24 @@ class TopicEditor extends Component {
   }
 
   onChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const { target } = event;
+    const { name } = target;
+    const { value } = target;
 
-    if (name === "location") {
-      this.onLocationChange(name, value);
+    const handlerMap = {
+      location: this.onLocationChange,
+      cyclic: this.onCyclicChange,
+      time: this.onTimeChange,
+      weekDay: this.onWeekDayChange,
+      singleDate: this.onSingleDateChange,
+    };
+
+    if (name in handlerMap) {
+      handlerMap[name].call(this, name, value);
       return;
     }
 
-    this.setState(
-      {
-        [name]: value,
-      },
-      () => console.log("state changed:", this.state),
-    );
-  }
-
-  onDescriptionChange(description) {
-    this.setState({ description }, () =>
-      console.log("state changed:", this.state),
-    );
+    this.stateSetting(name, value);
   }
 
   onLocationChange(name, value) {
@@ -73,7 +80,28 @@ class TopicEditor extends Component {
         // TODO: validate coordinate (-180, 180; -90, 90)
         newValue[index] = coordinate;
       });
-    this.setState({ [name]: newValue });
+    this.stateSetting(name, newValue);
+  }
+
+  onCyclicChange(name, value) {
+    const newValue = JSON.parse(value); // parsers.stringToBoolean
+    this.stateSetting(name, newValue);
+  }
+
+  onTimeChange(name, value) {}
+
+  onWeekDayChange(name, value) {
+    const newValue = Number(value); // stringToNumber
+    this.stateSetting(name, newValue);
+  }
+
+  onSingleDateChange(value) {
+    const newValue = value.getTime();
+    this.stateSetting("singleDate", newValue);
+  }
+
+  onDescriptionChange(description) {
+    this.stateSetting("description", description);
   }
 
   render() {
@@ -132,6 +160,7 @@ class TopicEditor extends Component {
               singleDate={this.state.singleDate}
               time={this.state.time}
               onChange={this.onChange}
+              onSingleDateChange={this.onSingleDateChange}
             />
           ) : null}
 
