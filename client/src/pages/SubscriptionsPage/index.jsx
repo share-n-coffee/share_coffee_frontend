@@ -5,10 +5,9 @@ import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
-import { checkIsBanned, checkTokenTime } from "../../helpers/requests";
+import { checkTokenTime } from "../../helpers/requests";
 
-const getEvents = (token, props) => {
-  checkIsBanned(sessionStorage.getItem("banned"), props);
+const getEvents = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
@@ -20,7 +19,6 @@ const getEvents = (token, props) => {
 };
 
 const getUser = (token, id) => {
-  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
@@ -32,7 +30,6 @@ const getUser = (token, id) => {
 };
 
 const subscribeUserToEvent = (eventId, userId, token) => {
-  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "put",
@@ -44,8 +41,7 @@ const subscribeUserToEvent = (eventId, userId, token) => {
   });
 };
 
-const unsubscibeUserFromEvent = (eventId, userId, token) => {
-  // checkIsBanned(sessionStorage.getItem("banned"));
+const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
@@ -66,7 +62,7 @@ const SubscriptionsPage = props => {
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
   const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
-  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubscibeUserFromEvent);
+  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubsrcibeUserFromEvent);
   const handleSubscribing = async (eventId, subscribingFunction) => {
     setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
     const result = await subscribingFunction(eventId, userId, token);
@@ -78,7 +74,7 @@ const SubscriptionsPage = props => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getEvents(token, props);
+      const result = await getEvents(token);
       setEvents(result.data);
     };
 
@@ -119,7 +115,19 @@ const SubscriptionsPage = props => {
       <main>
         <Switch>
           <Route exact path="/subscriptions/" component={EventFull} />
-          <Route path="/subscriptions/:id" component={TopicFront} />
+          <Route
+            path="/subscriptions/:id"
+            component={params => (
+              <TopicFront
+                userEvents={userData.events}
+                onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
+                onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+                isLoading={!isUserDataLoaded}
+                currentLoadingEvents={currentLoadingEvents}
+                {...params}
+              />
+            )}
+          />
         </Switch>
       </main>
     </>

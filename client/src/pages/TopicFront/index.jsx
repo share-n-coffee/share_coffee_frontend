@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import EventMap from "../../events/components/EventMap";
-import Button from "../../common/Button";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
-import { checkIsBanned, checkTokenTime } from "../../helpers/requests";
+import { checkTokenTime } from "../../helpers/requests";
+import SpinButton from "../../common/SpinButton";
 
 const getDataEvent = id => {
-  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(`https://forge-development.herokuapp.com/api/events/${id}`, {
     headers: {
@@ -20,11 +19,19 @@ const getDataEvent = id => {
     .catch(err => console.log(err));
 };
 
-const TopicFront = props => {
+const TopicFront = ({
+  userEvents = [],
+  onSubscriptionClick,
+  onUnsubscriptionClick,
+  isLoading,
+  currentLoadingEvents = [],
+  match,
+  history,
+}) => {
   const [linkHover, setHover] = useState(false);
-
-  const id = props.match.params.id;
-
+  const id = match.params.id;
+  const userEventIds = userEvents.map(event => event.eventId);
+  const isSubscribed = userEventIds.includes(id);
   const mouseEvents = {
     mouseOver: () => {
       setHover(true);
@@ -33,7 +40,7 @@ const TopicFront = props => {
       setHover(false);
     },
     click: () => {
-      props.history.goBack();
+      history.goBack();
     },
   };
 
@@ -44,7 +51,7 @@ const TopicFront = props => {
       setEvent(result);
     };
     fetchData();
-  }, {});
+  }, []);
   return (
     <>
       <PageTitle
@@ -57,11 +64,19 @@ const TopicFront = props => {
         <div className="map-section_container">
           <div className="section_header">
             <h2>Topic {eventData.title}</h2>
-            {eventData.active ? (
-              <Button text={"Subscribe"} type="Subscribe" />
-            ) : (
-              <Button text={"Subscribe"} type="Subscribe" disabled />
-            )}
+            <SpinButton
+              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              isLoading={isLoading || currentLoadingEvents.includes(id)}
+              disabled={!eventData.active}
+              onClick={() => {
+                if (isSubscribed) {
+                  onUnsubscriptionClick(id);
+                } else {
+                  onSubscriptionClick(id);
+                }
+              }}
+            />
           </div>
           <p className="section__descr">{eventData.description}</p>
           <div className="section__place">
