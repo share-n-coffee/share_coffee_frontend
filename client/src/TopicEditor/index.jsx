@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TimeChooser from "./TimeChooser";
 import TopicDescription from "../TopicDescription";
+import CyclicChooser from "./CyclicChooser";
 
 import styles from "./styles.module.scss";
 
@@ -9,7 +10,7 @@ import {
   PLACEHOLDERS,
   COORDINATES_SEP,
   DEFAULT_COORDINATES,
-  REGULARITY,
+  CYCLIC,
 } from "./constants";
 
 class TopicEditor extends Component {
@@ -118,27 +119,11 @@ class TopicEditor extends Component {
             required
           />
 
-          <div className={styles.topic_editor_periodic}>
-            <input
-              type="radio"
-              name="isRegular"
-              id="periodic"
-              value={REGULARITY.periodic}
-              checked={this.state.isRegular === REGULARITY.periodic}
-              onChange={this.onChange}
-              required
-            />
-            <label htmlFor="periodic">Periodic</label>
-            <input
-              type="radio"
-              name="isRegular"
-              id="single"
-              value={REGULARITY.single}
-              checked={this.state.isRegular === REGULARITY.single}
-              onChange={this.onChange}
-            />
-            <label htmlFor="single">Single</label>
-          </div>
+          <CyclicChooser
+            onChange={this.onChange}
+            cyclic={cyclic}
+            options={CYCLIC}
+          />
 
           {this.state.isRegular !== null ? (
             <TimeChooser
