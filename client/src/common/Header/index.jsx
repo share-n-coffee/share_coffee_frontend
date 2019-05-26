@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import logo from "./logo.png";
-import defaultUser from "./defaultUser.png";
-import styles from "./styles.module.scss";
+import logo from "../../assets/img/logo.png";
+import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
 import { removeCookie } from "tiny-cookie";
@@ -34,9 +33,9 @@ const adminNavigation = props => {
   }
   return (
     <>
-      <div className={styles.nav}>
-        <img className={styles.user__img} src={avatar} alt="avatar" />
-        <span className={styles.user__info}>{props.name}</span>
+      <div className="h-nav">
+        <img className="h-user__img" src={avatar} alt="avatar" />
+        <span className="h-user__info">{props.name}</span>
         <Button text="Log out" type="logout" onClick={() => logOut(props)} />
       </div>
     </>
@@ -52,7 +51,7 @@ const userNavigation = props => {
     <>
       {props.hasDepartment ? (
         <div>
-          <div className={styles.nav}>
+          <div className="h-nav">
             {sessionStorage.getItem("isAdmin") === "true" ? (
               <Button
                 text="Admin"
@@ -62,16 +61,16 @@ const userNavigation = props => {
             ) : (
               <></>
             )}
-            <img className={styles.user__img} src={avatar} alt="avatar" />
-            <span className={styles.user__info}> {props.name}</span>
+            <img className="h-user__img" src={avatar} alt="avatar" />
+            <span className="h-user__info"> {props.name}</span>
             <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
-          <div className={styles.header__dropdown}>
+          <div className="h-header__dropdown">
             <EventsDropDown events={events} />
           </div>
         </div>
       ) : (
-        <div className={styles.nav}>
+        <div className="h-nav">
           <Button text={"Log out "} type="logout" onClick={() => logOut(props)} />
         </div>
       )}
@@ -81,9 +80,9 @@ const userNavigation = props => {
 
 const Header = props => {
   return (
-    <div className={styles.header}>
-      <div className={styles.header__container}>
-        <div className={styles.logo_header}>
+    <div className="h-header">
+      <div className="h-header__container">
+        <div className="h-logo_header">
           <Link to="/" title="Home">
             <img src={logo} alt="coffee" />
           </Link>
