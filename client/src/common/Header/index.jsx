@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";

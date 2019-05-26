@@ -34,15 +34,18 @@ export default class App extends Component {
   }
 
   render() {
-    // setCookie("token", "youToken"); //for localhost
-    // sessionStorage.setItem("id", "122248863");
-    // sessionStorage.setItem("firstName", "gadya");
-    // sessionStorage.setItem("lastName", "xrenova");
-    // sessionStorage.setItem("avatar", "undefined");
-    // sessionStorage.setItem("isAdmin", true);
-    // sessionStorage.setItem("banned", true);
-    // sessionStorage.setItem("department", "magistral");
-    // sessionStorage.setItem("tokenTimeOver", "15134868");
+    setCookie(
+      "token",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTFjYTE2OGMwZjQzMDAxZTZlODg5NyIsImZpcnN0TmFtZSI6IkJhaHVzIiwibGFzdE5hbWUiOiJFTiIsImRlcGFydG1lbnQiOiI1Y2UyYzViNzA0ZTg1ZDAwMWUwZWI5MjEiLCJhdmF0YXIiOiJodHRwczovL3QubWUvaS91c2VycGljLzMyMC9DWEJhaHVzLmpwZyIsImJhbm5lZCI6eyJzdGF0dXMiOmZhbHNlLCJleHBpcmVkIjowfSwiaXNBZG1pbiI6dHJ1ZX0sImlhdCI6MTU1ODg2NzAxMiwiZXhwIjoxNTU5NDcxODEyfQ.5L6_f2PCza-4OI-IjiotTDkTSX0e0x64pKGrlWw4Exk",
+    ); //for localhost
+    sessionStorage.setItem("id", "122248863");
+    sessionStorage.setItem("firstName", "gadya");
+    sessionStorage.setItem("lastName", "xrenova");
+    sessionStorage.setItem("avatar", "undefined");
+    sessionStorage.setItem("isAdmin", true);
+    sessionStorage.setItem("banned", false);
+    sessionStorage.setItem("department", "magistral");
+    sessionStorage.setItem("tokenTimeOver", "15134868");
 
     //if no info about user
     if (!this.state.id && !this.state.token) {
