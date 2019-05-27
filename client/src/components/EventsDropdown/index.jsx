@@ -15,10 +15,11 @@ const EventsDropdown = ({ events }) => {
 
   const getUserInfo = async id => {
     const result = await axios({
-      url: `https://forge-development.herokuapp.com/api/users/${id}`,
+      url: `https://forgeserver.herokuapp.com/api/users/5ce5b8797247dc3860f0a747/upcoming`,
       method: "get",
       headers: {
         Authorization: `Bearer ${getCookie("token")}`,
+        "Content-Type": "application/json",
       },
     })
       .then(res => {
