@@ -35,7 +35,7 @@
     padding-left: 3px;
 }
 
-@media all and (max-width: 450px) {
+@media all and (max-width: 550px) {
     .eventDescItem {
         display: flex;
         align-items: flex-start;
@@ -43,7 +43,14 @@
         justify-content: flex-start;
     }
     .eventDescItem button {
-        margin-bottom: 20px;
         align-self: center;
+    }
+
+    .selectedEvent span{
+        display: none;
+    }
+
+    .eventDesc button {
+        margin-bottom: 15px;
     }
  }
