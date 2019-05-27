@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Pagination from "../../../components/Pagination";
 import { Link } from "react-router-dom";
-import Button from "../../../common/Button";
-import axios from "axios";
+import { request } from "../../../helpers/requests";
+import * as URL from "../../../constants";
+import SpinButton from "../../../common/SpinButton";
+import { Loading } from "../../../ui/components/Loader";
 
 class Topics extends Component {
   state = {
@@ -16,6 +18,8 @@ class Topics extends Component {
     up: "",
     userId: "",
     curPage: 1,
+    isLoading: "",
+    isLoadData: false,
   };
 
   componentDidMount() {
@@ -23,61 +27,36 @@ class Topics extends Component {
   }
 
   getData() {
-    const requestUrl = "https://forge-development.herokuapp.com/api/users/";
-    const token = sessionStorage.getItem("adminToken");
-
-    axios(requestUrl, {
-      headers: {
-        Authorization: `Bearer ${token} `,
-      },
-    })
-      .then(blob => blob.json())
-      .then(users => {
-        console.log(users);
-        if (users.errors && users.errors.length > 0) {
-          this.setState({ error: users.errors[0].msg });
-        }
-        this.setState({
-          users: users,
-          unsortedUser: users,
-          userLength: users.length,
-        });
-        this.pagination(10, this.state.curPage);
+    this.setState({ isLoadData: true });
+    request.get(URL.USERS).then(data => {
+      this.setState({
+        users: data.object,
+        unsortedUser: data.object,
+        userLength: data.object.length,
+        error: data.message,
+        isLoadData: false,
       });
+      this.pagination(10, this.state.curPage);
+    });
   }
 
   toggle = user => {
-    // this.state.userId === '' ? this.setState({userId: id}) : this.setState({userId: ''});
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/ban/${user._id}`;
-    const token = sessionStorage.getItem("adminToken");
     const status = {
       ban: {
         status: !user.banned.status,
       },
     };
-    axios(requestUrl, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token} `,
-      },
-      body: JSON.stringify(status),
-    })
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        console.log(data);
-        if (data.errors && data.errors.length > 0) {
-          this.setState({ error: data.errors[0].msg });
-        } else {
-          this.getData();
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err.message });
-        console.error(err);
+    this.setState({
+      isLoading: user._id,
+    });
+
+    request.put(URL.BAN_USER(user._id), status).then(data => {
+      this.getData();
+      this.setState({
+        error: data.message,
+        isLoading: "",
       });
+    });
   };
 
   pagination(pageSize, currentPage) {
@@ -97,21 +76,63 @@ class Topics extends Component {
     return days.substr(-2) + "." + months.substr(-2) + "." + years;
   };
 
+  sort = field => {
+    let sortOrder = 1;
+
+    if (field[0] === "-") {
+      sortOrder = -1;
+      field = field.substr(1);
+    }
+
+    return function(a, b) {
+      const isNumber = Number.isInteger(a[field]);
+
+      if (typeof a[field] === "undefined" || typeof b[field] === "undefined") return -1;
+
+      if (sortOrder == -1) {
+        if (isNumber) {
+          return b[field] - a[field];
+        } else {
+          return b[field].localeCompare(a[field]);
+        }
+      } else {
+        if (isNumber) {
+          return a[field] - b[field];
+        } else {
+          return a[field].localeCompare(b[field]);
+        }
+      }
+    };
+  };
+
   filter = filter => {
-    this.setState({ activeFilter: filter });
+    this.setState({
+      activeFilter: filter,
+    });
     if (this.state.activeFilter === filter) {
-      this.setState({ up: filter });
+      this.setState({
+        up: filter,
+        users: this.state.unsortedUser.sort(this.sort("-" + filter)),
+      });
     } else {
-      this.setState({ up: "" });
+      this.setState({
+        up: "",
+        users: this.state.unsortedUser.sort(this.sort(filter)),
+      });
     }
     if (this.state.up === filter) {
-      this.setState({ up: "" });
+      this.setState({
+        up: "",
+        users: this.state.unsortedUser.sort(this.sort(filter)),
+      });
     }
   };
 
   render() {
-    const { users, activeFilter, up, error, userLength } = this.state;
-    return (
+    const { users, activeFilter, up, error, userLength, isLoading, isLoadData } = this.state;
+    return isLoadData ? (
+      <Loading />
+    ) : (
       <div>
         {users && users.length > 0 ? (
           <div>
@@ -119,26 +140,26 @@ class Topics extends Component {
               <thead>
                 <tr>
                   <th
-                    className={`${activeFilter === "Username" ? "active" : ""} ${
-                      up === "Username" ? "up" : ""
+                    className={`${activeFilter === "username" ? "active" : ""} ${
+                      up === "username" ? "up" : ""
                     }`}
-                    onClick={() => this.filter("Username")}
+                    onClick={() => this.filter("username")}
                   >
                     Username
                   </th>
                   <th
-                    className={`${activeFilter === "Team" ? "active" : ""} ${
-                      up === "Team" ? "up" : ""
+                    className={`${activeFilter === "department" ? "active" : ""} ${
+                      up === "department" ? "up" : ""
                     }`}
-                    onClick={() => this.filter("Team")}
+                    onClick={() => this.filter("department")}
                   >
                     Team
                   </th>
                   <th
-                    className={`${activeFilter === "Registration" ? "active" : ""} ${
-                      up === "Registration" ? "up" : ""
+                    className={`${activeFilter === "created" ? "active" : ""} ${
+                      up === "created" ? "up" : ""
                     }`}
-                    onClick={() => this.filter("Registration")}
+                    onClick={() => this.filter("created")}
                     colSpan={2}
                   >
                     Registration Date
@@ -158,18 +179,24 @@ class Topics extends Component {
                         <span className={"username"}>{user.username}</span>
                       </Link>
                     </td>
-                    <td>team</td>
+                    <td>{user.department}</td>
                     <td>{this.timestamp(user.created)}</td>
                     {!user.admin.isAdmin ? (
                       <td>
                         {!user.banned.status ? (
-                          <Button
+                          <SpinButton
                             onClick={() => this.toggle(user)}
                             text="Ban User"
+                            isLoading={isLoading === user._id}
                             type="Unsubscribe"
                           />
                         ) : (
-                          <Button onClick={() => this.toggle(user)} text="Unban" type="Subscribe" />
+                          <SpinButton
+                            onClick={() => this.toggle(user)}
+                            text="Unban"
+                            type="Subscribe"
+                            isLoading={isLoading === user._id}
+                          />
                         )}
                       </td>
                     ) : (

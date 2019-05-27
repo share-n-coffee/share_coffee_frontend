@@ -24,7 +24,7 @@
   color: #0064FF;
   border: 2px solid rgba(0, 100, 255, 0.3);
 
-  :hover:enabled {
+  &:hover:enabled {
     background: #0064FF;
     color: #FFFFFF;
   }

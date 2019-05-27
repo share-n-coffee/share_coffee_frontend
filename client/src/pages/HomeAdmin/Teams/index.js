@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Button from "../../../common/Button";
-import axios from "axios";
+import * as URL from "../../../constants";
+import SpinButton from "../../../common/SpinButton";
+import { Loading } from "../../../ui/components/Loader";
 
 class DeleteBtn extends Component {
   state = {
-    team: [],
+    users: [],
     deleteContent: false,
+    isLoading: "",
   };
 
   componentDidMount() {
@@ -15,12 +18,9 @@ class DeleteBtn extends Component {
   }
 
   getOneTeam(id) {
-    const requestUrl = `https://forge-development.herokuapp.com/api/departments/${id}`;
-
-    request.get(requestUrl).then(data => {
-      console.log(data);
+    request.get(URL.USER_IN_TEAM(id)).then(data => {
       this.setState({
-        team: data.object,
+        users: data.object,
         error: data.message,
       });
     });
@@ -35,13 +35,17 @@ class DeleteBtn extends Component {
   };
 
   delete = () => {
+    this.setState({ isLoading: true });
     console.log("delete");
     this.clear();
+    this.setState({ isLoading: false });
   };
 
   render() {
-    const { team, deleteContent } = this.state;
-    return (
+    const { users, deleteContent, isLoading } = this.state;
+    return users.length > 0 ? (
+      ""
+    ) : (
       <div className="toggle_delete">
         {!deleteContent ? (
           <img src={require("../../../assets/img/close.svg")} alt="" onClick={this.toggle} />
@@ -49,7 +53,7 @@ class DeleteBtn extends Component {
           <div>
             Are you sure you want to delete?
             <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
-            <Button onClick={this.delete} text="Delete" />
+            <SpinButton onClick={this.delete} text="Delete" isLoading={isLoading} />
           </div>
         )}
       </div>
@@ -67,6 +71,8 @@ class Teams extends Component {
     isShowAdding: false,
     team: "",
     error: "",
+    isLoading: false,
+    isLoadData: false,
   };
 
   componentDidMount() {
@@ -74,13 +80,12 @@ class Teams extends Component {
   }
 
   getData() {
-    const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
-
-    request.get(requestUrl).then(data => {
-      console.log(data);
+    this.setState({ isLoadData: true });
+    request.get(URL.TEAMS).then(data => {
       this.setState({
         teams: data.object,
         error: data.message,
+        isLoadData: false,
       });
     });
   }
@@ -97,48 +102,38 @@ class Teams extends Component {
   };
 
   adding = () => {
+    this.setState({ isLoading: true });
+
     if (this.state.team === "") {
       this.setState({ error: "Name must be filled out" });
     } else {
       this.setState({ error: "" });
 
-      const requestUrl = "https://forge-development.herokuapp.com/api/departments/";
-      const token = sessionStorage.getItem("adminToken");
       const department = {
         title: this.state.team,
         description: "",
       };
-      axios(requestUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token} `,
-        },
-        body: JSON.stringify(department),
-      })
-        .then(data => {
-          return data.json();
-        })
-        .then(data => {
-          console.log(data);
-          if (data.errors && data.errors.length > 0) {
-            this.setState({ error: data.errors[0].msg });
-          } else {
-            this.toggleAdding();
-            this.setState({ success: true });
-            this.getData();
-          }
-        })
-        .catch(err => {
-          this.setState({ error: err.message });
-          console.error(err);
-        });
+
+      request.post(URL.TEAMS, department).then(data => {
+        if (!data.message) {
+          this.toggleAdding();
+          this.getData();
+          this.setState({ isLoading: false });
+        } else {
+          this.setState({
+            error: data.message,
+            isLoading: false,
+          });
+        }
+      });
     }
   };
 
   render() {
-    const { teams, isShowAdding, error } = this.state;
-    return (
+    const { teams, isShowAdding, error, isLoading, isLoadData } = this.state;
+    return isLoadData ? (
+      <Loading />
+    ) : (
       <div style={{ textAlign: "left" }}>
         {teams &&
           teams.length > 0 &&
@@ -159,7 +154,7 @@ class Teams extends Component {
               onChange={e => this.changeInput(e.target.value)}
               placeholder="Department name"
             />
-            <Button onClick={this.adding} text="Save" />
+            <SpinButton onClick={this.adding} text="Save" isLoading={isLoading} />
             <Button onClick={this.toggleAdding} type="Unsubscribe" text="Cancel" />
           </div>
         )}

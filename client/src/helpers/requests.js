@@ -1,4 +1,5 @@
-import { removeCookie } from "tiny-cookie";
+import { removeCookie, getCookie } from "tiny-cookie";
+import axios from "axios";
 
 class requests {
   initialResult = {
@@ -10,21 +11,15 @@ class requests {
 
   redirect2Login() {
     sessionStorage.clear();
-    window.location.reload(true);
+    removeCookie("token");
+    window.location.href = "/";
   }
 
   getAuthHeader() {
-    let header = {};
-    const token = sessionStorage.getItem("adminToken");
-
-    if (token) {
-      header = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      };
-    }
-
-    return header;
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
+    };
   }
 
   getStatusMessage(status) {
@@ -42,24 +37,30 @@ class requests {
 
     try {
       let response;
-
-      response = await fetch(url, { headers: authHeader });
+      response = await axios(url, { headers: authHeader });
       result.status = response.status;
       result.ok = response.ok;
+      result.object = response.data;
       result.message = this.getStatusMessage(response.status);
-
       if (response.status === 403 && withRedirect) this.redirect2Login();
-      else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-      if (response.status < 400) {
-        result.object = await response.json();
-      }
-      if (result.object.errors && result.object.errors > 0) {
-        result.message = result.object.errors[0].msg;
-        result.object = [];
-      }
     } catch (err) {
       console.log(err);
-      if (result.message === null) result.message = "Something went wrong";
+      const response = err.response;
+      result.object = [];
+
+      if (response) {
+        if (response.status === 403 && withRedirect) this.redirect2Login();
+        else if (response.status >= 400) console.log("Bad response from server, url: " + url);
+        if (response.status < 400) {
+          result.object = await response.data;
+        }
+        if (result.object.errors && result.object.errors > 0) {
+          result.message = result.object.errors[0].msg;
+          result.object = [];
+        }
+      } else {
+        result.message = "Something went wrong";
+      }
     }
     return result;
   }
@@ -68,9 +69,9 @@ class requests {
     let result = this.initialResult;
     const authHeader = this.getAuthHeader();
     const contentType = { "content-type": "application/json" };
-    const options = data ? { mode: "cors", body: data } : {};
+    const options = data ? { mode: "cors", data: data } : {};
     try {
-      const response = await fetch(url, {
+      const response = await axios(url, {
         method: "POST",
         headers: { ...authHeader, ...contentType },
         ...options,
@@ -80,12 +81,62 @@ class requests {
       result.message = this.getStatusMessage(response.status);
       if (response.status === 403 && withRedirect) this.redirect2Login();
       else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-      result.object = await response.json();
+      result.object = await response.data;
     } catch (err) {
-      console.log(err);
+      const response = err.response;
+      result.object = [];
 
-      if (err.message === "Network request failed") result.message = "Internet connection error";
-      if (result.message === null) result.message = "Something went wrong";
+      if (response) {
+        if (response.status === 403 && withRedirect) this.redirect2Login();
+        else if (response.status >= 400) console.log("Bad response from server, url: " + url);
+        if (response.status < 400) {
+          result.object = await response.data;
+        }
+        if (result.object.errors && result.object.errors > 0) {
+          result.message = result.object.errors[0].msg;
+          result.object = [];
+        }
+      } else {
+        result.message = "Something went wrong";
+      }
+    }
+    return result;
+  }
+
+  async put(url, data, withRedirect = true) {
+    let result = this.initialResult;
+    const authHeader = this.getAuthHeader();
+    const contentType = { "content-type": "application/json" };
+    const options = data ? { mode: "cors", data: data } : {};
+    try {
+      const response = await axios(url, {
+        method: "PUT",
+        headers: { ...authHeader, ...contentType },
+        ...options,
+      });
+      result.status = response.status;
+      result.ok = response.ok;
+      result.message = this.getStatusMessage(response.status);
+      if (response.status === 403 && withRedirect) this.redirect2Login();
+      else if (response.status >= 400) console.log("Bad response from server, url: " + url);
+      result.object = await response.data;
+    } catch (err) {
+      const response = err.response;
+      result.object = [];
+
+      if (response) {
+        if (response.status === 403 && withRedirect) this.redirect2Login();
+        else if (response.status >= 400) console.log("Bad response from server, url: " + url);
+        if (response.status < 400) {
+          result.object = await response.data;
+        }
+        if (result.object.errors && result.object.errors > 0) {
+          result.message = result.object.errors[0].msg;
+          result.object = [];
+        }
+      } else {
+        result.message = "Something went wrong";
+      }
     }
     return result;
   }
