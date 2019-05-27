@@ -14,13 +14,13 @@ import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
-// setCookie("token", "youtoken"); //for localhost
+// setCookie("token", ""); //for localhost
 // sessionStorage.setItem("id", "122248863");
 // sessionStorage.setItem("firstName", "gadya");
 // sessionStorage.setItem("lastName", "xrenova");
 // sessionStorage.setItem("avatar", "undefined");
-// // sessionStorage.setItem("isAdmin", true);
-// // sessionStorage.setItem("banned", false);
+// sessionStorage.setItem("isAdmin", false);
+// sessionStorage.setItem("banned", false);
 // sessionStorage.setItem("department", "magistral");
 // sessionStorage.setItem("tokenTimeOver", "15134868");
 

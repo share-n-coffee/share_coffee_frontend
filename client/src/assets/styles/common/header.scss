@@ -9,8 +9,10 @@
     align-items: center;
     & > span {
       margin-left: 10px;
+      margin-top: 25px;
       color: #939598;
-      font: 22px/normal 'Roboto';
+      font: 22px 'Roboto';
+      font-weight: bold;
     }
   }
   
