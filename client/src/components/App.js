@@ -57,6 +57,8 @@ export default class App extends Component {
               render={props => <LoginPage userAuth={this.userAuth} {...props} />}
               exact
             />
+            <Route path="/admin" component={HomeAdmin} exact />
+
             <Redirect to="/" />
           </Switch>
         </div>

@@ -6,6 +6,7 @@ import PageTitle from "../../modules/PageTitle";
 import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
 import { GET_EVENT } from "../../constants";
+import Button from "../../common/Button";
 
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
@@ -32,7 +33,6 @@ const TopicFront = ({
 }) => {
   const [linkHover, setHover] = useState(false);
 
-  const isAdmin = isAdmin;
   const id = match.params.id;
   const userEventIds = userEvents.map(event => event.eventId);
   const isSubscribed = userEventIds.includes(id);
@@ -49,7 +49,7 @@ const TopicFront = ({
   };
 
   const toEdit = () => {
-    props.history.push(`/admin/topic-create/${id}`);
+    history.push(`/admin/topic-create/${id}`);
   };
 
   const [eventData, setEvent] = useState({});

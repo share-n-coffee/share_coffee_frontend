@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Yandex from "./maps/yandex";
 import Leaflet from "./maps/leaflet";
-import Preloader from "../../../modules/Preloader";
+import Preloader from "../../../modules/preloader";
 
 //example
 // <MapEvent location={[55.751574, 37.573856]} zoom="5" type='leaflet/yandex' />
