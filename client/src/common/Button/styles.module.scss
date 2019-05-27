@@ -1,4 +1,5 @@
 .section__btn {
+  position: relative;
   padding: 9px 20px;
   outline: none;
   box-sizing: border-box;
@@ -30,6 +31,7 @@
 }
 
 .logout {
+  padding-right: 0;
   border: none;
   width: auto;
   border-radius: 0;
@@ -51,6 +53,17 @@
     border: 2px solid rgba(0, 180, 100, 0.3);
     color: #FFFFFF;
   }
+}
+
+.subscribe,
+.unsubscribe {
+  outline: none;
+  padding: 0;
+  width: 165px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

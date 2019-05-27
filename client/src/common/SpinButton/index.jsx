@@ -9,20 +9,21 @@ const SpinButton = props => (
     {...props}
     disabled={props.disabled || props.isLoading}
     text={
-      props.isLoading ? (
-        <div
-          className={classnames(styles.dots, {
-            [styles.greenDots]: props.type === "Subscribe",
-            [styles.redDots]: props.type === "Unsubscribe",
-          })}
-        >
-          <span />
-          <span />
-          <span />
-        </div>
-      ) : (
-        props.text
-      )
+      <>
+        {props.isLoading && (
+          <div
+            className={classnames(styles.dots, {
+              [styles.greenDots]: props.type === "Subscribe",
+              [styles.redDots]: props.type === "Unsubscribe",
+            })}
+          >
+            <span />
+            <span />
+            <span />
+          </div>
+        )}
+        <div className={classnames({ [styles.hidden]: props.isLoading })}>{props.text}</div>
+      </>
     }
   />
 );
