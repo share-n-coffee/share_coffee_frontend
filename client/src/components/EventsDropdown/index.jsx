@@ -48,7 +48,12 @@ const EventsDropdown = ({ events }) => {
         <span className={`event-arrow ${isOpened ? "event-rotated" : ""}`}>↓</span>
         {/*<ArrowIcon className={`event-arrow ${isOpened ? "event-rotated" : undefined}`} />*/}
       </button>
-      {isOpened && <List events={events} />}
+      {/*{isOpened && <List events={events} />}*/}
+      {isOpened && (
+        <div className="list">
+          <List events={events} />{" "}
+        </div>
+      )}
     </div>
   );
 };
