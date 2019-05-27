@@ -60,6 +60,24 @@ const TopicFront = ({
     };
     fetchData();
   }, []);
+
+  let { title, description, address, location } = eventData;
+
+  const titleTransform = title => {
+    let str = "";
+    if (title !== undefined || title !== null) {
+      for (let i = 0; i < title.length; i++) {
+        if (i === 0) {
+          str += title.charAt(i).toUpperCase();
+        } else {
+          str += title.charAt(i);
+        }
+      }
+      return str;
+    } else {
+      return "";
+    }
+  };
   return (
     <>
       {!isAdmin ? (
@@ -75,7 +93,7 @@ const TopicFront = ({
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
-            <h2>Topic {eventData.title}</h2>
+            <h2>Topic {eventData.title ? titleTransform(title) : ""}</h2>
             {isAdmin ? (
               <Button text={"Edit"} onClick={toEdit} />
             ) : (
@@ -96,15 +114,15 @@ const TopicFront = ({
           </div>
           <p className="section__descr">{eventData.description}</p>
           <div className="section__place">
-            <h3 className="section__topic__title">place</h3>
+            <h3 className="section__topic__title">Place:</h3>
             <p className="place__descr">{eventData.address}</p>
           </div>
           <div className="time__descr">
-            <h3 className="section__topic__title">time</h3>
+            <h3 className="section__topic__title">Time:</h3>
             <p className="time__descr">{eventData.options ? eventData.options.times[0] : <></>}</p>
           </div>
           <div className="map__descr">
-            <h3 className="section__topic__title">map</h3>
+            <h3 className="section__topic__title">Map:</h3>
             {eventData.location ? (
               <EventMap location={eventData.location} />
             ) : (
