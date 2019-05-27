@@ -5,6 +5,7 @@
 .event-item {
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
   width: 100%;
+  padding: 15px 0 0 0;
 
   & > .event_time {
     margin: 15px 20px;
@@ -14,6 +15,7 @@
     font: 18px/normal 'Roboto';
     font-weight: 700;
     color: #323232;
+    margin-bottom: 10px;
 
     &::before {
       background: #00B464;
@@ -49,27 +51,32 @@
 //   margin-top: 0px;
 // }
 
-.event-List {
-  background-color: #FFFFFF;
-  padding: 0;
-  position: relative;
-  top: 0;
-  animation: down .5s ease-out;
-  z-index: 10;
-}
-ul {
-  margin: 0;
-}
-
 .list {
-  outline: 1px solid rgba(51, 51, 51, 0.1);
+  background: transparent;
   overflow: hidden;
   position: absolute;
   top: 25px;
   width: 126%;
-  background: #FFFFFF;
-
+  padding:  10px 0 0 0;
 }
+
+.event-List {
+  background-color: #FFFFFF;
+  position: relative;
+  top: 0;
+  animation: down .5s ease-out;
+  z-index: 10;
+  width: 99%;
+  border: 1px solid rgba(51, 51, 51, 0.1);
+  padding: 0;
+  margin: 0;
+}
+
+ul,h4 {
+  margin: 0;
+}
+
+
 
 @keyframes down {
   0% {
