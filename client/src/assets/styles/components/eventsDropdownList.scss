@@ -73,18 +73,19 @@
   padding: 0;
   margin: 0;
 
-  &::before {
-    position: relative;
-    top: -17px;
-    left: 15px;
-    content: '';
-    display: inline-block;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #FFFFFF;
-    color: red;
-    z-index: 12;
-  }
+  //&::before {
+  //  position: relative;
+  //  top: -17px;
+  //  left: 15px;
+  //  content: '';
+  //  display: inline-block;
+  //  border-left: 10px solid transparent;
+  //  border-right: 10px solid transparent;
+  //  border-bottom: 10px solid #FFFFFF;
+  //  z-index: 12;
+  //}
+
+
 }
 
 ul, h4 {
