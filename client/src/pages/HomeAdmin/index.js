@@ -1,6 +1,6 @@
 import React from "react";
-import AdminLoginPage from "../AdminLoginPage";
 import HomeDashboard from "./home";
+import { Redirect } from "react-router";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
 import { setStorage } from "../LoginPage/helpers";
@@ -13,7 +13,11 @@ class HomeAdmin extends React.Component {
 
   componentDidMount() {
     const token = getCookie("token");
-    if (token !== null) {
+    const id = sessionStorage.getItem("id");
+    const checkAdmin = null; //сделать запрос к базе по полю админ:
+    //https://documenter.getpostman.com/view/7419944/S1TSXdzx?version=latest#b0a99c3e-90ec-447a-a996-eb552bab3e4b
+    //проверить результат
+    if (checkAdmin) {
       this.setState({ isLogin: true });
     }
   }
@@ -24,7 +28,7 @@ class HomeAdmin extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.isLogin ? (
       <>
         <Header
           isActive={false}
@@ -36,13 +40,11 @@ class HomeAdmin extends React.Component {
         />
         <div className="login_container" style={{ width: "100%" }}>
           <h1>Admin panel</h1>
-          {!this.state.isLogin ? (
-            <AdminLoginPage history={this.props.history} setLogin={this.setLogin} />
-          ) : (
-            <HomeDashboard history={this.props.history} />
-          )}
+          <HomeDashboard history={this.props.history} />
         </div>
       </>
+    ) : (
+      <Redirect to="/404" />
     );
   }
 }

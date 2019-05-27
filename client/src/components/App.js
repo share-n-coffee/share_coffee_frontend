@@ -3,9 +3,10 @@ import styles from "./styles.module.scss";
 import LoginPage from "../pages/LoginPage";
 import PageTeamSelect from "../pages/PageTeamSelect";
 import SubscriptionsPage from "../pages/SubscriptionsPage";
-import HomeAdmin from "../pages/HomeAdmin";
+import HomeAdmin from "../pages/HomeAdmin/";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
+import AdminLoginPage from "../pages/AdminLoginPage";
 import { token } from "../constants";
 import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
@@ -55,7 +56,7 @@ export default class App extends Component {
               render={props => <LoginPage userAuth={this.userAuth} {...props} />}
               exact
             />
-            <Route path="/admin" component={HomeAdmin} exact />
+            <Route path="/login_admin" component={AdminLoginPage} exact />
 
             <Redirect to="/" />
           </Switch>
@@ -74,10 +75,12 @@ export default class App extends Component {
             />
             <Route path="/team_select/" component={PageTeamSelect} exact />
             <Route path="/subscriptions/" component={SubscriptionsPage} />
+            <Route path="/login_admin" component={AdminLoginPage} exact />
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
             <Route path="/admin/topic-create" component={TopicCreate} exact />
             <Route path="/admin/user/:id" component={OneUser} exact />
+            <Route path="/404" component={NotFound} exact />
             <Route component={NotFound} exact />
           </Switch>
         </Router>
