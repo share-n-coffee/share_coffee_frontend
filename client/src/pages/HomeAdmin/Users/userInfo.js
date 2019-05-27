@@ -59,25 +59,30 @@ class Topics extends Component {
         <h3>{user.firstName + " " + user.lastName}</h3>
         <span>team: {user.department}</span>
         <div>
-          {user.banned && !user.banned.status ? (
-            <Button onClick={() => this.toggleBan(user)} text="Ban User" type="Unsubscribe" />
-          ) : (
-            <Button onClick={() => this.toggleBan(user)} text="Unban" type="Subscribe" />
-          )}
-        </div>
-        <div>
           {user.admin && !user.admin.isAdmin ? (
-            <Button
-              onClick={() => this.toggleAdmin(user)}
-              text="Grant Admin Rights"
-              type="Unsubscribe"
-            />
+            <div>
+              <div>
+                {user.banned && !user.banned.status ? (
+                  <Button onClick={() => this.toggleBan(user)} text="Ban User" type="Unsubscribe" />
+                ) : (
+                  <Button onClick={() => this.toggleBan(user)} text="Unban" type="Subscribe" />
+                )}
+              </div>
+              <Button
+                onClick={() => this.toggleAdmin(user)}
+                text="Grant Admin"
+                type="Unsubscribe"
+              />
+            </div>
           ) : (
-            <Button
-              onClick={() => this.toggleAdmin(user)}
-              text="Pick Up Admin Rights"
-              type="Subscribe"
-            />
+            <div>
+              <span>ADMIN</span>
+              <Button
+                onClick={() => this.toggleAdmin(user)}
+                text="Pick Up Admin"
+                type="Subscribe"
+              />
+            </div>
           )}
         </div>
       </div>
