@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
-import Button from "../../common/Button";
-import axios from "axios";
+import { request } from "../../helpers/requests";
+import SpinButton from "../../common/SpinButton";
+import { setCookie } from "tiny-cookie";
+import jwtDecode from "jwt-decode";
+import { setStorage } from "../LoginPage/helpers";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -14,45 +17,37 @@ class AdminLoginPage extends Component {
     username: "",
     password: "",
     error: "",
+    isLoading: false,
   };
 
   login = e => {
     e.preventDefault();
     const requestUrl = `https://forge-development.herokuapp.com/login/admin`;
 
+    this.setState({
+      isLoading: true,
+    });
+
     const user = {
       username: this.state.username,
       password: md5(this.state.password),
     };
 
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVjZGU4YjEwNDhlZjI3YTI1MWY2NWRkYyIsInRlbGVncmFtVXNlcklkIjo1NDE0MTk0MzEsImFkbWluIjp7ImlzQWRtaW4iOnRydWUsInBhc3N3b3JkIjoidGVzdCJ9fSwiaWF0IjoxNTU4MTc5Nzc4LCJleHAiOjE1NTgyNjYxNzh9.YESFpIbsN_-Hyu9Q0bo8mwhU_Ur9BbdbmudiJpLVea8";
-
-    axios(requestUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token} `,
-      },
-      body: JSON.stringify(user),
-    })
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        console.log(data);
-        if (data.errors && data.errors.length > 0) {
-          this.setState({ error: data.errors[0].msg });
+    request.post(requestUrl, user, false).then(data => {
+      if (!data.message) {
+        if (data.object.token) {
+          const date = new Date(jwtDecode(data.object.token).exp * 1000).toGMTString();
+          setCookie("token", data.object.token, { expires: date });
+          this.props.setLogin(data.object.token != null, data.object.token);
+          this.setState({ isLoading: false });
         }
-        if (data.token) {
-          sessionStorage.setItem("adminToken", data.token);
-          this.props.setLogin(token != null);
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err.message });
-        console.error(err);
-      });
+      } else {
+        this.setState({
+          error: data.message,
+          isLoading: false,
+        });
+      }
+    });
   };
 
   changeInput = (title, value) => {
@@ -60,7 +55,7 @@ class AdminLoginPage extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    const { error, isLoading } = this.state;
 
     return (
       <div className="form-page__wrapper login_container">
@@ -81,7 +76,7 @@ class AdminLoginPage extends Component {
             placeholder="password"
           />
 
-          <Button onClick={e => this.login(e)} text="Log in" />
+          <SpinButton onClick={e => this.login(e)} text="Log in" isLoading={isLoading} />
         </form>
       </div>
     );

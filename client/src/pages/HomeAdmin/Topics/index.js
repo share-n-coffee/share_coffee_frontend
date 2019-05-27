@@ -5,6 +5,9 @@ import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 import Button from "../../../common/Button";
+import * as URL from "../../../constants";
+import SpinButton from "../../../common/SpinButton";
+import { Loading } from "../../../ui/components/Loader";
 
 class TopicDropdown extends Component {
   state = {
@@ -18,8 +21,7 @@ class TopicDropdown extends Component {
   }
 
   getSubscribers = id => {
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-    request.get(requestUrl).then(data => {
+    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
         subscribers: data.object,
         error: data.message,
@@ -70,9 +72,7 @@ class DeleteBtn extends Component {
   }
 
   getSubscribers = id => {
-    const requestUrl = `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-    request.get(requestUrl).then(data => {
-      console.log(data);
+    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
         subscribers: data.object,
         error: data.message,
@@ -119,6 +119,8 @@ class Topics extends Component {
   state = {
     events: [],
     error: "",
+    isLoading: "",
+    isLoadData: false,
   };
 
   componentDidMount() {
@@ -126,21 +128,21 @@ class Topics extends Component {
   }
 
   getData() {
-    const requestUrl = "https://forge-development.herokuapp.com/api/events/";
+    this.setState({ isLoadData: true });
 
-    request.get(requestUrl).then(data => {
+    request.get(URL.EVENTS).then(data => {
       this.setState({
         events: data.object,
         error: data.message,
+        isLoadData: false,
       });
     });
   }
 
   generatePairs(id) {
-    const requestUrl = `https://forge-development.herokuapp.com/api/randomizer/${id}`;
-
-    request.post(requestUrl).then(data => {
-      console.log(data);
+    this.setState({ isLoading: id });
+    request.post(URL.GENERATE_PAIRS(id)).then(data => {
+      this.setState({ isLoading: "" });
     });
   }
 
@@ -150,11 +152,12 @@ class Topics extends Component {
   };
 
   render() {
-    const { events, error } = this.state;
-    return (
+    const { events, error, isLoading, isLoadData } = this.state;
+    return isLoadData ? (
+      <Loading />
+    ) : (
       <div style={{ textAlign: "left" }}>
-        {events &&
-          events.length > 0 &&
+        {events && events.length > 0 ? (
           events.map(event => (
             <div key={event._id} className={"one-topic"}>
               <Link to={{ pathname: `/admin/topic/${event._id}` }} className={"title"}>
@@ -167,10 +170,17 @@ class Topics extends Component {
               <div>{event.address}</div>
               <span>Time:</span>
               <div>{event.options.times}</div>
-              <Button onClick={() => this.generatePairs(event._id)} text="pairs" />
+              <SpinButton
+                onClick={() => this.generatePairs(event._id)}
+                text="pairs"
+                isLoading={isLoading === event._id}
+              />
               <DeleteBtn id={event._id} />
             </div>
-          ))}
+          ))
+        ) : (
+          <div>Events is empty</div>
+        )}
         <Button onClick={e => this.addTopic(e)} text="Add topic" />
         {error ? <ErrorMessage error={error} /> : null}
       </div>

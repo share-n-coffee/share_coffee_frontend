@@ -6,6 +6,7 @@ import PageTitle from "../../modules/PageTitle";
 import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
 import { GET_EVENT } from "../../constants";
+import Button from "../../common/Button";
 
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
@@ -28,8 +29,10 @@ const TopicFront = ({
   currentLoadingEvents = [],
   match,
   history,
+  isAdmin,
 }) => {
   const [linkHover, setHover] = useState(false);
+
   const id = match.params.id;
   const userEventIds = userEvents.map(event => event.eventId);
   const isSubscribed = userEventIds.includes(id);
@@ -43,6 +46,10 @@ const TopicFront = ({
     click: () => {
       history.goBack();
     },
+  };
+
+  const toEdit = () => {
+    history.push(`/admin/topic-create/${id}`);
   };
 
   const [eventData, setEvent] = useState({});
@@ -73,29 +80,37 @@ const TopicFront = ({
   };
   return (
     <>
-      <PageTitle
-        title={!linkHover ? eventData.title : "← Back"}
-        mouseOver={mouseEvents.mouseOver}
-        mouseOut={mouseEvents.mouseOut}
-        click={mouseEvents.click}
-      />
+      {!isAdmin ? (
+        <PageTitle
+          title={!linkHover ? eventData.title : "← Back"}
+          mouseOver={mouseEvents.mouseOver}
+          mouseOut={mouseEvents.mouseOut}
+          click={mouseEvents.click}
+        />
+      ) : (
+        ""
+      )}
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
             <h2>Topic {eventData.title ? titleTransform(title) : ""}</h2>
-            <SpinButton
-              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
-              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
-              isLoading={isLoading || currentLoadingEvents.includes(id)}
-              disabled={!eventData.active}
-              onClick={() => {
-                if (isSubscribed) {
-                  onUnsubscriptionClick(id);
-                } else {
-                  onSubscriptionClick(id);
-                }
-              }}
-            />
+            {isAdmin ? (
+              <Button text={"Edit"} onClick={toEdit} />
+            ) : (
+              <SpinButton
+                text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+                type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+                isLoading={isLoading || currentLoadingEvents.includes(id)}
+                disabled={!eventData.active}
+                onClick={() => {
+                  if (isSubscribed) {
+                    onUnsubscriptionClick(id);
+                  } else {
+                    onSubscriptionClick(id);
+                  }
+                }}
+              />
+            )}
           </div>
           <p className="section__descr">{eventData.description}</p>
           <div className="section__place">

@@ -1,8 +1,10 @@
 import React from "react";
 import AdminLoginPage from "../AdminLoginPage";
 import HomeDashboard from "./home";
-// import Navbar from "../../components/Navbar";
 import Header from "../../common/Header";
+import { getCookie } from "tiny-cookie";
+import { setStorage } from "../LoginPage/helpers";
+import jwtDecode from "jwt-decode";
 
 class HomeAdmin extends React.Component {
   state = {
@@ -10,14 +12,15 @@ class HomeAdmin extends React.Component {
   };
 
   componentDidMount() {
-    const token = sessionStorage.getItem("adminToken");
+    const token = getCookie("token");
     if (token !== null) {
       this.setState({ isLogin: true });
     }
   }
 
-  setLogin = state => {
+  setLogin = (state, data) => {
     this.setState({ isLogin: state });
+    setStorage(jwtDecode(data));
   };
 
   render() {
@@ -32,7 +35,6 @@ class HomeAdmin extends React.Component {
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
         <div className="login_container" style={{ width: "100%" }}>
-          {/*<Navbar setLogin={this.setLogin} isLogin={this.state.isLogin}/>*/}
           <h1>Admin panel</h1>
           {!this.state.isLogin ? (
             <AdminLoginPage history={this.props.history} setLogin={this.setLogin} />

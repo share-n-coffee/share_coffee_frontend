@@ -4,6 +4,8 @@ import { request } from "../../../helpers/requests";
 import Button from "../../../common/Button";
 import ErrorMessage from "../../../components/ErrorMessage";
 import Header from "../../../common/Header";
+import * as URL from "../../../constants";
+
 class TopicCreate extends Component {
   constructor(props) {
     super(props);
@@ -41,17 +43,12 @@ class TopicCreate extends Component {
 
   create = e => {
     e.preventDefault();
-
-    const requestUrl = "https://forge-development.herokuapp.com/api/events/";
     const event = {
       title: this.state.title,
       description: this.state.description,
       location: [1.23456, 7.890123],
     };
-    console.log(event);
-    request.post(requestUrl, event).then(data => {
-      console.log(data);
-
+    request.post(URL.EVENTS, event).then(data => {
       if (data.message === "") {
         this.props.history.push("/admin");
       } else {

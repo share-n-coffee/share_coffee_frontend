@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { request } from "../../../helpers/requests";
+import * as URL from "../../../constants";
 
 class TopicEditer extends Component {
   constructor(props) {
@@ -16,12 +17,11 @@ class TopicEditer extends Component {
   }
 
   getData() {
-    const requestUrl = `https://forge-development.herokuapp.com/api/events/${this.props._id}`;
-
-    axios(requestUrl).then(event => {
-      console.log(event);
-
-      this.setState({ event: event });
+    request.get(URL.ONE_EVENT(this.props._id)).then(data => {
+      this.setState({
+        event: data.object,
+        error: data.message,
+      });
     });
   }
   updateDate() {
@@ -29,7 +29,6 @@ class TopicEditer extends Component {
   }
 
   changeInput(event) {
-    console.log(event);
     this.setState({ title: event.target.value });
   }
 
