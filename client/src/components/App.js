@@ -6,6 +6,7 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
+import { token } from "../constants";
 import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
 import { HashRouter as Router } from "react-router-dom";
@@ -14,7 +15,7 @@ import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
-// setCookie("token", ""); //for localhost
+// setCookie("token", "token"); //for localhost
 // sessionStorage.setItem("id", "122248863");
 // sessionStorage.setItem("firstName", "gadya");
 // sessionStorage.setItem("lastName", "xrenova");
