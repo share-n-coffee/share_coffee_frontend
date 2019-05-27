@@ -1,25 +1,25 @@
-.h-header {
+.header {
     // height: 120px;
     background: #FAFAFA;
   }
   
-  .h-logo_header {
+  .logo_header {
     margin: 10px 0px;
     display: flex;
     align-items: center;
     & > span {
       margin-left: 10px;
       color: #939598;
-      font: 22px/normal 'Roboto Black';
+      font: 22px/normal 'Roboto';
     }
   }
   
-  .h-wrapper {
-    max-width: 1024px;
-    margin: 0 auto;
-  }
+  // .h-wrapper {
+  //   max-width: 1024px;
+  //   margin: 0 auto;
+  // }
   
-  .h-header__container {
+  .header__container {
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -28,19 +28,20 @@
   }
   
   
-  .h-nav {
+  .header-nav {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .h-user__img {
+  .header-user__img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    margin-left: 10px;
   }
   
-  .h-user__info {
+  .header-user__info {
     display: flex;
     margin: 0 20px 0 10px;
     align-items: center;
@@ -48,7 +49,7 @@
     color: #C8C8C8;
   }
   
-  .h-header__dropdown {
+  .header__dropdown {
     margin: 10px 0px;
     display: flex;
     align-items: center;
@@ -58,22 +59,22 @@
   }
   
   
-  @media all and (max-width: 450px) {
-    .h-header__container {
+  @media all and (max-width: 550px) {
+    .header__container {
       margin: 0 20px;
       flex-direction: column;
       justify-content: flex-start;
     }
 
-    .h-logo_header {
+    .logo_header {
       margin: 10px 0px;
     }
 
-    .h-nav {
+    .header-nav {
       margin: 10px 0 0 0;
     }
 
-    .h-header__dropdown {
+    .header__dropdown {
       margin:15px 0 35px 0;
     }
   }

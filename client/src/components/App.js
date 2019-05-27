@@ -6,7 +6,7 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
-import { setCookie } from "tiny-cookie"; //for localhost
+// import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
 import { HashRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router";
@@ -34,13 +34,16 @@ export default class App extends Component {
   }
 
   render() {
-    // setCookie("token", "youToken"); //for localhost
+    // setCookie(
+    //   "token",
+    //   "",
+    // ); //for localhost
     // sessionStorage.setItem("id", "122248863");
     // sessionStorage.setItem("firstName", "gadya");
     // sessionStorage.setItem("lastName", "xrenova");
     // sessionStorage.setItem("avatar", "undefined");
     // sessionStorage.setItem("isAdmin", true);
-    // sessionStorage.setItem("banned", true);
+    // sessionStorage.setItem("banned", false);
     // sessionStorage.setItem("department", "magistral");
     // sessionStorage.setItem("tokenTimeOver", "15134868");
 
