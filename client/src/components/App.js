@@ -48,7 +48,7 @@ export default class App extends Component {
     sessionStorage.setItem("tokenTimeOver", "15134868");
 
     //if no info about user
-    if (!this.state.id && !this.state.token) {
+    if (!this.state.id || !this.state.token) {
       return (
         <div className={`${styles.App} ${styles.wrapper}`}>
           <Switch>

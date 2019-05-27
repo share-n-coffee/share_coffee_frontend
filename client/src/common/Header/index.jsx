@@ -8,8 +8,24 @@ import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
 
 const events = [
-  { name: "name1", place: "place1", time: "1st September" },
-  { name: "name2", place: "place2", time: "1st September" },
+  {
+    title: "Platform Front-end",
+    name: "@ Latte Python ",
+    place: "12 Zybitskaya St., Minsk",
+    time: "22.04.2019 - 16:00",
+  },
+  {
+    title: "Platform Back-end",
+    name: "@ Latte Python ",
+    place: "12 Zybitskaya St., Minsk",
+    time: "22.04.2019 - 16:00",
+  },
+  {
+    title: "CG & Motion Design",
+    name: "@ Latte Python ",
+    place: "12 Zybitskaya St., Minsk",
+    time: "22.04.2019 - 16:00",
+  },
 ];
 //
 
