@@ -15,7 +15,7 @@ import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
-// setCookie("token", "token"); //for localhost
+// setCookie("token", token); //for localhost
 // sessionStorage.setItem("id", "122248863");
 // sessionStorage.setItem("firstName", "gadya");
 // sessionStorage.setItem("lastName", "xrenova");
