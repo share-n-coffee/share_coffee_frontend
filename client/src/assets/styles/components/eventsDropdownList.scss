@@ -55,6 +55,7 @@
   position: relative;
   top: 0;
   animation: down .5s ease-out;
+  z-index: 10;
 }
 ul {
   margin: 0;
