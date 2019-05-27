@@ -6,13 +6,23 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
-// import { setCookie } from "tiny-cookie"; //for localhost
+import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
 import { HashRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router";
 import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
+
+// setCookie("token", "youtoken"); //for localhost
+// sessionStorage.setItem("id", "122248863");
+// sessionStorage.setItem("firstName", "gadya");
+// sessionStorage.setItem("lastName", "xrenova");
+// sessionStorage.setItem("avatar", "undefined");
+// // sessionStorage.setItem("isAdmin", true);
+// // sessionStorage.setItem("banned", false);
+// sessionStorage.setItem("department", "magistral");
+// sessionStorage.setItem("tokenTimeOver", "15134868");
 
 export default class App extends Component {
   constructor(props) {
@@ -34,19 +44,6 @@ export default class App extends Component {
   }
 
   render() {
-    // setCookie(
-    //   "token",
-    //   "",
-    // ); //for localhost
-    // sessionStorage.setItem("id", "122248863");
-    // sessionStorage.setItem("firstName", "gadya");
-    // sessionStorage.setItem("lastName", "xrenova");
-    // sessionStorage.setItem("avatar", "undefined");
-    // sessionStorage.setItem("isAdmin", true);
-    // sessionStorage.setItem("banned", false);
-    // sessionStorage.setItem("department", "magistral");
-    // sessionStorage.setItem("tokenTimeOver", "15134868");
-
     //if no info about user
     if (!this.state.id || !this.state.token) {
       return (
