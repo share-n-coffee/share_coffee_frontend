@@ -5,6 +5,7 @@ import WeekPicker from "../WeekPicker";
 import DatePicker from "../DatePicker";
 import PickerButton from "../PickerButton";
 
+import * as formatters from "../formatters";
 import { PLACEHOLDERS } from "../constants";
 
 import styles from "./styles.module.scss";
@@ -59,7 +60,7 @@ class TimeChooser extends Component {
 
     switch (cyclic) {
       case true:
-        inputValue = `${weekDay}, ${time}`;
+        inputValue = formatters.periodicTime(weekDay, time);
         picker = (
           <WeekPicker
             weekDay={weekDay}
@@ -69,7 +70,7 @@ class TimeChooser extends Component {
         );
         break;
       case false:
-        inputValue = `${singleDate}, ${time}`;
+        inputValue = formatters.singleTime(singleDate, time);
         picker = (
           <DatePicker
             activeStartDate={singleDate}

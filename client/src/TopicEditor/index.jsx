@@ -5,6 +5,7 @@ import TimeChooser from "./TimeChooser";
 import TopicDescription from "../TopicDescription";
 import CyclicChooser from "./CyclicChooser";
 
+import * as formatters from "./formatters";
 import styles from "./styles.module.scss";
 
 import {
@@ -136,13 +137,7 @@ class TopicEditor extends Component {
             type="text"
             name="location"
             placeholder={PLACEHOLDERS.location}
-            value={
-              this.state.location
-                ? `${this.state.location[0]}${COORDINATES_SEP}${
-                    this.state.location[1]
-                  }`
-                : ""
-            }
+            value={formatters.location(this.state.location)}
             onChange={this.onChange}
             required
           />
