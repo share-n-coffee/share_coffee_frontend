@@ -19,7 +19,7 @@ class OneTopics extends Component {
   }
 
   getData(id) {
-    request.get(URL.ONE_EVENT(id)).then(data => {
+    request.get(URL.ONE_TOPIC(id)).then(data => {
       this.setState({
         event: data.object,
         error: data.message,

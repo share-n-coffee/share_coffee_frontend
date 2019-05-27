@@ -23,7 +23,7 @@ class TopicDropdown extends Component {
   getSubscribers = id => {
     request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
-        subscribers: data.object,
+        subscribers: data.object.data,
         error: data.message,
       });
     });
@@ -47,13 +47,18 @@ class TopicDropdown extends Component {
         onClick={() => subscribers.length > 0 && this.openSubscribers(id)}
         open={openSubscribers === id}
       >
-        {subscribers.length > 0 ? `Subscribers (${subscribers.length})` : `(0 Subscribers)`}
+        {subscribers && Array.isArray(subscribers) && subscribers.length > 0
+          ? `Subscribers (${subscribers.length})`
+          : `(0 Subscribers)`}
         <DropdownContent open={openSubscribers === id}>
-          {subscribers.map(subscriber => (
-            <DropdownItem key={subscriber._id}>
-              {subscriber.firstName} {subscriber.lastName}
-            </DropdownItem>
-          ))}
+          {subscribers &&
+            Array.isArray(subscribers) &&
+            subscribers.length > 0 &&
+            subscribers.map(subscriber => (
+              <DropdownItem key={subscriber._id}>
+                {subscriber.firstName} {subscriber.lastName}
+              </DropdownItem>
+            ))}
         </DropdownContent>
       </Dropdown>
     );
@@ -130,19 +135,12 @@ class Topics extends Component {
   getData() {
     this.setState({ isLoadData: true });
 
-    request.get(URL.EVENTS).then(data => {
+    request.get(URL.TOPICS).then(data => {
       this.setState({
-        events: data.object,
+        events: data.object.data,
         error: data.message,
         isLoadData: false,
       });
-    });
-  }
-
-  generatePairs(id) {
-    this.setState({ isLoading: id });
-    request.post(URL.GENERATE_PAIRS(id)).then(data => {
-      this.setState({ isLoading: "" });
     });
   }
 
@@ -169,13 +167,9 @@ class Topics extends Component {
               <span>Place: </span>
               <div>{event.address}</div>
               <span>Time:</span>
-              <div>{event.options.times}</div>
-              <SpinButton
-                onClick={() => this.generatePairs(event._id)}
-                text="pairs"
-                isLoading={isLoading === event._id}
-              />
-              <DeleteBtn id={event._id} />
+              <div>{event.time}</div>
+              <button style={{ visibility: "hidden" }} />
+              {/*<DeleteBtn id={event._id} />*/}
             </div>
           ))
         ) : (

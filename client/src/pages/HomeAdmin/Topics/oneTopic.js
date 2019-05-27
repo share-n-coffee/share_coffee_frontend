@@ -23,7 +23,7 @@ class TopicDropdown extends Component {
   getSubscribers = id => {
     request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
-        subscribers: data.object,
+        subscribers: data.object.data,
         error: data.message,
       });
     });
@@ -78,10 +78,10 @@ class oneTopic extends Component {
   }
 
   getData() {
-    request.get(URL.ONE_EVENT(this.props.match.params.id)).then(data => {
+    request.get(URL.ONE_TOPIC(this.props.match.params.id)).then(data => {
       console.log(data);
       this.setState({
-        event: data.object,
+        event: data.object.data.find(data => this.props.match.params.id === data._id),
         error: data.message,
       });
     });
@@ -120,7 +120,7 @@ class oneTopic extends Component {
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
         <PageTitle
-          title={this.state.linkNoHover ? event.title : "← Back"}
+          title={this.state.linkNoHover ? event && event.title : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}
           mouseOut={this.mouseEvents.mouseOut}
           click={this.mouseEvents.click}
@@ -154,7 +154,7 @@ class oneTopic extends Component {
             <span>Place: </span>
             <div>{event.address}</div>
             <span>Time:</span>
-            <div>{event.options.times}</div>
+            <div>{event.time}</div>
             <button style={{ visibility: "hidden" }} />
           </div>
         )}

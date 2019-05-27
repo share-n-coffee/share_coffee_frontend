@@ -48,7 +48,7 @@ class TopicCreate extends Component {
       description: this.state.description,
       location: [1.23456, 7.890123],
     };
-    request.post(URL.EVENTS, event).then(data => {
+    request.post(URL.TOPICS, event).then(data => {
       if (data.message === "") {
         this.props.history.push("/admin");
       } else {

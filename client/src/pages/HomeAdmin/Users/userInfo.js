@@ -37,13 +37,14 @@ class Topics extends Component {
   toggleAdmin = user => {
     const status = {
       admin: {
-        isAdmin: !user.admin.isAdmin,
+        permission: 1,
       },
     };
 
     request.put(URL.ADMIN_USER(user._id), status).then(data => {
-      this.getData(user._id);
-      this.setState({ error: data.message });
+      console.log(data);
+      // this.getData(user._id);
+      // this.setState({ error: data.message });
     });
   };
 
