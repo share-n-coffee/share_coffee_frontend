@@ -50,7 +50,7 @@ class Topics extends Component {
   render() {
     const { user } = this.props;
     return (
-      <div key={user._id} className={""}>
+      <div key={user._id} className="user-info__container">
         <img
           src={`${user.avatar ? user.avatar : require("../../../assets/img/logo.png")}`}
           alt="user photo"

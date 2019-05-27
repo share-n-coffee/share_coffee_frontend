@@ -1,6 +1,6 @@
 .eventDesc {
     max-width: 1024px;
-    margin: auto;
+    margin: 0 50px;
 }
 
 .eventDescItem {
@@ -9,18 +9,33 @@
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1.3px solid #e1e1e1;
-    margin: 0 20px;
+    //margin: 0 20px;
 }
 
 .eventDescItem  a{
     text-decoration: none;
 }
 
+.selectedEvent {
+    display: flex;
+}
+
+.selectedEvent span {
+    margin: 30px;
+    color: #C8C8C8;
+    font-family: sans-serif;
+}
+
+.selectedEvent span::before{
+    content: "✓";
+    padding-right: 5px;
+}
+
 .time-desc {
     padding-left: 3px;
 }
 
-@media all and (max-width: 450px) {
+@media all and (max-width: 550px) {
     .eventDescItem {
         display: flex;
         align-items: flex-start;
@@ -28,7 +43,14 @@
         justify-content: flex-start;
     }
     .eventDescItem button {
-        margin-bottom: 20px;
         align-self: center;
+    }
+
+    .selectedEvent span{
+        display: none;
+    }
+
+    .eventDesc button {
+        margin-bottom: 15px;
     }
  }

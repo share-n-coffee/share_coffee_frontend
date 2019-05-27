@@ -8,8 +8,24 @@ import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
 
 const events = [
-  { name: "name1", place: "place1", time: "1st September" },
-  { name: "name2", place: "place2", time: "1st September" },
+  {
+    title: "Platform Front-end",
+    name: "@ Latte Python ",
+    place: "12 Zybitskaya St., Minsk",
+    time: "22.04.2019 - 16:00",
+  },
+  {
+    title: "Platform Back-end",
+    name: "@ Latte Python ",
+    place: "12 Zybitskaya St., Minsk",
+    time: "22.04.2019 - 16:00",
+  },
+  {
+    title: "CG & Motion Design",
+    name: "@ Latte Python ",
+    place: "12 Zybitskaya St., Minsk",
+    time: "22.04.2019 - 16:00",
+  },
 ];
 //
 
@@ -47,7 +63,7 @@ const adminNavigation = props => {
   }
   return (
     <>
-      <div className="h-nav">
+      <div className="header-nav">
         {sessionStorage.getItem("firstName") !== null &&
         sessionStorage.getItem("lastName") !== null ? (
           <Button
@@ -60,8 +76,8 @@ const adminNavigation = props => {
         ) : (
           <></>
         )}
-        <img className="h-user__img" src={avatar} alt="avatar" />
-        <span className="h-user__info">{name}</span>
+        <img className="header-user__img" src={avatar} alt="avatar" />
+        <span className="header-user__info">{name}</span>
         <Button text="Log out" type="logout" onClick={() => logOut(props)} />
       </div>
     </>
@@ -77,7 +93,7 @@ const userNavigation = props => {
     <>
       {props.hasDepartment ? (
         <div>
-          <div className="h-nav">
+          <div className="header-nav">
             {sessionStorage.getItem("isAdmin") === "true" ? (
               <Button
                 text="Admin"
@@ -89,16 +105,16 @@ const userNavigation = props => {
             ) : (
               <></>
             )}
-            <img className="h-user__img" src={avatar} alt="avatar" />
-            <span className="h-user__info"> {props.name}</span>
+            <img className="header-user__img" src={avatar} alt="avatar" />
+            <span className="header-user__info"> {props.name}</span>
             <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
-          <div className="h-header__dropdown">
+          <div className="header__dropdown">
             <EventsDropDown events={events} />
           </div>
         </div>
       ) : (
-        <div className="h-nav">
+        <div className="header-nav">
           <Button text={"Log out "} type="logout" onClick={() => logOut(props)} />
         </div>
       )}
@@ -108,9 +124,9 @@ const userNavigation = props => {
 
 const Header = props => {
   return (
-    <div className="h-header">
-      <div className="h-header__container">
-        <div className="h-logo_header">
+    <div className="header">
+      <div className="header__container">
+        <div className="logo_header">
           <Link to="/" title="Home">
             <img src={logo} alt="coffee" />
           </Link>

@@ -27,7 +27,7 @@ const Dropdown = ({ options, selectedValue, onSelect }) => {
           setIsOpened(false);
         });
       }}
-      className={`department-dropdown_container} ${isOpened ? "department-focused" : undefined}`}
+      className={`department-dropdown_container ${isOpened ? "department-focused" : undefined}`}
     >
       <div tabIndex="0" className="department-selection" onClick={() => setIsOpened(!isOpened)}>
         {selection}

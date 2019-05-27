@@ -16,19 +16,38 @@ class EventDesc extends Component {
       currentLoadingEvents = [],
     } = this.props;
     const userEventIds = userEvents.map(event => event.eventId);
+    const regularity = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
 
     const elements = events.map(event => {
       const isSubscribed = userEventIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">
           <div className="eventContainer">
-            <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-              <EventName eventName={event.title} isSubscribed={event.isActive} />
-            </Link>
-
+            {isSubscribed ? (
+              <div className="selectedEvent">
+                <Link to={{ pathname: `/subscriptions/${event._id}` }}>
+                  <EventName eventName={event.title} isSubscribed={event.isActive} />
+                </Link>
+                <span>Subscribed</span>
+              </div>
+            ) : (
+              <Link to={{ pathname: `/subscriptions/${event._id}` }}>
+                <EventName eventName={event.title} isSubscribed={event.isActive} />
+              </Link>
+            )}
             <InfoAboutEvent
               adress={event.address}
-              eventFrequency={new Date(event.created).toDateString()}
+              eventFrequency={`every ${regularity[event.options.regularity]}, ${
+                event.options.times[0]
+              }`}
             />
           </div>
           <SpinButton

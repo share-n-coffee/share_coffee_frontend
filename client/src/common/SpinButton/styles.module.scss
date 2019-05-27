@@ -1,0 +1,45 @@
+.dots {
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  span {
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    &:not(:first-child) { margin-left: 5px; }
+  }
+
+  @for $i from 0 through 3 {
+    $t: $i * 0.15;
+    span:nth-child(#{$i}) {
+      animation: move 0.2s ease-in-out (#{$t}s) infinite alternate;
+    }
+  }
+}
+
+.greenDots {
+  span {
+    background-color: #00B464;
+  }
+}
+
+.redDots {
+  span {
+    background-color: #FF0032;
+  }
+}
+
+@keyframes move {
+  from { transform: translateY(-5px); }
+  to { transform: translateY(5px); }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+
+
+

@@ -12,7 +12,7 @@ class InfoAboutEvent extends Component {
         </div>
         <div className="info-row">
           <p className="info-title">Time:</p>
-          <span>{eventFrequency}</span>
+          <span className="time-desc">{eventFrequency}</span>
         </div>
       </div>
     );

@@ -7,8 +7,8 @@ import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
-import { checkTokenTime } from "../../helpers/requests";
-// import UserDataContext from "../../contexts/UserDataContext";
+import { SET_USER_DEPARTMENT, GET_ALL_DEPARTMENTS } from "../../constants";
+import { checkTokenTime, checkIsBanned } from "../../helpers/requests";
 
 const getAccountOptions = departments => {
   return departments.map(department => {
@@ -17,10 +17,12 @@ const getAccountOptions = departments => {
 };
 
 const setUserDepartment = departmentId => {
+  // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  const userId = sessionStorage.getItem("id");
   return axios
     .put(
-      `https://forge-development.herokuapp.com/api/users/${sessionStorage.getItem("id")}`,
+      `${SET_USER_DEPARTMENT(userId)}`,
       { newDepartment: departmentId },
       {
         headers: {
@@ -37,9 +39,10 @@ const PageTeamSelect = props => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
+    // checkIsBanned(sessionStorage.getItem("banned"));
     // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
     const fetchData = async () => {
-      const result = await axios("https://forge-development.herokuapp.com/api/departments/", {
+      const result = await axios(GET_ALL_DEPARTMENTS, {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
         },
