@@ -27,7 +27,7 @@ class Topics extends Component {
     this.getData();
   }
 
-  getData(page = 0, limit = 2) {
+  getData(page = 0, limit = 10) {
     this.setState({ isLoadData: true });
     request.get(URL.USERS(page, limit)).then(data => {
       console.log(data);

@@ -39,6 +39,7 @@ class DeleteBtn extends Component {
     request.delete(URL.DEL_TEAM(id)).then(data => {
       this.clear();
       this.setState({ isLoading: false });
+      this.props.refreshData(id);
     });
   };
 
@@ -87,7 +88,6 @@ class Teams extends Component {
   getData() {
     this.setState({ isLoadData: true });
     request.get(URL.TEAMS).then(data => {
-      console.log(data.object.data);
       this.setState({
         teams: data.object.data,
         error: data.message,
@@ -104,6 +104,12 @@ class Teams extends Component {
     this.setState({
       isShowAdding: !this.state.isShowAdding,
       error: "",
+    });
+  };
+
+  refreshData = id => {
+    this.setState({
+      teams: this.state.teams.filter(team => team._id !== id),
     });
   };
 
@@ -145,7 +151,7 @@ class Teams extends Component {
           teams.map(team => (
             <div key={team._id} className={"team_block"}>
               <span>{team.title}</span>
-              <DeleteBtn id={team._id} />
+              <DeleteBtn id={team._id} refreshData={id => this.refreshData(id)} />
             </div>
           ))
         ) : (
