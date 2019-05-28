@@ -61,6 +61,10 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "eslint": "^5.16.0",
@@ -77,10 +81,7 @@
     "lint-staged": "^8.1.6",
     "prettier": "^1.17.0",
     "prop-types": "^15.7.2",
-    "@storybook/react": "^5.0.11",
-    "@storybook/addon-actions": "^5.0.11",
-    "@storybook/addon-links": "^5.0.11",
-    "@storybook/addons": "^5.0.11"
+    "storybook-react-router": "^1.0.5"
   },
   "husky": {
     "hooks": {
