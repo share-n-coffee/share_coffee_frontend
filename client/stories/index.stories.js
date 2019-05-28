@@ -2,10 +2,10 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import TopicDescription from "../src/TopicDescription";
-import TopicEditor from "../src/TopicEditor";
-import WeekPicker from "../src/TopicEditor/WeekPicker";
-import DatePicker from "../src/TopicEditor/DatePicker";
+import TopicDescription from "../src/components/TopicDescription";
+import TopicEditor from "../src/components/TopicEditor";
+import WeekPicker from "../src/components/TopicEditor/WeekPicker";
+import DatePicker from "../src/components/TopicEditor/DatePicker";
 
 import * as data from "./data/";
 
