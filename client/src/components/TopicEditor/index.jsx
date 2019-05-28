@@ -72,7 +72,7 @@ class TopicEditor extends Component {
   onLocationChange(name, value) {
     const newValue = DEFAULT_COORDINATES;
     value
-      .split(COORDINATES_SEP)
+      .split(", ")
       .slice(0, 2)
       .forEach((str, index) => {
         const num = Number(str);
