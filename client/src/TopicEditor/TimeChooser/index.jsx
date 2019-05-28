@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import MaskedInput from "react-text-mask";
+import createAutoCorrectedDatePipe from "text-mask-addons/dist/createAutoCorrectedDatePipe";
 
 import WeekPicker from "../WeekPicker";
 import DatePicker from "../DatePicker";
@@ -14,10 +16,11 @@ class TimeChooser extends Component {
   constructor(props) {
     super(props);
     this.state = { isShowPicker: false };
+    this.timePipe = createAutoCorrectedDatePipe("HH:MM");
 
     this.showPicker = this.showPicker.bind(this);
     this.hidePicker = this.hidePicker.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onWeekDayChange = this.onWeekDayChange.bind(this);
     this.onSingleDateChange = this.onSingleDateChange.bind(this);
   }
 
@@ -41,7 +44,7 @@ class TimeChooser extends Component {
     }
   }
 
-  onChange(event) {
+  onWeekDayChange(event) {
     this.hidePicker(event);
     this.props.onChange(event);
   }
@@ -55,22 +58,25 @@ class TimeChooser extends Component {
     const { cyclic, weekDay, time, singleDate } = this.props;
     const { isShowPicker } = this.state;
 
-    let inputValue = "";
-    let picker = null;
+    let inputValue;
+    let picker;
+    let placeholder;
 
     switch (cyclic) {
       case true:
-        inputValue = formatters.periodicTime(weekDay, time);
+        placeholder = PLACEHOLDERS.weekDay;
+        inputValue = formatters.periodicTime(weekDay, "");
         picker = (
           <WeekPicker
             weekDay={weekDay}
-            onChange={this.onChange}
+            onChange={this.onWeekDayChange}
             onMouseLeave={this.hidePicker}
           />
         );
         break;
       case false:
-        inputValue = formatters.singleTime(singleDate, time);
+        placeholder = PLACEHOLDERS.date;
+        inputValue = formatters.singleTime(singleDate, "");
         picker = (
           <DatePicker
             activeStartDate={singleDate}
@@ -86,22 +92,36 @@ class TimeChooser extends Component {
     }
 
     return (
-      <div className={styles.time_chooser} onMouseLeave={this.hidePicker}>
-        <input
-          className={styles.time_input}
+      <>
+        <div className={styles.time_chooser} onMouseLeave={this.hidePicker}>
+          <input
+            className={`${styles.time_input}`}
+            type="text"
+            value={inputValue}
+            placeholder={placeholder}
+            onClick={this.showPicker}
+            readOnly
+            required
+          />
+
+          <div className={styles.picker_container}>
+            <PickerButton onClick={this.showPicker} />
+            {isShowPicker ? picker : null}
+          </div>
+        </div>
+
+        <MaskedInput
           type="text"
           name="time"
-          value={inputValue}
+          value={time}
           placeholder={PLACEHOLDERS.time}
+          mask={[/\d/, /\d/, ":", /\d/, /\d/]}
+          keepCharPositions={true}
+          pipe={this.timePipe}
           onChange={this.props.onChange}
-          onClick={this.showPicker}
-          required
+          placeholderChar={"\u2000"}
         />
-        <div className={styles.picker_container}>
-          <PickerButton onClick={this.showPicker} />
-          {isShowPicker ? picker : null}
-        </div>
-      </div>
+      </>
     );
   }
 }
