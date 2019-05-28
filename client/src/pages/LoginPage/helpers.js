@@ -12,7 +12,8 @@ const setStorage = userData => {
 const router = props => {
   props.userAuth();
   const id = sessionStorage.getItem("id");
-  const departament = sessionStorage.getItem("department");
+  const getDepartament = sessionStorage.getItem("department");
+  const departament = getDepartament === "undefined" ? undefined : getDepartament;
   if (id && !departament) {
     props.history.push("/team_select/");
   } else if (id && departament) {
