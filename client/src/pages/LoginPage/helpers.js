@@ -13,17 +13,19 @@ const setStorage = userData => {
 const router = props => {
   props.userAuth();
   const id = sessionStorage.getItem("id");
-  const departament = sessionStorage.getItem("department");
+  // const departament = sessionStorage.getItem("department");
+  const dep = sessionStorage.getItem("department");
+  const hasId =
+    id === "undefined" || id === undefined || id === null || id === "null" ? false : true;
+  const hasDepartament =
+    dep === "undefined" || dep === undefined || dep === null || dep === "null" ? false : true;
   // if (id && !departament) {
-  if (
-    id &&
-    (departament === null ||
-      departament === "undefined" ||
-      departament === undefined ||
-      departament === "null")
-  ) {
+  // console.log("hasId " + hasId);
+  // console.log("hasDep " + hasDepartament);
+  if (hasId && !hasDepartament) {
     props.history.push("/team_select/");
-  } else if (id && departament) {
+    // } else if (hasId && dep) {
+  } else if (hasId && hasDepartament) {
     props.history.push("/subscriptions/");
   }
 };
