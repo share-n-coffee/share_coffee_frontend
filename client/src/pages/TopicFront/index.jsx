@@ -8,6 +8,7 @@ import SpinButton from "../../common/SpinButton";
 import { GET_EVENT } from "../../constants";
 import Button from "../../common/Button";
 
+// api 1.0 and 2.0
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(GET_EVENT(id), {
@@ -56,7 +57,13 @@ const TopicFront = ({
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDataEvent(id);
-      setEvent(result);
+      console.log(result);
+      // api 1.0
+      // setEvent(result);
+      //  -------------
+      //  api 2.0
+      setEvent(result.data);
+      //  --------------
     };
     fetchData();
   }, []);
@@ -78,6 +85,7 @@ const TopicFront = ({
       return "";
     }
   };
+  console.log(eventData);
   return (
     <>
       {!isAdmin ? (

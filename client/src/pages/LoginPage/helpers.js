@@ -3,9 +3,9 @@ const setStorage = userData => {
   sessionStorage.setItem("firstName", userData.data.firstName);
   sessionStorage.setItem("lastName", userData.data.lastName);
   sessionStorage.setItem("avatar", userData.data.avatar);
-  sessionStorage.setItem("isAdmin", userData.data.isAdmin);
+  sessionStorage.setItem("isAdmin", userData.data.permission);
   sessionStorage.setItem("banned", userData.data.banned.status);
-  sessionStorage.setItem("department", userData.data.department);
+  sessionStorage.setItem("department", userData.data.department.title);
   sessionStorage.setItem("tokenTimeOver", userData.exp);
 };
 

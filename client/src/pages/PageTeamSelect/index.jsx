@@ -21,6 +21,7 @@ const setUserDepartment = departmentId => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
 
   const userId = sessionStorage.getItem("id");
+  // api 1.0
   return axios
     .put(
       `${SET_USER_DEPARTMENT(userId)}`,
@@ -34,6 +35,24 @@ const setUserDepartment = departmentId => {
     )
     .catch(error => console.log(error));
 };
+//---------------------------------------------
+
+// new api 2.0
+//   return axios
+//     .put(
+//       `${SET_USER_DEPARTMENT(userId)}`,
+//       { newDepartment: departmentId },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${getCookie("token")}`,
+//           "Content-Type": "application/json",
+//           mode: "cors",
+//         },
+//       },
+//     )
+//     .catch(error => console.log(error));
+// };
+//--------------------------------------------------------
 
 const PageTeamSelect = props => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
@@ -44,13 +63,29 @@ const PageTeamSelect = props => {
     // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
 
     const fetchData = async () => {
+      // api 1.0
+      // const result = await axios(GET_ALL_DEPARTMENTS, {
+      //   headers: {
+      //     Authorization: `Bearer ${getCookie("token")}`,
+      //   },
+      // });
+      //--------------------------------------------------------
+
+      // new api 2.0
       const result = await axios(GET_ALL_DEPARTMENTS, {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
         },
       });
+      console.log(result.data.data);
+      //--------------------------------------------------------
+      //api 1.0
+      // setOptions(getAccountOptions(result.data));
+      //--------------------------------------------------------
 
-      setOptions(getAccountOptions(result.data));
+      //  api 2.0
+      setOptions(getAccountOptions(result.data.data));
+      //--------------------------------------------------------
     };
 
     fetchData();

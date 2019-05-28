@@ -6,12 +6,12 @@ import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
 import {
-  // GET_EVENTS,
+  GET_EVENTS,
   GET_ALL_TOPICS,
   GET_USER,
   SUBCR_USER_TO_TOPIC,
-  // SUBCR_USER_TO_EVENT,
-  // UNSUBCR_USER_FROM_EVENT,
+  SUBCR_USER_TO_EVENT,
+  UNSUBCR_USER_FROM_EVENT,
   UNSUBCR_USER_FROM_TOPIC,
 } from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
@@ -27,6 +27,7 @@ import { checkTokenTime } from "../../helpers/requests";
 //   });
 // };
 
+// api 2.0
 const getAllTopics = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
@@ -34,19 +35,33 @@ const getAllTopics = token => {
     url: GET_ALL_TOPICS,
     headers: {
       Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
     },
   });
 };
-
+//--------------------------------------------------------
+// api 1.0 and 2.0
 const getUser = (token, id) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  console.log(GET_USER(id));
   return axios({
     method: "get",
     url: GET_USER(id),
     headers: {
       Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
     },
   });
+  // .then(res => {
+  //   console.log(res);
+  //   return res;
+  // })
+  // .catch(err => {
+  //   // console.log(err);
+  //   return err;
+  // });
 };
 
 // const subscribeUserToEvent = (eventId, userId, token) => {
@@ -61,17 +76,19 @@ const getUser = (token, id) => {
 //   });
 // };
 
-const subscribeUserToTopic = (topicId, token) => {
+// api 2.0
+const subscribeUserToTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  const userId = sessionStorage.getItem("id");
+  // const userId = sessionStorage.getItem("id");
   return axios({
     method: "post",
-    url: SUBCR_USER_TO_TOPIC(topicId, userId),
+    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
+//--------------------------------------------------------
 
 // const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
 //   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
@@ -85,17 +102,19 @@ const subscribeUserToTopic = (topicId, token) => {
 //   });
 // };
 
-const unsubsrcibeUserFromTopic = (topicId, token) => {
+// api 2.0
+const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  const userId = sessionStorage.getItem("id");
+  // const userId = sessionStorage.getItem("id");
   return axios({
     method: "delete",
-    url: UNSUBCR_USER_FROM_TOPIC(topicId, userId),
+    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
+//--------------------------------------------------------
 
 const SubscriptionsPage = props => {
   const [events, setEvents] = useState([]);
@@ -105,21 +124,47 @@ const SubscriptionsPage = props => {
   const token = getCookie("token");
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
-  const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
-  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubsrcibeUserFromEvent);
-  const handleSubscribing = async (eventId, subscribingFunction) => {
-    setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
-    const result = await subscribingFunction(eventId, userId, token);
-    setUserData(result.data);
+  console.log(userData);
+
+  //api 1.0
+  // const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
+  // const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubsrcibeUserFromEvent);
+  // const handleSubscribing = async (eventId, subscribingFunction) => {
+  //   setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
+  //   const result = await subscribingFunction(eventId, userId, token);
+  //   setUserData(result.data);
+  //   setCurrentLoadingEvents(
+  //     currentLoadingEvents.filter(loadingEventId => loadingEventId !== eventId),
+  //   );
+  // };
+  //--------------------------------------------------------------------------
+
+  //api 2.0
+  const handleSubscriptionClick = topicId => handleSubscribing(topicId, subscribeUserToTopic);
+  const handleUnsubscriptionClick = topicId => handleSubscribing(topicId, unsubsrcibeUserFromTopic);
+  const handleSubscribing = async (topicId, subscribingFunction) => {
+    setCurrentLoadingEvents([...currentLoadingEvents, topicId]);
+    const result = await subscribingFunction(topicId, userId, token);
+    // setUserData(result.data);
+    setUserData(result.data.data);
     setCurrentLoadingEvents(
-      currentLoadingEvents.filter(loadingEventId => loadingEventId !== eventId),
+      currentLoadingEvents.filter(loadingEventId => loadingEventId !== topicId),
     );
   };
+  //--------------------------------------------------------------------------
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getEvents(token);
-      setEvents(result.data);
+      // const result = await getEvents(token);
+      // api 2.0
+      const result = await getAllTopics(token);
+      console.log(result.data.data);
+      //---------------------------
+      // api 1.0
+      // setEvents(result.data);
+      //---------------------------
+      //api 2.0
+      setEvents(result.data.data);
     };
 
     fetchData();
@@ -128,7 +173,10 @@ const SubscriptionsPage = props => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
-      setUserData(result.data);
+      console.log(result.data.data);
+      // setUserData(result.data);
+      // api 2.0
+      setUserData(result.data.data);
       setIsUserDataLoaded(true);
     };
 

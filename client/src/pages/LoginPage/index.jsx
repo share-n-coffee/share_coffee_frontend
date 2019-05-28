@@ -19,14 +19,16 @@ export default class LoginPage extends Component {
   render() {
     // const isBanned = sessionStorage.getItem("banned") === "true" ? true : false;
     const handleTelegramResponse = async telegramResponse => {
-      //   const requestObj = {
-      //     method: "put",
-      //     url: SET_USER_DATA,
-      //     data: telegramResponse,
-      //     mode: "cors",
-      //     "Content-Type": "application/json",
-      //   };
-      // new server
+      // old api 1.0
+      // const requestObj = {
+      //   method: "put",
+      //   url: SET_USER_DATA,
+      //   data: telegramResponse,
+      //   mode: "cors",
+      //   "Content-Type": "application/json",
+      // };
+      //----------------------------------------
+      // new api 2.0
       // console.log(telegramResponse);
       const requestObj = {
         method: "post",
@@ -35,10 +37,10 @@ export default class LoginPage extends Component {
         mode: "cors",
         "Content-Type": "application/json",
       };
-      // mode: "cors",
+      //--------------------------------------
       const token = await axios(requestObj)
         .then(response => {
-          console.log(response);
+          // console.log(response);
           return response.data.token;
         })
         .catch(err => {
@@ -51,6 +53,7 @@ export default class LoginPage extends Component {
         });
 
       const userData = jwtDecode(`${token}`);
+      // console.log(userData)
       const date = new Date(userData.exp * 1000).toGMTString();
       setCookie("token", token, { expires: date });
       await setStorage(userData);

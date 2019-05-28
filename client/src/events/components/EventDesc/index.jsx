@@ -34,20 +34,26 @@ class EventDesc extends Component {
             {isSubscribed ? (
               <div className="selectedEvent">
                 <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-                  <EventName eventName={event.title} isSubscribed={event.isActive} />
+                  {/*<EventName eventName={event.title} isSubscribed={event.isActive} />*/}
+
+                  <EventName eventName={event.title} isSubscribed={event.active} />
                 </Link>
                 <span>Subscribed</span>
               </div>
             ) : (
               <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-                <EventName eventName={event.title} isSubscribed={event.isActive} />
+                {/*<EventName eventName={event.title} isSubscribed={event.isActive} />*/}
+                <EventName eventName={event.title} isSubscribed={event.active} />
               </Link>
             )}
             <InfoAboutEvent
+              // adress={event.address}
+              // eventFrequency={`every ${regularity[event.options.regularity]}, ${
+              //   event.options.times[0]
+              // }`}
+
               adress={event.address}
-              eventFrequency={`every ${regularity[event.options.regularity]}, ${
-                event.options.times[0]
-              }`}
+              eventFrequency={`every ${regularity[event.weekDay]}, ${event.time}`}
             />
           </div>
           <SpinButton
