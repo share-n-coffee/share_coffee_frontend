@@ -1,4 +1,5 @@
 import React from "react";
+import StoryRouter from "storybook-react-router";
 
 import { storiesOf } from "@storybook/react";
 
@@ -7,6 +8,7 @@ import TopicEditor from "../src/components/TopicEditor";
 import WeekPicker from "../src/components/TopicEditor/WeekPicker";
 import DatePicker from "../src/components/TopicEditor/DatePicker";
 import Button from "../src/common/Button";
+import TopicCreate from "../src/pages/HomeAdmin/Topics/topicCreate";
 
 import "../src/assets/styles/index.scss";
 import * as data from "./data/";
@@ -64,3 +66,9 @@ storiesOf("Buttons", module)
   .add("primary", () => <Button type="primary" text="primary" />)
   .add("logout", () => <Button type="logout" text="logout" />);
 
+// Topic creating page
+storiesOf("Topic creating page", module)
+  .addDecorator(StoryRouter())
+  .add("topic create page", () => {
+    return <TopicCreate />;
+  });
