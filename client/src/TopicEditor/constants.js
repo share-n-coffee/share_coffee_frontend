@@ -3,10 +3,11 @@ const PLACEHOLDERS = {
   address: "Place",
   time: "Time",
   title: "Topic Title",
+  weekDay: "Week Day",
+  date: "Date",
 };
 
 const DEFAULT_COORDINATES = [0, 0];
-const COORDINATES_SEP = ", ";
 
 const CYCLIC = [
   {
@@ -21,4 +22,4 @@ const CYCLIC = [
   },
 ];
 
-export { PLACEHOLDERS, COORDINATES_SEP, DEFAULT_COORDINATES, CYCLIC };
+export { PLACEHOLDERS, DEFAULT_COORDINATES, CYCLIC };
