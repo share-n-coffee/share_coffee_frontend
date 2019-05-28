@@ -19,6 +19,7 @@ class TopicEditor extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.topicData;
+    this.state.errors = {};
 
     this.onSave = this.onSave.bind(this);
     this.onCancel = this.onCancel.bind(this);
@@ -27,10 +28,15 @@ class TopicEditor extends Component {
     this.onSingleDateChange = this.onSingleDateChange.bind(this);
   }
 
-  stateSetting(name, value) {
+  stateSetting(name, payload) {
+    const { errors } = this.state;
+    if (payload.error !== undefined) {
+      errors[name] = payload.error;
+    }
     this.setState(
       {
-        [name]: value,
+        errors,
+        [name]: payload.value,
       },
       () => console.log("state changed:", this.state),
     );
@@ -67,7 +73,7 @@ class TopicEditor extends Component {
       return;
     }
 
-    this.stateSetting(name, value);
+    this.stateSetting(name, { value });
   }
 
   onLocationChange(name, value) {
@@ -81,28 +87,31 @@ class TopicEditor extends Component {
         // TODO: validate coordinate (-180, 180; -90, 90)
         newValue[index] = coordinate;
       });
-    this.stateSetting(name, newValue);
+    this.stateSetting(name, { value: newValue });
   }
 
   onCyclicChange(name, value) {
-    const newValue = JSON.parse(value); // parsers.stringToBoolean
-    this.stateSetting(name, newValue);
+    const parsedValue = JSON.parse(value);
+    this.stateSetting(name, { value: parsedValue });
   }
 
-  onTimeChange(name, value) {}
+  onTimeChange(name, value) {
+    this.stateSetting(name, { value });
+  }
 
   onWeekDayChange(name, value) {
-    const newValue = Number(value); // stringToNumber
-    this.stateSetting(name, newValue);
+    const parsedValue = Number(value);
+    this.stateSetting(name, { value: parsedValue });
   }
 
   onSingleDateChange(value) {
-    const newValue = value.getTime();
-    this.stateSetting("singleDate", newValue);
+    const parsedValue = value.getTime();
+    this.stateSetting("singleDate", { value: parsedValue });
   }
 
   onDescriptionChange(description) {
-    this.stateSetting("description", description);
+    const parsedValue = description;
+    this.stateSetting("description", { value: parsedValue });
   }
 
   render() {
