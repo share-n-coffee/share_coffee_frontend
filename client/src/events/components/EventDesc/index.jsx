@@ -15,6 +15,7 @@ class EventDesc extends Component {
       isLoading,
       currentLoadingEvents = [],
     } = this.props;
+    // console.log(userEventIds)
     const userEventIds = userEvents.map(event => event.eventId);
     const regularity = [
       "Sunday",
@@ -25,7 +26,7 @@ class EventDesc extends Component {
       "Friday",
       "Saturday",
     ];
-
+    console.log(events);
     const elements = events.map(event => {
       const isSubscribed = userEventIds.includes(event._id);
       return (

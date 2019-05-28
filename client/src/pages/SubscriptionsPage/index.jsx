@@ -147,6 +147,7 @@ const SubscriptionsPage = props => {
     const result = await subscribingFunction(topicId, userId, token);
     // setUserData(result.data);
     // console.log(result);
+    console.log(result);
     setUserData(result.data.data);
     setCurrentLoadingEvents(
       currentLoadingEvents.filter(loadingEventId => loadingEventId !== topicId),
@@ -165,6 +166,7 @@ const SubscriptionsPage = props => {
       // setEvents(result.data);
       //---------------------------
       //api 2.0
+      // console.log(result)
       setEvents(result.data.data);
     };
 
@@ -186,7 +188,6 @@ const SubscriptionsPage = props => {
 
   console.log(events);
   console.log(userData.events);
-  console.log(isUserDataLoaded);
 
   const EventFull = () => (
     <EventDesc
