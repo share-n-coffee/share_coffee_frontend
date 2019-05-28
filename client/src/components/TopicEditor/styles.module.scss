@@ -1,0 +1,42 @@
+@import './styles';
+
+.topic_editor {
+    width: 380px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+}
+
+.topic_editor_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.topic_editor_form input {
+    position: relative;
+    width: 100%;
+    padding: 22px 0;
+    font-size: 16px;
+    color: $unactive-grey;
+    border: none;
+    border-bottom: 1px solid $deep-blue-inactive;
+    outline: 0;
+    background: transparent;
+    margin: 10px 0;
+    &:focus {
+        background-color: transparent;
+        color: $metal;
+    };
+    &::placeholder {
+        color: $unactive-grey;
+    };
+    &:focus::placeholder {
+        color: $metal;
+    };
+    &:hover {
+      border-bottom: 1px solid $deep-blue;
+      cursor: pointer;
+    }
+  }
