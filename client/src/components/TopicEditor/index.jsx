@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import TimeChooser from "./TimeChooser";
 import TopicDescription from "../TopicDescription";
 import CyclicChooser from "./CyclicChooser";
+import Button from "../../common/Button";
+import SpinButton from "../../common/SpinButton";
 
 import * as formatters from "./formatters";
 import styles from "./styles.module.scss";
@@ -112,11 +114,6 @@ class TopicEditor extends Component {
     return (
       <div className={styles.topic_editor}>
         <form className={styles.topic_editor_form} onSubmit={this.onSave}>
-          <div>
-            <button onClick={this.onCancel}>Cancel</button>
-            <button type="submit">Save</button>
-          </div>
-
           <input
             type="text"
             name="title"
@@ -163,6 +160,11 @@ class TopicEditor extends Component {
             onChange={this.onDescriptionChange}
           />
         </form>
+
+        <div className={styles.topic_editor_buttons}>
+          <Button type="Unsubscribe" text="Cancel" onClick={this.onCancel} />
+          <SpinButton type="Subscribe" text="Save" />
+        </div>
       </div>
     );
   }
