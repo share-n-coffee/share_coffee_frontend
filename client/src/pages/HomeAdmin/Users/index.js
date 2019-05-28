@@ -29,10 +29,11 @@ class Topics extends Component {
   getData() {
     this.setState({ isLoadData: true });
     request.get(URL.USERS).then(data => {
+      console.log(data.object.data);
       this.setState({
-        users: data.object,
-        unsortedUser: data.object,
-        userLength: data.object.length,
+        users: data.object.data,
+        unsortedUser: data.object.data,
+        userLength: data.object.data.length,
         error: data.message,
         isLoadData: false,
       });
@@ -171,7 +172,11 @@ class Topics extends Component {
                   <tr
                     key={user._id}
                     className={`${
-                      user.banned.status ? "bannedUser" : user.admin.isAdmin ? "adminUser" : ""
+                      user.banned.status
+                        ? "bannedUser"
+                        : user.admin.permission !== 0
+                        ? "adminUser"
+                        : ""
                     }`}
                   >
                     <td>
@@ -181,7 +186,7 @@ class Topics extends Component {
                     </td>
                     <td>{user.department}</td>
                     <td>{this.timestamp(user.created)}</td>
-                    {!user.admin.isAdmin ? (
+                    {user.admin.permission === 0 ? (
                       <td>
                         {!user.banned.status ? (
                           <SpinButton

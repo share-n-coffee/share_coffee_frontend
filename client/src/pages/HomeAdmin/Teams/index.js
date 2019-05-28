@@ -20,7 +20,7 @@ class DeleteBtn extends Component {
   getOneTeam(id) {
     request.get(URL.USER_IN_TEAM(id)).then(data => {
       this.setState({
-        users: data.object,
+        users: data.object.data,
         error: data.message,
       });
     });
@@ -34,11 +34,12 @@ class DeleteBtn extends Component {
     this.setState({ deleteContent: false });
   };
 
-  delete = () => {
+  delete = id => {
     this.setState({ isLoading: true });
-    console.log("delete");
-    this.clear();
-    this.setState({ isLoading: false });
+    request.delete(URL.DEL_TEAM(id)).then(data => {
+      this.clear();
+      this.setState({ isLoading: false });
+    });
   };
 
   render() {
@@ -53,7 +54,11 @@ class DeleteBtn extends Component {
           <div>
             Are you sure you want to delete?
             <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
-            <SpinButton onClick={this.delete} text="Delete" isLoading={isLoading} />
+            <SpinButton
+              onClick={() => this.delete(this.props.id)}
+              text="Delete"
+              isLoading={isLoading}
+            />
           </div>
         )}
       </div>
@@ -82,8 +87,9 @@ class Teams extends Component {
   getData() {
     this.setState({ isLoadData: true });
     request.get(URL.TEAMS).then(data => {
+      console.log(data.object.data);
       this.setState({
-        teams: data.object,
+        teams: data.object.data,
         error: data.message,
         isLoadData: false,
       });
@@ -135,14 +141,16 @@ class Teams extends Component {
       <Loading />
     ) : (
       <div style={{ textAlign: "left" }}>
-        {teams &&
-          teams.length > 0 &&
+        {teams && teams.length > 0 ? (
           teams.map(team => (
             <div key={team._id} className={"team_block"}>
               <span>{team.title}</span>
               <DeleteBtn id={team._id} />
             </div>
-          ))}
+          ))
+        ) : (
+          <div>Team is empty</div>
+        )}
         {!isShowAdding ? (
           <Button onClick={this.toggleAdding} text=" Add team" />
         ) : (

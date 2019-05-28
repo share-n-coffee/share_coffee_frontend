@@ -42,7 +42,7 @@ class requests {
       result.ok = response.ok;
       result.object = response.data;
       result.message = this.getStatusMessage(response.status);
-      if (response.status === 403 && withRedirect) {
+      if (response.status === 401 && withRedirect) {
         this.redirect2Login();
       }
     } catch (err) {
@@ -50,7 +50,7 @@ class requests {
       result.object = [];
       if (response) {
         result.status = response.status;
-        if (response.status === 403 && withRedirect) this.redirect2Login();
+        if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
         if (response.data.errors && response.data.errors > 0) {
           result.message = response.data.errors[0].msg;
@@ -77,7 +77,7 @@ class requests {
       result.status = response.status;
       result.ok = response.ok;
       result.message = this.getStatusMessage(response.status);
-      if (response.status === 403 && withRedirect) this.redirect2Login();
+      if (response.status === 401 && withRedirect) this.redirect2Login();
       else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       result.object = await response.data;
     } catch (err) {
@@ -85,7 +85,7 @@ class requests {
       result.object = [];
       if (response) {
         result.status = response.status;
-        if (response.status === 403 && withRedirect) this.redirect2Login();
+        if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
         if (response.data.errors && response.data.errors > 0) {
           result.message = response.data.errors[0].msg;
@@ -113,7 +113,7 @@ class requests {
       result.status = response.status;
       result.ok = response.ok;
       result.message = this.getStatusMessage(response.status);
-      if (response.status === 403 && withRedirect) this.redirect2Login();
+      if (response.status === 401 && withRedirect) this.redirect2Login();
       else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       result.object = await response.data;
     } catch (err) {
@@ -122,7 +122,42 @@ class requests {
 
       if (response) {
         result.status = response.status;
-        if (response.status === 403 && withRedirect) this.redirect2Login();
+        if (response.status === 401 && withRedirect) this.redirect2Login();
+        else if (response.status >= 400) console.log("Bad response from server, url: " + url);
+        if (response.data.errors && response.data.errors > 0) {
+          result.message = response.data.errors[0].msg;
+          result.object = [];
+        }
+      } else {
+        result.message = "Something went wrong";
+      }
+    }
+    return result;
+  }
+
+  async delete(url, withRedirect = true) {
+    let result = this.initialResult;
+    const authHeader = this.getAuthHeader();
+
+    try {
+      let response;
+      response = await axios(url, {
+        method: "DELETE",
+        headers: authHeader,
+      });
+      result.status = response.status;
+      result.ok = response.ok;
+      result.object = response.data;
+      result.message = this.getStatusMessage(response.status);
+      if (response.status === 401 && withRedirect) {
+        this.redirect2Login();
+      }
+    } catch (err) {
+      const response = err.response;
+      result.object = [];
+      if (response) {
+        result.status = response.status;
+        if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
         if (response.data.errors && response.data.errors > 0) {
           result.message = response.data.errors[0].msg;

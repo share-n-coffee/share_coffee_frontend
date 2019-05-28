@@ -65,57 +65,6 @@ class TopicDropdown extends Component {
   }
 }
 
-class DeleteBtn extends Component {
-  state = {
-    subscribers: [],
-    error: false,
-    deleteContent: false,
-  };
-
-  componentDidMount() {
-    this.getSubscribers(this.props.id);
-  }
-
-  getSubscribers = id => {
-    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
-      this.setState({
-        subscribers: data.object,
-        error: data.message,
-      });
-    });
-  };
-
-  toggle = () => {
-    this.setState({ deleteContent: true });
-  };
-
-  clear = () => {
-    this.setState({ deleteContent: false });
-  };
-
-  delete = () => {
-    console.log("delete");
-    this.clear();
-  };
-
-  render() {
-    const { subscribers, deleteContent } = this.state;
-    return subscribers && subscribers.length > 0 ? null : (
-      <div className="toggle_delete">
-        {!deleteContent ? (
-          <img src={require("../../../assets/img/close.svg")} alt="" onClick={this.toggle} />
-        ) : (
-          <div>
-            Are you sure you want to delete?
-            <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
-            <Button onClick={this.delete} text="Delete" />
-          </div>
-        )}
-      </div>
-    );
-  }
-}
-
 class Topics extends Component {
   constructor(props) {
     super(props);
@@ -124,7 +73,6 @@ class Topics extends Component {
   state = {
     events: [],
     error: "",
-    isLoading: "",
     isLoadData: false,
   };
 
@@ -136,6 +84,7 @@ class Topics extends Component {
     this.setState({ isLoadData: true });
 
     request.get(URL.TOPICS).then(data => {
+      console.log(data.object.data);
       this.setState({
         events: data.object.data,
         error: data.message,
@@ -150,7 +99,7 @@ class Topics extends Component {
   };
 
   render() {
-    const { events, error, isLoading, isLoadData } = this.state;
+    const { events, error, isLoadData } = this.state;
     return isLoadData ? (
       <Loading />
     ) : (
@@ -169,7 +118,6 @@ class Topics extends Component {
               <span>Time:</span>
               <div>{event.time}</div>
               <button style={{ visibility: "hidden" }} />
-              {/*<DeleteBtn id={event._id} />*/}
             </div>
           ))
         ) : (
