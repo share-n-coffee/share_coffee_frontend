@@ -8,7 +8,7 @@ import CyclicChooser from "./CyclicChooser";
 import * as formatters from "./formatters";
 import styles from "./styles.module.scss";
 
-import { PLACEHOLDERS, COORDINATES_SEP, DEFAULT_COORDINATES, CYCLIC } from "./constants";
+import { PLACEHOLDERS, DEFAULT_COORDINATES, CYCLIC } from "./constants";
 
 class TopicEditor extends Component {
   constructor(props) {
@@ -41,13 +41,11 @@ class TopicEditor extends Component {
     e.preventDefault();
     console.log("saving");
     console.log(this.state);
-    // TODO: send state object to backend
   }
 
   onCancel(event) {
     event.preventDefault();
     console.log("canceling");
-    // TODO: what to do next?
   }
 
   onChange(event) {
@@ -164,8 +162,6 @@ class TopicEditor extends Component {
             editable={true}
             onChange={this.onDescriptionChange}
           />
-
-          <div>[ Map component ]</div>
         </form>
       </div>
     );
