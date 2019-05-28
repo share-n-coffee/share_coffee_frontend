@@ -77,7 +77,7 @@ const PageTeamSelect = props => {
           Authorization: `Bearer ${getCookie("token")}`,
         },
       });
-      console.log(result.data.data);
+      // console.log(result.data.data);
       //--------------------------------------------------------
       //api 1.0
       // setOptions(getAccountOptions(result.data));

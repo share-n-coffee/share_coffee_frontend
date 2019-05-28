@@ -56,6 +56,7 @@ export default class LoginPage extends Component {
       // console.log(userData)
       const date = new Date(userData.exp * 1000).toGMTString();
       setCookie("token", token, { expires: date });
+      // console.log(userData)
       await setStorage(userData);
       //from helpers.js
       router(this.props);

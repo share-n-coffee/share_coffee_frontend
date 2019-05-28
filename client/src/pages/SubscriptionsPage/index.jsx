@@ -146,6 +146,7 @@ const SubscriptionsPage = props => {
     setCurrentLoadingEvents([...currentLoadingEvents, topicId]);
     const result = await subscribingFunction(topicId, userId, token);
     // setUserData(result.data);
+    // console.log(result);
     setUserData(result.data.data);
     setCurrentLoadingEvents(
       currentLoadingEvents.filter(loadingEventId => loadingEventId !== topicId),
@@ -183,13 +184,19 @@ const SubscriptionsPage = props => {
     fetchData();
   }, []);
 
+  console.log(events);
+  console.log(userData.events);
+  console.log(isUserDataLoaded);
+
   const EventFull = () => (
     <EventDesc
       className="event"
       events={events}
       userEvents={userData.events}
-      onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
-      onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+      // onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
+      // onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+      onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
+      onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
       isLoading={!isUserDataLoaded}
       currentLoadingEvents={currentLoadingEvents}
     />
@@ -212,8 +219,10 @@ const SubscriptionsPage = props => {
             component={params => (
               <TopicFront
                 userEvents={userData.events}
-                onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
-                onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+                // onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
+                // onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+                onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
+                onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
                 isLoading={!isUserDataLoaded}
                 currentLoadingEvents={currentLoadingEvents}
                 {...params}
