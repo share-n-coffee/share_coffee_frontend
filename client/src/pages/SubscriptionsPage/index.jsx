@@ -6,18 +6,32 @@ import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
 import {
-  GET_EVENTS,
+  // GET_EVENTS,
+  GET_ALL_TOPICS,
   GET_USER,
-  SUBCR_USER_TO_EVENT,
-  UNSUBCR_USER_FROM_EVENT,
+  SUBCR_USER_TO_TOPIC,
+  // SUBCR_USER_TO_EVENT,
+  // UNSUBCR_USER_FROM_EVENT,
+  UNSUBCR_USER_FROM_TOPIC,
 } from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
 
-const getEvents = token => {
+// const getEvents = token => {
+//   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+//   return axios({
+//     method: "get",
+//     url: GET_EVENTS,
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+// };
+
+const getAllTopics = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: GET_EVENTS,
+    url: GET_ALL_TOPICS,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -35,27 +49,51 @@ const getUser = (token, id) => {
   });
 };
 
-const subscribeUserToEvent = (eventId, userId, token) => {
+// const subscribeUserToEvent = (eventId, userId, token) => {
+//   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+//   return axios({
+//     method: "put",
+//     url: SUBCR_USER_TO_EVENT(userId),
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//     data: { eventId: eventId },
+//   });
+// };
+
+const subscribeUserToTopic = (topicId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  const userId = sessionStorage.getItem("id");
   return axios({
-    method: "put",
-    url: SUBCR_USER_TO_EVENT(userId),
+    method: "post",
+    url: SUBCR_USER_TO_TOPIC(topicId, userId),
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: { eventId: eventId },
   });
 };
 
-const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
+// const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
+//   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+//   return axios({
+//     method: "delete",
+//     url: UNSUBCR_USER_FROM_EVENT(userId),
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//     data: { eventId: eventId },
+//   });
+// };
+
+const unsubsrcibeUserFromTopic = (topicId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  const userId = sessionStorage.getItem("id");
   return axios({
     method: "delete",
-    url: UNSUBCR_USER_FROM_EVENT(userId),
+    url: UNSUBCR_USER_FROM_TOPIC(topicId, userId),
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: { eventId: eventId },
   });
 };
 

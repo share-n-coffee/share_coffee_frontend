@@ -12,13 +12,28 @@ export const USER_IN_TEAM = id =>
 export const ADMIN_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
 
 const SET_USER_DATA = "https://forge-development.herokuapp.com/login";
-const GET_EVENTS = "https://forge-development.herokuapp.com/api/events/";
-const GET_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
-const SUBCR_USER_TO_EVENT = userId => `https://forge-development.herokuapp.com/api/users/${userId}`;
-const UNSUBCR_USER_FROM_EVENT = userId =>
-  `https://forge-development.herokuapp.com/api/users/${userId}`;
-const SET_USER_DEPARTMENT = userId => `https://forge-development.herokuapp.com/api/users/${userId}`;
-const GET_ALL_DEPARTMENTS = "https://forge-development.herokuapp.com/api/departments/";
+// const GET_EVENTS = "https://forge-development.herokuapp.com/api/events/";
+
+//new server api
+// const GET_EVENTS = `https://forgeserver.herokuapp.com/api/events/`;
+const GET_ALL_TOPICS = `https://forgeserver.herokuapp.com/api/topics/`;
+const SET_USER_DEPARTMENT = userId => `https://forgeserver.herokuapp.com/api/users/${userId}`;
+const GET_ALL_DEPARTMENTS = `https://forgeserver.herokuapp.com/api/departments/`;
+const GET_USER = id => `https://forgeserver.herokuapp.com/api/users/${id}`;
+const SUBCR_USER_TO_TOPIC = (topicId, userId) =>
+  `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`;
+
+const UNSUBCR_USER_FROM_TOPIC = (topicId, userId) =>
+  `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/ `;
+//
+//
+// const GET_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
+// const SUBCR_USER_TO_EVENT = userId => `https://forge-development.herokuapp.com/api/users/${userId}`;
+// const UNSUBCR_USER_FROM_EVENT = userId =>
+//   `https://forge-development.herokuapp.com/api/users/${userId}`;
+// const SET_USER_DEPARTMENT = userId => `https://forge-development.herokuapp.com/api/users/${userId}`;
+
+// const GET_ALL_DEPARTMENTS = "https://forge-development.herokuapp.com/api/departments/";
 const GET_EVENT = id => `https://forge-development.herokuapp.com/api/events/${id}`;
 
 // local server
@@ -26,10 +41,12 @@ const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVjZTAx
 
 export {
   SET_USER_DATA,
-  GET_EVENTS,
+  // GET_EVENTS,
+  GET_ALL_TOPICS,
   GET_USER,
-  SUBCR_USER_TO_EVENT,
-  UNSUBCR_USER_FROM_EVENT,
+  // SUBCR_USER_TO_EVENT,
+  SUBCR_USER_TO_TOPIC,
+  UNSUBCR_USER_FROM_TOPIC,
   SET_USER_DEPARTMENT,
   GET_ALL_DEPARTMENTS,
   GET_EVENT,

@@ -19,6 +19,7 @@ const getAccountOptions = departments => {
 const setUserDepartment = departmentId => {
   // checkIsBanned(sessionStorage.getItem("banned"));
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+
   const userId = sessionStorage.getItem("id");
   return axios
     .put(
@@ -41,6 +42,7 @@ const PageTeamSelect = props => {
   useEffect(() => {
     // checkIsBanned(sessionStorage.getItem("banned"));
     // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+
     const fetchData = async () => {
       const result = await axios(GET_ALL_DEPARTMENTS, {
         headers: {

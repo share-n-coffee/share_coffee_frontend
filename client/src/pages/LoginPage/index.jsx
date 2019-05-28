@@ -17,24 +17,24 @@ export default class LoginPage extends Component {
   };
 
   render() {
-    const isBanned = sessionStorage.getItem("banned") === "true" ? true : false;
+    // const isBanned = sessionStorage.getItem("banned") === "true" ? true : false;
     const handleTelegramResponse = async telegramResponse => {
+      //   const requestObj = {
+      //     method: "put",
+      //     url: SET_USER_DATA,
+      //     data: telegramResponse,
+      //     mode: "cors",
+      //     "Content-Type": "application/json",
+      //   };
+      // new server
+      // console.log(telegramResponse);
       const requestObj = {
-        method: "put",
-        url: SET_USER_DATA,
+        method: "post",
+        url: "https://forgeserver.herokuapp.com/login/",
         data: telegramResponse,
         mode: "cors",
         "Content-Type": "application/json",
       };
-      // new server
-      // console.log(telegramResponse);
-      // const requestObj = {
-      //   method: "post",
-      //   url: "https://forgeserver.herokuapp.com/login/",
-      //   data: telegramResponse,
-      //   mode: "cors",
-      //   "Content-Type": "application/json",
-      // };
       // mode: "cors",
       const token = await axios(requestObj)
         .then(response => {
