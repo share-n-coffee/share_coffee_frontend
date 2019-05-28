@@ -7,6 +7,7 @@ import TopicEditor from "../src/components/TopicEditor";
 import WeekPicker from "../src/components/TopicEditor/WeekPicker";
 import DatePicker from "../src/components/TopicEditor/DatePicker";
 
+import "../src/assets/styles/index.scss";
 import * as data from "./data/";
 
 // Topic editor
