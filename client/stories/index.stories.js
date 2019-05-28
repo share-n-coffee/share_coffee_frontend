@@ -8,6 +8,7 @@ import TopicEditor from "../src/components/TopicEditor";
 import WeekPicker from "../src/components/TopicEditor/WeekPicker";
 import DatePicker from "../src/components/TopicEditor/DatePicker";
 import Button from "../src/common/Button";
+import SpinButton from "../src/common/SpinButton";
 import TopicCreate from "../src/pages/HomeAdmin/Topics/topicCreate";
 
 import "../src/assets/styles/index.scss";
@@ -64,7 +65,9 @@ storiesOf("Buttons", module)
   .add("Subscribe", () => <Button type="Subscribe" text="Subscribe" />)
   .add("Unsubscribe", () => <Button type="Unsubscribe" text="Unsubscribe" />)
   .add("primary", () => <Button type="primary" text="primary" />)
-  .add("logout", () => <Button type="logout" text="logout" />);
+  .add("logout", () => <Button type="logout" text="logout" />)
+  .add("SpinButton Subscribe", () => <SpinButton type="Subscribe" isLoading  />)
+  .add("SpinButton Unsubscribe", () => <SpinButton type="Subscribe" text="Save" />);
 
 // Topic creating page
 storiesOf("Topic creating page", module)
