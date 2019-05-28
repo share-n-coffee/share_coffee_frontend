@@ -5,13 +5,14 @@ import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
 import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
-import { GET_EVENT } from "../../constants";
+import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
 
 // api 1.0 and 2.0
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  return axios(GET_EVENT(id), {
+  console.log(id);
+  return axios(GET_TOPIC(id), {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
     },
@@ -57,12 +58,12 @@ const TopicFront = ({
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDataEvent(id);
-      console.log(result);
+      console.log(result.data[0]);
       // api 1.0
       // setEvent(result);
       //  -------------
       //  api 2.0
-      setEvent(result.data);
+      setEvent(result.data[0]);
       //  --------------
     };
     fetchData();
@@ -123,11 +124,17 @@ const TopicFront = ({
           <p className="section__descr">{eventData.description}</p>
           <div className="section__place">
             <h3 className="section__topic__title">Place:</h3>
-            <p className="place__descr">{eventData.address}</p>
+            <p className="place__descr">
+              {eventData.address === "undefined" ||
+              eventData.address === null ||
+              eventData.address === undefined
+                ? "Default"
+                : eventData.address}
+            </p>
           </div>
           <div className="time__descr">
             <h3 className="section__topic__title">Time:</h3>
-            <p className="time__descr">{eventData.options ? eventData.options.times[0] : <></>}</p>
+            <p className="time__descr">{eventData.time}</p>
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>

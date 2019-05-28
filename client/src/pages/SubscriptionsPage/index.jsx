@@ -44,7 +44,7 @@ const getAllTopics = token => {
 // api 1.0 and 2.0
 const getUser = (token, id) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  console.log(GET_USER(id));
+  // console.log(GET_USER(id));
   return axios({
     method: "get",
     url: GET_USER(id),
@@ -124,7 +124,7 @@ const SubscriptionsPage = props => {
   const token = getCookie("token");
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
-  console.log(userData);
+  // console.log(userData);
 
   //api 1.0
   // const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
@@ -158,7 +158,7 @@ const SubscriptionsPage = props => {
       // const result = await getEvents(token);
       // api 2.0
       const result = await getAllTopics(token);
-      console.log(result.data.data);
+      // console.log(result.data.data);
       //---------------------------
       // api 1.0
       // setEvents(result.data);
@@ -173,7 +173,7 @@ const SubscriptionsPage = props => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
-      console.log(result.data.data);
+      // console.log(result.data.data);
       // setUserData(result.data);
       // api 2.0
       setUserData(result.data.data);

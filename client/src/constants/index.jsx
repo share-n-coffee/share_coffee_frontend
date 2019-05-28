@@ -35,7 +35,8 @@ const SUBCR_USER_TO_TOPIC = (topicId, userId) =>
   `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`;
 const UNSUBCR_USER_FROM_TOPIC = (topicId, userId) =>
   `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/ `;
-const GET_EVENT = id => `https://forgeserver.herokuapp.com/api/events/${id}`;
+// const GET_EVENT = id => `https://forgeserver.herokuapp.com/api/events/${id}`;
+const GET_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
 
 export {
   SET_USER_DATA,
@@ -48,6 +49,7 @@ export {
   UNSUBCR_USER_FROM_TOPIC,
   SET_USER_DEPARTMENT,
   GET_ALL_DEPARTMENTS,
-  GET_EVENT,
+  // GET_EVENT,
+  GET_TOPIC,
   token,
 };

@@ -62,7 +62,7 @@ export default class LoginPage extends Component {
     };
 
     const { error } = this.state;
-    console.log(sessionStorage.getItem("banned"));
+    // console.log(sessionStorage.getItem("banned"));
     return (
       <>
         <Header isActive={false} isAdmin={false} hasDepartment={false} />
