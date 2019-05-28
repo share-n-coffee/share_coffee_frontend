@@ -41,14 +41,13 @@ class OneUser extends React.Component {
       this.setState({ linkNoHover: true });
     },
     click: () => {
-      this.props.history.push("/admin");
+      this.props.history.push({ pathname: "/admin", state: { page: "Users" } });
       this.setState({ openEvent: false });
     },
   };
 
   render() {
     const { activeTab, user, error } = this.state;
-    console.log(user);
     return (
       <div>
         <Header

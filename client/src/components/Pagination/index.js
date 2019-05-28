@@ -11,7 +11,6 @@ class Pagination extends Component {
 
   componentDidMount() {
     const startingPage = this.props.startingPage ? this.props.startingPage : 1;
-    console.log("dafdf");
     this.setState({
       currentPage: startingPage,
     });
@@ -19,8 +18,6 @@ class Pagination extends Component {
 
   setCurrentPage(num) {
     this.setState({ currentPage: num });
-    console.log(num);
-    console.log(this.state.currentPage);
     this.props.change(num);
   }
 

@@ -24,6 +24,7 @@ class HomeAdmin extends React.Component {
   };
 
   render() {
+    console.log(this.state.currentPage);
     return (
       <>
         <Header
@@ -39,7 +40,7 @@ class HomeAdmin extends React.Component {
           {!this.state.isLogin ? (
             <AdminLoginPage history={this.props.history} setLogin={this.setLogin} />
           ) : (
-            <HomeDashboard history={this.props.history} />
+            <HomeDashboard history={this.props.history} location={this.props.location} />
           )}
         </div>
       </>
