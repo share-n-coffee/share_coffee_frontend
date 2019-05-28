@@ -54,11 +54,14 @@ class TopicDropdown extends Component {
           {subscribers &&
             Array.isArray(subscribers) &&
             subscribers.length > 0 &&
-            subscribers.map(subscriber => (
-              <DropdownItem key={subscriber._id}>
-                {subscriber.firstName} {subscriber.lastName}
-              </DropdownItem>
-            ))}
+            subscribers.map(
+              subscriber =>
+                subscriber !== null && (
+                  <DropdownItem key={subscriber._id}>
+                    {subscriber.firstName} {subscriber.lastName}
+                  </DropdownItem>
+                ),
+            )}
         </DropdownContent>
       </Dropdown>
     );

@@ -5,34 +5,29 @@ class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: null,
-      pageCount: null,
+      currentPage: 1,
     };
   }
 
   componentDidMount() {
     const startingPage = this.props.startingPage ? this.props.startingPage : 1;
-    const length = this.props.length;
-    const pageSize = this.props.pageSize;
-    let pageCount = parseInt(length / pageSize);
-
-    if (length % pageSize > 0) {
-      pageCount++;
-    }
+    console.log("dafdf");
     this.setState({
       currentPage: startingPage,
-      pageCount: pageCount,
     });
   }
 
   setCurrentPage(num) {
     this.setState({ currentPage: num });
-    this.props.change(this.props.pageSize, num);
+    console.log(num);
+    console.log(this.state.currentPage);
+    this.props.change(num);
   }
 
   createControls() {
     let controls = [];
-    const { pageCount, currentPage } = this.state;
+    const { currentPage } = this.state;
+    const { pageCount } = this.props;
     for (let i = 1; i <= pageCount; i++) {
       controls.push(
         <div
@@ -53,12 +48,10 @@ class Pagination extends Component {
 }
 
 Pagination.propTypes = {
-  pageSize: PropTypes.number.isRequired,
   startingPage: PropTypes.number.isRequired,
 };
 
 Pagination.defaultProps = {
-  pageSize: 10,
   startingPage: 1,
 };
 

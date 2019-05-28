@@ -37,6 +37,7 @@ class requests {
 
     try {
       let response;
+
       response = await axios(url, { headers: authHeader });
       result.status = response.status;
       result.ok = response.ok;

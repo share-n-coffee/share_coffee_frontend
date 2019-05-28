@@ -20,24 +20,25 @@ class Topics extends Component {
     curPage: 1,
     isLoading: "",
     isLoadData: false,
+    pageCount: 1,
   };
 
   componentDidMount() {
     this.getData();
   }
 
-  getData() {
+  getData(page = 0, limit = 2) {
     this.setState({ isLoadData: true });
-    request.get(URL.USERS).then(data => {
-      console.log(data.object.data);
+    request.get(URL.USERS(page, limit)).then(data => {
+      console.log(data);
       this.setState({
         users: data.object.data,
         unsortedUser: data.object.data,
         userLength: data.object.data.length,
+        pageCount: data.object.pages.total,
         error: data.message,
         isLoadData: false,
       });
-      this.pagination(10, this.state.curPage);
     });
   }
 
@@ -60,13 +61,8 @@ class Topics extends Component {
     });
   };
 
-  pagination(pageSize, currentPage) {
-    const data = this.state.unsortedUser;
-    const upperLimit = currentPage * pageSize;
-    this.setState({
-      users: data.slice(upperLimit - pageSize, upperLimit),
-      curPage: currentPage,
-    });
+  pagination(currentPage) {
+    this.getData(currentPage - 1);
   }
 
   timestamp = createdTime => {
@@ -130,10 +126,8 @@ class Topics extends Component {
   };
 
   render() {
-    const { users, activeFilter, up, error, userLength, isLoading, isLoadData } = this.state;
-    return isLoadData ? (
-      <Loading />
-    ) : (
+    const { users, activeFilter, up, error, pageCount, isLoading, isLoadData } = this.state;
+    return (
       <div>
         {users && users.length > 0 ? (
           <div>
@@ -171,49 +165,49 @@ class Topics extends Component {
                 {users.map(user => (
                   <tr
                     key={user._id}
-                    className={`${
-                      user.banned.status
-                        ? "bannedUser"
-                        : user.admin.permission !== 0
-                        ? "adminUser"
-                        : ""
-                    }`}
+                    // className={`${
+                    //   user.banned.status
+                    //     ? "bannedUser"
+                    //     : user.admin.permission !== 0
+                    //     ? "adminUser"
+                    //     : ""
+                    // }`}
                   >
                     <td>
                       <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
                         <span className={"username"}>{user.username}</span>
                       </Link>
                     </td>
-                    <td>{user.department}</td>
-                    <td>{this.timestamp(user.created)}</td>
-                    {user.admin.permission === 0 ? (
-                      <td>
-                        {!user.banned.status ? (
-                          <SpinButton
-                            onClick={() => this.toggle(user)}
-                            text="Ban User"
-                            isLoading={isLoading === user._id}
-                            type="Unsubscribe"
-                          />
-                        ) : (
-                          <SpinButton
-                            onClick={() => this.toggle(user)}
-                            text="Unban"
-                            type="Subscribe"
-                            isLoading={isLoading === user._id}
-                          />
-                        )}
-                      </td>
-                    ) : (
-                      <td>ADMIN</td>
-                    )}
+                    {/*<td>{user.department}</td>*/}
+                    {/*<td>{this.timestamp(user.created)}</td>*/}
+                    {/*{user.admin.permission === 0 ? (*/}
+                    {/*<td>*/}
+                    {/*{!user.banned.status ? (*/}
+                    {/*<SpinButton*/}
+                    {/*onClick={() => this.toggle(user)}*/}
+                    {/*text="Ban User"*/}
+                    {/*isLoading={isLoading === user._id}*/}
+                    {/*type="Unsubscribe"*/}
+                    {/*/>*/}
+                    {/*) : (*/}
+                    {/*<SpinButton*/}
+                    {/*onClick={() => this.toggle(user)}*/}
+                    {/*text="Unban"*/}
+                    {/*type="Subscribe"*/}
+                    {/*isLoading={isLoading === user._id}*/}
+                    {/*/>*/}
+                    {/*)}*/}
+                    {/*</td>*/}
+                    {/*) : (*/}
+                    {/*<td>ADMIN</td>*/}
+                    {/*)}*/}
                   </tr>
                 ))}
               </tbody>
             </table>
             <Pagination
-              length={userLength}
-              change={(pageSize, currentPage) => this.pagination(pageSize, currentPage)}
+              pageCount={pageCount}
+              change={currentPage => this.pagination(currentPage)}
             />
           </div>
         ) : (
