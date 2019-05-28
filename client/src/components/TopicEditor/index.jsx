@@ -8,12 +8,7 @@ import CyclicChooser from "./CyclicChooser";
 import * as formatters from "./formatters";
 import styles from "./styles.module.scss";
 
-import {
-  PLACEHOLDERS,
-  COORDINATES_SEP,
-  DEFAULT_COORDINATES,
-  CYCLIC,
-} from "./constants";
+import { PLACEHOLDERS, COORDINATES_SEP, DEFAULT_COORDINATES, CYCLIC } from "./constants";
 
 class TopicEditor extends Component {
   constructor(props) {
@@ -151,11 +146,7 @@ class TopicEditor extends Component {
             required
           />
 
-          <CyclicChooser
-            onChange={this.onChange}
-            cyclic={cyclic}
-            options={CYCLIC}
-          />
+          <CyclicChooser onChange={this.onChange} cyclic={cyclic} options={CYCLIC} />
 
           {cyclic !== undefined ? (
             <TimeChooser

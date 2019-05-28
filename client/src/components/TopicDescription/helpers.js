@@ -9,8 +9,6 @@ export function exportToHtml(editorState) {
 }
 
 export function importFromHtml(renderedHTML) {
-  const editorState = createEditorState(
-    convertToRaw(mediumDraftImporter(renderedHTML)),
-  );
+  const editorState = createEditorState(convertToRaw(mediumDraftImporter(renderedHTML)));
   return editorState;
 }

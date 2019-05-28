@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Editor, createEditorState } from "medium-draft";
-import { exportToHtml, importFromHtml } from "./helpers.js";
+import { exportToHtml, importFromHtml } from "./helpers";
 import { EDITOR_PLACEHOLDER } from "./constants";
 
 import "medium-draft/lib/index.css"; // default medium-draft's styles
