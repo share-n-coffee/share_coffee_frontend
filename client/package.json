@@ -21,9 +21,11 @@
     "react-router": "latest",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-text-mask": "^5.4.3",
     "react-yandex-maps": "^3.0.2",
     "reveal": "0.0.4",
     "styled-components": "^4.2.0",
+    "text-mask-addons": "^3.8.0",
     "tiny-cookie": "^2.3.1"
   },
   "scripts": {
