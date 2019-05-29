@@ -25,7 +25,7 @@ const getDataEvent = id => {
 };
 
 const TopicFront = ({
-  userEvents = [],
+  userEventsIds = [],
   onSubscriptionClick,
   onUnsubscriptionClick,
   isLoading,
@@ -37,8 +37,7 @@ const TopicFront = ({
   const [linkHover, setHover] = useState(false);
 
   const id = match.params.id;
-  const userEventIds = userEvents.map(event => event.eventId);
-  const isSubscribed = userEventIds.includes(id);
+  const isSubscribed = userEventsIds.includes(id);
   const mouseEvents = {
     mouseOver: () => {
       setHover(true);
