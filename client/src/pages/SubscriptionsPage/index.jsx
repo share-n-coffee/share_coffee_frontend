@@ -13,6 +13,7 @@ import {
   SUBCR_USER_TO_EVENT,
   UNSUBCR_USER_FROM_EVENT,
   UNSUBCR_USER_FROM_TOPIC,
+  GET_ALL_USER_SUBSCRIPTIONS,
 } from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
 
@@ -33,6 +34,19 @@ const getAllTopics = token => {
   return axios({
     method: "get",
     url: GET_ALL_TOPICS,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const getAllUserSubscriptions = (token, userId) => {
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  return axios({
+    method: "get",
+    url: `https://forgeserver.herokuapp.com/api/subscriptions/?userId=${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
@@ -117,13 +131,16 @@ const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
 //--------------------------------------------------------
 
 const SubscriptionsPage = props => {
-  const [events, setEvents] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [userData, setUserData] = useState({});
+  const [userTopics, setUserTopics] = useState([]);
+  const [userTopicsIds, setUserTopicsIds] = useState([]);
   const [isUserDataLoaded, setIsUserDataLoaded] = useState(false);
   const [currentLoadingEvents, setCurrentLoadingEvents] = useState([]);
   const token = getCookie("token");
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
+  //userTopicsIds = userTopics.map(topic => topic.topicId);
   // console.log(userData);
 
   //api 1.0
@@ -140,8 +157,14 @@ const SubscriptionsPage = props => {
   //--------------------------------------------------------------------------
 
   //api 2.0
-  const handleSubscriptionClick = topicId => handleSubscribing(topicId, subscribeUserToTopic);
-  const handleUnsubscriptionClick = topicId => handleSubscribing(topicId, unsubsrcibeUserFromTopic);
+  const handleSubscriptionClick = topicId => {
+    handleSubscribing(topicId, subscribeUserToTopic);
+    setUserTopicsIds([...userTopicsIds, topicId]);
+  };
+  const handleUnsubscriptionClick = topicId => {
+    handleSubscribing(topicId, unsubsrcibeUserFromTopic);
+    setUserTopicsIds(userTopicsIds.filter(id => id !== topicId));
+  };
   const handleSubscribing = async (topicId, subscribingFunction) => {
     setCurrentLoadingEvents([...currentLoadingEvents, topicId]);
     const result = await subscribingFunction(topicId, userId, token);
@@ -167,7 +190,7 @@ const SubscriptionsPage = props => {
       //---------------------------
       //api 2.0
       // console.log(result)
-      setEvents(result.data.data);
+      setTopics(result.data.data);
     };
 
     fetchData();
@@ -186,14 +209,25 @@ const SubscriptionsPage = props => {
     fetchData();
   }, []);
 
-  console.log(events);
-  console.log(userData.events);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getAllUserSubscriptions(token, userId);
+      // console.log(result.data.data);
+      // setUserData(result.data);
+      // api 2.0
+      setUserTopics(result.data.data);
+      setUserTopicsIds(result.data.data.map(event => event.topicId));
+      setIsUserDataLoaded(true);
+    };
+
+    fetchData();
+  }, []);
 
   const EventFull = () => (
     <EventDesc
       className="event"
-      events={events}
-      userEvents={userData.events}
+      events={topics}
+      userEventsIds={userTopicsIds}
       // onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
       // onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
       onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}

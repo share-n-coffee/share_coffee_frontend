@@ -11,12 +11,15 @@ class EventDesc extends Component {
       events,
       onSubscriptionClick,
       onUnsubscriptionClick,
-      userEvents = [],
+      userEventsIds = [],
       isLoading,
       currentLoadingEvents = [],
     } = this.props;
-    // console.log(userEventIds)
-    const userEventIds = userEvents.map(event => event.eventId);
+    // console.log("UserTopics", userEvents);
+    // const userEventIds = userEvents.map(event => event.topicId);
+    console.log("userEventsIds", userEventsIds);
+    console.log("topics", events);
+
     const regularity = [
       "Sunday",
       "Monday",
@@ -26,9 +29,8 @@ class EventDesc extends Component {
       "Friday",
       "Saturday",
     ];
-    console.log(events);
     const elements = events.map(event => {
-      const isSubscribed = userEventIds.includes(event._id);
+      const isSubscribed = userEventsIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">
           <div className="eventContainer">
@@ -54,7 +56,11 @@ class EventDesc extends Component {
               // }`}
 
               adress={event.address}
-              eventFrequency={`every ${regularity[event.weekDay]}, ${event.time}`}
+              eventFrequency={
+                event.cyclic
+                  ? `every ${regularity[event.weekDay]}, ${event.time}`
+                  : `${regularity[event.weekDay]}, ${event.time}`
+              }
             />
           </div>
           <SpinButton
