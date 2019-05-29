@@ -7,17 +7,14 @@ const setStorage = userData => {
   sessionStorage.setItem("avatar", userData.data.avatar);
   sessionStorage.setItem("isAdmin", userData.data.permission);
   sessionStorage.setItem("banned", userData.data.banned.status);
-  // console.log("probros 4");
   if (
     userData.data.department === null ||
     userData.data.department === "undefined" ||
     userData.data.department === undefined ||
     userData.data.department === "null"
   ) {
-    // console.log("probros session null");
     sessionStorage.setItem("department", null);
   } else {
-    // console.log("probros session title");
     sessionStorage.setItem("department", userData.data.department.title);
   }
   sessionStorage.setItem("tokenTimeOver", userData.exp);
@@ -70,7 +67,6 @@ const regularity = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fri
 
 const timeConverter = prop => {
   const date = new Date(prop);
-  console.log(date.getFullYear());
   let month = `0`;
   if (date.getMonth() < 9) {
     month += date.getMonth() + 1;
