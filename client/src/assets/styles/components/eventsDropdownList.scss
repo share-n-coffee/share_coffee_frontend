@@ -1,3 +1,5 @@
+//@import '../../img/u134_line.png';
+
 .event-list_container .event-item p:first-child {
   font-weight: bold;
 }
@@ -57,7 +59,7 @@
   position: absolute;
   top: 25px;
   width: 126%;
-  padding:  10px 0 0 0;
+  padding: 10px 0 0 0;
 }
 
 .event-List {
@@ -70,12 +72,25 @@
   border: 1px solid rgba(51, 51, 51, 0.1);
   padding: 0;
   margin: 0;
+
+  //&::before {
+  //  position: relative;
+  //  top: -17px;
+  //  left: 15px;
+  //  content: '';
+  //  display: inline-block;
+  //  border-left: 10px solid transparent;
+  //  border-right: 10px solid transparent;
+  //  border-bottom: 10px solid #FFFFFF;
+  //  z-index: 12;
+  //}
+
+
 }
 
-ul,h4 {
+ul, h4 {
   margin: 0;
 }
-
 
 
 @keyframes down {

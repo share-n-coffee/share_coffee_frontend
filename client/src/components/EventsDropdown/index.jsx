@@ -13,23 +13,28 @@ import { getCookie } from "tiny-cookie";
 const EventsDropdown = ({ events }) => {
   const [isOpened, setIsOpened] = useState(false);
 
-  const getUserInfo = async id => {
-    const result = await axios({
-      url: `https://forge-development.herokuapp.com/api/users/${id}`,
+  const getUpcomingEvents = async userId => {
+    const obj = {
       method: "get",
+      url: `https://forgeserver.herokuapp.com/api/users/${userId}/upcoming`,
       headers: {
         Authorization: `Bearer ${getCookie("token")}`,
+        mode: "cors",
+        "Content-Type": "application/json",
       },
-    })
+    };
+    const result = await axios(obj)
       .then(res => {
+        console.log(res);
         return res;
       })
       .catch(err => {
         console.log(err);
+        return err;
       });
-    console.log(result.data);
     return result;
   };
+
   return (
     <div
       onMouseLeave={() => {
@@ -41,14 +46,13 @@ const EventsDropdown = ({ events }) => {
         className="event-header"
         onClick={() => {
           // getUserInfo(sessionStorage.getItem("id"));
+          // getUpcomingEvents(sessionStorage.getItem("id"));
           setIsOpened(!isOpened);
         }}
       >
         <span>My upcoming events ({events.length})</span>
         <span className={`event-arrow ${isOpened ? "event-rotated" : ""}`}>↓</span>
-        {/*<ArrowIcon className={`event-arrow ${isOpened ? "event-rotated" : undefined}`} />*/}
       </button>
-      {/*{isOpened && <List events={events} />}*/}
       {isOpened && (
         <div className="list">
           <List events={events} />{" "}

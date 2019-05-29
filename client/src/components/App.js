@@ -3,9 +3,11 @@ import styles from "./styles.module.scss";
 import LoginPage from "../pages/LoginPage";
 import PageTeamSelect from "../pages/PageTeamSelect";
 import SubscriptionsPage from "../pages/SubscriptionsPage";
-import HomeAdmin from "../pages/HomeAdmin";
+import HomeAdmin from "../pages/HomeAdmin/";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
+import AdminLoginPage from "../pages/AdminLoginPage";
+import { token } from "../constants";
 import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
 import { HashRouter as Router } from "react-router-dom";
@@ -14,8 +16,9 @@ import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
-// setCookie("token", ""); //for localhost
-// sessionStorage.setItem("id", "122248863");
+// LOCALHOST
+// setCookie("token", token); //for localhost
+// sessionStorage.setItem("id", "5cee4b8a9193c9bb547994b8");
 // sessionStorage.setItem("firstName", "gadya");
 // sessionStorage.setItem("lastName", "xrenova");
 // sessionStorage.setItem("avatar", "undefined");
@@ -23,11 +26,11 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 // sessionStorage.setItem("banned", false);
 // sessionStorage.setItem("department", "magistral");
 // sessionStorage.setItem("tokenTimeOver", "15134868");
+//------------------------------------------------
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-
     this.userAuth = this.userAuth.bind(this);
   }
 
@@ -54,7 +57,7 @@ export default class App extends Component {
               render={props => <LoginPage userAuth={this.userAuth} {...props} />}
               exact
             />
-            <Route path="/admin" component={HomeAdmin} exact />
+            <Route path="/login_admin" component={AdminLoginPage} exact />
 
             <Redirect to="/" />
           </Switch>
@@ -73,10 +76,12 @@ export default class App extends Component {
             />
             <Route path="/team_select/" component={PageTeamSelect} exact />
             <Route path="/subscriptions/" component={SubscriptionsPage} />
+            <Route path="/login_admin" component={AdminLoginPage} exact />
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
             <Route path="/admin/topic-create" component={TopicCreate} exact />
             <Route path="/admin/user/:id" component={OneUser} exact />
+            <Route path="/404" component={NotFound} exact />
             <Route component={NotFound} exact />
           </Switch>
         </Router>

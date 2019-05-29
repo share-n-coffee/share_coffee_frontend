@@ -5,12 +5,14 @@ import { getCookie } from "tiny-cookie";
 import PageTitle from "../../modules/PageTitle";
 import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
-import { GET_EVENT } from "../../constants";
+import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
+import parser from "html-react-parser";
+import { checkerNone, letterTransform, regularity, timeConverter } from "../../helpers/helpers";
 
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  return axios(GET_EVENT(id), {
+  return axios(GET_TOPIC(id), {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
     },
@@ -22,7 +24,7 @@ const getDataEvent = id => {
 };
 
 const TopicFront = ({
-  userEvents = [],
+  userEventsIds = [],
   onSubscriptionClick,
   onUnsubscriptionClick,
   isLoading,
@@ -34,8 +36,7 @@ const TopicFront = ({
   const [linkHover, setHover] = useState(false);
 
   const id = match.params.id;
-  const userEventIds = userEvents.map(event => event.eventId);
-  const isSubscribed = userEventIds.includes(id);
+  const isSubscribed = userEventsIds.includes(id);
   const mouseEvents = {
     mouseOver: () => {
       setHover(true);
@@ -56,33 +57,16 @@ const TopicFront = ({
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDataEvent(id);
-      setEvent(result);
+      setEvent(result.data[0]);
     };
     fetchData();
   }, []);
 
-  let { title, description, address, location } = eventData;
-
-  const titleTransform = title => {
-    let str = "";
-    if (title !== undefined || title !== null) {
-      for (let i = 0; i < title.length; i++) {
-        if (i === 0) {
-          str += title.charAt(i).toUpperCase();
-        } else {
-          str += title.charAt(i);
-        }
-      }
-      return str;
-    } else {
-      return "";
-    }
-  };
   return (
     <>
       {!isAdmin ? (
         <PageTitle
-          title={!linkHover ? eventData.title : "← Back"}
+          title={!linkHover ? letterTransform(checkerNone(eventData.title)) : "← Back"}
           mouseOver={mouseEvents.mouseOver}
           mouseOut={mouseEvents.mouseOut}
           click={mouseEvents.click}
@@ -93,7 +77,7 @@ const TopicFront = ({
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
-            <h2>Topic {eventData.title ? titleTransform(title) : ""}</h2>
+            <h2>Topic "{letterTransform(checkerNone(eventData.title))}"</h2>
             {isAdmin ? (
               <Button text={"Edit"} onClick={toEdit} />
             ) : (
@@ -112,14 +96,20 @@ const TopicFront = ({
               />
             )}
           </div>
-          <p className="section__descr">{eventData.description}</p>
+          <p className="section__descr">{parser(checkerNone(eventData.description))}</p>
           <div className="section__place">
             <h3 className="section__topic__title">Place:</h3>
-            <p className="place__descr">{eventData.address}</p>
+            <p className="place__descr">{letterTransform(checkerNone(eventData.address))}</p>
           </div>
           <div className="time__descr">
             <h3 className="section__topic__title">Time:</h3>
-            <p className="time__descr">{eventData.options ? eventData.options.times[0] : <></>}</p>
+            <p className="time__descr">
+              {eventData.cyclic
+                ? `Every ${regularity[eventData.weekDay]}, ${checkerNone(eventData.time)}`
+                : `${timeConverter(checkerNone(eventData.singleDate))} - ${checkerNone(
+                    eventData.time,
+                  )}`}
+            </p>
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>

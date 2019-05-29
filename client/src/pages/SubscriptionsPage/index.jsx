@@ -7,23 +7,41 @@ import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
 import {
   GET_EVENTS,
+  GET_ALL_TOPICS,
   GET_USER,
+  SUBCR_USER_TO_TOPIC,
   SUBCR_USER_TO_EVENT,
   UNSUBCR_USER_FROM_EVENT,
+  UNSUBCR_USER_FROM_TOPIC,
+  GET_ALL_USER_SUBSCRIPTIONS,
 } from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
 
-const getEvents = token => {
+const getAllTopics = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: GET_EVENTS,
+    url: GET_ALL_TOPICS,
     headers: {
       Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
     },
   });
 };
 
+const getAllUserSubscriptions = (token, userId) => {
+  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  return axios({
+    method: "get",
+    url: `https://forgeserver.herokuapp.com/api/subscriptions/?userId=${userId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
+    },
+  });
+};
 const getUser = (token, id) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
@@ -31,57 +49,78 @@ const getUser = (token, id) => {
     url: GET_USER(id),
     headers: {
       Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
     },
   });
+  // .then(res => {
+  //   console.log(res);
+  //   return res;
+  // })
+  // .catch(err => {
+  //   // console.log(err);
+  //   return err;
+  // });
 };
 
-const subscribeUserToEvent = (eventId, userId, token) => {
+const subscribeUserToTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // const userId = sessionStorage.getItem("id");
   return axios({
-    method: "put",
-    url: SUBCR_USER_TO_EVENT(userId),
+    method: "post",
+    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: { eventId: eventId },
   });
 };
 
-const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
+const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  // const userId = sessionStorage.getItem("id");
   return axios({
     method: "delete",
-    url: UNSUBCR_USER_FROM_EVENT(userId),
+    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: { eventId: eventId },
   });
 };
+//--------------------------------------------------------
 
 const SubscriptionsPage = props => {
-  const [events, setEvents] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [userData, setUserData] = useState({});
+  const [userTopics, setUserTopics] = useState([]);
+  const [userTopicsIds, setUserTopicsIds] = useState([]);
   const [isUserDataLoaded, setIsUserDataLoaded] = useState(false);
   const [currentLoadingEvents, setCurrentLoadingEvents] = useState([]);
   const token = getCookie("token");
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
-  const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
-  const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubsrcibeUserFromEvent);
-  const handleSubscribing = async (eventId, subscribingFunction) => {
-    setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
-    const result = await subscribingFunction(eventId, userId, token);
-    setUserData(result.data);
+
+  const handleSubscriptionClick = topicId => {
+    handleSubscribing(topicId, subscribeUserToTopic);
+    setUserTopicsIds([...userTopicsIds, topicId]);
+  };
+  const handleUnsubscriptionClick = topicId => {
+    handleSubscribing(topicId, unsubsrcibeUserFromTopic);
+    setUserTopicsIds(userTopicsIds.filter(id => id !== topicId));
+  };
+  const handleSubscribing = async (topicId, subscribingFunction) => {
+    setCurrentLoadingEvents([...currentLoadingEvents, topicId]);
+    const result = await subscribingFunction(topicId, userId, token);
+    setUserData(result.data.data);
     setCurrentLoadingEvents(
-      currentLoadingEvents.filter(loadingEventId => loadingEventId !== eventId),
+      currentLoadingEvents.filter(loadingEventId => loadingEventId !== topicId),
     );
   };
+  //--------------------------------------------------------------------------
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getEvents(token);
-      setEvents(result.data);
+      const result = await getAllTopics(token);
+      setTopics(result.data.data);
     };
 
     fetchData();
@@ -90,7 +129,19 @@ const SubscriptionsPage = props => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
-      setUserData(result.data);
+      // console.log(result.data.data);
+      setUserData(result.data.data);
+      setIsUserDataLoaded(true);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getAllUserSubscriptions(token, userId);
+      setUserTopics(result.data.data);
+      setUserTopicsIds(result.data.data.map(event => event.topicId));
       setIsUserDataLoaded(true);
     };
 
@@ -100,10 +151,10 @@ const SubscriptionsPage = props => {
   const EventFull = () => (
     <EventDesc
       className="event"
-      events={events}
-      userEvents={userData.events}
-      onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
-      onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+      events={topics}
+      userEventsIds={userTopicsIds}
+      onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
+      onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
       isLoading={!isUserDataLoaded}
       currentLoadingEvents={currentLoadingEvents}
     />
@@ -125,9 +176,9 @@ const SubscriptionsPage = props => {
             path="/subscriptions/:id"
             component={params => (
               <TopicFront
-                userEvents={userData.events}
-                onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
-                onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
+                userEventsIds={userTopicsIds}
+                onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
+                onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
                 isLoading={!isUserDataLoaded}
                 currentLoadingEvents={currentLoadingEvents}
                 {...params}

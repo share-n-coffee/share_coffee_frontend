@@ -8,6 +8,7 @@
     "classnames": "^2.2.6",
     "draft-convert": "^2.1.4",
     "gh-pages": "^2.0.1",
+    "html-react-parser": "^0.7.1",
     "js-md5": "^0.7.3",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.5.1",

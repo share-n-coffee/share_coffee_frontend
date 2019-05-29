@@ -6,7 +6,7 @@ import { request } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
 import { setCookie } from "tiny-cookie";
 import jwtDecode from "jwt-decode";
-import { setStorage } from "../LoginPage/helpers";
+import { setStorage } from "../../helpers/helpers";
 import * as URL from "../../constants";
 
 class AdminLoginPage extends Component {
@@ -36,7 +36,6 @@ class AdminLoginPage extends Component {
         if (data.object.token) {
           const date = new Date(jwtDecode(data.object.token).exp * 1000).toGMTString();
           setCookie("token", data.object.token, { expires: date });
-          this.props.setLogin(data.object.token != null, data.object.token);
           this.setState({ isLoading: false });
         }
       } else {
