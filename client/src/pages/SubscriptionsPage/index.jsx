@@ -17,18 +17,6 @@ import {
 } from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
 
-// const getEvents = token => {
-//   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-//   return axios({
-//     method: "get",
-//     url: GET_EVENTS,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-// };
-
-// api 2.0
 const getAllTopics = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
@@ -58,7 +46,6 @@ const getAllUserSubscriptions = (token, userId) => {
 // api 1.0 and 2.0
 const getUser = (token, id) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  // console.log(GET_USER(id));
   return axios({
     method: "get",
     url: GET_USER(id),
@@ -78,19 +65,6 @@ const getUser = (token, id) => {
   // });
 };
 
-// const subscribeUserToEvent = (eventId, userId, token) => {
-//   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-//   return axios({
-//     method: "put",
-//     url: SUBCR_USER_TO_EVENT(userId),
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//     data: { eventId: eventId },
-//   });
-// };
-
-// api 2.0
 const subscribeUserToTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   // const userId = sessionStorage.getItem("id");
@@ -102,21 +76,7 @@ const subscribeUserToTopic = (topicId, userId, token) => {
     },
   });
 };
-//--------------------------------------------------------
 
-// const unsubsrcibeUserFromEvent = (eventId, userId, token) => {
-//   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-//   return axios({
-//     method: "delete",
-//     url: UNSUBCR_USER_FROM_EVENT(userId),
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//     data: { eventId: eventId },
-//   });
-// };
-
-// api 2.0
 const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   // const userId = sessionStorage.getItem("id");
@@ -170,7 +130,6 @@ const SubscriptionsPage = props => {
     const result = await subscribingFunction(topicId, userId, token);
     // setUserData(result.data);
     // console.log(result);
-    console.log(result);
     setUserData(result.data.data);
     setCurrentLoadingEvents(
       currentLoadingEvents.filter(loadingEventId => loadingEventId !== topicId),
@@ -180,15 +139,7 @@ const SubscriptionsPage = props => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const result = await getEvents(token);
-      // api 2.0
       const result = await getAllTopics(token);
-      // console.log(result.data.data);
-      //---------------------------
-      // api 1.0
-      // setEvents(result.data);
-      //---------------------------
-      //api 2.0
       // console.log(result)
       setTopics(result.data.data);
     };
@@ -200,8 +151,6 @@ const SubscriptionsPage = props => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
       // console.log(result.data.data);
-      // setUserData(result.data);
-      // api 2.0
       setUserData(result.data.data);
       setIsUserDataLoaded(true);
     };
@@ -254,8 +203,6 @@ const SubscriptionsPage = props => {
             component={params => (
               <TopicFront
                 userEvents={userData.events}
-                // onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
-                // onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
                 onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
                 onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
                 isLoading={!isUserDataLoaded}

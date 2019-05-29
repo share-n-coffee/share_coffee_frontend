@@ -7,11 +7,12 @@ import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
 import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
+import parser from "html-react-parser";
+import { checkerNone, letterTransform, regularity, timeConverter } from "../../helpers/helpers";
 
 // api 1.0 and 2.0
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  console.log(id);
   return axios(GET_TOPIC(id), {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -58,7 +59,7 @@ const TopicFront = ({
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDataEvent(id);
-      console.log(result.data[0]);
+      // console.log(result.data[0]);
       // api 1.0
       // setEvent(result);
       //  -------------
@@ -69,29 +70,12 @@ const TopicFront = ({
     fetchData();
   }, []);
 
-  let { title, description, address, location } = eventData;
-
-  const titleTransform = title => {
-    let str = "";
-    if (title !== undefined || title !== null) {
-      for (let i = 0; i < title.length; i++) {
-        if (i === 0) {
-          str += title.charAt(i).toUpperCase();
-        } else {
-          str += title.charAt(i);
-        }
-      }
-      return str;
-    } else {
-      return "";
-    }
-  };
-  console.log(eventData);
+  // console.log(eventData);
   return (
     <>
       {!isAdmin ? (
         <PageTitle
-          title={!linkHover ? eventData.title : "← Back"}
+          title={!linkHover ? letterTransform(checkerNone(eventData.title)) : "← Back"}
           mouseOver={mouseEvents.mouseOver}
           mouseOut={mouseEvents.mouseOut}
           click={mouseEvents.click}
@@ -102,7 +86,7 @@ const TopicFront = ({
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
-            <h2>Topic {eventData.title ? titleTransform(title) : ""}</h2>
+            <h2>Topic "{letterTransform(checkerNone(eventData.title))}"</h2>
             {isAdmin ? (
               <Button text={"Edit"} onClick={toEdit} />
             ) : (
@@ -121,20 +105,20 @@ const TopicFront = ({
               />
             )}
           </div>
-          <p className="section__descr">{eventData.description}</p>
+          <p className="section__descr">{parser(checkerNone(eventData.description))}</p>
           <div className="section__place">
             <h3 className="section__topic__title">Place:</h3>
-            <p className="place__descr">
-              {eventData.address === "undefined" ||
-              eventData.address === null ||
-              eventData.address === undefined
-                ? "Default"
-                : eventData.address}
-            </p>
+            <p className="place__descr">{letterTransform(checkerNone(eventData.address))}</p>
           </div>
           <div className="time__descr">
             <h3 className="section__topic__title">Time:</h3>
-            <p className="time__descr">{eventData.time}</p>
+            <p className="time__descr">
+              {eventData.cyclic
+                ? `Every ${regularity[eventData.weekDay]}, ${checkerNone(eventData.time)}`
+                : `Single day: ${timeConverter(checkerNone(eventData.singleDate))} in ${checkerNone(
+                    eventData.time,
+                  )}`}
+            </p>
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>

@@ -4,6 +4,7 @@ import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
 import SpinButton from "../../../common/SpinButton";
 import { Link } from "react-router-dom";
+import { letterTransform, checkerNone, timeConverter, regularity } from "../../../helpers/helpers";
 
 class EventDesc extends Component {
   render() {
@@ -39,14 +40,20 @@ class EventDesc extends Component {
                 <Link to={{ pathname: `/subscriptions/${event._id}` }}>
                   {/*<EventName eventName={event.title} isSubscribed={event.isActive} />*/}
 
-                  <EventName eventName={event.title} isSubscribed={event.active} />
+                  <EventName
+                    eventName={letterTransform(checkerNone(event.title))}
+                    isSubscribed={event.active}
+                  />
                 </Link>
                 <span>Subscribed</span>
               </div>
             ) : (
               <Link to={{ pathname: `/subscriptions/${event._id}` }}>
                 {/*<EventName eventName={event.title} isSubscribed={event.isActive} />*/}
-                <EventName eventName={event.title} isSubscribed={event.active} />
+                <EventName
+                  eventName={letterTransform(checkerNone(event.title))}
+                  isSubscribed={event.active}
+                />
               </Link>
             )}
             <InfoAboutEvent
@@ -55,11 +62,11 @@ class EventDesc extends Component {
               //   event.options.times[0]
               // }`}
 
-              adress={event.address}
+              adress={letterTransform(checkerNone(event.address))}
               eventFrequency={
                 event.cyclic
-                  ? `every ${regularity[event.weekDay]}, ${event.time}`
-                  : `${regularity[event.weekDay]}, ${event.time}`
+                  ? `Every ${regularity[event.weekDay]}, ${event.time}`
+                  : `Single day: ${timeConverter(event.singleDate)} in ${event.time}`
               }
             />
           </div>

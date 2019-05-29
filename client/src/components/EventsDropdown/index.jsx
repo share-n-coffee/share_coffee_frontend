@@ -28,7 +28,7 @@ const EventsDropdown = ({ events }) => {
       .catch(err => {
         console.log(err);
       });
-    console.log(result.data);
+    // console.log(result.data);
     return result;
   };
   return (
