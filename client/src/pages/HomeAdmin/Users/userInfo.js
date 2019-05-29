@@ -9,20 +9,20 @@ class Topics extends Component {
     users: [],
     admin: "",
     banned: false,
+    user: "",
   };
 
-  getData(id) {
-    request.get(URL.ONE_USER(id)).then(data => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== this.props.user) {
       this.setState({
-        users: data.object,
-        banned: data.object.banned,
-        admin: data.object.admin,
-        error: data.message,
+        user: nextProps.user,
       });
-    });
+    }
   }
 
   toggleBan = user => {
+    console.log("toggleBan");
+
     const status = {
       ban: {
         status: !user.banned.status,
@@ -30,12 +30,15 @@ class Topics extends Component {
     };
 
     request.put(URL.BAN_USER(user._id), status).then(data => {
-      this.getData(user._id);
+      this.setState({
+        user: data.object.data,
+      });
       this.setState({ error: data.message });
     });
   };
 
   toggleAdmin = user => {
+    console.log("toggleAdmin");
     const status = {
       admin: {
         permission: user.admin.permission === 1 ? 0 : 1,
@@ -44,13 +47,17 @@ class Topics extends Component {
     };
 
     request.put(URL.ONE_USER(user._id), status).then(data => {
-      this.getData(user._id);
-      this.setState({ error: data.message });
+      console.log(data.object.data);
+      this.setState({
+        user: data.object.data,
+        error: data.message,
+      });
     });
   };
 
   render() {
-    const { user } = this.props;
+    const { user } = this.state;
+    console.log(user);
     return (
       <div key={user._id} className="user-info__container">
         <img
@@ -61,7 +68,7 @@ class Topics extends Component {
         <h3>{user.firstName + " " + user.lastName}</h3>
         <span>team: {user.department && user.department.title}</span>
         <div>
-          {user.admin && !user.admin.isAdmin ? (
+          {user.admin && user.admin.permission === 0 ? (
             <div>
               <div>
                 {user.banned && !user.banned.status ? (
@@ -70,21 +77,20 @@ class Topics extends Component {
                   <Button onClick={() => this.toggleBan(user)} text="Unban" type="Subscribe" />
                 )}
               </div>
-              <Button
-                onClick={() => this.toggleAdmin(user)}
-                text="Grant Admin"
-                type="Unsubscribe"
-              />
+              {user.banned && !user.banned.status && (
+                <Button
+                  onClick={() => this.toggleAdmin(user)}
+                  text="add to admin"
+                  type="Subscribe"
+                />
+              )}
             </div>
           ) : (
-            <div>
-              <span>ADMIN</span>
-              <Button
-                onClick={() => this.toggleAdmin(user)}
-                text="Pick Up Admin"
-                type="Subscribe"
-              />
-            </div>
+            <Button
+              onClick={() => this.toggleAdmin(user)}
+              text="Delete from admin"
+              type="Subscribe"
+            />
           )}
         </div>
       </div>

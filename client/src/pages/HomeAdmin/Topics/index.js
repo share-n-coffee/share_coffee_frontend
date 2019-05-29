@@ -6,7 +6,6 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 import Button from "../../../common/Button";
 import * as URL from "../../../constants";
-import { Loading } from "../../../ui/components/Loader";
 import Pagination from "../../../components/Pagination";
 
 class TopicDropdown extends Component {
@@ -75,7 +74,6 @@ class Topics extends Component {
   state = {
     events: [],
     error: "",
-    isLoadData: false,
     pageCount: 1,
   };
 
@@ -84,15 +82,12 @@ class Topics extends Component {
   }
 
   getData(page = 0, limit = 5) {
-    this.setState({ isLoadData: true });
-
     request.get(URL.TOPICS(page, limit)).then(data => {
       console.log(data.object.data);
       this.setState({
         events: data.object.data,
         pageCount: data.object.pages.total,
         error: data.message,
-        isLoadData: false,
       });
     });
   }
@@ -108,7 +103,7 @@ class Topics extends Component {
   };
 
   render() {
-    const { events, error, isLoadData, pageCount } = this.state;
+    const { events, error, pageCount } = this.state;
     return (
       <div style={{ textAlign: "left" }}>
         {events && events.length > 0 ? (

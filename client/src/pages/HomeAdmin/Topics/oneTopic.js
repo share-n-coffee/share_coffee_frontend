@@ -38,10 +38,10 @@ class TopicDropdown extends Component {
           {subscribers.map(
             subscriber =>
               subscriber &&
-              subscriber.firstName(
+              subscriber.firstName && (
                 <DropdownItem key={subscriber._id}>
                   {subscriber.firstName} {subscriber.lastName}
-                </DropdownItem>,
+                </DropdownItem>
               ),
           )}
         </DropdownContent>
