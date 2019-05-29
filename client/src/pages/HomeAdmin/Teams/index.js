@@ -36,7 +36,7 @@ class DeleteBtn extends Component {
 
   delete = id => {
     this.setState({ isLoading: true });
-    request.delete(URL.DEL_TEAM(id)).then(data => {
+    request.delete(URL.ONE_TEAM(id)).then(data => {
       this.clear();
       this.setState({ isLoading: false });
       this.props.refreshData(id);

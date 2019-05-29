@@ -14,7 +14,7 @@ export const ONE_USER = id => `https://forgeserver.herokuapp.com/api/users/${id}
 
 export const TEAMS = `https://forgeserver.herokuapp.com/api/departments/`;
 export const USER_IN_TEAM = id => `https://forgeserver.herokuapp.com/api/users/?department=${id}`;
-export const DEL_TEAM = id => `https://forgeserver.herokuapp.com/api/departments/${id}`;
+export const ONE_TEAM = id => `https://forgeserver.herokuapp.com/api/departments/${id}`;
 
 const SET_USER_DATA = "https://forge-development.herokuapp.com/login";
 const GET_EVENTS = "https://forge-development.herokuapp.com/api/events/";

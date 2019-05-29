@@ -7,6 +7,31 @@ import { request } from "../../../helpers/requests";
 import * as URL from "../../../constants";
 import SpinButton from "../../../common/SpinButton";
 import { Loading } from "../../../ui/components/Loader";
+import Button from "../../../common/Button";
+
+class UserDepartment extends Component {
+  state = {
+    title: "",
+  };
+
+  componentDidMount() {
+    // console.log(this.props)
+    if (this.props.id) {
+      request.get(URL.ONE_TEAM(this.props.id)).then(data => {
+        console.log(data.object.data.title);
+        if (data.object) {
+          this.setState({
+            title: data.object.data.title,
+          });
+        }
+      });
+    }
+  }
+
+  render() {
+    return <span>{this.state.title}</span>;
+  }
+}
 
 class Topics extends Component {
   state = {
@@ -21,6 +46,7 @@ class Topics extends Component {
     isLoading: "",
     isLoadData: false,
     pageCount: 1,
+    curDep: "",
   };
 
   componentDidMount() {
@@ -180,7 +206,9 @@ class Topics extends Component {
                             <span className={"username"}>{user.username}</span>
                           </Link>
                         </td>
-                        <td>{user.department}</td>
+                        <td>
+                          <UserDepartment id={user.department} />
+                        </td>
                         <td>{this.timestamp(user.created)}</td>
                         {user.admin.permission === 0 ? (
                           <td>
