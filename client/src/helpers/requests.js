@@ -34,10 +34,8 @@ class requests {
   async get(url, withRedirect = true) {
     let result = this.initialResult;
     const authHeader = this.getAuthHeader();
-
     try {
       let response;
-
       response = await axios(url, { headers: authHeader });
       result.status = response.status;
       result.ok = response.ok;
@@ -53,7 +51,7 @@ class requests {
         result.status = response.status;
         if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.data.errors && response.data.errors > 0) {
+        if (response.data.errors && response.data.errors.length > 0) {
           result.message = response.data.errors[0].msg;
           result.object = [];
         }
@@ -88,7 +86,7 @@ class requests {
         result.status = response.status;
         if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.data.errors && response.data.errors > 0) {
+        if (response.data.errors && response.data.errors.length > 0) {
           result.message = response.data.errors[0].msg;
           result.object = [];
         }
@@ -125,7 +123,7 @@ class requests {
         result.status = response.status;
         if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.data.errors && response.data.errors > 0) {
+        if (response.data.errors && response.data.errors.length > 0) {
           result.message = response.data.errors[0].msg;
           result.object = [];
         }
@@ -160,7 +158,7 @@ class requests {
         result.status = response.status;
         if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.data.errors && response.data.errors > 0) {
+        if (response.data.errors && response.data.errors.length > 0) {
           result.message = response.data.errors[0].msg;
           result.object = [];
         }
