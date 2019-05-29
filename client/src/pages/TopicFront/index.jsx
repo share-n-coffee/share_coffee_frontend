@@ -7,6 +7,7 @@ import { checkTokenTime } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
 import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
+import parser from "html-react-parser";
 
 // api 1.0 and 2.0
 const getDataEvent = id => {
@@ -136,7 +137,7 @@ const TopicFront = ({
               />
             )}
           </div>
-          <p className="section__descr">{letterTransform(checkerNone(eventData.description))}</p>
+          <p className="section__descr">{parser(checkerNone(eventData.description))}</p>
           <div className="section__place">
             <h3 className="section__topic__title">Place:</h3>
             <p className="place__descr">{letterTransform(checkerNone(eventData.address))}</p>
