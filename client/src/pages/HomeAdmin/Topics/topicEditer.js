@@ -17,7 +17,7 @@ class TopicEditer extends Component {
   }
 
   getData() {
-    request.get(URL.ONE_EVENT(this.props._id)).then(data => {
+    request.get(URL.ONE_TOPIC(this.props._id)).then(data => {
       this.setState({
         event: data.object,
         error: data.message,

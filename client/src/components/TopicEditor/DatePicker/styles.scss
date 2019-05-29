@@ -1,0 +1,145 @@
+@import '../styles';
+
+.react-calendar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    padding: 1em;
+    background: $mr-white;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    
+    &, & *, & *:before, & *:after {
+      box-sizing: border-box;
+    }
+    
+    button {
+      margin: 0;
+      border: 0;
+      outline: none;
+      font-family: Roboto, sans-serif;
+      font-weight: 700;
+      
+      &:enabled {
+        &:hover {
+          cursor: pointer;
+          color: $deep-blue;
+        }
+      }
+
+      &.react-calendar__navigation__label {
+        font-weight: 400;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+
+      &.react-calendar__navigation__arrow:hover {
+        opacity: 0.3;
+      }
+    }
+  
+    &__navigation {
+      margin-bottom: 7px;
+      align-items: baseline;
+  
+      &__label {
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      button {
+        background: none;
+        padding: 3px;
+  
+  
+        &[disabled] {
+          background-color: rgb(240, 240, 240);
+        }
+      }
+    }
+  
+    &__month-view {
+      &__weekdays {
+        text-align: center;
+        margin: 8px auto;
+        font-weight: 700;
+        font-size: 10px;
+        color: $unactive-grey;
+  
+        &__weekday abbr {
+          text-decoration: none;
+        }
+      }
+  
+      &__weekNumbers {
+        font-weight: 700;
+  
+        .react-calendar__tile {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: .75em;
+          padding: calc(.75em / .75) calc(.5em / .75);
+        }
+      }
+  
+      &__days {
+        &__day {
+          &--weekend {
+            color: inherit;
+          }
+  
+          &--neighboringMonth {
+            color: $unactive-grey;
+          }
+        }
+      }
+    }
+  
+    &__tile {
+      max-width: 100%;
+      text-align: center;
+      padding: 5px;
+      font-size: 10px;
+      background: none;
+  
+      &:disabled {
+        background-color: rgb(20, 155, 38);
+      }
+  
+      &--hasActive {
+        $bgcolor: lighten(rgb(0, 110, 220), 30%);
+        background: $bgcolor;
+  
+        &:enabled {
+          &:hover, &:focus {
+            background: lighten($bgcolor, 10%);
+          }
+        }
+      }
+
+      &--now {
+        overflow: visible !important;
+        & abbr {
+          display: none;
+          
+        }
+        &::after {
+          content: 'Today';
+          display: block;
+          color: $deep-blue;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  
+    &--selectRange {
+      .react-calendar__tile {
+        &--hover {
+          background-color: rgb(230, 230, 230);
+        }
+      }
+    }
+  }
+  

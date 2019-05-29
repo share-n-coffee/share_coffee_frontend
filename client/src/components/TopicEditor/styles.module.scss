@@ -1,0 +1,48 @@
+@import './styles';
+
+.topic_editor {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.topic_editor_buttons {
+    display: flex;
+    margin: 22px;
+    flex-wrap: nowrap;
+}
+
+.topic_editor_form {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic_editor_form input {
+    position: relative;
+    width: 100%;
+    padding: 22px 0;
+    font-size: 16px;
+    color: $unactive-grey;
+    border: none;
+    border-bottom: 1px solid $deep-blue-inactive;
+    outline: 0;
+    background: transparent;
+    margin: 10px 0;
+    &:focus {
+        background-color: transparent;
+        color: $metal;
+    };
+    &::placeholder {
+        color: $unactive-grey;
+    };
+    &:focus::placeholder {
+        color: $metal;
+    };
+    &:hover {
+      border-bottom: 1px solid $deep-blue;
+      cursor: pointer;
+    }
+  }

@@ -57,7 +57,7 @@ export default class App extends Component {
               render={props => <LoginPage userAuth={this.userAuth} {...props} />}
               exact
             />
-            <Route path="/login_admin" component={AdminLoginPage} exact />
+            <Route path="/admin" component={HomeAdmin} exact />
 
             <Redirect to="/" />
           </Switch>
@@ -76,7 +76,6 @@ export default class App extends Component {
             />
             <Route path="/team_select/" component={PageTeamSelect} exact />
             <Route path="/subscriptions/" component={SubscriptionsPage} />
-            <Route path="/login_admin" component={AdminLoginPage} exact />
             <Route path="/admin" component={HomeAdmin} exact />
             <Route path="/admin/topic/:id" component={OneTopic} exact />
             <Route path="/admin/topic-create" component={TopicCreate} exact />

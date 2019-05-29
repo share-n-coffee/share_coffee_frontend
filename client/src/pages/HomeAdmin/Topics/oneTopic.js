@@ -11,22 +11,8 @@ import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/
 
 class TopicDropdown extends Component {
   state = {
-    subscribers: [],
     openSubscribers: "",
     error: "",
-  };
-
-  componentDidMount() {
-    this.getSubscribers(this.props.id);
-  }
-
-  getSubscribers = id => {
-    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
-      this.setState({
-        subscribers: data.object,
-        error: data.message,
-      });
-    });
   };
 
   openSubscribers = id => {
@@ -38,22 +24,26 @@ class TopicDropdown extends Component {
   };
 
   render() {
-    const { subscribers, openSubscribers } = this.state;
-    const { id } = this.props;
-
+    const { openSubscribers } = this.state;
+    const { id, subscribers } = this.props;
+    const length = subscribers.filter(subscriber => subscriber && subscriber.firstName).length;
     return (
       <Dropdown
-        length={subscribers.length}
+        length={length}
         onClick={() => subscribers.length > 0 && this.openSubscribers(id)}
         open={openSubscribers === id}
       >
-        {subscribers.length > 0 ? `Subscribers (${subscribers.length})` : `(0 Subscribers)`}
+        {subscribers && length > 0 ? `Subscribers (${length})` : `(0 Subscribers)`}
         <DropdownContent open={openSubscribers === id}>
-          {subscribers.map(subscriber => (
-            <DropdownItem key={subscriber._id}>
-              {subscriber.firstName} {subscriber.lastName}
-            </DropdownItem>
-          ))}
+          {subscribers.map(
+            subscriber =>
+              subscriber &&
+              subscriber.firstName && (
+                <DropdownItem key={subscriber._id}>
+                  {subscriber.firstName} {subscriber.lastName}
+                </DropdownItem>
+              ),
+          )}
         </DropdownContent>
       </Dropdown>
     );
@@ -66,7 +56,8 @@ class oneTopic extends Component {
   }
 
   state = {
-    event: [],
+    topic: [],
+    events: [],
     activeTab: "Description",
     isEdit: false,
     linkNoHover: true,
@@ -75,24 +66,38 @@ class oneTopic extends Component {
 
   componentDidMount() {
     this.getData();
+    this.getTopicEvents();
   }
 
   getData() {
-    request.get(URL.ONE_EVENT(this.props.match.params.id)).then(data => {
-      console.log(data);
+    request.get(URL.ONE_TOPIC(this.props.match.params.id)).then(data => {
       this.setState({
-        event: data.object,
+        topic: data.object.data.find(data => this.props.match.params.id === data._id),
         error: data.message,
       });
     });
   }
 
-  openTab(name) {
-    this.setState({ activeTab: name });
+  getTopicEvents() {
+    request.get(URL.TOPIC_EVENTS(this.props.match.params.id)).then(data => {
+      console.log(data.object.data);
+      this.setState({
+        events: data.object.data,
+        error: data.message,
+      });
+    });
   }
 
-  showEditForm() {
-    this.setState({ isEdit: true });
+  timestamp = createdTime => {
+    let date = new Date(createdTime);
+    let years = date.getFullYear();
+    let months = "0" + (date.getMonth() + 1);
+    let days = "0" + date.getDate();
+    return days.substr(-2) + "." + months.substr(-2) + "." + years;
+  };
+
+  openTab(name) {
+    this.setState({ activeTab: name });
   }
 
   mouseEvents = {
@@ -109,7 +114,7 @@ class oneTopic extends Component {
   };
 
   render() {
-    const { event, activeTab, isEdit } = this.state;
+    const { topic, activeTab, isEdit, events } = this.state;
     return (
       <>
         <Header
@@ -120,7 +125,7 @@ class oneTopic extends Component {
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
         <PageTitle
-          title={this.state.linkNoHover ? event.title : "← Back"}
+          title={this.state.linkNoHover ? topic && topic.title : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}
           mouseOut={this.mouseEvents.mouseOut}
           click={this.mouseEvents.click}
@@ -140,23 +145,27 @@ class oneTopic extends Component {
                 <TopicFront match={this.props.match} isAdmin={true} history={this.props.history} />
               </div>
             ) : (
-              <TopicEditer id={event._id} />
+              <TopicEditer id={topic._id} />
             )}
           </div>
-        ) : (
-          <div className={"one-topic"}>
-            <div className={"title"}>
-              <span className={`event-status ${event.active ? "active" : ""}`} />
-              {event.title}
-            </div>
+        ) : events && events.length > 0 ? (
+          events.map(event => (
+            <div className={"one-topic"}>
+              <div className={"title"}>
+                <span className={`event-status ${event.active ? "active" : ""}`} />
+                {this.timestamp(event.date)}
+              </div>
 
-            <TopicDropdown id={event._id} />
-            <span>Place: </span>
-            <div>{event.address}</div>
-            <span>Time:</span>
-            <div>{event.options.times}</div>
-            <button style={{ visibility: "hidden" }} />
-          </div>
+              <TopicDropdown subscribers={event.participants} />
+              <span>Place: </span>
+              <div>{topic.address}</div>
+              <span>Time:</span>
+              <div>{topic.time}</div>
+              <button style={{ visibility: "hidden" }} />
+            </div>
+          ))
+        ) : (
+          <div>Topic events is empty</div>
         )}
       </>
     );

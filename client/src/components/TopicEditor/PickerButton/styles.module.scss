@@ -1,0 +1,14 @@
+.icon_calendar  {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    background: no-repeat center url('./icon-calendar.png');
+    text-decoration: none;
+    outline: none;
+}
+
+.icon_calendar:hover {
+    background-image: url('./icon-calendar-focus.png');
+    cursor: pointer;
+}

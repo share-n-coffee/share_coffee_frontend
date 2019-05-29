@@ -1,0 +1,15 @@
+.time_chooser  {
+    display: flex;
+    align-items: center;
+}
+
+.time_input {
+    flex: 1;
+}
+
+.picker_container {
+    position: relative;
+    margin-left: 32px;
+    margin-right: 24px;
+    z-index: 10;
+}

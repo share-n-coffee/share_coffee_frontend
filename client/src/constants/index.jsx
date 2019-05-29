@@ -1,15 +1,23 @@
-export const TEAMS = `https://forge-development.herokuapp.com/api/departments/`;
+export const LOGIN_ADMIN = `https://forgeserver.herokuapp.com/login/admin`;
+
 export const GET_TOPIC_SUBSCRIBERS = id =>
-  `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-export const EVENTS = `https://forge-development.herokuapp.com/api/events/`;
-export const GENERATE_PAIRS = id => `https://forge-development.herokuapp.com/api/randomizer/${id}`;
-export const ONE_EVENT = id => `https://forge-development.herokuapp.com/api/events/${id}`;
-export const USERS = `https://forge-development.herokuapp.com/api/users/`;
-export const BAN_USER = id => `https://forge-development.herokuapp.com/api/users/ban/${id}`;
-export const ONE_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
-export const USER_IN_TEAM = id =>
-  `https://forge-development.herokuapp.com/api/users/?events.eventId=${id}`;
-export const ADMIN_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
+  `https://forgeserver.herokuapp.com/api/subscriptions/topic/${id}`;
+export const TOPICS = (page = 0, limit = 5) =>
+  `https://forgeserver.herokuapp.com/api/topics/?page=${page}&limit=${limit}`;
+export const ONE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
+export const ADD_NEW_TOPIC = "https://forgeserver.herokuapp.com/api/topics/";
+export const UPDATE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
+// export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
+export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/topics/events/${id}`;
+
+export const USERS = (page = 0, limit = 10) =>
+  `https://forgeserver.herokuapp.com/api/users/?page=${page}&limit=${limit}`;
+export const BAN_USER = id => `https://forgeserver.herokuapp.com/api/users/ban/${id}`;
+export const ONE_USER = id => `https://forgeserver.herokuapp.com/api/users/${id}`;
+
+export const TEAMS = `https://forgeserver.herokuapp.com/api/departments/`;
+export const USER_IN_TEAM = id => `https://forgeserver.herokuapp.com/api/users/?department=${id}`;
+export const ONE_TEAM = id => `https://forgeserver.herokuapp.com/api/departments/${id}`;
 
 const SET_USER_DATA = "https://forge-development.herokuapp.com/login";
 const GET_EVENTS = "https://forge-development.herokuapp.com/api/events/";

@@ -6,8 +6,7 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 import Button from "../../../common/Button";
 import * as URL from "../../../constants";
-import SpinButton from "../../../common/SpinButton";
-import { Loading } from "../../../ui/components/Loader";
+import Pagination from "../../../components/Pagination";
 
 class TopicDropdown extends Component {
   state = {
@@ -23,7 +22,7 @@ class TopicDropdown extends Component {
   getSubscribers = id => {
     request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
       this.setState({
-        subscribers: data.object,
+        subscribers: data.object.data,
         error: data.message,
       });
     });
@@ -40,73 +39,29 @@ class TopicDropdown extends Component {
   render() {
     const { subscribers, openSubscribers } = this.state;
     const { id } = this.props;
+    const length = subscribers.filter(subscriber => subscriber && subscriber.firstName).length;
 
     return (
       <Dropdown
-        length={subscribers.length}
-        onClick={() => subscribers.length > 0 && this.openSubscribers(id)}
+        length={length}
+        onClick={() => length > 0 && this.openSubscribers(id)}
         open={openSubscribers === id}
       >
-        {subscribers.length > 0 ? `Subscribers (${subscribers.length})` : `(0 Subscribers)`}
+        {subscribers && length > 0 ? `Subscribers (${length})` : `(0 Subscribers)`}
         <DropdownContent open={openSubscribers === id}>
-          {subscribers.map(subscriber => (
-            <DropdownItem key={subscriber._id}>
-              {subscriber.firstName} {subscriber.lastName}
-            </DropdownItem>
-          ))}
+          {subscribers &&
+            length > 0 &&
+            subscribers.map(
+              subscriber =>
+                subscriber &&
+                subscriber.firstName && (
+                  <DropdownItem key={subscriber._id}>
+                    {subscriber.firstName} {subscriber.lastName}
+                  </DropdownItem>
+                ),
+            )}
         </DropdownContent>
       </Dropdown>
-    );
-  }
-}
-
-class DeleteBtn extends Component {
-  state = {
-    subscribers: [],
-    error: false,
-    deleteContent: false,
-  };
-
-  componentDidMount() {
-    this.getSubscribers(this.props.id);
-  }
-
-  getSubscribers = id => {
-    request.get(URL.GET_TOPIC_SUBSCRIBERS(id)).then(data => {
-      this.setState({
-        subscribers: data.object,
-        error: data.message,
-      });
-    });
-  };
-
-  toggle = () => {
-    this.setState({ deleteContent: true });
-  };
-
-  clear = () => {
-    this.setState({ deleteContent: false });
-  };
-
-  delete = () => {
-    console.log("delete");
-    this.clear();
-  };
-
-  render() {
-    const { subscribers, deleteContent } = this.state;
-    return subscribers && subscribers.length > 0 ? null : (
-      <div className="toggle_delete">
-        {!deleteContent ? (
-          <img src={require("../../../assets/img/close.svg")} alt="" onClick={this.toggle} />
-        ) : (
-          <div>
-            Are you sure you want to delete?
-            <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
-            <Button onClick={this.delete} text="Delete" />
-          </div>
-        )}
-      </div>
     );
   }
 }
@@ -119,31 +74,27 @@ class Topics extends Component {
   state = {
     events: [],
     error: "",
-    isLoading: "",
-    isLoadData: false,
+    pageCount: 1,
   };
 
   componentDidMount() {
     this.getData();
   }
 
-  getData() {
-    this.setState({ isLoadData: true });
-
-    request.get(URL.EVENTS).then(data => {
+  getData(page = 0, limit = 5) {
+    request.get(URL.TOPICS(page, limit)).then(data => {
+      console.log(data.object.data);
       this.setState({
-        events: data.object,
+        events: data.object.data,
+        pageCount: data.object.pages.total,
         error: data.message,
-        isLoadData: false,
       });
     });
   }
 
-  generatePairs(id) {
-    this.setState({ isLoading: id });
-    request.post(URL.GENERATE_PAIRS(id)).then(data => {
-      this.setState({ isLoading: "" });
-    });
+  pagination(currentPage) {
+    console.log(currentPage);
+    this.getData(currentPage - 1);
   }
 
   addTopic = e => {
@@ -152,10 +103,8 @@ class Topics extends Component {
   };
 
   render() {
-    const { events, error, isLoading, isLoadData } = this.state;
-    return isLoadData ? (
-      <Loading />
-    ) : (
+    const { events, error, pageCount } = this.state;
+    return (
       <div style={{ textAlign: "left" }}>
         {events && events.length > 0 ? (
           events.map(event => (
@@ -169,18 +118,16 @@ class Topics extends Component {
               <span>Place: </span>
               <div>{event.address}</div>
               <span>Time:</span>
-              <div>{event.options.times}</div>
-              <SpinButton
-                onClick={() => this.generatePairs(event._id)}
-                text="pairs"
-                isLoading={isLoading === event._id}
-              />
-              <DeleteBtn id={event._id} />
+              <div>{event.time}</div>
+              <button style={{ visibility: "hidden" }} />
             </div>
           ))
         ) : (
           <div>Events is empty</div>
         )}
+
+        <Pagination pageCount={pageCount} change={currentPage => this.pagination(currentPage)} />
+
         <Button onClick={e => this.addTopic(e)} text="Add topic" />
         {error ? <ErrorMessage error={error} /> : null}
       </div>

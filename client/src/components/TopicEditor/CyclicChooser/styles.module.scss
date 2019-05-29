@@ -1,0 +1,32 @@
+@import '../styles';
+
+.topic_editor_periodic {
+    margin: 20px 0 0;
+    width: 100%;
+    display: flex;
+    & [type="radio"] {
+        display: none;
+    };
+    & label {
+        position: relative;
+        padding: 0 20px;
+        flex: 1;
+        cursor: pointer;
+    };
+    & [type="radio"] + label:before {
+        content: '';
+        position: absolute;
+        box-sizing: border-box;
+        margin: 0px;
+        left: 0;
+        top: 0.4em;
+        width: 10px;
+        height: 10px;
+        border: 1px solid $unactive-grey;
+        border-radius: 100%;
+        background: $mr-white;
+    }
+    & [type="radio"]:checked + label:before {
+        border: 3px solid $deep-blue;
+    }
+}

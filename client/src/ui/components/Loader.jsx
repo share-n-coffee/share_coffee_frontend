@@ -12,7 +12,7 @@ export const Loading = () => {
   );
 };
 
-export const UILoading = styled.p`
+export const UILoading = styled.div`
   color: #0064ff;
   text-align: center;
 `;

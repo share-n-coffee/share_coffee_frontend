@@ -7,6 +7,31 @@ import { request } from "../../../helpers/requests";
 import * as URL from "../../../constants";
 import SpinButton from "../../../common/SpinButton";
 import { Loading } from "../../../ui/components/Loader";
+import Button from "../../../common/Button";
+
+class UserDepartment extends Component {
+  state = {
+    title: "",
+  };
+
+  componentDidMount() {
+    // console.log(this.props)
+    if (this.props.id) {
+      request.get(URL.ONE_TEAM(this.props.id)).then(data => {
+        console.log(data.object.data.title);
+        if (data.object) {
+          this.setState({
+            title: data.object.data.title,
+          });
+        } else this.setState({ title: `Did't choose a team` });
+      });
+    } else this.setState({ title: `Did't choose a team` });
+  }
+
+  render() {
+    return <span>{this.state.title}</span>;
+  }
+}
 
 class Topics extends Component {
   state = {
@@ -20,23 +45,26 @@ class Topics extends Component {
     curPage: 1,
     isLoading: "",
     isLoadData: false,
+    pageCount: 1,
+    curDep: "",
   };
 
   componentDidMount() {
     this.getData();
   }
 
-  getData() {
+  getData(page = 0, limit = 10) {
     this.setState({ isLoadData: true });
-    request.get(URL.USERS).then(data => {
+    request.get(URL.USERS(page, limit)).then(data => {
+      console.log(data);
       this.setState({
-        users: data.object,
-        unsortedUser: data.object,
-        userLength: data.object.length,
+        users: data.object.data,
+        unsortedUser: data.object.data,
+        userLength: data.object.data.length,
+        pageCount: data.object.pages.total,
         error: data.message,
         isLoadData: false,
       });
-      this.pagination(10, this.state.curPage);
     });
   }
 
@@ -59,13 +87,8 @@ class Topics extends Component {
     });
   };
 
-  pagination(pageSize, currentPage) {
-    const data = this.state.unsortedUser;
-    const upperLimit = currentPage * pageSize;
-    this.setState({
-      users: data.slice(upperLimit - pageSize, upperLimit),
-      curPage: currentPage,
-    });
+  pagination(currentPage) {
+    this.getData(currentPage - 1);
   }
 
   timestamp = createdTime => {
@@ -129,10 +152,8 @@ class Topics extends Component {
   };
 
   render() {
-    const { users, activeFilter, up, error, userLength, isLoading, isLoadData } = this.state;
-    return isLoadData ? (
-      <Loading />
-    ) : (
+    const { users, activeFilter, up, error, pageCount, isLoading, isLoadData } = this.state;
+    return (
       <div>
         {users && users.length > 0 ? (
           <div>
@@ -167,48 +188,57 @@ class Topics extends Component {
                 </tr>
               </thead>
               <tbody>
-                {users.map(user => (
-                  <tr
-                    key={user._id}
-                    className={`${
-                      user.banned.status ? "bannedUser" : user.admin.isAdmin ? "adminUser" : ""
-                    }`}
-                  >
-                    <td>
-                      <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
-                        <span className={"username"}>{user.username}</span>
-                      </Link>
-                    </td>
-                    <td>{user.department}</td>
-                    <td>{this.timestamp(user.created)}</td>
-                    {!user.admin.isAdmin ? (
-                      <td>
-                        {!user.banned.status ? (
-                          <SpinButton
-                            onClick={() => this.toggle(user)}
-                            text="Ban User"
-                            isLoading={isLoading === user._id}
-                            type="Unsubscribe"
-                          />
+                {users.map(
+                  user =>
+                    user.username && (
+                      <tr
+                        key={user._id}
+                        // className={`${
+                        //   user.banned.status
+                        //     ? "bannedUser"
+                        //     : user.admin.permission !== 0
+                        //     ? "adminUser"
+                        //     : ""
+                        // }`}
+                      >
+                        <td>
+                          <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
+                            <span className={"username"}>{user.username}</span>
+                          </Link>
+                        </td>
+                        <td>
+                          <UserDepartment id={user.department} />
+                        </td>
+                        <td>{this.timestamp(user.created)}</td>
+                        {user.admin.permission === 0 ? (
+                          <td>
+                            {!user.banned.status ? (
+                              <SpinButton
+                                onClick={() => this.toggle(user)}
+                                text="Ban User"
+                                isLoading={isLoading === user._id}
+                                type="Unsubscribe"
+                              />
+                            ) : (
+                              <SpinButton
+                                onClick={() => this.toggle(user)}
+                                text="Unban"
+                                type="Subscribe"
+                                isLoading={isLoading === user._id}
+                              />
+                            )}
+                          </td>
                         ) : (
-                          <SpinButton
-                            onClick={() => this.toggle(user)}
-                            text="Unban"
-                            type="Subscribe"
-                            isLoading={isLoading === user._id}
-                          />
+                          <td>ADMIN</td>
                         )}
-                      </td>
-                    ) : (
-                      <td>ADMIN</td>
-                    )}
-                  </tr>
-                ))}
+                      </tr>
+                    ),
+                )}
               </tbody>
             </table>
             <Pagination
-              length={userLength}
-              change={(pageSize, currentPage) => this.pagination(pageSize, currentPage)}
+              pageCount={pageCount}
+              change={currentPage => this.pagination(currentPage)}
             />
           </div>
         ) : (
@@ -226,5 +256,4 @@ Topics.propTypes = {
   children: PropTypes.object,
   dispatch: PropTypes.func,
 };
-
 export default Topics;
