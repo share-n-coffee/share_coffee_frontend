@@ -73,7 +73,7 @@ const timeConverter = prop => {
   } else {
     month = date.getMonth() + 1;
   }
-  return `${date.getDate()}/${month}/${date.getFullYear()}`;
+  return `${date.getDate()}.${month}.${date.getFullYear()}`;
 };
 
 export { setStorage, router, letterTransform, checkerNone, timeConverter, regularity };

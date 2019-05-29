@@ -18,19 +18,20 @@ class EventDesc extends Component {
     } = this.props;
     // console.log("UserTopics", userEvents);
     // const userEventIds = userEvents.map(event => event.topicId);
-    console.log("userEventsIds", userEventsIds);
-    console.log("topics", events);
+    // console.log("userEventsIds", userEventsIds);
+    // console.log("topics", events);
 
-    const regularity = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    // const regularity = [
+    //   "Sunday",
+    //   "Monday",
+    //   "Tuesday",
+    //   "Wednesday",
+    //   "Thursday",
+    //   "Friday",
+    //   "Saturday",
+    // ];
     const elements = events.map(event => {
+      console.log(event);
       const isSubscribed = userEventsIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">

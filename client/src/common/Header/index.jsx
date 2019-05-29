@@ -8,6 +8,7 @@ import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
+import { checkerNone } from "../../helpers/helpers";
 
 // static
 const events = [
@@ -31,7 +32,6 @@ const events = [
   },
 ];
 //
-
 // api 2.0 upcoming dropdown
 const getUpcomingEvents = userId => {
   const obj = {
@@ -53,7 +53,9 @@ const getUpcomingEvents = userId => {
       return err;
     });
 };
+const hasId = checkerNone(sessionStorage.getItem("id")) === "" ? false : true;
 
+// console.log(userEvents.data);
 const logOut = props => {
   const { location } = props;
   sessionStorage.clear();

@@ -141,6 +141,7 @@ const SubscriptionsPage = props => {
     const fetchData = async () => {
       const result = await getAllTopics(token);
       // console.log(result)
+      console.log(result);
       setTopics(result.data.data);
     };
 
