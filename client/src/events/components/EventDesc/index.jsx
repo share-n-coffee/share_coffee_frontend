@@ -4,6 +4,7 @@ import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
 import SpinButton from "../../../common/SpinButton";
 import { Link } from "react-router-dom";
+import { letterTransform, checkerNone, timeConverter, regularity } from "../../../helpers/helpers";
 
 class EventDesc extends Component {
   render() {
@@ -11,43 +12,41 @@ class EventDesc extends Component {
       events,
       onSubscriptionClick,
       onUnsubscriptionClick,
-      userEvents = [],
+      userEventsIds = [],
       isLoading,
       currentLoadingEvents = [],
     } = this.props;
-    const userEventIds = userEvents.map(event => event.eventId);
-    const regularity = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
 
     const elements = events.map(event => {
-      const isSubscribed = userEventIds.includes(event._id);
+      const isSubscribed = userEventsIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">
           <div className="eventContainer">
             {isSubscribed ? (
               <div className="selectedEvent">
                 <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-                  <EventName eventName={event.title} isSubscribed={event.isActive} />
+                  <EventName
+                    eventName={letterTransform(checkerNone(event.title))}
+                    isSubscribed={event.active}
+                  />
                 </Link>
                 <span>Subscribed</span>
               </div>
             ) : (
               <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-                <EventName eventName={event.title} isSubscribed={event.isActive} />
+                <EventName
+                  eventName={letterTransform(checkerNone(event.title))}
+                  isSubscribed={event.active}
+                />
               </Link>
             )}
             <InfoAboutEvent
-              adress={event.address}
-              eventFrequency={`every ${regularity[event.options.regularity]}, ${
-                event.options.times[0]
-              }`}
+              adress={letterTransform(checkerNone(event.address))}
+              eventFrequency={
+                event.cyclic
+                  ? `Every ${regularity[event.weekDay]}, ${event.time}`
+                  : `${timeConverter(event.singleDate)} - ${event.time}`
+              }
             />
           </div>
           <SpinButton
