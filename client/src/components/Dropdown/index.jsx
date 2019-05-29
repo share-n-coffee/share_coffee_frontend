@@ -17,7 +17,7 @@ const getLabelByValue = (options, value) => {
  */
 const Dropdown = ({ options, selectedValue, onSelect }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const selection = selectedValue ? getLabelByValue(options, selectedValue) : "Accounts";
+  const selection = selectedValue ? getLabelByValue(options, selectedValue) : "Select department";
 
   return (
     <div
