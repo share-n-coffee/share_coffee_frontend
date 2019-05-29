@@ -1,5 +1,20 @@
 import React from "react";
 
+const checkerProp = prop => {
+  if (
+    prop === "undefined" ||
+    prop === null ||
+    prop === undefined ||
+    prop === "undefined" ||
+    `${prop}` === "NaN" ||
+    prop === ""
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const setStorage = userData => {
   sessionStorage.setItem("id", userData.data._id);
   sessionStorage.setItem("firstName", userData.data.firstName);
@@ -7,12 +22,7 @@ const setStorage = userData => {
   sessionStorage.setItem("avatar", userData.data.avatar);
   sessionStorage.setItem("isAdmin", userData.data.permission);
   sessionStorage.setItem("banned", userData.data.banned.status);
-  if (
-    userData.data.department === null ||
-    userData.data.department === "undefined" ||
-    userData.data.department === undefined ||
-    userData.data.department === "null"
-  ) {
+  if (checkerProp(userData.data.department)) {
     sessionStorage.setItem("department", null);
   } else {
     sessionStorage.setItem("department", userData.data.department.title);
@@ -21,19 +31,11 @@ const setStorage = userData => {
 };
 
 const router = props => {
-  // console.log("probros 5");
   props.userAuth();
-  const id = sessionStorage.getItem("id");
-  // const departament = sessionStorage.getItem("department");
-  const dep = sessionStorage.getItem("department");
-  const hasId =
-    id === "undefined" || id === undefined || id === null || id === "null" ? false : true;
-  const hasDepartament =
-    dep === "undefined" || dep === undefined || dep === null || dep === "null" ? false : true;
-  // if (id && !departament) {
+  const hasId = !checkerProp(sessionStorage.getItem("id"));
+  const hasDepartament = !checkerProp(sessionStorage.getItem("department"));
   if (hasId && !hasDepartament) {
     props.history.push("/team_select/");
-    // } else if (hasId && dep) {
   } else if (hasId && hasDepartament) {
     props.history.push("/subscriptions/");
   }
@@ -52,14 +54,6 @@ const letterTransform = prop => {
     return str;
   } else {
     return "";
-  }
-};
-
-const checkerNone = prop => {
-  if (prop === "undefined" || prop === null || prop === undefined || prop === "undefined") {
-    return "";
-  } else {
-    return prop;
   }
 };
 
@@ -103,8 +97,9 @@ export {
   setStorage,
   router,
   letterTransform,
-  checkerNone,
+  // checkerNone,
   timeConverter,
   regularity,
   secConverter,
+  checkerProp,
 };

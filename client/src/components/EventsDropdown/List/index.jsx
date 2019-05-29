@@ -4,6 +4,7 @@ import {
   timeConverter,
   letterTransform,
   checkerNone,
+  checkerProp,
   secConverter,
 } from "../../../helpers/helpers";
 
@@ -22,11 +23,19 @@ const List = ({ events }) => {
             if (id < 3) {
               return (
                 <div className="event-item" key={id}>
-                  <h4 className="event_title">{letterTransform(checkerNone(item.topic.title))}</h4>
-                  <p className="event_place">{checkerNone(item.topic.address)}</p>
-                  <p className="event_time">{`${timeConverter(
-                    checkerNone(item.date),
-                  )} - ${secConverter(item.date)}`}</p>
+                  <h4 className="event_title">
+                    {checkerProp(item.topic.title)
+                      ? "Default title"
+                      : letterTransform(item.topic.title)}
+                  </h4>
+                  <p className="event_place">
+                    {checkerProp(item.topic.address) ? "Default address" : item.topic.address}
+                  </p>
+                  <p className="event_time">
+                    {checkerProp(item.date)
+                      ? "Default date"
+                      : `${timeConverter(item.date)} - ${secConverter(item.date)}`}
+                  </p>
                 </div>
               );
             } else {
