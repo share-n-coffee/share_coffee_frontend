@@ -181,6 +181,8 @@ TopicEditor.propTypes = {
     time: PropTypes.string.isRequired,
     singleDate: PropTypes.number,
   }),
+  onCancel: PropTypes.func,
+  onSave: PropTypes.func,
 };
 
 TopicEditor.defaultProps = {
