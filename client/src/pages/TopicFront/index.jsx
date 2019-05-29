@@ -69,16 +69,16 @@ const TopicFront = ({
     fetchData();
   }, []);
 
-  let { title, description, address, location } = eventData;
+  // let { title, description, address, location } = eventData;
 
-  const titleTransform = title => {
+  const letterTransform = prop => {
     let str = "";
-    if (title !== undefined || title !== null) {
-      for (let i = 0; i < title.length; i++) {
+    if (prop !== undefined || prop !== null) {
+      for (let i = 0; i < prop.length; i++) {
         if (i === 0) {
-          str += title.charAt(i).toUpperCase();
+          str += prop.charAt(i).toUpperCase();
         } else {
-          str += title.charAt(i);
+          str += prop.charAt(i);
         }
       }
       return str;
@@ -86,12 +86,27 @@ const TopicFront = ({
       return "";
     }
   };
+
+  const checkerNone = prop => {
+    if (prop === "undefined" || prop === null || prop === undefined || prop === "undefined") {
+      return "";
+    } else {
+      return prop;
+    }
+  };
+
+  const parseHTML = props => {
+    const test = React.createElement("div", null, props);
+    // test.insertHTML = props;
+    return test;
+  };
+
   console.log(eventData);
   return (
     <>
       {!isAdmin ? (
         <PageTitle
-          title={!linkHover ? eventData.title : "← Back"}
+          title={!linkHover ? letterTransform(checkerNone(eventData.title)) : "← Back"}
           mouseOver={mouseEvents.mouseOver}
           mouseOut={mouseEvents.mouseOut}
           click={mouseEvents.click}
@@ -102,7 +117,7 @@ const TopicFront = ({
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
-            <h2>Topic {eventData.title ? titleTransform(title) : ""}</h2>
+            <h2>Topic "{letterTransform(checkerNone(eventData.title))}"</h2>
             {isAdmin ? (
               <Button text={"Edit"} onClick={toEdit} />
             ) : (
@@ -121,20 +136,14 @@ const TopicFront = ({
               />
             )}
           </div>
-          <p className="section__descr">{eventData.description}</p>
+          <p className="section__descr">{letterTransform(checkerNone(eventData.description))}</p>
           <div className="section__place">
             <h3 className="section__topic__title">Place:</h3>
-            <p className="place__descr">
-              {eventData.address === "undefined" ||
-              eventData.address === null ||
-              eventData.address === undefined
-                ? "Default"
-                : eventData.address}
-            </p>
+            <p className="place__descr">{letterTransform(checkerNone(eventData.address))}</p>
           </div>
           <div className="time__descr">
             <h3 className="section__topic__title">Time:</h3>
-            <p className="time__descr">{eventData.time}</p>
+            <p className="time__descr">{checkerNone(eventData.time)}</p>
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>
