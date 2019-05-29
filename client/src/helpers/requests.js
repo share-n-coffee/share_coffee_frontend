@@ -34,7 +34,6 @@ class requests {
   async get(url, withRedirect = true) {
     let result = this.initialResult;
     const authHeader = this.getAuthHeader();
-
     try {
       let response;
       response = await axios(url, { headers: authHeader });
@@ -42,20 +41,18 @@ class requests {
       result.ok = response.ok;
       result.object = response.data;
       result.message = this.getStatusMessage(response.status);
-      if (response.status === 403 && withRedirect) this.redirect2Login();
+      if (response.status === 401 && withRedirect) {
+        this.redirect2Login();
+      }
     } catch (err) {
-      console.log(err);
       const response = err.response;
       result.object = [];
-
       if (response) {
-        if (response.status === 403 && withRedirect) this.redirect2Login();
+        result.status = response.status;
+        if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.status < 400) {
-          result.object = await response.data;
-        }
-        if (result.object.errors && result.object.errors > 0) {
-          result.message = result.object.errors[0].msg;
+        if (response.data.errors && response.data.errors.length > 0) {
+          result.message = response.data.errors[0].msg;
           result.object = [];
         }
       } else {
@@ -79,21 +76,18 @@ class requests {
       result.status = response.status;
       result.ok = response.ok;
       result.message = this.getStatusMessage(response.status);
-      if (response.status === 403 && withRedirect) this.redirect2Login();
+      if (response.status === 401 && withRedirect) this.redirect2Login();
       else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       result.object = await response.data;
     } catch (err) {
       const response = err.response;
       result.object = [];
-
       if (response) {
-        if (response.status === 403 && withRedirect) this.redirect2Login();
+        result.status = response.status;
+        if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.status < 400) {
-          result.object = await response.data;
-        }
-        if (result.object.errors && result.object.errors > 0) {
-          result.message = result.object.errors[0].msg;
+        if (response.data.errors && response.data.errors.length > 0) {
+          result.message = response.data.errors[0].msg;
           result.object = [];
         }
       } else {
@@ -114,10 +108,11 @@ class requests {
         headers: { ...authHeader, ...contentType },
         ...options,
       });
+
       result.status = response.status;
       result.ok = response.ok;
       result.message = this.getStatusMessage(response.status);
-      if (response.status === 403 && withRedirect) this.redirect2Login();
+      if (response.status === 401 && withRedirect) this.redirect2Login();
       else if (response.status >= 400) console.log("Bad response from server, url: " + url);
       result.object = await response.data;
     } catch (err) {
@@ -125,13 +120,46 @@ class requests {
       result.object = [];
 
       if (response) {
-        if (response.status === 403 && withRedirect) this.redirect2Login();
+        result.status = response.status;
+        if (response.status === 401 && withRedirect) this.redirect2Login();
         else if (response.status >= 400) console.log("Bad response from server, url: " + url);
-        if (response.status < 400) {
-          result.object = await response.data;
+        if (response.data.errors && response.data.errors.length > 0) {
+          result.message = response.data.errors[0].msg;
+          result.object = [];
         }
-        if (result.object.errors && result.object.errors > 0) {
-          result.message = result.object.errors[0].msg;
+      } else {
+        result.message = "Something went wrong";
+      }
+    }
+    return result;
+  }
+
+  async delete(url, withRedirect = true) {
+    let result = this.initialResult;
+    const authHeader = this.getAuthHeader();
+
+    try {
+      let response;
+      response = await axios(url, {
+        method: "DELETE",
+        headers: authHeader,
+      });
+      result.status = response.status;
+      result.ok = response.ok;
+      result.object = response.data;
+      result.message = this.getStatusMessage(response.status);
+      if (response.status === 401 && withRedirect) {
+        this.redirect2Login();
+      }
+    } catch (err) {
+      const response = err.response;
+      result.object = [];
+      if (response) {
+        result.status = response.status;
+        if (response.status === 401 && withRedirect) this.redirect2Login();
+        else if (response.status >= 400) console.log("Bad response from server, url: " + url);
+        if (response.data.errors && response.data.errors.length > 0) {
+          result.message = response.data.errors[0].msg;
           result.object = [];
         }
       } else {

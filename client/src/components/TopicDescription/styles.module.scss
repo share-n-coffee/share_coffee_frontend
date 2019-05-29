@@ -1,0 +1,14 @@
+@import '../TopicEditor/styles.scss';
+
+.desc_editor {
+  padding: 22px 0;
+  margin: 10px 0;
+}
+
+.desc_editor__editable {
+  border-bottom: 1px solid $deep-blue-inactive;
+  &:focus, &:hover {
+    border-bottom: 1px solid $deep-blue;
+  }
+}
+

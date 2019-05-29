@@ -11,7 +11,7 @@ import Header from "../../../common/Header";
 class OneUser extends React.Component {
   state = {
     activeTab: "UserInfo",
-    user: [],
+    user: {},
     error: "",
     linkNoHover: true,
   };
@@ -23,7 +23,7 @@ class OneUser extends React.Component {
   getData() {
     request.get(URL.ONE_USER(this.props.match.params.id)).then(data => {
       this.setState({
-        user: data.object,
+        user: data.object.data,
         error: data.message,
       });
     });
@@ -41,14 +41,13 @@ class OneUser extends React.Component {
       this.setState({ linkNoHover: true });
     },
     click: () => {
-      this.props.history.push("/admin");
+      this.props.history.push({ pathname: "/admin", state: { page: "Users" } });
       this.setState({ openEvent: false });
     },
   };
 
   render() {
     const { activeTab, user, error } = this.state;
-
     return (
       <div>
         <Header
@@ -71,13 +70,13 @@ class OneUser extends React.Component {
           <Tab onClick={() => this.openTab("UserTopics")} active={activeTab === "UserTopics"}>
             Topics
           </Tab>
-          <Tab onClick={() => this.openTab("UserLogs")} active={activeTab === "UserLogs"}>
-            Logs
-          </Tab>
+          {/*<Tab onClick={() => this.openTab("UserLogs")} active={activeTab === "UserLogs"}>*/}
+          {/*Logs*/}
+          {/*</Tab>*/}
         </TabContainer>
         {activeTab === "UserInfo" && <UserInfo user={user} error={error} />}
         {activeTab === "UserTopics" && <UserTopics events={user.events} error={error} />}
-        {activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}
+        {/*{activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}*/}
       </div>
     );
   }

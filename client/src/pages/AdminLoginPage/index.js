@@ -7,6 +7,7 @@ import SpinButton from "../../common/SpinButton";
 import { setCookie } from "tiny-cookie";
 import jwtDecode from "jwt-decode";
 import { setStorage } from "../../helpers/helpers";
+import * as URL from "../../constants";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -22,22 +23,21 @@ class AdminLoginPage extends Component {
 
   login = e => {
     e.preventDefault();
-    const requestUrl = `https://forge-development.herokuapp.com/login/admin`;
 
-    this.setState({
-      isLoading: true,
-    });
+    this.setState({ isLoading: true });
 
     const user = {
       username: this.state.username,
       password: md5(this.state.password),
     };
 
-    request.post(requestUrl, user, false).then(data => {
+    request.post(URL.LOGIN_ADMIN, user, false).then(data => {
       if (!data.message) {
         if (data.object.token) {
           const date = new Date(jwtDecode(data.object.token).exp * 1000).toGMTString();
           setCookie("token", data.object.token, { expires: date });
+          setStorage(jwtDecode(`${data.object.token}`));
+          this.props.setLogin();
           this.setState({ isLoading: false });
         }
       } else {

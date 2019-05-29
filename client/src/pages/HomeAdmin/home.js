@@ -9,6 +9,11 @@ class HomeDashboard extends React.Component {
     activeTab: "Topics",
   };
 
+  componentDidMount() {
+    if (this.props.location.state && this.props.location.state.page)
+      this.setState({ activeTab: this.props.location.state.page });
+  }
+
   openTab = tabName => {
     this.setState({ activeTab: tabName });
   };
@@ -19,22 +24,13 @@ class HomeDashboard extends React.Component {
     return (
       <div>
         <TabContainer>
-          <Tab
-            onClick={() => this.openTab("Topics")}
-            active={activeTab === "Topics"}
-          >
+          <Tab onClick={() => this.openTab("Topics")} active={activeTab === "Topics"}>
             Topics
           </Tab>
-          <Tab
-            onClick={() => this.openTab("Users")}
-            active={activeTab === "Users"}
-          >
+          <Tab onClick={() => this.openTab("Users")} active={activeTab === "Users"}>
             Users
           </Tab>
-          <Tab
-            onClick={() => this.openTab("Teams")}
-            active={activeTab === "Teams"}
-          >
+          <Tab onClick={() => this.openTab("Teams")} active={activeTab === "Teams"}>
             Teams
           </Tab>
         </TabContainer>

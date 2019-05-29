@@ -20,7 +20,7 @@ class DeleteBtn extends Component {
   getOneTeam(id) {
     request.get(URL.USER_IN_TEAM(id)).then(data => {
       this.setState({
-        users: data.object,
+        users: data.object.data,
         error: data.message,
       });
     });
@@ -34,11 +34,13 @@ class DeleteBtn extends Component {
     this.setState({ deleteContent: false });
   };
 
-  delete = () => {
+  delete = id => {
     this.setState({ isLoading: true });
-    console.log("delete");
-    this.clear();
-    this.setState({ isLoading: false });
+    request.delete(URL.ONE_TEAM(id)).then(data => {
+      this.clear();
+      this.setState({ isLoading: false });
+      this.props.refreshData(id);
+    });
   };
 
   render() {
@@ -53,7 +55,11 @@ class DeleteBtn extends Component {
           <div>
             Are you sure you want to delete?
             <Button onClick={this.clear} text="Cancel" type="Unsubscribe" />
-            <SpinButton onClick={this.delete} text="Delete" isLoading={isLoading} />
+            <SpinButton
+              onClick={() => this.delete(this.props.id)}
+              text="Delete"
+              isLoading={isLoading}
+            />
           </div>
         )}
       </div>
@@ -83,7 +89,7 @@ class Teams extends Component {
     this.setState({ isLoadData: true });
     request.get(URL.TEAMS).then(data => {
       this.setState({
-        teams: data.object,
+        teams: data.object.data,
         error: data.message,
         isLoadData: false,
       });
@@ -98,6 +104,12 @@ class Teams extends Component {
     this.setState({
       isShowAdding: !this.state.isShowAdding,
       error: "",
+    });
+  };
+
+  refreshData = id => {
+    this.setState({
+      teams: this.state.teams.filter(team => team._id !== id),
     });
   };
 
@@ -117,8 +129,10 @@ class Teams extends Component {
       request.post(URL.TEAMS, department).then(data => {
         if (!data.message) {
           this.toggleAdding();
-          this.getData();
-          this.setState({ isLoading: false });
+          this.setState({
+            teams: this.state.teams.concat(data.object.data),
+            isLoading: false,
+          });
         } else {
           this.setState({
             error: data.message,
@@ -135,14 +149,16 @@ class Teams extends Component {
       <Loading />
     ) : (
       <div style={{ textAlign: "left" }}>
-        {teams &&
-          teams.length > 0 &&
+        {teams && teams.length > 0 ? (
           teams.map(team => (
             <div key={team._id} className={"team_block"}>
               <span>{team.title}</span>
-              <DeleteBtn id={team._id} />
+              <DeleteBtn id={team._id} refreshData={id => this.refreshData(id)} />
             </div>
-          ))}
+          ))
+        ) : (
+          <div>Team is empty</div>
+        )}
         {!isShowAdding ? (
           <Button onClick={this.toggleAdding} text=" Add team" />
         ) : (
