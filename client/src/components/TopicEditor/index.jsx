@@ -163,7 +163,7 @@ class TopicEditor extends Component {
 
         <div className={styles.topic_editor_buttons}>
           <Button type="Unsubscribe" text="Cancel" onClick={this.onCancel} />
-          <SpinButton type="Subscribe" text="Save" />
+          <SpinButton type="Subscribe" text="Save" onClick={this.onSave} />
         </div>
       </div>
     );
