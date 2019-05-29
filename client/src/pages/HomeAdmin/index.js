@@ -3,31 +3,51 @@ import HomeDashboard from "./home";
 import { Redirect } from "react-router";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
+import Preloader from "../../modules/Preloader";
+import axios from "axios";
+import { GET_USER } from "../../constants/";
 import { setStorage } from "../../helpers/helpers";
 import jwtDecode from "jwt-decode";
 
 class HomeAdmin extends React.Component {
   state = {
-    isLogin: false,
+    isLogin: 0,
+    loading: true,
   };
 
-  componentDidMount() {
+  async componentWillMount() {
     const token = getCookie("token");
     const id = sessionStorage.getItem("id");
-    const checkAdmin = null; //сделать запрос к базе по полю админ:
-    //https://documenter.getpostman.com/view/7419944/S1TSXdzx?version=latest#b0a99c3e-90ec-447a-a996-eb552bab3e4b
-    //проверить результат
-    if (checkAdmin) {
-      this.setState({ isLogin: true });
-    }
+
+    const result = await axios({
+      url: GET_USER(id),
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    await this.setState({
+      isLogin: result.data.data.admin.permission,
+      loading: false,
+    });
   }
 
-  setLogin = (state, data) => {
-    this.setState({ isLogin: state });
-    setStorage(jwtDecode(data));
-  };
-
   render() {
+    if (this.state.loading) {
+      return (
+        <div className="preloader-body">
+          <Preloader />
+        </div>
+      );
+    }
+
     return this.state.isLogin ? (
       <>
         <Header

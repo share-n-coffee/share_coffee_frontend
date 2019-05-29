@@ -1,3 +1,12 @@
+.preloader-body{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin:auto;
+}
+
 .preloader{
     position: absolute;
       display: flex;
@@ -8,11 +17,11 @@
       background: #FAFAFA;
       z-index: -2;
   }
-  
+
   .preloader-image__container{
     position:absolute;
   }
-  
+
   .preloader-animation__container{
     position: absolute;
     left:7px;
@@ -23,7 +32,7 @@
     overflow: hidden;
     z-index: -1;
   }
-  
+
   .preloader-animation{
     position: absolute;
     top:124px;
@@ -36,12 +45,12 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
   }
-  
+
   @keyframes coffee {
     from {
       top: 124px;
     }
-  
+
     to {
       top:0;
     }
