@@ -8,11 +8,11 @@ import SpinButton from "../../common/SpinButton";
 import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
 import parser from "html-react-parser";
+import { checkerNone, letterTransform, regularity, timeConverter } from "../../helpers/helpers";
 
 // api 1.0 and 2.0
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
-  console.log(id);
   return axios(GET_TOPIC(id), {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -59,7 +59,7 @@ const TopicFront = ({
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDataEvent(id);
-      console.log(result.data[0]);
+      // console.log(result.data[0]);
       // api 1.0
       // setEvent(result);
       //  -------------
@@ -70,39 +70,7 @@ const TopicFront = ({
     fetchData();
   }, []);
 
-  // let { title, description, address, location } = eventData;
-
-  const letterTransform = prop => {
-    let str = "";
-    if (prop !== undefined || prop !== null) {
-      for (let i = 0; i < prop.length; i++) {
-        if (i === 0) {
-          str += prop.charAt(i).toUpperCase();
-        } else {
-          str += prop.charAt(i);
-        }
-      }
-      return str;
-    } else {
-      return "";
-    }
-  };
-
-  const checkerNone = prop => {
-    if (prop === "undefined" || prop === null || prop === undefined || prop === "undefined") {
-      return "";
-    } else {
-      return prop;
-    }
-  };
-
-  const parseHTML = props => {
-    const test = React.createElement("div", null, props);
-    // test.insertHTML = props;
-    return test;
-  };
-
-  console.log(eventData);
+  // console.log(eventData);
   return (
     <>
       {!isAdmin ? (
@@ -144,7 +112,13 @@ const TopicFront = ({
           </div>
           <div className="time__descr">
             <h3 className="section__topic__title">Time:</h3>
-            <p className="time__descr">{checkerNone(eventData.time)}</p>
+            <p className="time__descr">
+              {eventData.cyclic
+                ? `Every ${regularity[eventData.weekDay]}, ${checkerNone(eventData.time)}`
+                : `Single day: ${timeConverter(checkerNone(eventData.singleDate))} in ${checkerNone(
+                    eventData.time,
+                  )}`}
+            </p>
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>
