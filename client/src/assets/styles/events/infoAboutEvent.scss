@@ -14,7 +14,7 @@
     font-style: normal;
     font-size: 16px;
     color: #C8C8C8;
-    margin-left: 20px;
+    margin-left: 30px;
     margin-right: 70px;
   }
   
@@ -29,3 +29,9 @@
       color: #323232;
     }
   }
+
+  @media all and (max-width: 550px) {
+    .info-title {
+      margin-left: 15px;
+    }
+ }
