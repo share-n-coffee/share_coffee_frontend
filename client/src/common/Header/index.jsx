@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
 import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { getCookie } from "tiny-cookie";
+import { checkerNone } from "../../helpers/helpers";
 
+// static
 const events = [
   {
     title: "Platform Front-end",
@@ -28,7 +32,30 @@ const events = [
   },
 ];
 //
+// api 2.0 upcoming dropdown
+const getUpcomingEvents = userId => {
+  const obj = {
+    method: "get",
+    url: `https://forgeserver.herokuapp.com/api/users/${userId}/upcoming`,
+    headers: {
+      Authorization: `Bearer ${getCookie("token")}`,
+      mode: "cors",
+      "Content-Type": "application/json",
+    },
+  };
+  return axios(obj)
+    .then(res => {
+      console.log(res);
+      return res;
+    })
+    .catch(err => {
+      console.log(err);
+      return err;
+    });
+};
+const hasId = checkerNone(sessionStorage.getItem("id")) === "" ? false : true;
 
+// console.log(userEvents.data);
 const logOut = props => {
   const { location } = props;
   sessionStorage.clear();
