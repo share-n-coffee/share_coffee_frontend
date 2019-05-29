@@ -65,6 +65,13 @@ const PageTeamSelect = props => {
     fetchData();
   }, []);
 
+  const dep = sessionStorage.getItem("department");
+  const hasDepartament =
+    dep === "undefined" || dep === undefined || dep === null || dep === "null" ? false : true;
+  if (hasDepartament) {
+    props.history.goBack();
+  }
+
   return (
     <>
       <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
