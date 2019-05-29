@@ -2,7 +2,8 @@ export const LOGIN_ADMIN = `https://forgeserver.herokuapp.com/login/admin`;
 
 export const GET_TOPIC_SUBSCRIBERS = id =>
   `https://forgeserver.herokuapp.com/api/subscriptions/topic/${id}`;
-export const TOPICS = `https://forgeserver.herokuapp.com/api/topics/`;
+export const TOPICS = (page = 0, limit = 5) =>
+  `https://forgeserver.herokuapp.com/api/topics/?page=${page}&limit=${limit}`;
 export const ONE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
 // export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
 export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/topics/events/${id}`;
