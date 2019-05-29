@@ -36,6 +36,8 @@ class AdminLoginPage extends Component {
         if (data.object.token) {
           const date = new Date(jwtDecode(data.object.token).exp * 1000).toGMTString();
           setCookie("token", data.object.token, { expires: date });
+          setStorage(jwtDecode(`${data.object.token}`));
+          this.props.setLogin();
           this.setState({ isLoading: false });
         }
       } else {
