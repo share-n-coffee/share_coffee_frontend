@@ -7,6 +7,8 @@ import CyclicChooser from "./CyclicChooser";
 import Button from "../../common/Button";
 import SpinButton from "../../common/SpinButton";
 
+import api from "./api";
+
 import * as formatters from "./formatters";
 import styles from "./styles.module.scss";
 
@@ -41,13 +43,33 @@ class TopicEditor extends Component {
 
   onSave(e) {
     e.preventDefault();
-    console.log("saving");
-    console.log(this.state);
+
+    // prepare date for sending
+    const data = { ...this.state };
+    delete data["errors"];
+    if (data.active === undefined) {
+      data.active = true;
+    }
+
+    try {
+      api
+        .addNewEvent(data)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+    } catch (err) {
+      console.log(err);
+    }
+
+    if (this.props.onSave) {
+      this.props.onSave();
+    }
   }
 
   onCancel(event) {
     event.preventDefault();
-    console.log("canceling");
+    if (this.props.onCancel) {
+      this.props.onCancel();
+    }
   }
 
   onChange(event) {
