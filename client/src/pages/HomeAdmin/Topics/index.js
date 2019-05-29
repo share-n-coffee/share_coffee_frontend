@@ -40,19 +40,18 @@ class TopicDropdown extends Component {
   render() {
     const { subscribers, openSubscribers } = this.state;
     const { id } = this.props;
-
+    console.log(subscribers);
     return (
       <Dropdown
         length={subscribers.length}
         onClick={() => subscribers.length > 0 && this.openSubscribers(id)}
         open={openSubscribers === id}
       >
-        {subscribers && Array.isArray(subscribers) && subscribers.length > 0
+        {subscribers && subscribers.length > 0
           ? `Subscribers (${subscribers.length})`
           : `(0 Subscribers)`}
         <DropdownContent open={openSubscribers === id}>
           {subscribers &&
-            Array.isArray(subscribers) &&
             subscribers.length > 0 &&
             subscribers.map(
               subscriber =>

@@ -6,7 +6,8 @@ export const TOPICS = `https://forgeserver.herokuapp.com/api/topics/`;
 export const ONE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
 export const ADD_NEW_TOPIC = "https://forgeserver.herokuapp.com/api/topics/";
 export const UPDATE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
-export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
+// export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
+export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/topics/events/${id}`;
 
 export const USERS = (page = 0, limit = 10) =>
   `https://forgeserver.herokuapp.com/api/users/?page=${page}&limit=${limit}`;

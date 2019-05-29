@@ -27,7 +27,7 @@ class Topics extends Component {
     this.getData();
   }
 
-  getData(page = 0, limit = 2) {
+  getData(page = 0, limit = 10) {
     this.setState({ isLoadData: true });
     request.get(URL.USERS(page, limit)).then(data => {
       console.log(data);
@@ -162,47 +162,50 @@ class Topics extends Component {
                 </tr>
               </thead>
               <tbody>
-                {users.map(user => (
-                  <tr
-                    key={user._id}
-                    // className={`${
-                    //   user.banned.status
-                    //     ? "bannedUser"
-                    //     : user.admin.permission !== 0
-                    //     ? "adminUser"
-                    //     : ""
-                    // }`}
-                  >
-                    <td>
-                      <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
-                        <span className={"username"}>{user.username}</span>
-                      </Link>
-                    </td>
-                    {/*<td>{user.department}</td>*/}
-                    {/*<td>{this.timestamp(user.created)}</td>*/}
-                    {/*{user.admin.permission === 0 ? (*/}
-                    {/*<td>*/}
-                    {/*{!user.banned.status ? (*/}
-                    {/*<SpinButton*/}
-                    {/*onClick={() => this.toggle(user)}*/}
-                    {/*text="Ban User"*/}
-                    {/*isLoading={isLoading === user._id}*/}
-                    {/*type="Unsubscribe"*/}
-                    {/*/>*/}
-                    {/*) : (*/}
-                    {/*<SpinButton*/}
-                    {/*onClick={() => this.toggle(user)}*/}
-                    {/*text="Unban"*/}
-                    {/*type="Subscribe"*/}
-                    {/*isLoading={isLoading === user._id}*/}
-                    {/*/>*/}
-                    {/*)}*/}
-                    {/*</td>*/}
-                    {/*) : (*/}
-                    {/*<td>ADMIN</td>*/}
-                    {/*)}*/}
-                  </tr>
-                ))}
+                {users.map(
+                  user =>
+                    user.username && (
+                      <tr
+                        key={user._id}
+                        // className={`${
+                        //   user.banned.status
+                        //     ? "bannedUser"
+                        //     : user.admin.permission !== 0
+                        //     ? "adminUser"
+                        //     : ""
+                        // }`}
+                      >
+                        <td>
+                          <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
+                            <span className={"username"}>{user.username}</span>
+                          </Link>
+                        </td>
+                        <td>{user.department}</td>
+                        <td>{this.timestamp(user.created)}</td>
+                        {user.admin.permission === 0 ? (
+                          <td>
+                            {!user.banned.status ? (
+                              <SpinButton
+                                onClick={() => this.toggle(user)}
+                                text="Ban User"
+                                isLoading={isLoading === user._id}
+                                type="Unsubscribe"
+                              />
+                            ) : (
+                              <SpinButton
+                                onClick={() => this.toggle(user)}
+                                text="Unban"
+                                type="Subscribe"
+                                isLoading={isLoading === user._id}
+                              />
+                            )}
+                          </td>
+                        ) : (
+                          <td>ADMIN</td>
+                        )}
+                      </tr>
+                    ),
+                )}
               </tbody>
             </table>
             <Pagination

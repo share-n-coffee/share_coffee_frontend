@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { request } from "../../../helpers/requests";
 import * as URL from "../../../constants";
 import Button from "../../../common/Button";
+import md5 from "js-md5";
 
 class Topics extends Component {
   state = {
@@ -38,11 +39,11 @@ class Topics extends Component {
     const status = {
       admin: {
         permission: user.admin.permission === 1 ? 0 : 1,
+        password: user.admin.permission === 1 ? "" : md5("test"),
       },
     };
 
     request.put(URL.ONE_USER(user._id), status).then(data => {
-      console.log(data);
       this.getData(user._id);
       this.setState({ error: data.message });
     });
