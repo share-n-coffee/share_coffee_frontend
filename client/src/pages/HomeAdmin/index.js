@@ -34,7 +34,7 @@ class HomeAdmin extends React.Component {
         console.log(err);
       });
     await this.setState({
-      isLogin: result.data.data.admin.permission + 1,
+      isLogin: result.data.data.admin.permission,
       loading: false,
     });
   }
