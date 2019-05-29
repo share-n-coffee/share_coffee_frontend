@@ -5,8 +5,11 @@ const setStorage = userData => {
   sessionStorage.setItem("avatar", userData.data.avatar);
   sessionStorage.setItem("isAdmin", userData.data.permission);
   sessionStorage.setItem("banned", userData.data.banned.status);
-  sessionStorage.setItem("department", userData.data.department);
-  // sessionStorage.setItem("department", userData.data.department.title);
+  if (userData.data.department === null) {
+    sessionStorage.setItem("department", userData.data.department);
+  } else {
+    sessionStorage.setItem("department", userData.data.department.title);
+  }
   sessionStorage.setItem("tokenTimeOver", userData.exp);
 };
 
@@ -20,8 +23,6 @@ const router = props => {
   const hasDepartament =
     dep === "undefined" || dep === undefined || dep === null || dep === "null" ? false : true;
   // if (id && !departament) {
-  // console.log("hasId " + hasId);
-  // console.log("hasDep " + hasDepartament);
   if (hasId && !hasDepartament) {
     props.history.push("/team_select/");
     // } else if (hasId && dep) {

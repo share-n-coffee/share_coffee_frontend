@@ -30,7 +30,6 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 export default class App extends Component {
   constructor(props) {
     super(props);
-
     this.userAuth = this.userAuth.bind(this);
   }
 
