@@ -4,7 +4,8 @@ export const GET_TOPIC_SUBSCRIBERS = id =>
   `https://forgeserver.herokuapp.com/api/subscriptions/topic/${id}`;
 export const TOPICS = `https://forgeserver.herokuapp.com/api/topics/`;
 export const ONE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/${id}`;
-export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
+// export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
+export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/topics/events/${id}`;
 
 export const USERS = (page = 0, limit = 10) =>
   `https://forgeserver.herokuapp.com/api/users/?page=${page}&limit=${limit}`;
