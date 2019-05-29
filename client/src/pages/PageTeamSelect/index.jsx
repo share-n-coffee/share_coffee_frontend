@@ -7,6 +7,7 @@ import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
+import jwtdecode from "jwt-decode";
 import { SET_USER_DEPARTMENT, GET_ALL_DEPARTMENTS } from "../../constants";
 import { checkTokenTime, checkIsBanned } from "../../helpers/requests";
 
@@ -21,23 +22,30 @@ const setUserDepartment = departmentId => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
 
   const userId = sessionStorage.getItem("id");
-  // api 1.0
-  return axios
-    .put(
-      `${SET_USER_DEPARTMENT(userId)}`,
-      { newDepartment: departmentId },
-      {
-        headers: {
-          Authorization: `Bearer ${getCookie("token")}`,
-          "Content-Type": "application/json",
-        },
-      },
-    )
+  const token = getCookie("token");
+  // api 2.0
+  return axios({
+    method: "put",
+    url: `${SET_USER_DEPARTMENT(userId)}`,
+    data: { newDepartment: departmentId },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      mode: "cors",
+      "Content-Type": "application/json",
+    },
+  })
+    .then(res => {
+      // const user = jwtdecode(`${res.data.token}`);
+      // console.log(user);
+      // sessionStorage.setItem("department", user.data.department._id);
+      // console.log(res);
+      return res;
+    })
     .catch(error => console.log(error));
 };
 //---------------------------------------------
 
-// new api 2.0
+// new api 1.0
 //   return axios
 //     .put(
 //       `${SET_USER_DEPARTMENT(userId)}`,
