@@ -5,6 +5,7 @@ import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
 import Preloader from "../../modules/Preloader";
 import axios from "axios";
+import { GET_USER } from "../../constants/";
 import { setStorage } from "../../helpers/helpers";
 import jwtDecode from "jwt-decode";
 
@@ -19,7 +20,7 @@ class HomeAdmin extends React.Component {
     const id = sessionStorage.getItem("id");
 
     const result = await axios({
-      url: `https://forgeserver.herokuapp.com/api/users/${id}`,
+      url: GET_USER(id),
       method: "get",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -33,7 +34,7 @@ class HomeAdmin extends React.Component {
         console.log(err);
       });
     await this.setState({
-      isLogin: result.data.data.admin.permission,
+      isLogin: result.data.data.admin.permission + 1,
       loading: false,
     });
   }
