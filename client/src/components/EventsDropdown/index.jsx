@@ -13,28 +13,6 @@ import { getCookie } from "tiny-cookie";
 const EventsDropdown = ({ events }) => {
   const [isOpened, setIsOpened] = useState(false);
 
-  const getUpcomingEvents = async userId => {
-    const obj = {
-      method: "get",
-      url: `https://forgeserver.herokuapp.com/api/users/${userId}/upcoming`,
-      headers: {
-        Authorization: `Bearer ${getCookie("token")}`,
-        mode: "cors",
-        "Content-Type": "application/json",
-      },
-    };
-    const result = await axios(obj)
-      .then(res => {
-        console.log(res);
-        return res;
-      })
-      .catch(err => {
-        console.log(err);
-        return err;
-      });
-    return result;
-  };
-
   return (
     <div
       onMouseLeave={() => {
@@ -45,8 +23,6 @@ const EventsDropdown = ({ events }) => {
       <button
         className="event-header"
         onClick={() => {
-          // getUserInfo(sessionStorage.getItem("id"));
-          // getUpcomingEvents(sessionStorage.getItem("id"));
           setIsOpened(!isOpened);
         }}
       >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
@@ -33,19 +33,20 @@ const events = [
 ];
 //
 // api 2.0 upcoming dropdown
-const getUpcomingEvents = userId => {
+const getUpcomingEvents = async userId => {
+  const token = getCookie("token");
   const obj = {
     method: "get",
     url: `https://forgeserver.herokuapp.com/api/users/${userId}/upcoming`,
     headers: {
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${token}`,
       mode: "cors",
       "Content-Type": "application/json",
     },
   };
   return axios(obj)
     .then(res => {
-      console.log(res);
+      // console.log(res);
       return res;
     })
     .catch(err => {
@@ -54,8 +55,8 @@ const getUpcomingEvents = userId => {
     });
 };
 const hasId = checkerNone(sessionStorage.getItem("id")) === "" ? false : true;
+// const userEvents = hasId ? getUpcomingEvents(sessionStorage.getItem("id")) : [];
 
-// console.log(userEvents.data);
 const logOut = props => {
   const { location } = props;
   sessionStorage.clear();
@@ -111,10 +112,10 @@ const adminNavigation = props => {
   );
 };
 
-const userNavigation = props => {
+const userNavigation = (props, userEvents) => {
   let { avatar } = props;
-  if (avatar === "undefined") {
-    avatar = defaultUser;
+  if (avatar === "undefined" || avatar === undefined || avatar === null || avatar === "null") {
+    avatar = `${defaultUser}`;
   }
   return (
     <>
@@ -137,7 +138,8 @@ const userNavigation = props => {
             <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
           <div className="header__dropdown">
-            <EventsDropDown events={events} />
+            {/*<EventsDropDown events={events} />*/}
+            <EventsDropDown events={userEvents} />
           </div>
         </div>
       ) : (
@@ -150,6 +152,22 @@ const userNavigation = props => {
 };
 
 const Header = props => {
+  const [userEvents, setUserEvents] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getUpcomingEvents(sessionStorage.getItem("id"));
+      if (result.data) {
+        console.log(result.data);
+        setUserEvents(result.data.data);
+      } else {
+        setUserEvents([]);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // console.log(userEvents);
+
   return (
     <div className="header">
       <div className="header__container">
@@ -160,7 +178,7 @@ const Header = props => {
           <span>SHARE & COFFEE</span>
         </div>
         {props.isActive ? (
-          <>{props.isAdmin ? adminNavigation(props) : userNavigation(props)}</>
+          <>{props.isAdmin ? adminNavigation(props) : userNavigation(props, userEvents)}</>
         ) : (
           <></>
         )}

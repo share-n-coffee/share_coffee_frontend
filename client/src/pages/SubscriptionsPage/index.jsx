@@ -129,7 +129,6 @@ const SubscriptionsPage = props => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getUser(token, userId);
-      // console.log(result.data.data);
       setUserData(result.data.data);
       setIsUserDataLoaded(true);
     };

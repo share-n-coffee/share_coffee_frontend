@@ -49,18 +49,34 @@ class EventDesc extends Component {
               }
             />
           </div>
-          <SpinButton
-            text={isSubscribed ? "Unsubscribe" : "Subscribe"}
-            type={isSubscribed ? "Unsubscribe" : "Subscribe"}
-            isLoading={isLoading || currentLoadingEvents.includes(event._id)}
-            onClick={() => {
-              if (isSubscribed) {
-                onUnsubscriptionClick(event._id);
-              } else {
-                onSubscriptionClick(event._id);
-              }
-            }}
-          />
+          {event.active ? (
+            <SpinButton
+              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              isLoading={isLoading || currentLoadingEvents.includes(event._id)}
+              onClick={() => {
+                if (isSubscribed) {
+                  onUnsubscriptionClick(event._id);
+                } else {
+                  onSubscriptionClick(event._id);
+                }
+              }}
+            />
+          ) : (
+            <SpinButton
+              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              isLoading={isLoading || currentLoadingEvents.includes(event._id)}
+              disabled={true}
+              onClick={() => {
+                if (isSubscribed) {
+                  onUnsubscriptionClick(event._id);
+                } else {
+                  onSubscriptionClick(event._id);
+                }
+              }}
+            />
+          )}
         </div>
       );
     });
