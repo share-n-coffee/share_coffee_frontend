@@ -6,8 +6,8 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 import Button from "../../../common/Button";
 import * as URL from "../../../constants";
-import SpinButton from "../../../common/SpinButton";
 import { Loading } from "../../../ui/components/Loader";
+import Pagination from "../../../components/Pagination";
 
 class TopicDropdown extends Component {
   state = {
@@ -76,23 +76,30 @@ class Topics extends Component {
     events: [],
     error: "",
     isLoadData: false,
+    pageCount: 1,
   };
 
   componentDidMount() {
     this.getData();
   }
 
-  getData() {
+  getData(page = 0, limit = 5) {
     this.setState({ isLoadData: true });
 
-    request.get(URL.TOPICS).then(data => {
+    request.get(URL.TOPICS(page, limit)).then(data => {
       console.log(data.object.data);
       this.setState({
         events: data.object.data,
+        pageCount: data.object.pages.total,
         error: data.message,
         isLoadData: false,
       });
     });
+  }
+
+  pagination(currentPage) {
+    console.log(currentPage);
+    this.getData(currentPage - 1);
   }
 
   addTopic = e => {
@@ -101,10 +108,8 @@ class Topics extends Component {
   };
 
   render() {
-    const { events, error, isLoadData } = this.state;
-    return isLoadData ? (
-      <Loading />
-    ) : (
+    const { events, error, isLoadData, pageCount } = this.state;
+    return (
       <div style={{ textAlign: "left" }}>
         {events && events.length > 0 ? (
           events.map(event => (
@@ -125,6 +130,9 @@ class Topics extends Component {
         ) : (
           <div>Events is empty</div>
         )}
+
+        <Pagination pageCount={pageCount} change={currentPage => this.pagination(currentPage)} />
+
         <Button onClick={e => this.addTopic(e)} text="Add topic" />
         {error ? <ErrorMessage error={error} /> : null}
       </div>
