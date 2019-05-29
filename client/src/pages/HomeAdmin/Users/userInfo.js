@@ -21,8 +21,6 @@ class Topics extends Component {
   }
 
   toggleBan = user => {
-    console.log("toggleBan");
-
     const status = {
       ban: {
         status: !user.banned.status,
@@ -38,7 +36,6 @@ class Topics extends Component {
   };
 
   toggleAdmin = user => {
-    console.log("toggleAdmin");
     const status = {
       admin: {
         permission: user.admin.permission === 1 ? 0 : 1,
@@ -47,7 +44,6 @@ class Topics extends Component {
     };
 
     request.put(URL.ONE_USER(user._id), status).then(data => {
-      console.log(data.object.data);
       this.setState({
         user: data.object.data,
         error: data.message,
@@ -57,7 +53,6 @@ class Topics extends Component {
 
   render() {
     const { user } = this.state;
-    console.log(user);
     return (
       <div key={user._id} className="user-info__container">
         <img
@@ -66,7 +61,12 @@ class Topics extends Component {
         />
         <h2>{user.username} </h2>
         <h3>{user.firstName + " " + user.lastName}</h3>
-        <span>team: {user.department && user.department.title}</span>
+        <span>
+          team:{" "}
+          {user.department && user.department.title
+            ? `${user.department.title}`
+            : `Did't choose a team`}{" "}
+        </span>
         <div>
           {user.admin && user.admin.permission === 0 ? (
             <div>

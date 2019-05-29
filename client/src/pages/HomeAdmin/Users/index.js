@@ -23,9 +23,9 @@ class UserDepartment extends Component {
           this.setState({
             title: data.object.data.title,
           });
-        }
+        } else this.setState({ title: `Did't choose a team` });
       });
-    }
+    } else this.setState({ title: `Did't choose a team` });
   }
 
   render() {
@@ -256,5 +256,4 @@ Topics.propTypes = {
   children: PropTypes.object,
   dispatch: PropTypes.func,
 };
-
 export default Topics;
