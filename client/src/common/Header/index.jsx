@@ -157,6 +157,7 @@ const Header = props => {
     const fetchData = async () => {
       const result = await getUpcomingEvents(sessionStorage.getItem("id"));
       if (result.data) {
+        console.log(result.data);
         setUserEvents(result.data.data);
       } else {
         setUserEvents([]);

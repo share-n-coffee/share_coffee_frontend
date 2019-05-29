@@ -18,7 +18,6 @@ class EventDesc extends Component {
     } = this.props;
 
     const elements = events.map(event => {
-      console.log(event);
       const isSubscribed = userEventsIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">
