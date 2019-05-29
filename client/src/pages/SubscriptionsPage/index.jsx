@@ -202,7 +202,7 @@ const SubscriptionsPage = props => {
             path="/subscriptions/:id"
             component={params => (
               <TopicFront
-                userEvents={userData.events}
+                userEventsIds={userTopicsIds}
                 onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
                 onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
                 isLoading={!isUserDataLoaded}
