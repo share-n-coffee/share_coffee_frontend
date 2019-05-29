@@ -13,25 +13,6 @@ import { getCookie } from "tiny-cookie";
 const EventsDropdown = ({ events }) => {
   const [isOpened, setIsOpened] = useState(false);
 
-  // const getUserInfo = async id => {
-  //   const result = await axios({
-  //     url: `https://forgeserver.herokuapp.com/api/users/5ce5b8797247dc3860f0a747/upcoming`,
-  //     method: "get",
-  //     headers: {
-  //       Authorization: `Bearer ${getCookie("token")}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then(res => {
-  //       return res;
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  //   // console.log(result.data);
-  //   return result;
-  // };
-
   const getUpcomingEvents = async userId => {
     const obj = {
       method: "get",
@@ -71,9 +52,7 @@ const EventsDropdown = ({ events }) => {
       >
         <span>My upcoming events ({events.length})</span>
         <span className={`event-arrow ${isOpened ? "event-rotated" : ""}`}>↓</span>
-        {/*<ArrowIcon className={`event-arrow ${isOpened ? "event-rotated" : undefined}`} />*/}
       </button>
-      {/*{isOpened && <List events={events} />}*/}
       {isOpened && (
         <div className="list">
           <List events={events} />{" "}

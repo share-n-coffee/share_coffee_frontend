@@ -42,8 +42,6 @@ const getAllUserSubscriptions = (token, userId) => {
     },
   });
 };
-//--------------------------------------------------------
-// api 1.0 and 2.0
 const getUser = (token, id) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
@@ -100,23 +98,7 @@ const SubscriptionsPage = props => {
   const token = getCookie("token");
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
-  //userTopicsIds = userTopics.map(topic => topic.topicId);
-  // console.log(userData);
 
-  //api 1.0
-  // const handleSubscriptionClick = eventId => handleSubscribing(eventId, subscribeUserToEvent);
-  // const handleUnsubscriptionClick = eventId => handleSubscribing(eventId, unsubsrcibeUserFromEvent);
-  // const handleSubscribing = async (eventId, subscribingFunction) => {
-  //   setCurrentLoadingEvents([...currentLoadingEvents, eventId]);
-  //   const result = await subscribingFunction(eventId, userId, token);
-  //   setUserData(result.data);
-  //   setCurrentLoadingEvents(
-  //     currentLoadingEvents.filter(loadingEventId => loadingEventId !== eventId),
-  //   );
-  // };
-  //--------------------------------------------------------------------------
-
-  //api 2.0
   const handleSubscriptionClick = topicId => {
     handleSubscribing(topicId, subscribeUserToTopic);
     setUserTopicsIds([...userTopicsIds, topicId]);
@@ -128,8 +110,6 @@ const SubscriptionsPage = props => {
   const handleSubscribing = async (topicId, subscribingFunction) => {
     setCurrentLoadingEvents([...currentLoadingEvents, topicId]);
     const result = await subscribingFunction(topicId, userId, token);
-    // setUserData(result.data);
-    // console.log(result);
     setUserData(result.data.data);
     setCurrentLoadingEvents(
       currentLoadingEvents.filter(loadingEventId => loadingEventId !== topicId),
@@ -140,8 +120,6 @@ const SubscriptionsPage = props => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getAllTopics(token);
-      // console.log(result)
-      console.log(result);
       setTopics(result.data.data);
     };
 
@@ -162,9 +140,6 @@ const SubscriptionsPage = props => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getAllUserSubscriptions(token, userId);
-      // console.log(result.data.data);
-      // setUserData(result.data);
-      // api 2.0
       setUserTopics(result.data.data);
       setUserTopicsIds(result.data.data.map(event => event.topicId));
       setIsUserDataLoaded(true);
@@ -178,8 +153,6 @@ const SubscriptionsPage = props => {
       className="event"
       events={topics}
       userEventsIds={userTopicsIds}
-      // onSubscriptionClick={eventId => handleSubscriptionClick(eventId)}
-      // onUnsubscriptionClick={eventId => handleUnsubscriptionClick(eventId)}
       onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
       onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
       isLoading={!isUserDataLoaded}

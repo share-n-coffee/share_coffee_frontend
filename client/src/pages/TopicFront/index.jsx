@@ -10,7 +10,6 @@ import Button from "../../common/Button";
 import parser from "html-react-parser";
 import { checkerNone, letterTransform, regularity, timeConverter } from "../../helpers/helpers";
 
-// api 1.0 and 2.0
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(GET_TOPIC(id), {
@@ -58,18 +57,11 @@ const TopicFront = ({
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDataEvent(id);
-      // console.log(result.data[0]);
-      // api 1.0
-      // setEvent(result);
-      //  -------------
-      //  api 2.0
       setEvent(result.data[0]);
-      //  --------------
     };
     fetchData();
   }, []);
 
-  // console.log(eventData);
   return (
     <>
       {!isAdmin ? (
@@ -114,7 +106,7 @@ const TopicFront = ({
             <p className="time__descr">
               {eventData.cyclic
                 ? `Every ${regularity[eventData.weekDay]}, ${checkerNone(eventData.time)}`
-                : `Single day: ${timeConverter(checkerNone(eventData.singleDate))} in ${checkerNone(
+                : `${timeConverter(checkerNone(eventData.singleDate))} - ${checkerNone(
                     eventData.time,
                   )}`}
             </p>

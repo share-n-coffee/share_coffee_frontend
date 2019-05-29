@@ -16,22 +16,8 @@ class EventDesc extends Component {
       isLoading,
       currentLoadingEvents = [],
     } = this.props;
-    // console.log("UserTopics", userEvents);
-    // const userEventIds = userEvents.map(event => event.topicId);
-    // console.log("userEventsIds", userEventsIds);
-    // console.log("topics", events);
 
-    // const regularity = [
-    //   "Sunday",
-    //   "Monday",
-    //   "Tuesday",
-    //   "Wednesday",
-    //   "Thursday",
-    //   "Friday",
-    //   "Saturday",
-    // ];
     const elements = events.map(event => {
-      console.log(event);
       const isSubscribed = userEventsIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">
@@ -39,8 +25,6 @@ class EventDesc extends Component {
             {isSubscribed ? (
               <div className="selectedEvent">
                 <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-                  {/*<EventName eventName={event.title} isSubscribed={event.isActive} />*/}
-
                   <EventName
                     eventName={letterTransform(checkerNone(event.title))}
                     isSubscribed={event.active}
@@ -50,7 +34,6 @@ class EventDesc extends Component {
               </div>
             ) : (
               <Link to={{ pathname: `/subscriptions/${event._id}` }}>
-                {/*<EventName eventName={event.title} isSubscribed={event.isActive} />*/}
                 <EventName
                   eventName={letterTransform(checkerNone(event.title))}
                   isSubscribed={event.active}
@@ -58,16 +41,11 @@ class EventDesc extends Component {
               </Link>
             )}
             <InfoAboutEvent
-              // adress={event.address}
-              // eventFrequency={`every ${regularity[event.options.regularity]}, ${
-              //   event.options.times[0]
-              // }`}
-
               adress={letterTransform(checkerNone(event.address))}
               eventFrequency={
                 event.cyclic
                   ? `Every ${regularity[event.weekDay]}, ${event.time}`
-                  : `Single day: ${timeConverter(event.singleDate)} in ${event.time}`
+                  : `${timeConverter(event.singleDate)} - ${event.time}`
               }
             />
           </div>
