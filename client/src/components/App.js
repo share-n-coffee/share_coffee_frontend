@@ -18,10 +18,10 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 
 // setCookie("token", token); //for localhost
 // sessionStorage.setItem("id", "122248863");
-// sessionStorage.setItem("firstName", "gadya");
-// sessionStorage.setItem("lastName", "xrenova");
+// sessionStorage.setItem("firstName", "FullStackVasya921");
+// sessionStorage.setItem("lastName", "");
 // sessionStorage.setItem("avatar", "undefined");
-// sessionStorage.setItem("isAdmin", false);
+// sessionStorage.setItem("isAdmin", true);
 // sessionStorage.setItem("banned", false);
 // sessionStorage.setItem("department", "magistral");
 // sessionStorage.setItem("tokenTimeOver", "15134868");
