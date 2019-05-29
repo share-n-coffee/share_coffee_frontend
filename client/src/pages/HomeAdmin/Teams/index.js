@@ -129,8 +129,10 @@ class Teams extends Component {
       request.post(URL.TEAMS, department).then(data => {
         if (!data.message) {
           this.toggleAdding();
-          this.getData();
-          this.setState({ isLoading: false });
+          this.setState({
+            teams: this.state.teams.concat(data.object.data),
+            isLoading: false,
+          });
         } else {
           this.setState({
             error: data.message,
