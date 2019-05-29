@@ -3,7 +3,7 @@ import AdminLoginPage from "../AdminLoginPage";
 import HomeDashboard from "./home";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
-import { setStorage } from "../LoginPage/helpers";
+import { setStorage } from "../../helpers/helpers";
 import jwtDecode from "jwt-decode";
 
 class HomeAdmin extends React.Component {

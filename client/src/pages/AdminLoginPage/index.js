@@ -6,7 +6,7 @@ import { request } from "../../helpers/requests";
 import SpinButton from "../../common/SpinButton";
 import { setCookie } from "tiny-cookie";
 import jwtDecode from "jwt-decode";
-import { setStorage } from "../LoginPage/helpers";
+import { setStorage } from "../../helpers/helpers";
 
 class AdminLoginPage extends Component {
   constructor(props) {
