@@ -18,6 +18,7 @@ class EventDesc extends Component {
     } = this.props;
 
     const elements = events.map(event => {
+      console.log(event);
       const isSubscribed = userEventsIds.includes(event._id);
       return (
         <div key={event._id} className="eventDescItem">
@@ -49,18 +50,34 @@ class EventDesc extends Component {
               }
             />
           </div>
-          <SpinButton
-            text={isSubscribed ? "Unsubscribe" : "Subscribe"}
-            type={isSubscribed ? "Unsubscribe" : "Subscribe"}
-            isLoading={isLoading || currentLoadingEvents.includes(event._id)}
-            onClick={() => {
-              if (isSubscribed) {
-                onUnsubscriptionClick(event._id);
-              } else {
-                onSubscriptionClick(event._id);
-              }
-            }}
-          />
+          {event.active ? (
+            <SpinButton
+              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              isLoading={isLoading || currentLoadingEvents.includes(event._id)}
+              onClick={() => {
+                if (isSubscribed) {
+                  onUnsubscriptionClick(event._id);
+                } else {
+                  onSubscriptionClick(event._id);
+                }
+              }}
+            />
+          ) : (
+            <SpinButton
+              text={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              type={isSubscribed ? "Unsubscribe" : "Subscribe"}
+              isLoading={isLoading || currentLoadingEvents.includes(event._id)}
+              disabled={true}
+              onClick={() => {
+                if (isSubscribed) {
+                  onUnsubscriptionClick(event._id);
+                } else {
+                  onSubscriptionClick(event._id);
+                }
+              }}
+            />
+          )}
         </div>
       );
     });
