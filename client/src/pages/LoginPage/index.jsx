@@ -24,6 +24,8 @@ export default class LoginPage extends Component {
         method: "put",
         url: SET_USER_DATA,
         data: telegramResponse,
+        mode: "cors",
+        "content-Type": "application/json",
       };
 
       const token = await axios(requestObj)
