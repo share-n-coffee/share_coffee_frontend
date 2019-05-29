@@ -18,15 +18,21 @@ const List = ({ events }) => {
         </ul>
       ) : (
         <ul className="event-List">
-          {events.map(({ id, topic, date }) => (
-            <div className="event-item" key={id}>
-              <h4 className="event_title">{letterTransform(checkerNone(topic.title))}</h4>
-              <p className="event_place">{checkerNone(topic.address)}</p>
-              <p className="event_time">{`${timeConverter(checkerNone(date))} - ${secConverter(
-                date,
-              )}`}</p>
-            </div>
-          ))}
+          {events.map((item, id) => {
+            if (id < 3) {
+              return (
+                <div className="event-item" key={id}>
+                  <h4 className="event_title">{letterTransform(checkerNone(item.topic.title))}</h4>
+                  <p className="event_place">{checkerNone(item.topic.address)}</p>
+                  <p className="event_time">{`${timeConverter(
+                    checkerNone(item.date),
+                  )} - ${secConverter(item.date)}`}</p>
+                </div>
+              );
+            } else {
+              return <></>;
+            }
+          })}
         </ul>
       )}
     </>
