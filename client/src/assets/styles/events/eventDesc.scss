@@ -17,10 +17,11 @@
 
 .selectedEvent {
     display: flex;
+    align-items: center;
 }
 
 .selectedEvent span {
-    margin: 30px;
+    margin: 0 30px;
     color: #C8C8C8;
     font-family: sans-serif;
 }
@@ -49,11 +50,13 @@
         align-self: center;
     }
 
-    .selectedEvent span{
-        display: none;
-    }
-
     .eventDesc button {
         margin-bottom: 15px;
     }
  }
+
+ @media all and (max-width: 650px) { 
+    .selectedEvent span{
+        display: none;
+    }
+}
