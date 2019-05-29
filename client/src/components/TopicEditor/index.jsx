@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 import TimeChooser from "./TimeChooser";
 import TopicDescription from "../TopicDescription";
 import CyclicChooser from "./CyclicChooser";
+import Button from "../../common/Button";
+import SpinButton from "../../common/SpinButton";
+
+import api from "./api";
 
 import * as formatters from "./formatters";
 import styles from "./styles.module.scss";
@@ -39,13 +43,33 @@ class TopicEditor extends Component {
 
   onSave(e) {
     e.preventDefault();
-    console.log("saving");
-    console.log(this.state);
+
+    // prepare date for sending
+    const data = { ...this.state };
+    delete data["errors"];
+    if (data.active === undefined) {
+      data.active = true;
+    }
+
+    try {
+      api
+        .addNewEvent(data)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+    } catch (err) {
+      console.log(err);
+    }
+
+    if (this.props.onSave) {
+      this.props.onSave();
+    }
   }
 
   onCancel(event) {
     event.preventDefault();
-    console.log("canceling");
+    if (this.props.onCancel) {
+      this.props.onCancel();
+    }
   }
 
   onChange(event) {
@@ -112,11 +136,6 @@ class TopicEditor extends Component {
     return (
       <div className={styles.topic_editor}>
         <form className={styles.topic_editor_form} onSubmit={this.onSave}>
-          <div>
-            <button onClick={this.onCancel}>Cancel</button>
-            <button type="submit">Save</button>
-          </div>
-
           <input
             type="text"
             name="title"
@@ -163,6 +182,11 @@ class TopicEditor extends Component {
             onChange={this.onDescriptionChange}
           />
         </form>
+
+        <div className={styles.topic_editor_buttons}>
+          <Button type="Unsubscribe" text="Cancel" onClick={this.onCancel} />
+          <SpinButton type="Subscribe" text="Save" onClick={this.onSave} />
+        </div>
       </div>
     );
   }
@@ -179,6 +203,8 @@ TopicEditor.propTypes = {
     time: PropTypes.string.isRequired,
     singleDate: PropTypes.number,
   }),
+  onCancel: PropTypes.func,
+  onSave: PropTypes.func,
 };
 
 TopicEditor.defaultProps = {
