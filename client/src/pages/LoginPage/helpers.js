@@ -5,15 +5,24 @@ const setStorage = userData => {
   sessionStorage.setItem("avatar", userData.data.avatar);
   sessionStorage.setItem("isAdmin", userData.data.permission);
   sessionStorage.setItem("banned", userData.data.banned.status);
-  if (userData.data.department === null) {
-    sessionStorage.setItem("department", userData.data.department);
+  console.log("probros 4");
+  if (
+    userData.data.department === null ||
+    userData.data.department === "undefined" ||
+    userData.data.department === undefined ||
+    userData.data.department === "null"
+  ) {
+    console.log("probros session null");
+    sessionStorage.setItem("department", null);
   } else {
+    console.log("probros session title");
     sessionStorage.setItem("department", userData.data.department.title);
   }
   sessionStorage.setItem("tokenTimeOver", userData.exp);
 };
 
 const router = props => {
+  console.log("probros 5");
   props.userAuth();
   const id = sessionStorage.getItem("id");
   // const departament = sessionStorage.getItem("department");

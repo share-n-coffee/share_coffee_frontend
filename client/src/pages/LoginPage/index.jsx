@@ -37,8 +37,10 @@ export default class LoginPage extends Component {
         "Content-Type": "application/json",
       };
       //--------------------------------------
+      console.log("probros 1");
       const token = await axios(requestObj)
         .then(response => {
+          console.log("probros 2");
           return response.data.token;
         })
         .catch(err => {
@@ -50,6 +52,7 @@ export default class LoginPage extends Component {
           // console.log(err);
           return err;
         });
+      console.log("probros 3");
       const userData = jwtDecode(`${token}`);
       const date = new Date(userData.exp * 1000).toGMTString();
       setCookie("token", token, { expires: date });
