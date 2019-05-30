@@ -67,7 +67,6 @@ const TopicFront = ({
     };
     fetchData();
   }, []);
-
   return (
     <>
       {!isAdmin ? (
@@ -147,9 +146,18 @@ const TopicFront = ({
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>
-            {eventData.location ? (
-              <EventMap location={eventData.location} />
+            {!checkerProp(eventData.location) ? (
+              `${
+                eventData.location.length !== 0 ? (
+                  <EventMap location={eventData.location} />
+                ) : (
+                  "No coordinates"
+                )
+              }`
             ) : (
+              //   ? (
+              //   <EventMap location={eventData.location} />
+              // ) :
               <span>Map is not ready</span>
             )}
           </div>
