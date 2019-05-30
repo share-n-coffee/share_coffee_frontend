@@ -116,7 +116,9 @@ const PageTeamSelect = props => {
           </main>
         </>
       ) : (
-        <Preloader />
+        <div className="preload_center">
+          <Preloader />
+        </div>
       )}
     </>
   );
