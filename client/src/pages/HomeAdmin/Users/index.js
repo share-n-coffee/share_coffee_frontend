@@ -15,7 +15,6 @@ class UserDepartment extends Component {
   };
 
   componentDidMount() {
-    // console.log(this.props)
     if (this.props.id) {
       request.get(URL.ONE_TEAM(this.props.id)).then(data => {
         console.log(data.object.data.title);
@@ -189,7 +188,7 @@ class Users extends Component {
                         <td>
                           <UserDepartment id={user.department} />
                         </td>
-                        <td>{this.timestamp(user.created)}</td>
+                        <td>{user.created ? this.timestamp(user.created) : "No date"}</td>
                         {user.admin.permission === 0 ? (
                           <td>
                             {!user.banned.status ? (
