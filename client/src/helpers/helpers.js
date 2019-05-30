@@ -77,7 +77,7 @@ const timeConverter = prop => {
 const secConverter = prop => {
   const date = new Date(prop);
   const arr = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  let min = 0,
+  let min = `0`,
     hour = 0;
   if (date.getMinutes() < 10) {
     min += date.getMinutes();
