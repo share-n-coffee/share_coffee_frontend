@@ -50,6 +50,7 @@ class HomeDashboard extends React.Component {
                 Teams
               </Tab>
             </TabContainer>
+            <div className="shadow_container" />
             {activeTab === "Topics" && <Topics history={this.props.history} />}
             {activeTab === "Users" && <Users />}
             {activeTab === "Teams" && <Teams />}
