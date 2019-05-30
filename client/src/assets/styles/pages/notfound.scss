@@ -12,6 +12,10 @@
   left: 100px;
 }
 
+.api, .deadline {
+  top: 180px;
+}
+
 .tests_txt {
   right: 100px;
 }
@@ -24,7 +28,7 @@
   margin: 20px auto;
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 425px) {
   .gif {
     width: 75%;
     height: 75%;
@@ -35,11 +39,14 @@
   }
 
   .redux_txt, .tests_txt {
-    font-size: 24px ;
+    font-size: 24px;
     top: 35px;
   }
   .redux_txt {
     left: 0;
+  }
+  .api, .deadline {
+    top: 70px;
   }
 
   .tests_txt {
