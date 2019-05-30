@@ -24,7 +24,8 @@ class NotFound extends Component {
           isAdmin={isAdmin}
           hasDepartment={hasDepartment}
           avatar={sessionStorage.getItem("avatar")}
-          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+          name={sessionStorage.getItem("firstName")}
+          surName={sessionStorage.getItem("lastName")}
           location={this.props}
         />
         <div className="notfound_container">
