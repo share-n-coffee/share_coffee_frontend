@@ -51,6 +51,10 @@ class TopicEditor extends Component {
       data.active = true;
     }
 
+    if (this.props.onSave) {
+      this.props.onSave();
+    }
+
     try {
       api
         .addNewEvent(data)

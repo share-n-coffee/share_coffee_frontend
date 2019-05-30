@@ -60,6 +60,10 @@ class TopicCreate extends Component {
     });
   };
 
+  save = () => {
+    this.props.history.push("/admin");
+  };
+
   render() {
     const { error } = this.state;
 
@@ -72,17 +76,18 @@ class TopicCreate extends Component {
           avatar={sessionStorage.getItem("avatar")}
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
+        <main>
+          <PageTitle
+            title={this.state.linkNoHover ? "New topic" : "← Back"}
+            mouseOver={this.mouseEvents.mouseOver}
+            mouseOut={this.mouseEvents.mouseOut}
+            click={this.mouseEvents.click}
+          />
 
-        <PageTitle
-          title={this.state.linkNoHover ? "New topic" : "← Back"}
-          mouseOver={this.mouseEvents.mouseOver}
-          mouseOut={this.mouseEvents.mouseOut}
-          click={this.mouseEvents.click}
-        />
+          <TopicEditor onCancel={this.cancel} onSave={this.save} />
 
-        <TopicEditor onCancel={this.cancel} />
-
-        {error ? <ErrorMessage error={error} /> : ""}
+          {error ? <ErrorMessage error={error} /> : ""}
+        </main>
 
         <Footer />
       </>
