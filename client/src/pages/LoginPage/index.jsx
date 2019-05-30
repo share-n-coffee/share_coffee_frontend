@@ -46,7 +46,11 @@ export default class LoginPage extends Component {
 
     // const { error } = this.state;
     if (this.state.loadingData) {
-      return <Preloader />;
+      return (
+        <div className="preloader-body">
+          <Preloader />
+        </div>
+      );
     }
 
     return (
