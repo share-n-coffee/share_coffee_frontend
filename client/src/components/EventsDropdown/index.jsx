@@ -26,7 +26,7 @@ const EventsDropdown = ({ events }) => {
           setIsOpened(!isOpened);
         }}
       >
-        <span>My upcoming events ({events.length > 3 ? 3 : events.length})</span>
+        <span>My upcoming events ({events.length})</span>
         <span className={`event-arrow ${isOpened ? "event-rotated" : ""}`}>↓</span>
       </button>
       {isOpened && (

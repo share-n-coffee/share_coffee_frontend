@@ -76,25 +76,13 @@ const timeConverter = prop => {
 
 const secConverter = prop => {
   const date = new Date(prop);
-  const arr = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  let min = `0`,
-    hour = 0;
-  if (date.getMinutes() < 10) {
-    min += date.getMinutes();
+  let min = `0`;
+  if (date.getUTCMinutes() < 10) {
+    min += date.getUTCMinutes();
   } else {
-    min = date.getMinutes();
+    min = date.getUTCMinutes();
   }
-  if (date.getHours() <= 12) {
-    hour = date.getHours();
-  } else {
-    for (let i = 0; i < arr.length; i++) {
-      if (date.getHours() === arr[i]) {
-        hour = i + 1;
-      }
-    }
-  }
-  let mas = `${hour}:${min}`;
-  return mas;
+  return `${date.getUTCHours()}:${min}`;
 };
 
 const mapChecker = prop => {

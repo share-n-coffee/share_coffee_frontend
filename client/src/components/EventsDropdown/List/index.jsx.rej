@@ -1,0 +1,4 @@
+diff a/client/src/components/EventsDropdown/List/index.jsx b/client/src/components/EventsDropdown/List/index.jsx	(rejected hunks)
+@@ -16 +16 @@ const List = ({ events }) => {
+-  console.log(userEvents)
++  console.log(userEvents);

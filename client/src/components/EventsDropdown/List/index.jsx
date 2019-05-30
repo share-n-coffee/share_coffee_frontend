@@ -13,6 +13,7 @@ const List = ({ events }) => {
   userEvents.sort((a, b) => {
     return a.date - b.date;
   });
+  console.log(userEvents);
   return (
     <>
       {events.length === 0 ? (
