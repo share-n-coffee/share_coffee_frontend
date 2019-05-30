@@ -11,6 +11,7 @@ import { checkerProp } from "../../helpers/helpers";
 import jwtdecode from "jwt-decode";
 import { SET_USER_DEPARTMENT, GET_ALL_DEPARTMENTS } from "../../constants";
 import { checkTokenTime, checkIsBanned } from "../../helpers/requests";
+import Preloader from "../../modules/Preloader";
 
 const getAccountOptions = departments => {
   return departments.map(department => {
@@ -43,6 +44,7 @@ const setUserDepartment = departmentId => {
 const PageTeamSelect = props => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
   const [options, setOptions] = useState([]);
+  const [isDataLoaded, setDataLoad] = useState(false);
 
   useEffect(() => {
     // checkIsBanned(sessionStorage.getItem("banned"));
@@ -60,6 +62,7 @@ const PageTeamSelect = props => {
           return err;
         });
       // console.log(result.data.data);
+      setDataLoad(true);
       setOptions(getAccountOptions(result.data.data));
     };
 
@@ -75,40 +78,46 @@ const PageTeamSelect = props => {
 
   return (
     <>
-      <Header
-        isActive={true}
-        isAdmin={sessionStorage.getItem("isAdmin")}
-        hasDepartment={false}
-        location={props}
-      />
-      <main className="select-main_section">
-        <PageTitle
-          title={`Hello, ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
-            "lastName",
-          )}`}
-        />
-        <SectionInfo
-          infoText="Select your team to start knowledge sharing and
-                having some coffee:"
-        />
-        <div className="select-dropdown_container">
-          <Dropdown
-            options={options}
-            selectedValue={selectedDepartmentId}
-            onSelect={setSelectedDepartmentId}
+      {isDataLoaded ? (
+        <>
+          <Header
+            isActive={true}
+            isAdmin={sessionStorage.getItem("isAdmin")}
+            hasDepartment={false}
+            location={props}
           />
-        </div>
+          <main className="select-main_section">
+            <PageTitle
+              title={`Hello, ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
+                "lastName",
+              )}`}
+            />
+            <SectionInfo
+              infoText="Select your team to start knowledge sharing and
+                having some coffee:"
+            />
+            <div className="select-dropdown_container">
+              <Dropdown
+                options={options}
+                selectedValue={selectedDepartmentId}
+                onSelect={setSelectedDepartmentId}
+              />
+            </div>
 
-        <Button
-          onClick={async () => {
-            await setUserDepartment(selectedDepartmentId);
-            props.history.push("/subscriptions");
-          }}
-          disabled={!selectedDepartmentId}
-          text="Accept"
-          type="primary"
-        />
-      </main>
+            <Button
+              onClick={async () => {
+                await setUserDepartment(selectedDepartmentId);
+                props.history.push("/subscriptions");
+              }}
+              disabled={!selectedDepartmentId}
+              text="Accept"
+              type="primary"
+            />
+          </main>
+        </>
+      ) : (
+        <Preloader />
+      )}
     </>
   );
 };
