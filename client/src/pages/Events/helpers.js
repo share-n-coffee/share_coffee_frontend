@@ -49,7 +49,6 @@ const getUser = (token, id) => {
 //===================================================================================//
 
 const subscribeUserToTopic = (topicId, userId, token) => {
-  console.log("subscribeUserToTopic");
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "post",

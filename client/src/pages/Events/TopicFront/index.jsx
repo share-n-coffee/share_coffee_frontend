@@ -80,9 +80,7 @@ class TopicFront extends Component {
   async componentWillMount() {
     const topicId = this.props.match.params.id;
     const eventDataReq = await getDataEvent(topicId, this.token);
-    console.log(eventDataReq);
     const all = await getSubscription(topicId, this.userId, this.token);
-    console.log(all);
     this.setState({
       eventData: eventDataReq.data[0],
       loading: false,
