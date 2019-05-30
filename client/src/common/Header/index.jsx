@@ -110,13 +110,15 @@ const adminNavigation = props => {
 };
 
 const userNavigation = (props, userEvents) => {
-  let { avatar, name } = props;
+  let { avatar, name, surName } = props;
   if (checkerProp(avatar)) {
     avatar = defaultUser;
   }
-  console.log(name);
-  if (checkerProp(name)) {
-    name = "user";
+  let fullName = "user";
+  if (checkerProp(name) || checkerProp(surName)) {
+    fullName = "user";
+  } else {
+    fullName = `${name} ${surName}`;
   }
   return (
     <>
@@ -135,7 +137,7 @@ const userNavigation = (props, userEvents) => {
               <></>
             )}
             <img className="header-user__img" src={avatar} alt="avatar" />
-            <span className="header-user__info"> {name}</span>
+            <span className="header-user__info">{fullName}</span>
             <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
           <div className="header__dropdown">

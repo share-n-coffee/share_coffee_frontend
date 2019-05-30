@@ -171,11 +171,11 @@ const SubscriptionsPage = props => {
         <>
           <Header
             isActive={true}
-            // isAdmin={false}
             isAdmin={sessionStorage.getItem("isAdmin")}
             hasDepartment={true}
             avatar={sessionStorage.getItem("avatar")}
-            name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+            name={sessionStorage.getItem("firstName")}
+            surName={sessionStorage.getItem("lastName")}
             location={props}
           />
           <main>
