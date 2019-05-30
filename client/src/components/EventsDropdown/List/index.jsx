@@ -9,6 +9,10 @@ import {
 } from "../../../helpers/helpers";
 
 const List = ({ events }) => {
+  const userEvents = [...events];
+  userEvents.sort((a, b) => {
+    return a.date - b.date;
+  });
   return (
     <>
       {events.length === 0 ? (
@@ -20,7 +24,7 @@ const List = ({ events }) => {
         </ul>
       ) : (
         <ul className="event-List">
-          {events.map((item, id) => {
+          {userEvents.map((item, id) => {
             if (id < 3) {
               return (
                 <div className="event-item" key={id}>
