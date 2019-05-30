@@ -10,17 +10,3 @@
 main {
   margin-bottom: 100px;
 }
-
-.preload_center {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 35% auto;
-}
-
-@media all and (max-width: 425px) {
-  .preload_center {
-    margin: 35vh auto;
-  }
-}
