@@ -193,7 +193,7 @@ const SubscriptionsPage = props => {
           </main>
         </>
       ) : (
-        <div className="wrapper preload_center">
+        <div className="preload_center">
           <Preloader />
         </div>
       )}
