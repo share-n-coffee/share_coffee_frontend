@@ -1,15 +1,20 @@
 .eventName {
-    margin: 15px 0;
-    color: #323232;
-    font: 18px "Roboto";
-    font-weight: bold;
+  margin: 15px 0;
+  color: #323232;
+  font: 18px "Roboto";
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    color: rgba(51, 51, 51, .8);
+  }
 }
 
 .eventContainer {
-    position: relative;
-    margin-bottom: 15px;
+  position: relative;
+  margin-bottom: 15px;
 }
 
 .eventDescItem:nth-child(2) .eventName {
-    margin: 20px 0;
+  margin: 20px 0;
 }
