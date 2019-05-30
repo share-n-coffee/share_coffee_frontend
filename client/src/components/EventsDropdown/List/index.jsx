@@ -12,7 +12,7 @@ const List = ({ events }) => {
   return (
     <>
       {events.length === 0 ? (
-        <ul className="event-List">
+        <ul className="event-List" key={events.length}>
           <div className="event-item">
             <h4 className="event_title">No confirmed events</h4>
           </div>
