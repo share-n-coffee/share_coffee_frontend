@@ -8,7 +8,13 @@ import SpinButton from "../../common/SpinButton";
 import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
 import parser from "html-react-parser";
-import { checkerNone, letterTransform, regularity, timeConverter } from "../../helpers/helpers";
+import {
+  // checkerNone,
+  letterTransform,
+  regularity,
+  timeConverter,
+  checkerProp,
+} from "../../helpers/helpers";
 
 const getDataEvent = id => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
@@ -61,12 +67,16 @@ const TopicFront = ({
     };
     fetchData();
   }, []);
-
   return (
     <>
       {!isAdmin ? (
         <PageTitle
-          title={!linkHover ? letterTransform(checkerNone(eventData.title)) : "← Back"}
+          title={
+            !linkHover
+              ? `${checkerProp(eventData.title) ? "Default title" : eventData.title}`
+              : // letterTransform(checkerNone(eventData.title))
+                "← Back"
+          }
           mouseOver={mouseEvents.mouseOver}
           mouseOut={mouseEvents.mouseOut}
           click={mouseEvents.click}
@@ -77,7 +87,13 @@ const TopicFront = ({
       <div className="topic-wrapper">
         <div className="map-section_container">
           <div className="section_header">
-            <h2>Topic "{letterTransform(checkerNone(eventData.title))}"</h2>
+            <h2>
+              Topic "
+              {checkerProp(eventData.title) ? "Default title" : letterTransform(eventData.title)
+              // letterTransform(checkerNone(eventData.title))
+              }
+              "
+            </h2>
             {isAdmin ? (
               <Button text={"Edit"} onClick={toEdit} />
             ) : (
@@ -96,26 +112,52 @@ const TopicFront = ({
               />
             )}
           </div>
-          <p className="section__descr">{parser(checkerNone(eventData.description))}</p>
+          <p className="section__descr">
+            {parser(
+              checkerProp(eventData.description) ? "Default description" : eventData.description,
+              // checkerNone(eventData.description)
+            )}
+          </p>
           <div className="section__place">
             <h3 className="section__topic__title">Place:</h3>
-            <p className="place__descr">{letterTransform(checkerNone(eventData.address))}</p>
+            <p className="place__descr">
+              {checkerProp(eventData.address) ? "Default address" : eventData.address
+              // letterTransform(checkerNone(eventData.address))
+              }
+            </p>
           </div>
           <div className="time__descr">
             <h3 className="section__topic__title">Time:</h3>
             <p className="time__descr">
               {eventData.cyclic
-                ? `Every ${regularity[eventData.weekDay]}, ${checkerNone(eventData.time)}`
-                : `${timeConverter(checkerNone(eventData.singleDate))} - ${checkerNone(
-                    eventData.time,
-                  )}`}
+                ? `Every ${regularity[eventData.weekDay]}, ${
+                    checkerProp(eventData.time) ? "Default time" : eventData.time
+                    // checkerNone(eventData.time)
+                  }`
+                : `${
+                    checkerProp(eventData.singleDate)
+                      ? "Default singleDate"
+                      : timeConverter(eventData.singleDate)
+                  } - ${
+                    checkerProp(eventData.time) ? "Default time" : eventData.time
+                    // checkerNone(eventData.time)
+                  }`}
             </p>
           </div>
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>
-            {eventData.location ? (
-              <EventMap location={eventData.location} />
+            {!checkerProp(eventData.location) ? (
+              `${
+                eventData.location.length !== 0 ? (
+                  <EventMap location={eventData.location} />
+                ) : (
+                  "No coordinates"
+                )
+              }`
             ) : (
+              //   ? (
+              //   <EventMap location={eventData.location} />
+              // ) :
               <span>Map is not ready</span>
             )}
           </div>

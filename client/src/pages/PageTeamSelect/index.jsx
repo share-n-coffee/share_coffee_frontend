@@ -7,6 +7,7 @@ import SectionInfo from "../../modules/SectionInfo";
 import PageTitle from "../../modules/PageTitle";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
+import { checkerProp } from "../../helpers/helpers";
 import jwtdecode from "jwt-decode";
 import { SET_USER_DEPARTMENT, GET_ALL_DEPARTMENTS } from "../../constants";
 import { checkTokenTime, checkIsBanned } from "../../helpers/requests";
@@ -65,16 +66,21 @@ const PageTeamSelect = props => {
     fetchData();
   }, []);
 
-  const dep = sessionStorage.getItem("department");
-  const hasDepartament =
-    dep === "undefined" || dep === undefined || dep === null || dep === "null" ? false : true;
+  // const dep = sessionStorage.getItem("department");
+  const hasDepartament = !checkerProp(sessionStorage.getItem("department"));
+  // dep === "undefined" || dep === undefined || dep === null || dep === "null" ? false : true;
   if (hasDepartament) {
     props.history.goBack();
   }
 
   return (
     <>
-      <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
+      <Header
+        isActive={true}
+        isAdmin={sessionStorage.getItem("isAdmin")}
+        hasDepartment={false}
+        location={props}
+      />
       <main className="select-main_section">
         <PageTitle
           title={`Hello, ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(

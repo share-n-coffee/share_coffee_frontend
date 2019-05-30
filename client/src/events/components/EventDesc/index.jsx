@@ -4,7 +4,13 @@ import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
 import SpinButton from "../../../common/SpinButton";
 import { Link } from "react-router-dom";
-import { letterTransform, checkerNone, timeConverter, regularity } from "../../../helpers/helpers";
+import {
+  letterTransform,
+  checkerNone,
+  timeConverter,
+  regularity,
+  checkerProp,
+} from "../../../helpers/helpers";
 
 class EventDesc extends Component {
   render() {
@@ -26,7 +32,9 @@ class EventDesc extends Component {
               <div className="selectedEvent">
                 <Link to={{ pathname: `/subscriptions/${event._id}` }}>
                   <EventName
-                    eventName={letterTransform(checkerNone(event.title))}
+                    eventName={
+                      checkerProp(event.title) ? "Default title" : letterTransform(event.title)
+                    }
                     isSubscribed={event.active}
                   />
                 </Link>
@@ -35,13 +43,17 @@ class EventDesc extends Component {
             ) : (
               <Link to={{ pathname: `/subscriptions/${event._id}` }}>
                 <EventName
-                  eventName={letterTransform(checkerNone(event.title))}
+                  eventName={
+                    checkerProp(event.title) ? "Default title" : letterTransform(event.title)
+                  }
                   isSubscribed={event.active}
                 />
               </Link>
             )}
             <InfoAboutEvent
-              adress={letterTransform(checkerNone(event.address))}
+              adress={
+                checkerProp(event.address) ? "Default address" : letterTransform(event.address)
+              }
               eventFrequency={
                 event.cyclic
                   ? `Every ${regularity[event.weekDay]}, ${event.time}`

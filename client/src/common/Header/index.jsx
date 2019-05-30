@@ -4,11 +4,12 @@ import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
+
 import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
-import { checkerNone } from "../../helpers/helpers";
+import { checkerNone, checkerProp } from "../../helpers/helpers";
 
 // static
 const events = [
@@ -32,7 +33,6 @@ const events = [
   },
 ];
 //
-// api 2.0 upcoming dropdown
 const getUpcomingEvents = async userId => {
   const token = getCookie("token");
   const obj = {
@@ -46,7 +46,6 @@ const getUpcomingEvents = async userId => {
   };
   return axios(obj)
     .then(res => {
-      // console.log(res);
       return res;
     })
     .catch(err => {
@@ -54,8 +53,6 @@ const getUpcomingEvents = async userId => {
       return err;
     });
 };
-const hasId = checkerNone(sessionStorage.getItem("id")) === "" ? false : true;
-// const userEvents = hasId ? getUpcomingEvents(sessionStorage.getItem("id")) : [];
 
 const logOut = props => {
   const { location } = props;
@@ -83,7 +80,7 @@ const checkListSuperAdmin = () => {
 
 const adminNavigation = props => {
   let { avatar, name } = props;
-  if (avatar === "undefined" || avatar === null) {
+  if (checkerProp(avatar)) {
     avatar = defaultUser;
   }
   if (checkListSuperAdmin()) {
@@ -114,15 +111,15 @@ const adminNavigation = props => {
 
 const userNavigation = (props, userEvents) => {
   let { avatar } = props;
-  if (avatar === "undefined" || avatar === undefined || avatar === null || avatar === "null") {
-    avatar = `${defaultUser}`;
+  if (checkerProp(avatar)) {
+    avatar = defaultUser;
   }
   return (
     <>
       {props.hasDepartment ? (
         <div>
           <div className="header-nav">
-            {sessionStorage.getItem("isAdmin") === "true" ? (
+            {sessionStorage.getItem("isAdmin") === "1" ? (
               <Button
                 text="Admin"
                 type="logout"
@@ -138,7 +135,6 @@ const userNavigation = (props, userEvents) => {
             <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />
           </div>
           <div className="header__dropdown">
-            {/*<EventsDropDown events={events} />*/}
             <EventsDropDown events={userEvents} />
           </div>
         </div>
@@ -152,21 +148,21 @@ const userNavigation = (props, userEvents) => {
 };
 
 const Header = props => {
+  const hasId = checkerProp(sessionStorage.getItem("id"));
   const [userEvents, setUserEvents] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getUpcomingEvents(sessionStorage.getItem("id"));
-      if (result.data) {
+      if (!hasId) {
+        console.log(hasId);
+        const result = await getUpcomingEvents(sessionStorage.getItem("id"));
         console.log(result.data);
         setUserEvents(result.data.data);
       } else {
         setUserEvents([]);
       }
     };
-
     fetchData();
   }, []);
-  // console.log(userEvents);
 
   return (
     <div className="header">
@@ -178,7 +174,12 @@ const Header = props => {
           <span>SHARE & COFFEE</span>
         </div>
         {props.isActive ? (
-          <>{props.isAdmin ? adminNavigation(props) : userNavigation(props, userEvents)}</>
+          <>
+            {props.isAdmin === "2"
+              ? adminNavigation(props)
+              : // `${props.isAdmin === "1" ? userNavigation()}`
+                userNavigation(props, userEvents)}
+          </>
         ) : (
           <></>
         )}
