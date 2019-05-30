@@ -9,7 +9,7 @@ import { GET_TOPIC } from "../../constants";
 import Button from "../../common/Button";
 import parser from "html-react-parser";
 import {
-  // checkerNone,
+  mapChecker,
   letterTransform,
   regularity,
   timeConverter,
@@ -67,6 +67,7 @@ const TopicFront = ({
     };
     fetchData();
   }, []);
+  console.log(eventData);
   return (
     <>
       {!isAdmin ? (
@@ -147,17 +148,12 @@ const TopicFront = ({
           <div className="map__descr">
             <h3 className="section__topic__title">Map:</h3>
             {!checkerProp(eventData.location) ? (
-              `${
-                eventData.location.length !== 0 ? (
-                  <EventMap location={eventData.location} />
-                ) : (
-                  "No coordinates"
-                )
-              }`
+              eventData.location.length === 2 ? (
+                <EventMap location={eventData.location} />
+              ) : (
+                "no coord"
+              )
             ) : (
-              //   ? (
-              //   <EventMap location={eventData.location} />
-              // ) :
               <span>Map is not ready</span>
             )}
           </div>

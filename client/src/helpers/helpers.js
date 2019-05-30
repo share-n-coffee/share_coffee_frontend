@@ -2,7 +2,7 @@ import React from "react";
 
 const checkerProp = prop => {
   if (
-    prop === "undefined" ||
+    prop === "null" ||
     prop === null ||
     prop === undefined ||
     prop === "undefined" ||
@@ -33,10 +33,14 @@ const setStorage = userData => {
 const router = props => {
   props.userAuth();
   const hasId = !checkerProp(sessionStorage.getItem("id"));
+  console.log(hasId);
   const hasDepartament = !checkerProp(sessionStorage.getItem("department"));
+  console.log(hasDepartament);
   if (hasId && !hasDepartament) {
+    console.log("probros 1");
     props.history.push("/team_select/");
   } else if (hasId && hasDepartament) {
+    console.log("probros 2");
     props.history.push("/subscriptions/");
   }
 };
@@ -73,7 +77,7 @@ const timeConverter = prop => {
 const secConverter = prop => {
   const date = new Date(prop);
   const arr = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-  let min = 0,
+  let min = `0`,
     hour = 0;
   if (date.getMinutes() < 10) {
     min += date.getMinutes();
@@ -93,11 +97,20 @@ const secConverter = prop => {
   return mas;
 };
 
+const mapChecker = prop => {
+  if (prop.length === 2) {
+    console.log([+prop[0], +prop[1]]);
+    return [+prop[0], +prop[1]];
+  } else {
+    return [+prop[0]];
+  }
+};
+
 export {
   setStorage,
   router,
   letterTransform,
-  // checkerNone,
+  mapChecker,
   timeConverter,
   regularity,
   secConverter,

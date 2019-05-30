@@ -33,7 +33,7 @@ const events = [
   },
 ];
 //
-const getUpcomingEvents = async userId => {
+const getUpcomingEvents = userId => {
   const token = getCookie("token");
   const obj = {
     method: "get",
@@ -153,9 +153,7 @@ const Header = props => {
   useEffect(() => {
     const fetchData = async () => {
       if (!hasId) {
-        console.log(hasId);
         const result = await getUpcomingEvents(sessionStorage.getItem("id"));
-        console.log(result.data);
         setUserEvents(result.data.data);
       } else {
         setUserEvents([]);
@@ -190,7 +188,7 @@ const Header = props => {
 
 Header.propTypes = {
   isActive: PropTypes.bool,
-  isAdmin: PropTypes.bool,
+  isAdmin: PropTypes.string,
   hasDepartment: PropTypes.bool,
   avatar: PropTypes.string,
   name: PropTypes.string,

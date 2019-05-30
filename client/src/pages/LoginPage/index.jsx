@@ -40,7 +40,7 @@ export default class LoginPage extends Component {
     // const { error } = this.state;
     return (
       <>
-        <Header isActive={false} isAdmin={false} hasDepartment={false} />
+        <Header isActive={false} isAdmin={"0"} hasDepartment={false} />
         <PageTitle title="Get your own kick off" desc="with Wargaming S&C" />
         <SectionInfo infoText="Use Telegram to be aware of upcoming meets and manage subscriptions:" />
         {/*{isBanned ? <BanMsg /> : <></>}*/}

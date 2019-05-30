@@ -46,7 +46,7 @@ class HomeAdmin extends React.Component {
       <>
         <Header
           isActive={false}
-          isAdmin={true}
+          isAdmin={"2"}
           hasDepartment={false}
           location={this.props}
           avatar={sessionStorage.getItem("avatar")}
