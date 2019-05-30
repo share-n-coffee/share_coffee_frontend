@@ -9,7 +9,7 @@ import TopicFront from "../TopicFront";
 import { GET_ALL_TOPICS, GET_USER } from "../../constants";
 import Preloader from "../../modules/Preloader";
 
-const getAllTopics = (token, page = 0, limit = 5) => {
+const getAllTopics = (token, page = 0, limit = 3) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
