@@ -128,7 +128,9 @@ class Topics extends Component {
 
         <Pagination pageCount={pageCount} change={currentPage => this.pagination(currentPage)} />
 
-        <Button onClick={e => this.addTopic(e)} text="Add topic" />
+        <div className="add_btn">
+          <Button onClick={e => this.addTopic(e)} text="Add Topic" />
+        </div>
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );

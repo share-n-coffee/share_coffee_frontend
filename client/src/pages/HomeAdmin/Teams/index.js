@@ -160,9 +160,11 @@ class Teams extends Component {
           <div>Team is empty</div>
         )}
         {!isShowAdding ? (
-          <Button onClick={this.toggleAdding} text=" Add team" />
+          <div className="add_btn">
+            <Button onClick={this.toggleAdding} text="Add team" />
+          </div>
         ) : (
-          <div>
+          <div className="add_team_container">
             <input
               autoFocus={true}
               className="form__field-input"
@@ -170,8 +172,10 @@ class Teams extends Component {
               onChange={e => this.changeInput(e.target.value)}
               placeholder="Department name"
             />
-            <SpinButton onClick={this.adding} text="Save" isLoading={isLoading} />
-            <Button onClick={this.toggleAdding} type="Unsubscribe" text="Cancel" />
+            <div className="two_btn_group">
+              <Button onClick={this.toggleAdding} type="Unsubscribe" text="Cancel" />
+              <SpinButton onClick={this.adding} text="Save" isLoading={isLoading} />
+            </div>
           </div>
         )}
         {error ? <ErrorMessage error={error} /> : ""}
