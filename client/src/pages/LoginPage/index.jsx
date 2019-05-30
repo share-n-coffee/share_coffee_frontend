@@ -10,11 +10,18 @@ import jwtDecode from "jwt-decode";
 import { setStorage, router } from "../../helpers/helpers";
 import ErrorMessage from "../../components/ErrorMessage";
 import BanMsg from "../../components/BanMsg";
+import Preloader from "../../modules/Preloader";
 
 export default class LoginPage extends Component {
+  state = {
+    loadingData: false,
+  };
   render() {
     // const isBanned = sessionStorage.getItem("banned") === "true" ? true : false;
     const handleTelegramResponse = async telegramResponse => {
+      this.setState({
+        loadingData: true,
+      });
       const requestObj = {
         method: "post",
         url: "https://forgeserver.herokuapp.com/login/",
@@ -38,6 +45,10 @@ export default class LoginPage extends Component {
     };
 
     // const { error } = this.state;
+    if (this.state.loadingData) {
+      return <Preloader />;
+    }
+
     return (
       <>
         <Header isActive={false} isAdmin={"0"} hasDepartment={false} />

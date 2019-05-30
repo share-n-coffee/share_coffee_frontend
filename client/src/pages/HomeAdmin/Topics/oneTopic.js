@@ -6,7 +6,7 @@ import PageTitle from "../../../modules/PageTitle";
 import { request } from "../../../helpers/requests";
 import Header from "../../../common/Header";
 import * as URL from "../../../constants";
-import TopicFront from "../../TopicFront";
+import TopicFront from "../../Events/TopicFront";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 
 class TopicDropdown extends Component {
