@@ -60,6 +60,10 @@ class TopicCreate extends Component {
     });
   };
 
+  save = () => {
+    this.props.history.push("/admin");
+  };
+
   render() {
     const { error } = this.state;
 
@@ -80,7 +84,7 @@ class TopicCreate extends Component {
             click={this.mouseEvents.click}
           />
 
-          <TopicEditor onCancel={this.cancel} />
+          <TopicEditor onCancel={this.cancel} onSave={this.save} />
 
           {error ? <ErrorMessage error={error} /> : ""}
         </main>
