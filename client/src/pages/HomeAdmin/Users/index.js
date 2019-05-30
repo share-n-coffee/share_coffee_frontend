@@ -33,7 +33,7 @@ class UserDepartment extends Component {
   }
 }
 
-class Topics extends Component {
+class Users extends Component {
   state = {
     users: [],
     unsortedUser: [],
@@ -47,15 +47,16 @@ class Topics extends Component {
     isLoadData: false,
     pageCount: 1,
     curDep: "",
+    sortBy: "created_desc",
   };
 
   componentDidMount() {
     this.getData();
   }
 
-  getData(page = 0, limit = 10) {
+  getData(page = 0, sortBy = "created_desc", limit = 10) {
     this.setState({ isLoadData: true });
-    request.get(URL.USERS(page, limit)).then(data => {
+    request.get(URL.USERS(page, limit, sortBy)).then(data => {
       console.log(data);
       this.setState({
         users: data.object.data,
@@ -88,7 +89,10 @@ class Topics extends Component {
   };
 
   pagination(currentPage) {
-    this.getData(currentPage - 1);
+    this.setState({
+      currentPage: currentPage,
+    });
+    this.getData(currentPage - 1, this.state.sortBy);
   }
 
   timestamp = createdTime => {
@@ -99,60 +103,38 @@ class Topics extends Component {
     return days.substr(-2) + "." + months.substr(-2) + "." + years;
   };
 
-  sort = field => {
-    let sortOrder = 1;
-
-    if (field[0] === "-") {
-      sortOrder = -1;
-      field = field.substr(1);
-    }
-
-    return function(a, b) {
-      const isNumber = Number.isInteger(a[field]);
-
-      if (typeof a[field] === "undefined" || typeof b[field] === "undefined") return -1;
-
-      if (sortOrder == -1) {
-        if (isNumber) {
-          return b[field] - a[field];
-        } else {
-          return b[field].localeCompare(a[field]);
-        }
-      } else {
-        if (isNumber) {
-          return a[field] - b[field];
-        } else {
-          return a[field].localeCompare(b[field]);
-        }
-      }
-    };
-  };
-
   filter = filter => {
+    let sortBy = filter + "_desc";
     this.setState({
       activeFilter: filter,
     });
     if (this.state.activeFilter === filter) {
       this.setState({
         up: filter,
-        users: this.state.unsortedUser.sort(this.sort("-" + filter)),
       });
+      sortBy = filter + "_desc";
     } else {
       this.setState({
         up: "",
-        users: this.state.unsortedUser.sort(this.sort(filter)),
       });
+      sortBy = filter + "_asc";
     }
     if (this.state.up === filter) {
       this.setState({
         up: "",
-        users: this.state.unsortedUser.sort(this.sort(filter)),
       });
+      sortBy = filter + "_asc";
     }
+
+    this.setState({
+      sortBy: sortBy,
+    });
+
+    this.getData(this.state.currentPage - 1, sortBy);
   };
 
   render() {
-    const { users, activeFilter, up, error, pageCount, isLoading, isLoadData } = this.state;
+    const { users, activeFilter, up, error, pageCount, isLoading } = this.state;
     return (
       <div>
         {users && users.length > 0 ? (
@@ -193,13 +175,11 @@ class Topics extends Component {
                     user.username && (
                       <tr
                         key={user._id}
-                        // className={`${
-                        //   user.banned.status
-                        //     ? "bannedUser"
-                        //     : user.admin.permission !== 0
-                        //     ? "adminUser"
-                        //     : ""
-                        // }`}
+                        className={`${
+                          user.admin.permission !== 0
+                            ? "adminUser"
+                            : user.banned.status && "bannedUser"
+                        }`}
                       >
                         <td>
                           <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
@@ -250,10 +230,10 @@ class Topics extends Component {
   }
 }
 
-Topics.propTypes = {
+Users.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
   children: PropTypes.object,
   dispatch: PropTypes.func,
 };
-export default Topics;
+export default Users;

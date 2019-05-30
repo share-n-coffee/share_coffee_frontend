@@ -6,24 +6,14 @@ import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
 // import {Preloader} from '../../modules/Preloader'
-import {
-  GET_EVENTS,
-  GET_ALL_TOPICS,
-  GET_USER,
-  SUBCR_USER_TO_TOPIC,
-  SUBCR_USER_TO_EVENT,
-  UNSUBCR_USER_FROM_EVENT,
-  UNSUBCR_USER_FROM_TOPIC,
-  GET_ALL_USER_SUBSCRIPTIONS,
-} from "../../constants";
-import { checkTokenTime } from "../../helpers/requests";
+import { GET_ALL_TOPICS, GET_USER } from "../../constants";
 import Preloader from "../../modules/Preloader";
 
-const getAllTopics = token => {
+const getAllTopics = (token, page = 0, limit = 5) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: GET_ALL_TOPICS,
+    url: GET_ALL_TOPICS(page, limit),
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
@@ -84,6 +74,8 @@ const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
 
 const SubscriptionsPage = props => {
   const [topics, setTopics] = useState([]);
+  const [varCurrentPage, setCurrentPage] = useState([]);
+  const [pageCount, setPageCount] = useState([]);
   const [userData, setUserData] = useState({});
   const [userTopics, setUserTopics] = useState([]);
   const [userTopicsIds, setUserTopicsIds] = useState([]);
@@ -121,6 +113,8 @@ const SubscriptionsPage = props => {
     const fetchData = async () => {
       const result = await getAllTopics(token);
       setTopics(result.data.data);
+      setPageCount(result.data.pages.total);
+      setCurrentPage(1);
     };
 
     fetchData();
@@ -155,11 +149,22 @@ const SubscriptionsPage = props => {
       onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
       onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
       isLoading={!isUserDataLoaded}
+      pageCount={pageCount}
+      currentPage={varCurrentPage}
+      pagination={currentPage => pagination(currentPage)}
       currentLoadingEvents={currentLoadingEvents}
     />
   );
-  // console.log(userData);
-  // console.log(isUserDataLoaded)
+
+  const pagination = currentPage => {
+    const fetchData = async () => {
+      const result = await getAllTopics(token, currentPage - 1);
+      setTopics(result.data.data);
+      setCurrentPage(currentPage);
+    };
+    fetchData();
+  };
+
   return (
     <>
       {isUserDataLoaded ? (

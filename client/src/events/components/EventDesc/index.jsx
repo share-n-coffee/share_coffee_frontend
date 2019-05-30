@@ -11,6 +11,7 @@ import {
   regularity,
   checkerProp,
 } from "../../../helpers/helpers";
+import Pagination from "../../../components/Pagination";
 
 class EventDesc extends Component {
   render() {
@@ -20,9 +21,11 @@ class EventDesc extends Component {
       onUnsubscriptionClick,
       userEventsIds = [],
       isLoading,
+      pagination,
+      pageCount,
+      currentPage,
       currentLoadingEvents = [],
     } = this.props;
-
     const elements = events.map(event => {
       const isSubscribed = userEventsIds.includes(event._id);
       return (
@@ -96,6 +99,7 @@ class EventDesc extends Component {
       <>
         <PageTitle title="Current topics" />
         <div className="eventDesc">{elements}</div>
+        <Pagination pageCount={pageCount} change={pagination} startingPage={currentPage} />
       </>
     );
   }
