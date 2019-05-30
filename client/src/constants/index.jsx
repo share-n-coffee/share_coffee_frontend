@@ -10,8 +10,8 @@ export const UPDATE_TOPIC = id => `https://forgeserver.herokuapp.com/api/topics/
 // export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/events/?topicId=${id}`;
 export const TOPIC_EVENTS = id => `https://forgeserver.herokuapp.com/api/topics/events/${id}`;
 
-export const USERS = (page = 0, limit = 10) =>
-  `https://forgeserver.herokuapp.com/api/users/?page=${page}&limit=${limit}`;
+export const USERS = (page = 0, limit = 10, sortBy = "created_desc") =>
+  `https://forgeserver.herokuapp.com/api/users/?page=${page}&limit=${limit}&sortBy=${sortBy}`;
 export const BAN_USER = id => `https://forgeserver.herokuapp.com/api/users/ban/${id}`;
 export const ONE_USER = id => `https://forgeserver.herokuapp.com/api/users/${id}`;
 
