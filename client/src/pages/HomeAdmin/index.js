@@ -44,22 +44,22 @@ class HomeAdmin extends React.Component {
 
     return (
       <>
-        <Header
-          isActive={false}
-          isAdmin={"2"}
-          hasDepartment={false}
-          location={this.props}
-          avatar={sessionStorage.getItem("avatar")}
-          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
-        />
-        <div className="login_container" style={{ width: "100%" }}>
-          <h1>Admin panel</h1>
-          {this.state.isLogin ? (
-            <HomeDashboard history={this.props.history} location={this.props.location} />
-          ) : (
-            <AdminLoginPage setLogin={() => this.setLogin()} />
-          )}
-        </div>
+        {/*<Header*/}
+        {/*isActive={true}*/}
+        {/*isAdmin={sessionStorage.getItem("isAdmin")}*/}
+        {/*hasDepartment={false}*/}
+        {/*location={this.props}*/}
+        {/*avatar={sessionStorage.getItem("avatar")}*/}
+        {/*name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}*/}
+        {/*/>*/}
+        {/*<div className="login_container" style={{ width: "100%" }}>*/}
+        {/*<h1>Admin panel</h1>*/}
+        {this.state.isLogin ? (
+          <HomeDashboard history={this.props.history} location={this.props.location} />
+        ) : (
+          <AdminLoginPage setLogin={() => this.setLogin()} />
+        )}
+        {/*</div>*/}
       </>
     );
   }
