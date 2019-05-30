@@ -21,11 +21,6 @@
     }
   }
   
-  // .h-wrapper {
-  //   max-width: 1024px;
-  //   margin: 0 auto;
-  // }
-  
   .header__container {
     height: 100%;
     display: flex;
@@ -39,7 +34,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding-left: 20px;
     margin-top: 13px;
 
     & > .header-user__info + button {
@@ -50,7 +44,6 @@
   
   .header-user__img {
     width: 31px;
-    // height: 40px;
     border-radius: 50%;
   }
   
