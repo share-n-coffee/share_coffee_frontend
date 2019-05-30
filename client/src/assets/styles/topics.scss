@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  margin: 0 20px;
+  margin: 0 60px;
   display: grid;
   border-bottom: 1.3px solid #e1e1e1;
   padding: 20px 0;
@@ -113,4 +113,8 @@
       margin-top: 20px;
     }
   }
+}
+
+.add_btn {
+  margin: 30px 60px;
 }
