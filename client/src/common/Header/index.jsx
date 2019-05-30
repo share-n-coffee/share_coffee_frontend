@@ -4,7 +4,7 @@ import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
-
+import { SERVER } from "../../constants/";
 import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -37,7 +37,7 @@ const getUpcomingEvents = userId => {
   const token = getCookie("token");
   const obj = {
     method: "get",
-    url: `https://forgeserver.herokuapp.com/api/users/${userId}/upcoming`,
+    url: `${SERVER}/users/${userId}/upcoming`,
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
