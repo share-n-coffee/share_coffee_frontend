@@ -2,7 +2,7 @@ import React from "react";
 import { Tab, TabContainer } from "../../../ui/core/home";
 import UserTopics from "./userTopics";
 import UserInfo from "./userInfo";
-import UserLogs from "./userLogs";
+//import UserLogs from "./userLogs";
 import { request } from "../../../helpers/requests";
 import PageTitle from "../../../modules/PageTitle";
 import * as URL from "../../../constants";

@@ -57,7 +57,7 @@ class Topics extends Component {
       <div key={user._id} className="user-info__container">
         <img
           src={`${user.avatar ? user.avatar : require("../../../assets/img/logo.png")}`}
-          alt="user photo"
+          alt="user avatar"
         />
         <h2>{user.username} </h2>
         <h3>{user.firstName + " " + user.lastName}</h3>

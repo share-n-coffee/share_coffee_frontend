@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import EventMap from "../../../events/components/EventMap";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../../modules/PageTitle";
-import { checkTokenTime } from "../../../helpers/requests";
+//import { checkTokenTime } from "../../../helpers/requests";
 import SpinButton from "../../../common/SpinButton";
 import Button from "../../../common/Button";
 import parser from "html-react-parser";
@@ -16,7 +16,7 @@ import {
 } from "../helpers.js";
 
 import {
-  mapChecker,
+  //mapChecker,
   letterTransform,
   regularity,
   timeConverter,
@@ -91,16 +91,7 @@ class TopicFront extends Component {
   }
 
   render() {
-    const {
-      userEventsIds = [],
-      onSubscriptionClick,
-      onUnsubscriptionClick,
-      isLoading,
-      currentLoadingEvents = [],
-      match,
-      history,
-      isAdmin,
-    } = this.props;
+    const { isLoading, isAdmin } = this.props;
 
     if (this.state.loading) {
       return (

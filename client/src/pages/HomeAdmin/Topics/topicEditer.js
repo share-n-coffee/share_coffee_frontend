@@ -3,9 +3,9 @@ import { request } from "../../../helpers/requests";
 import * as URL from "../../../constants";
 
 class TopicEditer extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     event: [],

@@ -5,12 +5,12 @@ import SectionInfo from "../../modules/SectionInfo";
 import { setCookie } from "tiny-cookie";
 import Header from "../../common/Header";
 import axios from "axios";
-import { SET_USER_DATA } from "../../constants";
 import jwtDecode from "jwt-decode";
 import { setStorage, router } from "../../helpers/helpers";
-import ErrorMessage from "../../components/ErrorMessage";
-import BanMsg from "../../components/BanMsg";
 import Preloader from "../../modules/Preloader";
+//import { SET_USER_DATA } from "../../constants";
+//import ErrorMessage from "../../components/ErrorMessage";
+//import BanMsg from "../../components/BanMsg";
 
 export default class LoginPage extends Component {
   state = {

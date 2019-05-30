@@ -10,9 +10,9 @@ import { request } from "../../../helpers/requests";
 import PageTitle from "../../../modules/PageTitle";
 
 class TopicCreate extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     error: "",

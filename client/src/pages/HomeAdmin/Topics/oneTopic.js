@@ -51,9 +51,9 @@ class TopicDropdown extends Component {
 }
 
 class oneTopic extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     topic: [],
