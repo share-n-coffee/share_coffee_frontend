@@ -5,6 +5,7 @@ import EventDesc from "../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
+// import {Preloader} from '../../modules/Preloader'
 import {
   GET_EVENTS,
   GET_ALL_TOPICS,
@@ -16,6 +17,7 @@ import {
   GET_ALL_USER_SUBSCRIPTIONS,
 } from "../../constants";
 import { checkTokenTime } from "../../helpers/requests";
+import Preloader from "../../modules/Preloader";
 
 const getAllTopics = token => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
@@ -53,14 +55,6 @@ const getUser = (token, id) => {
       "Content-Type": "application/json",
     },
   });
-  // .then(res => {
-  //   console.log(res);
-  //   return res;
-  // })
-  // .catch(err => {
-  //   // console.log(err);
-  //   return err;
-  // });
 };
 
 const subscribeUserToTopic = (topicId, userId, token) => {
@@ -98,6 +92,12 @@ const SubscriptionsPage = props => {
   const token = getCookie("token");
   //const userId = "5ce1147ca0c89f001e1c2a4b";
   const userId = sessionStorage.getItem("id");
+  // console.log(userData);
+  // console.log(topics);
+  // console.log(userTopics);
+  // console.log(userTopicsIds);
+  // console.log(isUserDataLoaded)
+  // console.log(currentLoadingEvents)
 
   const handleSubscriptionClick = topicId => {
     handleSubscribing(topicId, subscribeUserToTopic);
@@ -158,35 +158,45 @@ const SubscriptionsPage = props => {
       currentLoadingEvents={currentLoadingEvents}
     />
   );
+  // console.log(userData);
+  // console.log(isUserDataLoaded)
   return (
     <>
-      <Header
-        isActive={true}
-        // isAdmin={false}
-        isAdmin={sessionStorage.getItem("isAdmin")}
-        hasDepartment={true}
-        avatar={sessionStorage.getItem("avatar")}
-        name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
-        location={props}
-      />
-      <main>
-        <Switch>
-          <Route exact path="/subscriptions/" component={EventFull} />
-          <Route
-            path="/subscriptions/:id"
-            component={params => (
-              <TopicFront
-                userEventsIds={userTopicsIds}
-                onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
-                onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
-                isLoading={!isUserDataLoaded}
-                currentLoadingEvents={currentLoadingEvents}
-                {...params}
-              />
-            )}
+      {isUserDataLoaded ? (
+        <>
+          <Header
+            isActive={true}
+            // isAdmin={false}
+            isAdmin={sessionStorage.getItem("isAdmin")}
+            hasDepartment={true}
+            avatar={sessionStorage.getItem("avatar")}
+            name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+            location={props}
           />
-        </Switch>
-      </main>
+          <main>
+            <Switch>
+              <Route exact path="/subscriptions/" component={EventFull} />
+              <Route
+                path="/subscriptions/:id"
+                component={params => (
+                  <TopicFront
+                    userEventsIds={userTopicsIds}
+                    onSubscriptionClick={topicId => handleSubscriptionClick(topicId)}
+                    onUnsubscriptionClick={topicId => handleUnsubscriptionClick(topicId)}
+                    isLoading={!isUserDataLoaded}
+                    currentLoadingEvents={currentLoadingEvents}
+                    {...params}
+                  />
+                )}
+              />
+            </Switch>
+          </main>
+        </>
+      ) : (
+        <div className="wrapper preload_center">
+          <Preloader />
+        </div>
+      )}
     </>
   );
 };
