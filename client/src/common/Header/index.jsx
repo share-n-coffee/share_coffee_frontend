@@ -124,7 +124,7 @@ const userNavigation = (props, userEvents) => {
                 text="Admin"
                 type="logout"
                 onClick={() => {
-                  props.location.history.replace(`/admin}`);
+                  props.location.history.replace(`/admin`);
                 }}
               />
             ) : (

@@ -162,7 +162,8 @@ const SubscriptionsPage = props => {
     <>
       <Header
         isActive={true}
-        isAdmin={false}
+        // isAdmin={false}
+        isAdmin={sessionStorage.getItem("isAdmin")}
         hasDepartment={true}
         avatar={sessionStorage.getItem("avatar")}
         name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}

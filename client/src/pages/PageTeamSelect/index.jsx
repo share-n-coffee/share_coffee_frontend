@@ -75,7 +75,12 @@ const PageTeamSelect = props => {
 
   return (
     <>
-      <Header isActive={true} isAdmin={false} hasDepartment={false} location={props} />
+      <Header
+        isActive={true}
+        isAdmin={sessionStorage.getItem("isAdmin")}
+        hasDepartment={false}
+        location={props}
+      />
       <main className="select-main_section">
         <PageTitle
           title={`Hello, ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem(
