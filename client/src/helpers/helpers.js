@@ -2,7 +2,7 @@ import React from "react";
 
 const checkerProp = prop => {
   if (
-    prop === "undefined" ||
+    prop === "null" ||
     prop === null ||
     prop === undefined ||
     prop === "undefined" ||
@@ -33,10 +33,14 @@ const setStorage = userData => {
 const router = props => {
   props.userAuth();
   const hasId = !checkerProp(sessionStorage.getItem("id"));
+  console.log(hasId);
   const hasDepartament = !checkerProp(sessionStorage.getItem("department"));
+  console.log(hasDepartament);
   if (hasId && !hasDepartament) {
+    console.log("probros 1");
     props.history.push("/team_select/");
   } else if (hasId && hasDepartament) {
+    console.log("probros 2");
     props.history.push("/subscriptions/");
   }
 };
