@@ -8,6 +8,7 @@ import { setCookie } from "tiny-cookie";
 import jwtDecode from "jwt-decode";
 import { setStorage } from "../../helpers/helpers";
 import * as URL from "../../constants";
+import Header from "../../common/Header";
 
 class AdminLoginPage extends Component {
   constructor(props) {
@@ -57,27 +58,40 @@ class AdminLoginPage extends Component {
     const { error, isLoading } = this.state;
 
     return (
-      <div className="form-page__wrapper login_container">
-        <h2 className="form-page__form-heading">Please Login In</h2>
-        <form className="form">
-          {error ? <ErrorMessage error={error} /> : null}
-          <input
-            className="form__field-input"
-            type="text"
-            onChange={e => this.changeInput("username", e.target.value)}
-            placeholder="username"
-          />
+      <>
+        <Header
+          isActive={false}
+          isAdmin={"2"}
+          hasDepartment={false}
+          location={this.props}
+          avatar={sessionStorage.getItem("avatar")}
+          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+        />
+        <div className="login_container" style={{ width: "100%" }}>
+          <h1>Admin panel</h1>
+          <div className="form-page__wrapper login_container">
+            <h2 className="form-page__form-heading">Please Login In</h2>
+            <form className="form">
+              {error ? <ErrorMessage error={error} /> : null}
+              <input
+                className="form__field-input"
+                type="text"
+                onChange={e => this.changeInput("username", e.target.value)}
+                placeholder="username"
+              />
 
-          <input
-            className="form__field-input"
-            type="password"
-            onChange={e => this.changeInput("password", e.target.value)}
-            placeholder="password"
-          />
+              <input
+                className="form__field-input"
+                type="password"
+                onChange={e => this.changeInput("password", e.target.value)}
+                placeholder="password"
+              />
 
-          <SpinButton onClick={e => this.login(e)} text="Log in" isLoading={isLoading} />
-        </form>
-      </div>
+              <SpinButton onClick={e => this.login(e)} text="Log in" isLoading={isLoading} />
+            </form>
+          </div>
+        </div>
+      </>
     );
   }
 }
