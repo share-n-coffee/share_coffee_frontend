@@ -6,7 +6,7 @@ import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";
 import TopicFront from "../TopicFront";
 // import {Preloader} from '../../modules/Preloader'
-import { GET_ALL_TOPICS, GET_USER } from "../../constants";
+import { SERVER, GET_ALL_TOPICS, GET_USER } from "../../constants";
 import Preloader from "../../modules/Preloader";
 
 const getAllTopics = (token, page = 0, limit = 3) => {
@@ -26,7 +26,7 @@ const getAllUserSubscriptions = (token, userId) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: `https://forgeserver.herokuapp.com/api/subscriptions/?userId=${userId}`,
+    url: `${SERVER}/subscriptions/?userId=${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
@@ -52,7 +52,7 @@ const subscribeUserToTopic = (topicId, userId, token) => {
   // const userId = sessionStorage.getItem("id");
   return axios({
     method: "post",
-    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
+    url: `${SERVER}/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -64,7 +64,7 @@ const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
   // const userId = sessionStorage.getItem("id");
   return axios({
     method: "delete",
-    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
+    url: `${SERVER}/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

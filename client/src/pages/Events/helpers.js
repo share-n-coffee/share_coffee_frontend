@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_TOPICS, GET_USER, GET_TOPIC } from "../../constants";
+import { SERVER, GET_ALL_TOPICS, GET_USER, GET_TOPIC } from "../../constants";
 
 //===================================================================================//
 
@@ -22,7 +22,7 @@ const getAllUserSubscriptions = (token, userId) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: `https://forgeserver.herokuapp.com/api/subscriptions/?userId=${userId}`,
+    url: `${SERVER}/subscriptions/?userId=${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
@@ -53,7 +53,7 @@ const subscribeUserToTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "post",
-    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
+    url: `${SERVER}/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -66,7 +66,7 @@ const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
-    url: `https://forgeserver.herokuapp.com/api/topics/${topicId}/${userId}/`,
+    url: `${SERVER}/topics/${topicId}/${userId}/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -94,7 +94,7 @@ const getSubscription = (topicId, userId, token) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
-    url: `https://forgeserver.herokuapp.com/api/subscriptions/?userId=${userId}&topicId=${topicId}`,
+    url: `${SERVER}/subscriptions/?userId=${userId}&topicId=${topicId}`,
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
