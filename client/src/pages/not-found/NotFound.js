@@ -42,7 +42,9 @@ class NotFound extends Component {
             </div>
             <div className="gif__container">
               <span className="redux_txt">Redux</span>
+              <span className="redux_txt api">API 3.0</span>
               <span className="tests_txt">Tests</span>
+              <span className="tests_txt deadline">Deadlines</span>
               <img src={john} className="gif" alt="john" />
             </div>
           </div>
