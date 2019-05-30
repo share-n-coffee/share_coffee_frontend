@@ -72,17 +72,18 @@ class TopicCreate extends Component {
           avatar={sessionStorage.getItem("avatar")}
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
+        <main>
+          <PageTitle
+            title={this.state.linkNoHover ? "New topic" : "← Back"}
+            mouseOver={this.mouseEvents.mouseOver}
+            mouseOut={this.mouseEvents.mouseOut}
+            click={this.mouseEvents.click}
+          />
 
-        <PageTitle
-          title={this.state.linkNoHover ? "New topic" : "← Back"}
-          mouseOver={this.mouseEvents.mouseOver}
-          mouseOut={this.mouseEvents.mouseOut}
-          click={this.mouseEvents.click}
-        />
+          <TopicEditor onCancel={this.cancel} />
 
-        <TopicEditor onCancel={this.cancel} />
-
-        {error ? <ErrorMessage error={error} /> : ""}
+          {error ? <ErrorMessage error={error} /> : ""}
+        </main>
 
         <Footer />
       </>
