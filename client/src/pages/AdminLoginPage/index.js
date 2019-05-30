@@ -59,14 +59,7 @@ class AdminLoginPage extends Component {
 
     return (
       <>
-        <Header
-          isActive={false}
-          isAdmin={"2"}
-          hasDepartment={false}
-          location={this.props}
-          avatar={sessionStorage.getItem("avatar")}
-          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
-        />
+        <Header isActive={false} isAdmin={"2"} hasDepartment={false} location={this.props} />
         <div className="login_container" style={{ width: "100%" }}>
           <h1>Admin panel</h1>
           <div className="form-page__wrapper login_container">
