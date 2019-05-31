@@ -1,5 +1,10 @@
 .form {
- margin-bottom: 100px;
+ margin: 30px auto;
+ max-width: 380px;
+}
+
+.admin_login_button {
+  margin: 30px auto;
 }
 
 .form__field-input {
@@ -8,16 +13,23 @@
   margin: 10px 0;
   font-size: 16px;
   width: 100%;
-  color: #666;
+  color: #C8C8C8;
   border: none;
-  border-bottom: 1px solid cornflowerblue;
+  border-bottom: 1px solid #0064ff4d;
   outline: 0;
   background: transparent;
 
   &:focus {
     background-color: transparent;
-    color: #333;
+    color: #323232;
+    border-bottom: 1px solid #0064ff;
   }
+  &:last-of-type {
+    margin-bottom: 30px;
+  }
+  &::placeholder {
+    color: #C8C8C8;
+};
 }
 
 .form__submit-btn-wrapper {
