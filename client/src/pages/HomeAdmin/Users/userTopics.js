@@ -43,7 +43,8 @@ class OneTopics extends Component {
             <span>Time:</span>
             <div>{event.time}</div>
             <div>{event.options && event.options.times[0]}</div>
-            <Button text="unsubscribe" />
+            <button style={{ visibility: "hidden" }} />
+            {/*<Button text="unsubscribe" />*/}
           </div>
         ) : (
           ""
