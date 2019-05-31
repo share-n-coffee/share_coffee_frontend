@@ -64,21 +64,20 @@ class AdminLoginPage extends Component {
           <h1 className="main__header">Admin panel</h1>
           <div className="shadow_container" />
           <div className="form-page__wrapper login_container">
-            <h2 className="form-page__form-heading">Please Login In</h2>
             <form className="form">
               {error ? <ErrorMessage error={error} /> : null}
               <input
                 className="form__field-input"
                 type="text"
                 onChange={e => this.changeInput("username", e.target.value)}
-                placeholder="username"
+                placeholder="Username"
               />
 
               <input
                 className="form__field-input"
                 type="password"
                 onChange={e => this.changeInput("password", e.target.value)}
-                placeholder="password"
+                placeholder="Password"
               />
 
               <SpinButton onClick={e => this.login(e)} text="Log in" isLoading={isLoading} />
