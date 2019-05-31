@@ -27,21 +27,25 @@ class Topics extends Component {
         </div>
 
         <div>
-          {user.admin && user.admin.permission === 0 ? (
-            <div>
+          {user.admin && user.admin.permission !== 2 ? (
+            user.admin && user.admin.permission === 0 ? (
               <div>
-                {user.banned && !user.banned.status ? (
-                  <Button onClick={() => toggleBan(user)} text="Ban User" type="Unsubscribe" />
-                ) : (
-                  <Button onClick={() => toggleBan(user)} text="Unban" type="Subscribe" />
+                <div>
+                  {user.banned && !user.banned.status ? (
+                    <Button onClick={() => toggleBan(user)} text="Ban User" type="Unsubscribe" />
+                  ) : (
+                    <Button onClick={() => toggleBan(user)} text="Unban" type="Subscribe" />
+                  )}
+                </div>
+                {user.banned && !user.banned.status && (
+                  <Button onClick={() => toggleAdmin(user)} text="add to admin" type="Subscribe" />
                 )}
               </div>
-              {user.banned && !user.banned.status && (
-                <Button onClick={() => toggleAdmin(user)} text="add to admin" type="Subscribe" />
-              )}
-            </div>
+            ) : (
+              <Button onClick={() => toggleAdmin(user)} text="Delete from admin" type="Subscribe" />
+            )
           ) : (
-            <Button onClick={() => toggleAdmin(user)} text="Delete from admin" type="Subscribe" />
+            `Super Admin`
           )}
         </div>
       </div>
