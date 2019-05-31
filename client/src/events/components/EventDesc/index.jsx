@@ -4,13 +4,7 @@ import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
 import SpinButton from "../../../common/SpinButton";
 import { Link } from "react-router-dom";
-import {
-  letterTransform,
-  checkerNone,
-  timeConverter,
-  regularity,
-  checkerProp,
-} from "../../../helpers/helpers";
+import { letterTransform, timeConverter, regularity, checkerProp } from "../../../helpers/helpers";
 import Pagination from "../../../components/Pagination";
 
 class EventDesc extends Component {

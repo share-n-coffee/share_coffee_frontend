@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import List from "./List";
-import { ReactComponent as ArrowIcon } from "../../icons/Arrow.svg";
-import axios from "axios";
-import { getCookie } from "tiny-cookie";
+// import { ReactComponent as ArrowIcon } from "../../icons/Arrow.svg";
+
 /**
  * Dropdown component for showing user events
  * @param events (array of label-value objects)

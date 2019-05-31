@@ -1,11 +1,9 @@
 import React from "react";
 import HomeDashboard from "./home";
-import Header from "../../common/Header";
 import Preloader from "../../modules/Preloader";
 import { GET_USER } from "../../constants/";
 import AdminLoginPage from "../AdminLoginPage";
 import { request } from "../../helpers/requests";
-import { Redirect } from "react-router";
 
 class HomeAdmin extends React.Component {
   state = {

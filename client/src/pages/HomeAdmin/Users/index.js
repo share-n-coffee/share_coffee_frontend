@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { request } from "../../../helpers/requests";
 import * as URL from "../../../constants";
 import SpinButton from "../../../common/SpinButton";
-import { Loading } from "../../../ui/components/Loader";
-import Button from "../../../common/Button";
+//import { Loading } from "../../../ui/components/Loader";
+//import Button from "../../../common/Button";
 
 class UserDepartment extends Component {
   state = {
