@@ -9,13 +9,15 @@ export const ADD_NEW_TOPIC = `${SERVER}/topics/`;
 export const UPDATE_TOPIC = id => `${SERVER}/topics/${id}`;
 // export const TOPIC_EVENTS = id => `${SERVER}/events/?topicId=${id}`;
 export const TOPIC_EVENTS = id => `${SERVER}/topics/events/${id}`;
-export const USERS = (page = 0, limit = 10, sortBy = "created_desc") =>
-  `${SERVER}/users/?page=${page}&limit=${limit}&sortBy=${sortBy}`;
+export const USERS = (page = 0, limit = 10, sortBy = "created_desc") => `${SERVER}/users/?page=${page}&limit=${limit}&sortBy=${sortBy}`;
 export const BAN_USER = id => `${SERVER}/users/ban/${id}`;
 export const ONE_USER = id => `${SERVER}/users/${id}`;
+export const USER_TOPIC = id => `${SERVER}/subscriptions/?userId=${id}`;
+
 export const TEAMS = `${SERVER}/departments/`;
 export const USER_IN_TEAM = id => `${SERVER}/users/?department=${id}`;
 export const ONE_TEAM = id => `${SERVER}/departments/${id}`;
+
 const SET_USER_DATA = "https://forge-development.herokuapp.com/login";
 const GET_EVENTS = "https://forge-development.herokuapp.com/api/events/"; //--------------------------------------------------------------------------
 // const GET_USER = id => `https://forge-development.herokuapp.com/api/users/${id}`;
