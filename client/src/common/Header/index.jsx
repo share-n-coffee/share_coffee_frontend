@@ -92,11 +92,9 @@ const userNavigation = (props, userEvents) => {
   if (checkerProp(avatar)) {
     avatar = defaultUser;
   }
-  let fullName = "user";
+  let fullName = `${name} ${surName}`;
   if (checkerProp(name) || checkerProp(surName)) {
     fullName = "user";
-  } else {
-    fullName = `${name} ${surName}`;
   }
   return (
     <>

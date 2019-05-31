@@ -9,7 +9,8 @@ export const ADD_NEW_TOPIC = `${SERVER}/topics/`;
 export const UPDATE_TOPIC = id => `${SERVER}/topics/${id}`;
 // export const TOPIC_EVENTS = id => `${SERVER}/events/?topicId=${id}`;
 export const TOPIC_EVENTS = id => `${SERVER}/topics/events/${id}`;
-export const USERS = (page = 0, limit = 10, sortBy = "created_desc") => `${SERVER}/users/?page=${page}&limit=${limit}&sortBy=${sortBy}`;
+export const USERS = (page = 0, limit = 10, sortBy = "created_desc") =>
+  `${SERVER}/users/?page=${page}&limit=${limit}&sortBy=${sortBy}`;
 export const BAN_USER = id => `${SERVER}/users/ban/${id}`;
 export const ONE_USER = id => `${SERVER}/users/${id}`;
 export const USER_TOPIC = id => `${SERVER}/subscriptions/?userId=${id}`;

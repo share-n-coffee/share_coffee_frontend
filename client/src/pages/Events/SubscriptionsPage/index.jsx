@@ -121,9 +121,10 @@ class SubscriptionsPage extends Component {
           isAdmin={sessionStorage.getItem("isAdmin")}
           hasDepartment={true}
           avatar={sessionStorage.getItem("avatar")}
-          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+          name={sessionStorage.getItem("firstName")}
+          surName={sessionStorage.getItem("lastName")}
           location={this.props}
-        />{" "}
+        />
         <main>
           <Switch>
             <Route exact path="/subscriptions/" component={this.EventFull} />
