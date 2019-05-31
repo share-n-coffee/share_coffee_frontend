@@ -12,26 +12,26 @@ import { getCookie } from "tiny-cookie";
 import { checkerNone, checkerProp } from "../../helpers/helpers";
 
 // static
-const events = [
-  {
-    title: "Platform Front-end",
-    name: "@ Latte Python ",
-    place: "12 Zybitskaya St., Minsk",
-    time: "22.04.2019 - 16:00",
-  },
-  {
-    title: "Platform Back-end",
-    name: "@ Latte Python ",
-    place: "12 Zybitskaya St., Minsk",
-    time: "22.04.2019 - 16:00",
-  },
-  {
-    title: "CG & Motion Design",
-    name: "@ Latte Python ",
-    place: "12 Zybitskaya St., Minsk",
-    time: "22.04.2019 - 16:00",
-  },
-];
+// const events = [
+//   {
+//     title: "Platform Front-end",
+//     name: "@ Latte Python ",
+//     place: "12 Zybitskaya St., Minsk",
+//     time: "22.04.2019 - 16:00",
+//   },
+//   {
+//     title: "Platform Back-end",
+//     name: "@ Latte Python ",
+//     place: "12 Zybitskaya St., Minsk",
+//     time: "22.04.2019 - 16:00",
+//   },
+//   {
+//     title: "CG & Motion Design",
+//     name: "@ Latte Python ",
+//     place: "12 Zybitskaya St., Minsk",
+//     time: "22.04.2019 - 16:00",
+//   },
+// ];
 //
 const getUpcomingEvents = userId => {
   const token = getCookie("token");
@@ -114,11 +114,9 @@ const userNavigation = (props, userEvents) => {
   if (checkerProp(avatar)) {
     avatar = defaultUser;
   }
-  let fullName = "user";
+  let fullName = `${name} ${surName}`;
   if (checkerProp(name) || checkerProp(surName)) {
     fullName = "user";
-  } else {
-    fullName = `${name} ${surName}`;
   }
   return (
     <>
