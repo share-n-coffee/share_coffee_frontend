@@ -33,7 +33,8 @@ class HomeDashboard extends React.Component {
           hasDepartment={false}
           location={this.props}
           avatar={sessionStorage.getItem("avatar")}
-          name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+          name={sessionStorage.getItem("firstName")}
+          surName={sessionStorage.getItem("lastName")}
         />
         <div className="login_container" style={{ width: "100%" }}>
           <h1>Admin panel</h1>

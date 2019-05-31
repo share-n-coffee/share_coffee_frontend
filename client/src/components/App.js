@@ -6,7 +6,6 @@ import SubscriptionsPage from "../pages/SubscriptionsPage";
 import HomeAdmin from "../pages/HomeAdmin/";
 import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
 import OneUser from "../pages/HomeAdmin/Users/oneUser";
-import AdminLoginPage from "../pages/AdminLoginPage";
 import { token } from "../constants";
 import { setCookie } from "tiny-cookie"; //for localhost
 import { getCookie } from "tiny-cookie";
@@ -15,6 +14,7 @@ import { Route, Switch, Redirect } from "react-router";
 import Footer from "../common/Footer";
 import NotFound from "../pages/not-found/NotFound";
 import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
+import AdminLoginPage from "../pages/AdminLoginPage";
 
 // LOCALHOST
 // setCookie("token", token); //for localhost
@@ -22,9 +22,9 @@ import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
 // sessionStorage.setItem("firstName", "gadya");
 // sessionStorage.setItem("lastName", "xrenova");
 // sessionStorage.setItem("avatar", "undefined");
-// sessionStorage.setItem("isAdmin", false);
+// sessionStorage.setItem("isAdmin", 1);
 // sessionStorage.setItem("banned", false);
-// sessionStorage.setItem("department", "magistral");
+// sessionStorage.setItem("department", 'zvd');
 // sessionStorage.setItem("tokenTimeOver", "15134868");
 //------------------------------------------------
 

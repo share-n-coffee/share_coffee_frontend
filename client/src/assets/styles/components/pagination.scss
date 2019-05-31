@@ -5,8 +5,10 @@
 }
 
 .pagin-btn {
-  background-color: white;
-  border-radius: 0.15em;
+  font-family: 'Roboto';
+  color: #323232;
+  background-color: #EFEFEF;
+  border-radius: 0.3em;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 0 0.25em;
@@ -27,7 +29,7 @@
 }
 
 .pagin-active {
-  background-color: #4D7EA8;
+  background-color: #0064FF;
   color: white;
 
   &:hover,

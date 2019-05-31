@@ -9,7 +9,7 @@ import TopicFront from "../TopicFront";
 import { GET_ALL_TOPICS, GET_USER } from "../../constants";
 import Preloader from "../../modules/Preloader";
 
-const getAllTopics = (token, page = 0, limit = 5) => {
+const getAllTopics = (token, page = 0, limit = 3) => {
   // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
@@ -171,11 +171,11 @@ const SubscriptionsPage = props => {
         <>
           <Header
             isActive={true}
-            // isAdmin={false}
             isAdmin={sessionStorage.getItem("isAdmin")}
             hasDepartment={true}
             avatar={sessionStorage.getItem("avatar")}
-            name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
+            name={sessionStorage.getItem("firstName")}
+            surName={sessionStorage.getItem("lastName")}
             location={props}
           />
           <main>
@@ -198,7 +198,7 @@ const SubscriptionsPage = props => {
           </main>
         </>
       ) : (
-        <div className="preload_center">
+        <div className="preloader-body">
           <Preloader />
         </div>
       )}
