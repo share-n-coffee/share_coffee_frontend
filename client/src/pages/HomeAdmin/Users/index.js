@@ -17,7 +17,6 @@ class UserDepartment extends Component {
   componentDidMount() {
     if (this.props.id) {
       request.get(URL.ONE_TEAM(this.props.id)).then(data => {
-        console.log(data.object.data.title);
         if (data.object) {
           this.setState({
             title: data.object.data.title,
@@ -56,7 +55,6 @@ class Users extends Component {
   getData(page = 0, sortBy = "created_desc", limit = 10) {
     this.setState({ isLoadData: true });
     request.get(URL.USERS(page, limit, sortBy)).then(data => {
-      console.log(data);
       this.setState({
         users: data.object.data,
         unsortedUser: data.object.data,
@@ -171,7 +169,7 @@ class Users extends Component {
               <tbody>
                 {users.map(
                   user =>
-                    user.username && (
+                    (user.username || user.firstName) && (
                       <tr
                         key={user._id}
                         className={`${
@@ -182,7 +180,9 @@ class Users extends Component {
                       >
                         <td>
                           <Link to={{ pathname: `/admin/user/${user._id}` }} className={"title"}>
-                            <span className={"username"}>{user.username}</span>
+                            <span className={"username"}>
+                              {user.username ? user.username : `user (${user.firstName})`}
+                            </span>
                           </Link>
                         </td>
                         <td>

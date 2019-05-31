@@ -101,38 +101,42 @@ class OneUser extends React.Component {
           avatar={sessionStorage.getItem("avatar")}
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
-    <main>
-        <PageTitle
-          title={this.state.linkNoHover ? user.firstName + " " + user.lastName : "← Back"}
-          mouseOver={this.mouseEvents.mouseOver}
-          mouseOut={this.mouseEvents.mouseOut}
-          click={this.mouseEvents.click}
-          withShadowContainer={false}
-        />
-        <TabContainer>
-          <Tab onClick={() => this.openTab("UserInfo")} active={activeTab === "UserInfo"}>
-            User
-          </Tab>
-          <Tab onClick={() => this.openTab("UserTopics")} active={activeTab === "UserTopics"}>
-            Topics
-          </Tab>
-          {/*<Tab onClick={() => this.openTab("UserLogs")} active={activeTab === "UserLogs"}>*/}
-          {/*Logs*/}
-          {/*</Tab>*/}
-        </TabContainer>
-        <div className="shadow_container" />
-        {activeTab === "UserInfo" && (
-          <UserInfo
-            user={user}
-            error={error}
-            toggleBan={user => this.toggleBan(user)}
-            toggleAdmin={user => this.toggleAdmin(user)}
+        <main>
+          <PageTitle
+            title={
+              this.state.linkNoHover
+                ? user.firstName + " " + (user.lastName !== null ? user.lastName : "")
+                : "← Back"
+            }
+            mouseOver={this.mouseEvents.mouseOver}
+            mouseOut={this.mouseEvents.mouseOut}
+            click={this.mouseEvents.click}
+            withShadowContainer={false}
           />
-        )}
-        {activeTab === "UserTopics" && <UserTopics events={events} error={error} />}
-        {/*{activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}*/}
-      </main>
-     </>
+          <TabContainer>
+            <Tab onClick={() => this.openTab("UserInfo")} active={activeTab === "UserInfo"}>
+              User
+            </Tab>
+            <Tab onClick={() => this.openTab("UserTopics")} active={activeTab === "UserTopics"}>
+              Topics
+            </Tab>
+            {/*<Tab onClick={() => this.openTab("UserLogs")} active={activeTab === "UserLogs"}>*/}
+            {/*Logs*/}
+            {/*</Tab>*/}
+          </TabContainer>
+          <div className="shadow_container" />
+          {activeTab === "UserInfo" && (
+            <UserInfo
+              user={user}
+              error={error}
+              toggleBan={user => this.toggleBan(user)}
+              toggleAdmin={user => this.toggleAdmin(user)}
+            />
+          )}
+          {activeTab === "UserTopics" && <UserTopics events={events} error={error} />}
+          {/*{activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}*/}
+        </main>
+      </>
     );
   }
 }

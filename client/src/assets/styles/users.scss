@@ -80,13 +80,30 @@
 
 .user-info__container {
   margin: 0 10px 100px;
+  display: flex;
+  & > .info {
+    flex: 1;
+    padding: 0 40px;
+    & > p {
+      margin-top: 0;
+      font-size: 18px;
+    }
+  }
 }
 
+@media all and (max-width: 767px) {
+  .user-info__container {
+   flex-direction: column;
+    & > .info {
+      padding: 20px 0;
+    }
+  }
+}
 @media all and (max-width: 450px) {
   .user_block thead tr th {
     text-align: center;
   }
-  
+
   .user_block td:last-child {
     display: none;
   }

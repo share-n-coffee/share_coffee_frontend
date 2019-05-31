@@ -2,7 +2,7 @@
     min-height: 120px;
     background: #FAFAFA;
   }
-  
+
   .logo_header {
     margin: 10px 0px;
     display: flex;
@@ -20,7 +20,7 @@
       margin-left: 8px;
     }
   }
-  
+
   .header__container {
     height: 100%;
     display: flex;
@@ -28,8 +28,8 @@
     align-items: center;
     margin: 0 50px;
   }
-  
-  
+
+
   .header-nav {
     display: flex;
     justify-content: center;
@@ -41,12 +41,13 @@
       font: 16px/normal "Roboto";
     }
   }
-  
+
   .header-user__img {
     width: 31px;
     border-radius: 50%;
+    margin-left: 20px;
   }
-  
+
   .header-user__info {
     display: flex;
     margin: 0 2px 0 7px;
@@ -54,7 +55,7 @@
     font: 16px/normal "Roboto";
     color: #C8C8C8;
   }
-  
+
   .header__dropdown {
     margin: 10px 0px;
     display: flex;
@@ -62,8 +63,8 @@
     justify-content: flex-end;
     position: relative;
   }
-  
-  
+
+
   @media all and (max-width: 600px) {
     .header__container {
       margin: 0 20px;
