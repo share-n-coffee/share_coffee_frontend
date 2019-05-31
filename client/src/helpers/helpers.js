@@ -85,20 +85,10 @@ const secConverter = prop => {
   return `${date.getUTCHours()}:${min}`;
 };
 
-const mapChecker = prop => {
-  if (prop.length === 2) {
-    console.log([+prop[0], +prop[1]]);
-    return [+prop[0], +prop[1]];
-  } else {
-    return [+prop[0]];
-  }
-};
-
 export {
   setStorage,
   router,
   letterTransform,
-  mapChecker,
   timeConverter,
   regularity,
   secConverter,
