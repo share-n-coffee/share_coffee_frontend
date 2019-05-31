@@ -5,6 +5,7 @@ import Users from "./Users";
 import Teams from "./Teams";
 import Header from "../../common/Header";
 import { checkerProp } from "../../helpers/helpers";
+import PageTitle from "../../modules/PageTitle";
 
 class HomeDashboard extends React.Component {
   state = {
@@ -37,8 +38,8 @@ class HomeDashboard extends React.Component {
           surName={sessionStorage.getItem("lastName")}
         />
         <main>
+          <PageTitle title="Admin panel" withShadowContainer={false} />
           <div className="login_container" style={{ width: "100%" }}>
-            <h1 className="main__header">Admin panel</h1>
             <div>
               <TabContainer>
                 <Tab onClick={() => this.openTab("Topics")} active={activeTab === "Topics"}>

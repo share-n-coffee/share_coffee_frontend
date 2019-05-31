@@ -4,40 +4,18 @@ import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
 import Button from "../Button";
 import EventsDropDown from "../../components/EventsDropdown";
-
+import { SERVER } from "../../constants/";
 import { removeCookie } from "tiny-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "tiny-cookie";
-import { checkerNone, checkerProp } from "../../helpers/helpers";
+import { checkerProp } from "../../helpers/helpers";
 
-// static
-const events = [
-  {
-    title: "Platform Front-end",
-    name: "@ Latte Python ",
-    place: "12 Zybitskaya St., Minsk",
-    time: "22.04.2019 - 16:00",
-  },
-  {
-    title: "Platform Back-end",
-    name: "@ Latte Python ",
-    place: "12 Zybitskaya St., Minsk",
-    time: "22.04.2019 - 16:00",
-  },
-  {
-    title: "CG & Motion Design",
-    name: "@ Latte Python ",
-    place: "12 Zybitskaya St., Minsk",
-    time: "22.04.2019 - 16:00",
-  },
-];
-//
 const getUpcomingEvents = userId => {
   const token = getCookie("token");
   const obj = {
     method: "get",
-    url: `https://forgeserver.herokuapp.com/api/users/${userId}/upcoming`,
+    url: `${SERVER}/users/${userId}/upcoming`,
     headers: {
       Authorization: `Bearer ${token}`,
       mode: "cors",
@@ -114,11 +92,9 @@ const userNavigation = (props, userEvents) => {
   if (checkerProp(avatar)) {
     avatar = defaultUser;
   }
-  let fullName = "user";
+  let fullName = `${name} ${surName}`;
   if (checkerProp(name) || checkerProp(surName)) {
     fullName = "user";
-  } else {
-    fullName = `${name} ${surName}`;
   }
   return (
     <>
@@ -154,9 +130,9 @@ const userNavigation = (props, userEvents) => {
 };
 
 const Header = props => {
-  const hasId = checkerProp(sessionStorage.getItem("id"));
   const [userEvents, setUserEvents] = useState([]);
   useEffect(() => {
+    const hasId = checkerProp(sessionStorage.getItem("id"));
     const fetchData = async () => {
       if (!hasId) {
         const result = await getUpcomingEvents(sessionStorage.getItem("id"));

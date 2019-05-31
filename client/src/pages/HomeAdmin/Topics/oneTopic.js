@@ -6,7 +6,7 @@ import PageTitle from "../../../modules/PageTitle";
 import { request } from "../../../helpers/requests";
 import Header from "../../../common/Header";
 import * as URL from "../../../constants";
-import TopicFront from "../../TopicFront";
+import TopicFront from "../../Events/TopicFront";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";
 
 class TopicDropdown extends Component {
@@ -51,9 +51,9 @@ class TopicDropdown extends Component {
 }
 
 class oneTopic extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     topic: [],
@@ -124,49 +124,57 @@ class oneTopic extends Component {
           avatar={sessionStorage.getItem("avatar")}
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
-        <PageTitle
-          title={this.state.linkNoHover ? topic && topic.title : "← Back"}
-          mouseOver={this.mouseEvents.mouseOver}
-          mouseOut={this.mouseEvents.mouseOut}
-          click={this.mouseEvents.click}
-        />
-        <TabContainer>
-          <Tab onClick={() => this.openTab("Description")} active={activeTab === "Description"}>
-            Description
-          </Tab>
-          <Tab onClick={() => this.openTab("Upcoming")} active={activeTab === "Upcoming"}>
-            Upcoming
-          </Tab>
-        </TabContainer>
-        {activeTab === "Description" ? (
-          <div>
-            {!isEdit ? (
-              <div>
-                <TopicFront match={this.props.match} isAdmin={true} history={this.props.history} />
-              </div>
-            ) : (
-              <TopicEditer id={topic._id} />
-            )}
-          </div>
-        ) : events && events.length > 0 ? (
-          events.map(event => (
-            <div className={"one-topic"}>
-              <div className={"title"}>
-                <span className={`event-status ${event.active ? "active" : ""}`} />
-                {this.timestamp(event.date)}
-              </div>
-
-              <TopicDropdown subscribers={event.participants} />
-              <span>Place: </span>
-              <div>{topic.address}</div>
-              <span>Time:</span>
-              <div>{topic.time}</div>
-              <button style={{ visibility: "hidden" }} />
+        <main>
+          <PageTitle
+            title={this.state.linkNoHover ? topic && topic.title : "← Back"}
+            mouseOver={this.mouseEvents.mouseOver}
+            mouseOut={this.mouseEvents.mouseOut}
+            click={this.mouseEvents.click}
+            withShadowContainer={false}
+          />
+          <TabContainer>
+            <Tab onClick={() => this.openTab("Description")} active={activeTab === "Description"}>
+              Description
+            </Tab>
+            <Tab onClick={() => this.openTab("Upcoming")} active={activeTab === "Upcoming"}>
+              Upcoming
+            </Tab>
+          </TabContainer>
+          <div className="shadow_container" />
+          {activeTab === "Description" ? (
+            <div>
+              {!isEdit ? (
+                <div>
+                  <TopicFront
+                    match={this.props.match}
+                    isAdmin={true}
+                    history={this.props.history}
+                  />
+                </div>
+              ) : (
+                <TopicEditer id={topic._id} />
+              )}
             </div>
-          ))
-        ) : (
-          <div>Topic events is empty</div>
-        )}
+          ) : events && events.length > 0 ? (
+            events.map(event => (
+              <div className={"one-topic"}>
+                <div className={"title"}>
+                  <span className={`event-status ${event.active ? "active" : ""}`} />
+                  {this.timestamp(event.date)}
+                </div>
+
+                <TopicDropdown subscribers={event.participants} />
+                <span>Place: </span>
+                <div>{topic.address}</div>
+                <span>Time:</span>
+                <div>{topic.time}</div>
+                <button style={{ visibility: "hidden" }} />
+              </div>
+            ))
+          ) : (
+            <div className="no-topic-events">There are no events for this topic.</div>
+          )}
+        </main>
       </>
     );
   }

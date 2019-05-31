@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Dropdown = styled.div`
   font-family: "Roboto Regular", "Roboto", sans-serif;
