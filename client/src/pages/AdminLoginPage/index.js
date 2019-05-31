@@ -61,7 +61,8 @@ class AdminLoginPage extends Component {
       <>
         <Header isActive={false} isAdmin={"2"} hasDepartment={false} location={this.props} />
         <div className="login_container" style={{ width: "100%" }}>
-          <h1>Admin panel</h1>
+          <h1 className="main__header">Admin panel</h1>
+          <div className="shadow_container" />
           <div className="form-page__wrapper login_container">
             <h2 className="form-page__form-heading">Please Login In</h2>
             <form className="form">
