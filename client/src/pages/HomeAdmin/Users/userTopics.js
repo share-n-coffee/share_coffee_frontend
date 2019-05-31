@@ -18,6 +18,27 @@ class OneTopics extends Component {
     this.getData(this.props.id);
   }
 
+  timestamp = createdTime => {
+    let date = new Date(createdTime);
+    let years = date.getFullYear();
+    let months = "0" + (date.getMonth() + 1);
+    let days = "0" + date.getDate();
+    return days.substr(-2) + "." + months.substr(-2) + "." + years;
+  };
+
+  eventDay(day) {
+    const daysOfTheWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    return `every ${daysOfTheWeek[day]}`;
+  }
+
   getData(id) {
     request.get(URL.ONE_TOPIC(id)).then(data => {
       this.setState({
@@ -41,7 +62,10 @@ class OneTopics extends Component {
             <span>Place: </span>
             <div>{event.address}</div>
             <span>Time:</span>
-            <div>{event.time}</div>
+            <div>
+              {event.cyclic ? this.eventDay(event.weekDay) : this.timestamp(event.singleDate)},{" "}
+              {event.time}
+            </div>
             <div>{event.options && event.options.times[0]}</div>
             <button style={{ visibility: "hidden" }} />
             {/*<Button text="unsubscribe" />*/}
