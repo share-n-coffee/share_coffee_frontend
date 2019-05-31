@@ -10,14 +10,22 @@ class Topics extends Component {
           src={`${user.avatar ? user.avatar : require("../../../assets/img/logo.png")}`}
           alt="user avatar"
         />
-        <h2>{user.username} </h2>
-        <h3>{user.firstName + " " + user.lastName}</h3>
-        <span>
-          team:{" "}
-          {user.department && user.department.title
-            ? `${user.department.title}`
-            : `Did't choose a team`}{" "}
-        </span>
+        <div className={"info"}>
+          <p>
+            <b>Username: </b>
+            {user.username}{" "}
+          </p>
+          <p>
+            <b>FIO: </b> {user.firstName + " " + (user.lastName !== null ? user.lastName : "")}
+          </p>
+          <p>
+            <b>Team: </b>
+            {user.department && user.department.title
+              ? `${user.department.title}`
+              : `Did't choose a team`}{" "}
+          </p>
+        </div>
+
         <div>
           {user.admin && user.admin.permission === 0 ? (
             <div>
