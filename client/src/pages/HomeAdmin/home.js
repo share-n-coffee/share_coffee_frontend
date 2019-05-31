@@ -36,26 +36,28 @@ class HomeDashboard extends React.Component {
           name={sessionStorage.getItem("firstName")}
           surName={sessionStorage.getItem("lastName")}
         />
-        <div className="login_container" style={{ width: "100%" }}>
-          <h1 className="main__header">Admin panel</h1>
-          <div>
-            <TabContainer>
-              <Tab onClick={() => this.openTab("Topics")} active={activeTab === "Topics"}>
-                Topics
-              </Tab>
-              <Tab onClick={() => this.openTab("Users")} active={activeTab === "Users"}>
-                Users
-              </Tab>
-              <Tab onClick={() => this.openTab("Teams")} active={activeTab === "Teams"}>
-                Teams
-              </Tab>
-            </TabContainer>
-            <div className="shadow_container" />
-            {activeTab === "Topics" && <Topics history={this.props.history} />}
-            {activeTab === "Users" && <Users />}
-            {activeTab === "Teams" && <Teams />}
+        <main>
+          <div className="login_container" style={{ width: "100%" }}>
+            <h1 className="main__header">Admin panel</h1>
+            <div>
+              <TabContainer>
+                <Tab onClick={() => this.openTab("Topics")} active={activeTab === "Topics"}>
+                  Topics
+                </Tab>
+                <Tab onClick={() => this.openTab("Users")} active={activeTab === "Users"}>
+                  Users
+                </Tab>
+                <Tab onClick={() => this.openTab("Teams")} active={activeTab === "Teams"}>
+                  Teams
+                </Tab>
+              </TabContainer>
+              <div className="shadow_container" />
+              {activeTab === "Topics" && <Topics history={this.props.history} />}
+              {activeTab === "Users" && <Users />}
+              {activeTab === "Teams" && <Teams />}
+            </div>
           </div>
-        </div>
+        </main>
       </>
     );
   }
