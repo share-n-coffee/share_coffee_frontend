@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import Dropdown from "../../components/Dropdown";
@@ -8,9 +8,8 @@ import PageTitle from "../../modules/PageTitle";
 import Header from "../../common/Header";
 import { getCookie } from "tiny-cookie";
 import { checkerProp } from "../../helpers/helpers";
-import jwtdecode from "jwt-decode";
 import { SET_USER_DEPARTMENT, GET_ALL_DEPARTMENTS } from "../../constants";
-import { checkTokenTime, checkIsBanned } from "../../helpers/requests";
+//import { checkTokenTime, checkIsBanned } from "../../helpers/requests";
 import Preloader from "../../modules/Preloader";
 
 const getAccountOptions = departments => {

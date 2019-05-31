@@ -67,9 +67,9 @@ class TopicDropdown extends Component {
 }
 
 class Topics extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     events: [],
@@ -102,6 +102,27 @@ class Topics extends Component {
     this.props.history.push("/admin/topic-create");
   };
 
+  timestamp = createdTime => {
+    let date = new Date(createdTime);
+    let years = date.getFullYear();
+    let months = "0" + (date.getMonth() + 1);
+    let days = "0" + date.getDate();
+    return days.substr(-2) + "." + months.substr(-2) + "." + years;
+  };
+
+  eventDay(day) {
+    const daysOfTheWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    return `every ${daysOfTheWeek[day]}`;
+  }
+
   render() {
     const { events, error, pageCount } = this.state;
     return (
@@ -118,7 +139,10 @@ class Topics extends Component {
               <span>Place: </span>
               <div>{event.address}</div>
               <span>Time:</span>
-              <div>{event.time}</div>
+              <div>
+                {event.cyclic ? this.eventDay(event.weekDay) : this.timestamp(event.singleDate)},{" "}
+                {event.time}
+              </div>
               <button style={{ visibility: "hidden" }} />
             </div>
           ))

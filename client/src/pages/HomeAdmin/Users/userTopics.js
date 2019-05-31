@@ -9,7 +9,7 @@ class OneTopics extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      event: [],
+      event: {},
       error: "",
     };
   }
@@ -21,7 +21,7 @@ class OneTopics extends Component {
   getData(id) {
     request.get(URL.ONE_TOPIC(id)).then(data => {
       this.setState({
-        event: data.object,
+        event: data.object.data[0],
         error: data.message,
       });
     });
@@ -31,18 +31,23 @@ class OneTopics extends Component {
     const { event, error } = this.state;
     return (
       <div>
-        <div key={event._id} className={"one-topic"}>
-          <Link to={{ pathname: `/topic/${event._id}` }} className={"title"}>
-            <span className={`event-status ${event.active ? "active" : ""}`} />
-            {event.title}
-          </Link>
-          <div />
-          <span>Place: </span>
-          <div>{event.address}</div>
-          <span>Time:</span>
-          <div>{event.options && event.options.times[0]}</div>
-          <Button text="unsubscribe" />
-        </div>
+        {event ? (
+          <div key={event._id} className={"one-topic"}>
+            <Link to={{ pathname: `/topic/${event._id}` }} className={"title"}>
+              <span className={`event-status ${event.active ? "active" : ""}`} />
+              {event.title}
+            </Link>
+            <div />
+            <span>Place: </span>
+            <div>{event.address}</div>
+            <span>Time:</span>
+            <div>{event.time}</div>
+            <div>{event.options && event.options.times[0]}</div>
+            <Button text="unsubscribe" />
+          </div>
+        ) : (
+          ""
+        )}
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );
@@ -54,9 +59,13 @@ class UserTopics extends Component {
     const { events, error } = this.props;
     return (
       <div className="user-topic__container">
-        {events &&
-          events.length > 0 &&
-          events.map(event => <OneTopics id={event.eventId} key={event.eventId} />)}
+        {events && events.length > 0 ? (
+          events.map(event => <OneTopics id={event.topicId} key={event.topicId} />)
+        ) : (
+          <div>User topic is empty</div>
+        )}
+        {/*<Pagination pageCount={pageCount} change={currentPage => this.pagination(currentPage)} />*/}
+
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );
