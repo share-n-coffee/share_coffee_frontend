@@ -12,12 +12,14 @@ class OneUser extends React.Component {
   state = {
     activeTab: "UserInfo",
     user: {},
+    events: [],
     error: "",
     linkNoHover: true,
   };
 
   componentDidMount() {
     this.getData();
+    this.getUserTopic(this.props.match.params.id);
   }
 
   getData() {
@@ -64,6 +66,15 @@ class OneUser extends React.Component {
     });
   };
 
+  getUserTopic(id) {
+    request.get(URL.USER_TOPIC(id)).then(data => {
+      this.setState({
+        events: data.object.data,
+        error: data.message,
+      });
+    });
+  }
+
   mouseEvents = {
     mouseOver: () => {
       this.setState({ linkNoHover: false });
@@ -78,7 +89,7 @@ class OneUser extends React.Component {
   };
 
   render() {
-    const { activeTab, user, error } = this.state;
+    const { activeTab, user, error, events } = this.state;
     return (
       <div>
         <Header
@@ -113,7 +124,7 @@ class OneUser extends React.Component {
             toggleAdmin={user => this.toggleAdmin(user)}
           />
         )}
-        {activeTab === "UserTopics" && <UserTopics events={user.events} error={error} />}
+        {activeTab === "UserTopics" && <UserTopics events={events} error={error} />}
         {/*{activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}*/}
       </div>
     );
