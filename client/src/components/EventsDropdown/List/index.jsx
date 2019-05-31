@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   timeConverter,
   letterTransform,
-  checkerNone,
   checkerProp,
   secConverter,
 } from "../../../helpers/helpers";

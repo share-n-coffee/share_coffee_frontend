@@ -11,9 +11,9 @@ import * as URL from "../../constants";
 import Header from "../../common/Header";
 
 class AdminLoginPage extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     username: "",

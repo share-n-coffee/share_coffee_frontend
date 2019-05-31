@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 export const TabContainer = styled.div`
@@ -15,7 +14,6 @@ export const Tab = styled.div`
   padding: 30px 60px;
   cursor: pointer;
   border-bottom: ${({ active }) => (active ? "1px solid #0064FF;" : "1px solid transparent;")};
-
   &:hover {
     opacity: 0.6;
   }
