@@ -5,6 +5,7 @@ import Users from "./Users";
 import Teams from "./Teams";
 import Header from "../../common/Header";
 import { checkerProp } from "../../helpers/helpers";
+import PageTitle from "../../modules/PageTitle";
 
 class HomeDashboard extends React.Component {
   state = {
@@ -36,25 +37,28 @@ class HomeDashboard extends React.Component {
           name={sessionStorage.getItem("firstName")}
           surName={sessionStorage.getItem("lastName")}
         />
-        <div className="login_container" style={{ width: "100%" }}>
-          <h1>Admin panel</h1>
-          <div>
-            <TabContainer>
-              <Tab onClick={() => this.openTab("Topics")} active={activeTab === "Topics"}>
-                Topics
-              </Tab>
-              <Tab onClick={() => this.openTab("Users")} active={activeTab === "Users"}>
-                Users
-              </Tab>
-              <Tab onClick={() => this.openTab("Teams")} active={activeTab === "Teams"}>
-                Teams
-              </Tab>
-            </TabContainer>
-            {activeTab === "Topics" && <Topics history={this.props.history} />}
-            {activeTab === "Users" && <Users />}
-            {activeTab === "Teams" && <Teams />}
+        <main>
+          <PageTitle title="Admin panel" withShadowContainer={false} />
+          <div className="login_container" style={{ width: "100%" }}>
+            <div>
+              <TabContainer>
+                <Tab onClick={() => this.openTab("Topics")} active={activeTab === "Topics"}>
+                  Topics
+                </Tab>
+                <Tab onClick={() => this.openTab("Users")} active={activeTab === "Users"}>
+                  Users
+                </Tab>
+                <Tab onClick={() => this.openTab("Teams")} active={activeTab === "Teams"}>
+                  Teams
+                </Tab>
+              </TabContainer>
+              <div className="shadow_container" />
+              {activeTab === "Topics" && <Topics history={this.props.history} />}
+              {activeTab === "Users" && <Users />}
+              {activeTab === "Teams" && <Teams />}
+            </div>
           </div>
-        </div>
+        </main>
       </>
     );
   }

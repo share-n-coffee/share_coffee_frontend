@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class PageTitle extends Component {
   render() {
-    const { title, desc, mouseOver, mouseOut, click } = this.props;
+    const { title, desc, mouseOver, mouseOut, click, withShadowContainer } = this.props;
     let styleCheck = mouseOver ? "main__header__link" : "main__header";
     return (
       <>
@@ -12,10 +12,14 @@ class PageTitle extends Component {
           </h1>
           <p className="main__description">{desc}</p>
         </div>
-        <div className="shadow_container" />
+        {withShadowContainer ? <div className="shadow_container" /> : null}
       </>
     );
   }
 }
+
+PageTitle.defaultProps = {
+  withShadowContainer: true,
+};
 
 export default PageTitle;

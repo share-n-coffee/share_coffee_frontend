@@ -93,7 +93,7 @@ class OneUser extends React.Component {
   render() {
     const { activeTab, user, error, events } = this.state;
     return (
-      <div>
+      <>
         <Header
           isActive={true}
           isAdmin={true}
@@ -101,11 +101,13 @@ class OneUser extends React.Component {
           avatar={sessionStorage.getItem("avatar")}
           name={`${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`}
         />
+    <main>
         <PageTitle
           title={this.state.linkNoHover ? user.firstName + " " + user.lastName : "← Back"}
           mouseOver={this.mouseEvents.mouseOver}
           mouseOut={this.mouseEvents.mouseOut}
           click={this.mouseEvents.click}
+          withShadowContainer={false}
         />
         <TabContainer>
           <Tab onClick={() => this.openTab("UserInfo")} active={activeTab === "UserInfo"}>
@@ -118,6 +120,7 @@ class OneUser extends React.Component {
           {/*Logs*/}
           {/*</Tab>*/}
         </TabContainer>
+        <div className="shadow_container" />
         {activeTab === "UserInfo" && (
           <UserInfo
             user={user}
@@ -128,7 +131,8 @@ class OneUser extends React.Component {
         )}
         {activeTab === "UserTopics" && <UserTopics events={events} error={error} />}
         {/*{activeTab === "UserLogs" && <UserLogs log={user.logs} error={error} />}*/}
-      </div>
+      </main>
+     </>
     );
   }
 }
