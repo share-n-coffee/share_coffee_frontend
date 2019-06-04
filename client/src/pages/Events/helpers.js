@@ -1,10 +1,9 @@
 import axios from "axios";
 import { SERVER, GET_ALL_TOPICS, GET_USER, GET_TOPIC } from "../../constants";
-
-//===================================================================================//
+import { checkTokenTime } from "../../helpers/helpers";
 
 const getAllTopics = (token, page = 0, limit = 3) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: GET_ALL_TOPICS(page, limit),
@@ -16,10 +15,8 @@ const getAllTopics = (token, page = 0, limit = 3) => {
   });
 };
 
-//===================================================================================//
-
 const getAllUserSubscriptions = (token, userId) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: `${SERVER}/subscriptions/?userId=${userId}`,
@@ -31,10 +28,8 @@ const getAllUserSubscriptions = (token, userId) => {
   });
 };
 
-//===================================================================================//
-
 const getUser = (token, id) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: GET_USER(id),
@@ -46,10 +41,8 @@ const getUser = (token, id) => {
   });
 };
 
-//===================================================================================//
-
 const subscribeUserToTopic = (topicId, userId, token) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "post",
     url: `${SERVER}/topics/${topicId}/${userId}/`,
@@ -59,10 +52,8 @@ const subscribeUserToTopic = (topicId, userId, token) => {
   });
 };
 
-//===================================================================================//
-
 const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "delete",
     url: `${SERVER}/topics/${topicId}/${userId}/`,
@@ -72,10 +63,8 @@ const unsubsrcibeUserFromTopic = (topicId, userId, token) => {
   });
 };
 
-//===================================================================================//
-
 const getDataEvent = (topicId, token) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios(GET_TOPIC(topicId), {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -87,10 +76,8 @@ const getDataEvent = (topicId, token) => {
     .catch(err => console.log(err));
 };
 
-//===================================================================================//
-
 const getSubscription = (topicId, userId, token) => {
-  // checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
+  checkTokenTime(sessionStorage.getItem("tokenTimeOver"));
   return axios({
     method: "get",
     url: `${SERVER}/subscriptions/?userId=${userId}&topicId=${topicId}`,
@@ -102,7 +89,6 @@ const getSubscription = (topicId, userId, token) => {
   });
 };
 
-//===================================================================================//
 export {
   getSubscription,
   getAllTopics,

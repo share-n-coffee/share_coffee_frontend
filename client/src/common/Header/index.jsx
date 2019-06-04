@@ -67,18 +67,6 @@ const adminNavigation = props => {
   return (
     <>
       <div className="header-nav">
-        {sessionStorage.getItem("firstName") !== null &&
-        sessionStorage.getItem("lastName") !== null ? (
-          <Button
-            text="User"
-            type="logout"
-            onClick={() => {
-              props.location.history.replace(`/subscriptions`);
-            }}
-          />
-        ) : (
-          <></>
-        )}
         <img className="header-user__img" src={avatar} alt="avatar" />
         <span className="header-user__info">{name}</span>
         <Button text="Log out" type="logout" onClick={() => logOut(props)} />
@@ -101,17 +89,6 @@ const userNavigation = (props, userEvents) => {
       {props.hasDepartment ? (
         <div>
           <div className="header-nav">
-            {sessionStorage.getItem("isAdmin") === "1" ? (
-              <Button
-                text="Admin"
-                type="logout"
-                onClick={() => {
-                  props.location.history.replace(`/admin`);
-                }}
-              />
-            ) : (
-              <></>
-            )}
             <img className="header-user__img" src={avatar} alt="avatar" />
             <span className="header-user__info">{fullName}</span>
             <Button text={"Log out"} type="logout" onClick={() => logOut(props)} />

@@ -1,3 +1,5 @@
+import { removeCookie } from "tiny-cookie";
+
 const checkerProp = prop => {
   if (
     prop === "null" ||
@@ -79,12 +81,14 @@ const secConverter = prop => {
   return `${date.getUTCHours()}:${min}`;
 };
 
-const mapChecker = prop => {
-  if (prop.length === 2) {
-    console.log([+prop[0], +prop[1]]);
-    return [+prop[0], +prop[1]];
+const checkTokenTime = tokenTimeOver => {
+  let dateNow = (Date.now() / 1000).toFixed();
+  if (+tokenTimeOver < +dateNow) {
+    window.location.history.replace("/");
+    sessionStorage.clear();
+    removeCookie("token");
   } else {
-    return [+prop[0]];
+    return;
   }
 };
 
@@ -96,4 +100,5 @@ export {
   regularity,
   secConverter,
   checkerProp,
+  checkTokenTime,
 };
