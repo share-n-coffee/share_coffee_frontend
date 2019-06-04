@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import EventMap from "../../../events/components/EventMap";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../../modules/PageTitle";
-//import { checkTokenTime } from "../../../helpers/requests";
 import SpinButton from "../../../common/SpinButton";
 import Button from "../../../common/Button";
 import parser from "html-react-parser";
