@@ -4,14 +4,7 @@ import styles from "./styles.module.scss";
 
 export default class TelegramLoginButton extends Component {
   componentDidMount() {
-    const {
-      botName,
-      buttonSize,
-      cornerRadius,
-      requestAccess,
-      usePic,
-      dataOnauth,
-    } = this.props;
+    const { botName, buttonSize, cornerRadius, requestAccess, usePic, dataOnauth } = this.props;
     window.TelegramLoginWidget = {
       dataOnauth: user => {
         dataOnauth(user);

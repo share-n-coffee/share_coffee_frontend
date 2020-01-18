@@ -7,10 +7,7 @@ class Topics extends Component {
     return (
       <div>
         <p>Bans</p>
-        {logs &&
-          logs.bans &&
-          logs.bans.length > 0 &&
-          logs.bans.map(ban => <p>users ban info</p>)}
+        {logs && logs.bans && logs.bans.length > 0 && logs.bans.map(ban => <p>users ban info</p>)}
         {error ? <ErrorMessage error={error} /> : null}
       </div>
     );
