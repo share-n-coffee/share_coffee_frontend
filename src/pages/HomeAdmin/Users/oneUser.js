@@ -7,7 +7,7 @@ import UserInfo from "./userInfo";
 import { request } from "../../../helpers/requests";
 import PageTitle from "../../../modules/PageTitle";
 import * as URL from "../../../constants";
-import Header from "../../../common/Header";
+import Header from "../../../components/Header";
 import md5 from "js-md5";
 
 class OneUser extends React.Component {

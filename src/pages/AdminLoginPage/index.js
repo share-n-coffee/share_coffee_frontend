@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import md5 from "js-md5";
 import ErrorMessage from "../../components/ErrorMessage";
 import { request } from "../../helpers/requests";
-import SpinButton from "../../common/SpinButton";
+import SpinButton from "../../components/SpinButton";
 import { setCookie } from "tiny-cookie";
 import jwtDecode from "jwt-decode";
 import { setStorage } from "../../helpers/helpers";
 import * as URL from "../../constants";
-import Header from "../../common/Header";
+import Header from "../../components/Header";
 
 class AdminLoginPage extends Component {
   // constructor(props) {

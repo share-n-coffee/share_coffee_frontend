@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import styles from "./styles.module.scss";
 
-const Button = props => {
-  const { text, onClick, disabled, type } = props;
+export const Button = props => {
+  const { value, onClick, disabled, type } = props;
   const ClassName = classNames({
     [styles.subscribe]: type === "Subscribe",
     [styles.unsubscribe]: type === "Unsubscribe",
@@ -19,13 +19,13 @@ const Button = props => {
       disabled={disabled}
       type={type}
     >
-      {text}
+      {value}
     </button>
   );
 };
 
 Button.propTypes = {
-  text: PropTypes.node,
+  value: PropTypes.node,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   type: PropTypes.string,
@@ -34,5 +34,3 @@ Button.propTypes = {
 Button.defaultProps = {
   type: "primary",
 };
-
-export default Button;

@@ -4,7 +4,7 @@ import TopicEditer from "./topicEditer";
 import { Tab, TabContainer } from "../../../ui/core/home";
 import PageTitle from "../../../modules/PageTitle";
 import { request } from "../../../helpers/requests";
-import Header from "../../../common/Header";
+import Header from "../../../components/Header";
 import * as URL from "../../../constants";
 import TopicFront from "../../Events/TopicFront";
 import { DropdownContent, DropdownItem, Dropdown } from "../../../ui/components/dropdown";

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import InfoAboutEvent from "../../modules/InfoAboutEvent";
 import PageTitle from "../../../modules/PageTitle";
 import EventName from "../../modules/EventName";
-import SpinButton from "../../../common/SpinButton";
+import SpinButton from "../../../components/SpinButton";
 import { Link } from "react-router-dom";
 import { letterTransform, timeConverter, regularity, checkerProp } from "../../../helpers/helpers";
 import Pagination from "../../../components/Pagination";

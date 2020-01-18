@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import EventMap from "../../../events/components/EventMap";
 import { getCookie } from "tiny-cookie";
 import PageTitle from "../../../modules/PageTitle";
-import SpinButton from "../../../common/SpinButton";
-import Button from "../../../common/Button";
+import SpinButton from "../../../components/SpinButton";
+import Button from "../../../components/Button";
 import parser from "html-react-parser";
 import Preloader from "../../../modules/Preloader";
 

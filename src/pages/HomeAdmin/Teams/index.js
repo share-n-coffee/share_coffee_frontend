@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { request } from "../../../helpers/requests";
 import ErrorMessage from "../../../components/ErrorMessage";
-import Button from "../../../common/Button";
+import Button from "../../../components/Button";
 import * as URL from "../../../constants";
-import SpinButton from "../../../common/SpinButton";
+import SpinButton from "../../../components/SpinButton";
 import { Loading } from "../../../ui/components/Loader";
 
 class DeleteBtn extends Component {

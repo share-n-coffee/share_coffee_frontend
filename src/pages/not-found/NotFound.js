@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import john from "../../assets/img/john.gif";
-import Header from "../../common/Header";
-import Button from "../../common/Button";
+import Header from "../../components/Header";
+import Button from "../../components/Button";
 
 class NotFound extends Component {
   render() {

@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "RandomCoffee",
   "homepage": "http://random-coffee.fun/",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
@@ -31,11 +31,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "startMac": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint -c .eslintrc.json src/",
     "fix-lint": "eslint -c .eslintrc.json src/**/*.js --fix",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -92,7 +90,7 @@
   "lint-staged": {
     "linters": {
       "src/**/*.{js,jsx,ts,tsx,json,md}": [
-        "prettier --write",
+        "eslint --fix",
         "git add"
       ]
     }

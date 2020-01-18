@@ -3,7 +3,7 @@ import PageTitle from "../../modules/PageTitle";
 import TelegramLoginButton from "../../helpers/TelegramLoginButton";
 import SectionInfo from "../../modules/SectionInfo";
 import { setCookie } from "tiny-cookie";
-import Header from "../../common/Header";
+import Header from "../../components/Header";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { setStorage, router } from "../../helpers/helpers";

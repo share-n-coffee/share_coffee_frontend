@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "../../../common/Button";
+import Button from "../../../components/Button";
 
 class Topics extends Component {
   render() {

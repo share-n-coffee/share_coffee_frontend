@@ -1,27 +1,47 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true,
-    "jest": true
-  },
-  "extends": [
-    "airbnb-base",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": [
-    "import",
-    "jsx-a11y",
-    "react",
-    "prettier"
-  ],
-  "rules": {
-    "jsx-quotes": [
-      1,
-      "prefer-double"
+    "parser": "babel-eslint",
+    "plugins": [
+        "react",
+        "prettier"
     ],
-    "prettier/prettier": "error",
-    "no-console": 0,
-    "no-unused-vars": 0
-  }
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "prettier/react"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "es6": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "globals": {
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error"
+        ],
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "warn",
+                    "error",
+                    "info"
+                ]
+            }
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "ignoreRestSiblings": true
+            }
+        ]
+    }
 }

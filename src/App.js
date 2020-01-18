@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import styles from "./styles.module.scss";
-import LoginPage from "../pages/LoginPage";
-import PageTeamSelect from "../pages/PageTeamSelect";
-import SubscriptionsPage from "../pages/Events/SubscriptionsPage";
-import HomeAdmin from "../pages/HomeAdmin/";
-import OneTopic from "../pages/HomeAdmin/Topics/oneTopic";
-import OneUser from "../pages/HomeAdmin/Users/oneUser";
+import LoginPage from "./pages/LoginPage";
+import PageTeamSelect from "./pages/PageTeamSelect";
+import SubscriptionsPage from "./pages/Events/SubscriptionsPage";
+import HomeAdmin from "./pages/HomeAdmin";
+import OneTopic from "./pages/HomeAdmin/Topics/oneTopic";
+import OneUser from "./pages/HomeAdmin/Users/oneUser";
 import { getCookie } from "tiny-cookie";
 import { HashRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router";
-import Footer from "../common/Footer";
-import NotFound from "../pages/not-found/NotFound";
-import TopicCreate from "../pages/HomeAdmin/Topics/topicCreate";
+import Footer from "./components/Footer";
+import NotFound from "./pages/not-found/NotFound";
+import TopicCreate from "./pages/HomeAdmin/Topics/topicCreate";
 
 export default class App extends Component {
   constructor(props) {

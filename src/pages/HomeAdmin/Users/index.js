@@ -5,7 +5,7 @@ import Pagination from "../../../components/Pagination";
 import { Link } from "react-router-dom";
 import { request } from "../../../helpers/requests";
 import * as URL from "../../../constants";
-import SpinButton from "../../../common/SpinButton";
+import SpinButton from "../../../components/SpinButton";
 //import { Loading } from "../../../ui/components/Loader";
 //import Button from "../../../common/Button";
 

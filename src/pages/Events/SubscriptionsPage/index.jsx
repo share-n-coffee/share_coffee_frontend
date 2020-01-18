@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "../../../common/Header";
+import Header from "../../../components/Header";
 import EventDesc from "../../../events/components/EventDesc";
 import { getCookie } from "tiny-cookie";
 import { Switch, Route } from "react-router-dom";

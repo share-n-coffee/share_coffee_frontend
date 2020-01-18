@@ -3,7 +3,7 @@ import { Tab, TabContainer } from "../../ui/core/home";
 import Topics from "./Topics";
 import Users from "./Users";
 import Teams from "./Teams";
-import Header from "../../common/Header";
+import Header from "../../components/Header";
 import { checkerProp } from "../../helpers/helpers";
 import PageTitle from "../../modules/PageTitle";
 
