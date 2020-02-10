@@ -1,0 +1,47 @@
+{
+    "parser": "babel-eslint",
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "prettier/react"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "es6": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "globals": {
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error"
+        ],
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "warn",
+                    "error",
+                    "info"
+                ]
+            }
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "ignoreRestSiblings": true
+            }
+        ]
+    }
+}
