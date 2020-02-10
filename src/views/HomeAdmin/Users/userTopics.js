@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { request } from "../../../helpers/requests";
-import Button from "../../../components/Button";
+import {Button} from "../../../components/Button";
 import * as URL from "../../../constants";
 
 class OneTopics extends Component {
