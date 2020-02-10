@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import logo from "../../assets/img/logo.svg";
 import defaultUser from "../../assets/img/defaultUser.png";
-import Button from "../Button";
+import {Button} from "../Button";
 import EventsDropDown from "../EventsDropdown";
 import { SERVER } from "../../constants";
 import { removeCookie } from "tiny-cookie";

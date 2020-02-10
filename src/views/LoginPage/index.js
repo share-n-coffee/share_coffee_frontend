@@ -8,6 +8,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { setStorage, router } from "../../helpers/helpers";
 import Preloader from "../../modules/Preloader";
+import {Button} from '../../components/Button'
 //import { SET_USER_DATA } from "../../constants";
 //import ErrorMessage from "../../components/ErrorMessage";
 //import BanMsg from "../../components/BanMsg";
@@ -61,14 +62,15 @@ export default class LoginPage extends Component {
         {/*{isBanned ? <BanMsg /> : <></>}*/}
         {/*{error ? <ErrorMessage error={error} /> : <></>}*/}
         <div id="telegram__login__container" className="section" onClick={this.update}>
-          <TelegramLoginButton
+          {/* <TelegramLoginButton
             dataOnauth={handleTelegramResponse}
             botName="rdmcoffee_bot"
             requestAccess="write"
             buttonSize="large"
             cornerRadius={20}
             usePic={false}
-          />
+          /> */}
+          <Button value={'Log in'} />
         </div>
       </>
     );

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import TimeChooser from "./TimeChooser";
 import TopicDescription from "../TopicDescription";
 import CyclicChooser from "./CyclicChooser";
-import Button from "../Button";
+import {Button} from "../Button";
 import SpinButton from "../SpinButton";
 
 import api from "./api";
