@@ -109,7 +109,8 @@
     "react-app"
   ],
   "plugins": [
-    "react"
+    "react",
+    "eslint-plugin-prettier"
   ],
   "globals": {
   }
