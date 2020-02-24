@@ -6,8 +6,6 @@
     "dependencies": {
         "axios": "^0.19.2",
         "classnames": "2.2.6",
-        "eslint-plugin-prettier": "3.1.2",
-        "eslint-plugin-react": "7.18.3",
         "gh-pages": "2.2.0",
         "html-react-parser": "^0.10.1",
         "js-md5": "0.7.3",
@@ -34,16 +32,12 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "fix-lint": "eslint -c .eslintrc.json src/**/*.js --fix",
+        "fix-lint": "eslint src/**/*.{js, jsx} --fix",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
-        "format": "prettier --write src/**/*.js",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
         "reinstall": "rm -rf node_modules package-lock.json && npm install"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
     },
     "browserslist": {
         "production": [
@@ -59,6 +53,8 @@
     },
     "devDependencies": {
         "@babel/core": "7.8.4",
+        "@babel/plugin-transform-react-jsx": "^7.8.3",
+        "@babel/plugin-transform-runtime": "^7.8.3",
         "@babel/preset-env": "7.8.4",
         "@babel/preset-react": "7.8.3",
         "@storybook/addon-actions": "5.3.13",
@@ -66,14 +62,21 @@
         "@storybook/addons": "5.3.13",
         "@storybook/react": "5.3.13",
         "axios-mock-adapter": "1.17.0",
-        "babel-eslint": "10.0.3",
+        "babel-eslint": "^10.0.3",
         "babel-loader": "8.0.6",
         "eslint": "6.8.0",
+        "eslint-loader": "^3.0.3",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-react": "^7.18.3",
         "husky": "^4.2.3",
         "lint-staged": "^10.0.7",
         "prettier": "1.19.1",
         "prop-types": "15.7.2",
-        "storybook-react-router": "1.0.8"
+        "storybook-react-router": "1.0.8",
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.2"
     },
     "husky": {
         "hooks": {
@@ -84,5 +87,9 @@
         "src/**/*.{js,jsx,ts,tsx,json,md}": [
             "eslint --fix"
         ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/share-n-coffee/share_coffee_frontend.git"
     }
 }

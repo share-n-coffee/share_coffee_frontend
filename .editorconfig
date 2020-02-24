@@ -2,10 +2,10 @@
 
 root = true
 
-[*.js]
+[{*.js, jsx}]
 charset = utf-8
 indent_style = space
-indent_size = 2
+indent_size = 4
 trim_trailing_whitespace = true
 insert_final_newline = true
 quote_type = double
