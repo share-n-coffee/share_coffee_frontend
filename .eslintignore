@@ -5,3 +5,6 @@ dist/
 /.vscode
 /.idea
 node_modules
+stories
+.storybook
+src/ui
