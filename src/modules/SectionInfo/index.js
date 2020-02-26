@@ -1,15 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
-class SectionInfo extends Component {
-  render() {
-    const { infoText } = this.props;
-
+const SectionInfo = ({ infoText }) => {
     return (
-      <div className="section__info">
-        <span>{infoText}</span>
-      </div>
+        <div className="section__info">
+            <span>{infoText}</span>
+        </div>
     );
-  }
-}
+};
+
+SectionInfo.propTypes = {
+    infoText: PropTypes.string.isRequired
+};
 
 export default SectionInfo;

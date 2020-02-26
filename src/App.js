@@ -1,33 +1,34 @@
-import React, { Component } from 'react';
-import { getCookie } from 'tiny-cookie';
-import { HashRouter as Router } from 'react-router-dom';
-import { Route, Switch, Redirect } from 'react-router';
-import styles from './styles.module.scss';
-import LoginPage from './views/LoginPage';
-import PageTeamSelect from './views/PageTeamSelect';
-import SubscriptionsPage from './views/Events/SubscriptionsPage';
-import HomeAdmin from './views/HomeAdmin';
-import OneTopic from './views/HomeAdmin/Topics/oneTopic';
-import OneUser from './views/HomeAdmin/Users/oneUser';
-import Footer from './components/Footer';
-import NotFound from './views/NotFound';
-import TopicCreate from './views/HomeAdmin/Topics';
+import React, { Component } from "react";
+import { getCookie } from "tiny-cookie";
+import { HashRouter as Router } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router";
+import styles from "./styles.module.scss";
+import LoginPage from "./views/LoginPage";
+import PageTeamSelect from "./views/PageTeamSelect";
+import SubscriptionsPage from "./views/Events/SubscriptionsPage";
+import HomeAdmin from "./views/HomeAdmin";
+import OneTopic from "./views/HomeAdmin/Topics/oneTopic";
+import OneUser from "./views/HomeAdmin/Users/oneUser";
+import Footer from "./components/Footer";
+import NotFound from "./views/NotFound";
+import TopicCreate from "./views/HomeAdmin/Topics";
 
 export default class App extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            id: sessionStorage.getItem("id"),
+            token: getCookie("token")
+        };
+
         this.userAuth = this.userAuth.bind(this);
     }
 
-    state = {
-        id: sessionStorage.getItem('id'),
-        token: getCookie('token'),
-    };
-
     userAuth() {
         this.setState({
-            id: sessionStorage.getItem('id'),
-            token: getCookie('token'),
+            id: sessionStorage.getItem("id"),
+            token: getCookie("token")
         });
     }
 
@@ -37,7 +38,7 @@ export default class App extends Component {
             return (
                 <div className={`${styles.App} ${styles.wrapper}`}>
                     <Switch>
-                        <Route path="/" render={(props) => <LoginPage userAuth={this.userAuth} {...props} />} exact />
+                        <Route path="/" render={props => <LoginPage userAuth={this.userAuth} {...props} />} exact />
                         <Route path="/admin" component={HomeAdmin} exact />
 
                         <Redirect to="/" />
@@ -50,7 +51,7 @@ export default class App extends Component {
             <div className={`${styles.App} ${styles.wrapper}`}>
                 <Router>
                     <Switch>
-                        <Route path="/" render={(props) => <LoginPage userAuth={this.userAuth} {...props} />} exact />
+                        <Route path="/" render={props => <LoginPage userAuth={this.userAuth} {...props} />} exact />
                         <Route path="/team_select/" component={PageTeamSelect} exact />
                         <Route path="/subscriptions/" component={SubscriptionsPage} />
                         <Route path="/admin" component={HomeAdmin} exact />
