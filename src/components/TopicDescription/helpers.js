@@ -4,11 +4,11 @@ import mediumDraftImporter from "medium-draft/lib/importer";
 import { convertToRaw } from "draft-js";
 
 export function exportToHtml(editorState) {
-  const renderedHTML = mediumDraftExporter(editorState.getCurrentContent());
-  return renderedHTML;
+    const renderedHTML = mediumDraftExporter(editorState.getCurrentContent());
+    return renderedHTML;
 }
 
 export function importFromHtml(renderedHTML) {
-  const editorState = createEditorState(convertToRaw(mediumDraftImporter(renderedHTML)));
-  return editorState;
+    const editorState = createEditorState(convertToRaw(mediumDraftImporter(renderedHTML)));
+    return editorState;
 }

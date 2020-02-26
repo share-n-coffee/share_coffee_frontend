@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
+import { FOOTER_TITLE } from "../../constants";
 
-class Footer extends Component {
-  render() {
+const Footer = () => {
     return (
-      <div className="footer-wrapper footer">
-        <span className="footer__title">© 2019 Wargaming.net</span>
-      </div>
+        <div className="footer-wrapper footer">
+            <span className="footer__title">{FOOTER_TITLE}</span>
+        </div>
     );
-  }
-}
+};
 
 export default Footer;

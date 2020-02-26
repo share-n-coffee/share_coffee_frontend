@@ -1,3 +1,15 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react", "react-app"]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        },
+        "loose": true
+      }
+    ],
+    "@babel/preset-react",
+    "react-app"
+  ]
 }
