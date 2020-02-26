@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import List from './List';
-import { ReactComponent as DropdownArrowIcon } from '../../assets/icons/DropdownArrow.svg';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import List from "./List";
+import { ReactComponent as DropdownArrowIcon } from "../../assets/icons/DropdownArrow.svg";
 
 let timeOutId = null;
 
 const getLabelByValue = (options, value) => {
-    const option = (options || []).find((option) => option.value === value);
+    const option = (options || []).find(item => item.value === value);
 
     return option.label;
 };
@@ -17,7 +18,7 @@ const getLabelByValue = (options, value) => {
  */
 const Dropdown = ({ options, selectedValue, onSelect }) => {
     const [isOpened, setIsOpened] = useState(false);
-    const selection = selectedValue ? getLabelByValue(options, selectedValue) : 'Select department';
+    const selection = selectedValue ? getLabelByValue(options, selectedValue) : "Select department";
 
     return (
         <div
@@ -27,15 +28,14 @@ const Dropdown = ({ options, selectedValue, onSelect }) => {
                     setIsOpened(false);
                 });
             }}
-            className={`department-dropdown_container ${isOpened ? 'department-focused' : undefined}`}
-        >
+            className={`department-dropdown_container ${isOpened ? "department-focused" : undefined}`}>
             <div tabIndex="0" className="department-selection" onClick={() => setIsOpened(!isOpened)}>
                 {selection}
-                <DropdownArrowIcon className={`department-arrow ${isOpened ? 'department-rotated' : undefined}`} />
+                <DropdownArrowIcon className={`department-arrow ${isOpened ? "department-rotated" : undefined}`} />
             </div>
             {isOpened && (
                 <List
-                    onItemClick={(value) => {
+                    onItemClick={value => {
                         onSelect(value);
                         setIsOpened(false);
                     }}
@@ -44,6 +44,12 @@ const Dropdown = ({ options, selectedValue, onSelect }) => {
             )}
         </div>
     );
+};
+
+Dropdown.propTypes = {
+    selectedValue: PropTypes.string,
+    onSelect: PropTypes.func,
+    options: PropTypes.array
 };
 
 export default Dropdown;
