@@ -20,10 +20,6 @@
       "double"
     ],
     "curly": 2,
-    "indent": [
-      2,
-      4
-    ],
     "semi": [
       2,
       "always"
